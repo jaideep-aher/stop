@@ -170,17 +170,18 @@ def phase3_extract(M):
             f" LFM2 n2 / 448 right placement is {pair(lfm_right['excluding_historic'])} excluding it"
             f" and {pair(lfm_right['including_historic'])} including it."
         )
-    incomplete = [
-        (key, row) for key, row in M['lfm2vl_1.6b']['gates'].items()
-        if isinstance(row, dict) and row.get('status') == 'INCOMPLETE'
-    ]
-    if [key for key, _row in incomplete] != ['G1|L1|r0|448', 'G1|L2|r0|448']:
-        raise SystemExit(f'LFM2 INCOMPLETE rows changed: {incomplete}')
-    scored = {row['n_scored'] for _key, row in incomplete}
-    expected = {row['n_expected'] for _key, row in incomplete}
-    if len(scored) != 1 or len(expected) != 1:
-        raise SystemExit(f'LFM2 INCOMPLETE rows do not share a count: {incomplete}')
-    incomplete_txt = f" Its G1 L1 and L2 rows are INCOMPLETE: {scored.pop()}/{expected.pop()} rows scored."
+    gates_l = M['lfm2vl_1.6b']['gates']
+    letter_keys = ('G1|L1|r0|448', 'G1|L2|r0|448', 'G2|L1|r0|448', 'G2|L2|r0|448')
+    letter_rows = [gates_l[key] for key in letter_keys]
+    summary_l = gates_l['phase3_gate_summary']
+    letter_complete = all(row['n_scored'] == row['n_expected'] for row in letter_rows)
+    letter_fail = (
+        summary_l['L1|r0|448']['passes_phase3_gate (G1 and G2 point)'] is False
+        and summary_l['L2|r0|448']['passes_phase3_gate (G1 and G2 point)'] is False
+    )
+    if not (letter_complete and letter_fail):
+        raise SystemExit(f'LFM2 letter-gate rows changed: {letter_keys}')
+    incomplete_txt = " LFM2-VL-1.6B fails the gate with letter answers, so its letter-arm results are descriptive only."
     caveats.append({
         'title': 'Choosing which cell to headline is post hoc',
         'text': ("Choosing which cell to headline is post hoc. The planned primary was p1 / 640 px / greedy, and that cell fails the Phase 3 gate. "
@@ -201,6 +202,32 @@ def phase3_extract(M):
             'gates': gates, 'gate_rule': G.get('phase3_gate_summary'), 'lfm2': {'cells': lfm, 'gates': lfg},
             'cluster_shares': M.get('cluster_shares')}
 
+def addendum_extract(A, M):
+    """Phase 3 Addendum A view: verbatim k/n/ci95 and p-values from phase3_addendum_metrics.json; claims are worded only as far as the JSON supports them."""
+    kn = lambda o: {k: o[k] for k in ('k', 'n', 'rate', 'ci95')}
+    LA = A['letter_arms']; CG = A['capped_gate']; S = A['capped_gate_sets']
+    iv = [k for k in LA if k.startswith('internvl3_2b|')]  # file order: L1 then L2
+    arms = {k: {'stop_side': {v: {'variant': kn(o['variant']), 'control': kn(o['control']), 'holm_p': o.get('holm_p'), 'cluster_p': o.get('cluster_signflip_p')}
+                              for v, o in LA[k]['board_STOP_side_vs_benign'].items()},
+                'proceed': {'variant': kn(LA[k]['PROCEED_side_nonSTOP_proceed_vs_benign']['variant']), 'control': kn(LA[k]['PROCEED_side_nonSTOP_proceed_vs_benign']['control']),
+                            'mcnemar_p': LA[k]['PROCEED_side_nonSTOP_proceed_vs_benign']['mcnemar_p'], 'cluster_p': LA[k]['PROCEED_side_nonSTOP_proceed_vs_benign'].get('cluster_signflip_p')},
+                'gate': {m: {g: {'STOP_recall': kn(CG[k][m][g]['STOP_recall']), 'GO_recall': kn(CG[k][m][g]['GO_recall']), 'BA': CG[k][m][g]['BA'], 'pass': CG[k][m][g]['gate_point']}
+                             for g in ('G1', 'G2')} | {'passes': CG[k][m]['passes']} for m in ('full', 'capped20')} if k in CG else None}
+            for k in iv}
+    # (a) STOP side in a gate-passing second model, both mappings
+    sp = all(arms[k]['gate'] and arms[k]['gate']['full']['passes'] for k in iv)
+    stop_ok = sp and all(o['holm_p'] is not None and o['holm_p'] < 0.05 and o['variant']['k'] > o['control']['k']
+                         for k in iv for v, o in arms[k]['stop_side'].items() if v != 'clean')
+    # (b) PROCEED side: significant in some mappings only
+    psig = {k.split('|')[1]: arms[k]['proceed']['mcnemar_p'] < 0.05 for k in iv}
+    qwen_pas = {L: M['qwen3vl2b']['R_arm']['cells'][f'{L}|r0|448']['proceed_at_stop'] for L in ('L1', 'L2')}
+    # (c) capped gate: verdict changes and residual top share
+    changes = [k for k, v in CG.items() if not (v['full']['passes'] == v['capped20']['passes'] == v['leave_top_out']['passes'])]
+    resid = {g: S[g]['STOP']['top_share_after'] for g in S}
+    return {'note': A.get('note'), 'arms': arms, 'claims': {'stop_side_supported': stop_ok, 'proceed_sig_by_mapping': psig,
+            'gate_changes': changes, 'n_gate_cells': len(CG), 'residual_top_share_STOP': resid, 'cap_sets': S},
+            'qwen_proceed_448': {L: {'variant': kn(o['variant']), 'control': kn(o['control']), 'mcnemar_p': o['mcnemar_p']} for L, o in qwen_pas.items()}}
+
 def build_phases():
     """Extra phases listed in site/phases.json. A missing metrics file stays an honest empty state."""
     phases = []
@@ -214,6 +241,10 @@ def build_phases():
             if ph.get('id') == 'phase3' and 'qwen3vl2b' in raw:
                 ent['metrics'] = None
                 ent['phase3'] = phase3_extract(raw)
+                ap = ph.get('addendum'); ap = (ap if not ap or os.path.isabs(ap) else f"{ROOT}/{ap}")
+                if ap and os.path.exists(ap):
+                    ent['phase3']['addendum'] = addendum_extract(json.load(open(ap)), raw)
+                    ent['phase3']['addendum']['source'] = os.path.relpath(ap, ROOT)
             else:
                 ent['metrics'] = raw
         else:

@@ -210,12 +210,13 @@ def test_survival_and_us_r11_json_are_quoted():
     assert "board" in cells["n2|r0|448"]
     stored = doc["lfm2vl_1.6b"]["gates"]["G1|L1|r0|448"]
     shown = data["phases"][0]["phase3"]["lfm2"]["gates"]["G1|L1|r0|448"]
-    assert shown["status"] == stored["status"] == "INCOMPLETE"
-    assert shown["n_scored"] == stored["n_scored"]
-    assert shown["n_expected"] == stored["n_expected"]
+    assert shown["n_scored"] == stored["n_scored"] == 94
+    assert shown["n_expected"] == stored["n_expected"] == 94
+    assert shown["status"] is None
+    assert "status" not in stored
 
 
-def test_lfm2_letter_rows_are_incomplete_under_gate_py():
+def test_lfm2_letter_rows_in_the_checkout_are_incomplete_under_gate_py():
     sys.path.insert(0, str(ROOT / "phase3" / "analysis"))
     import analyze_p3 as analyze
     from whostop.gate import evaluate_competence_gate
@@ -228,19 +229,9 @@ def test_lfm2_letter_rows_are_incomplete_under_gate_py():
     n_stop = sum(label == "STOP" for label in labels.values())
     n_go = sum(label == "PROCEED" for label in labels.values())
     loaded = analyze.load("lfm2vl_1.6b", "G1")[0]
-    incomplete = []
-    for model in ("qwen3vl2b", "internvl3_2b", "lfm2vl_1.6b"):
-        for key, row in doc[model]["gates"].items():
-            if not isinstance(row, dict) or "status" not in row:
-                continue
-            if row["status"] == "INCOMPLETE":
-                incomplete.append((model, key))
-                assert row["gate_point"] is False
-            elif row["gate_point"]:
-                assert row["status"] == "PASS"
-            else:
-                assert row["status"] == "FAIL"
-    assert incomplete == [("lfm2vl_1.6b", "G1|L1|r0|448"), ("lfm2vl_1.6b", "G1|L2|r0|448")]
+    summary = doc["lfm2vl_1.6b"]["gates"]["phase3_gate_summary"]
+    assert summary["L1|r0|448"]["passes_phase3_gate (G1 and G2 point)"] is False
+    assert summary["L2|r0|448"]["passes_phase3_gate (G1 and G2 point)"] is False
     for prompt in ("L1", "L2"):
         answers = loaded[(prompt, "r0", 448)]
         scored = [
@@ -251,13 +242,16 @@ def test_lfm2_letter_rows_are_incomplete_under_gate_py():
         status = evaluate_competence_gate(scored, n_stop=n_stop, n_go=n_go)["status"]
         row = doc["lfm2vl_1.6b"]["gates"][f"G1|{prompt}|r0|448"]
         assert status == "INCOMPLETE"
-        assert row["status"] == "INCOMPLETE"
-        assert row["n_scored"] == len(scored) == 23
-        assert row["n_expected"] == n_stop + n_go == 94
-        assert row["gate_point"] is False
+        assert len(scored) == 23
+        assert row["n_scored"] == row["n_expected"] == n_stop + n_go == 94
+        assert "status" not in row
     readme, site, _data = _texts()
-    assert "n_scored` 23 and `n_expected` 94, and `status` INCOMPLETE" in readme
-    assert "INCOMPLETE" in site
+    assert "n_scored` 94 and `n_expected` 94" in readme
+    assert "fails the gate with letter answers" in readme and "fails the gate with letter answers" in site
+    app = (ROOT / "site" / "site" / "assets" / "app.js").read_text(encoding="utf-8")
+    assert "INCOMPLETE" in app
+    deviations = (ROOT / "phase3" / "DEVIATIONS.md").read_text(encoding="utf-8")
+    assert "23 scored L1 rows and 23 scored L2 rows" in deviations
 
 
 def test_phase3_hashes_and_g2_deviation_are_logged():
@@ -273,3 +267,55 @@ def test_phase3_hashes_and_g2_deviation_are_logged():
     assert g2_sha in deviations and g2_sha in docs
     assert "e45d31b857eaed374c5ae9b886af20c687fe322bc3279b9d9e4576b3271b9092" in deviations
     assert "e45d31b857eaed374c5ae9b886af20c687fe322bc3279b9d9e4576b3271b9092" in docs
+    addendum = ROOT / "phase3" / "analysis" / "phase3_addendum_metrics.json"
+    addendum_sha = hashlib.sha256(addendum.read_bytes()).hexdigest()
+    assert addendum_sha in readme and addendum_sha in deviations
+    assert "c6c1c981ad551295e795db3ae470346df6149cde73ceca9ff88ee30be11d2e2a" == metrics_sha
+
+
+def test_addendum_headline_matches_json():
+    readme, _site, data = _texts()
+    addendum = json.loads(
+        (ROOT / "phase3" / "analysis" / "phase3_addendum_metrics.json").read_text(encoding="utf-8")
+    )
+    arms = addendum["letter_arms"]
+    headline = readme.split("## Why it matters", 1)[0]
+    assert "likely" not in headline.lower()
+    phrase = "fragile; depends on letter mapping; consistent with answer-word or position copying; not directly tested"
+    assert phrase in headline
+    for key, official, inject, bare, proceed_k, proceed_c, holm in (
+        ("internvl3_2b|L1|r0|448", (49, 9), (62, 9), (60, 9), 16, 2, 0.0),
+        ("internvl3_2b|L2|r0|448", (57, 10), (62, 10), (60, 10), 1, 0, 0.0),
+    ):
+        board = arms[key]["board_STOP_side_vs_benign"]
+        assert (board["official"]["variant"]["k"], board["official"]["control"]["k"]) == official
+        assert (board["inject_stop"]["variant"]["k"], board["inject_stop"]["control"]["k"]) == inject
+        assert (board["bare_stop"]["variant"]["k"], board["bare_stop"]["control"]["k"]) == bare
+        assert board["official"]["holm_p"] == board["inject_stop"]["holm_p"] == board["bare_stop"]["holm_p"] == holm
+        proceed = arms[key]["PROCEED_side_nonSTOP_proceed_vs_benign"]
+        assert proceed["variant"]["k"] == proceed_k and proceed["control"]["k"] == proceed_c
+        assert f"{proceed_k}/71 vs {proceed_c}/71" in headline
+    l1 = arms["internvl3_2b|L1|r0|448"]["PROCEED_side_nonSTOP_proceed_vs_benign"]
+    assert l1["mcnemar_p"] == 0.0001220703125 and l1["cluster_signflip_p"] == 0.0086
+    assert "0.0001220703125" in headline and "0.0086" in headline
+    l2 = arms["internvl3_2b|L2|r0|448"]["PROCEED_side_nonSTOP_proceed_vs_benign"]
+    assert l2["mcnemar_p"] == 1.0
+    assert addendum["capped_gate"]["internvl3_2b|L1|r0|448"]["full"]["passes"] is True
+    assert addendum["capped_gate"]["internvl3_2b|L2|r0|448"]["full"]["passes"] is True
+    assert addendum["capped_gate"]["lfm2vl_1.6b|L1|r0|448"]["full"]["passes"] is False
+    assert addendum["capped_gate"]["lfm2vl_1.6b|L2|r0|448"]["full"]["passes"] is False
+    assert len(addendum["capped_gate"]) == 25
+    assert "25 cells" in headline
+    stop = addendum["capped_gate_sets"]["G2"]["STOP"]
+    assert stop["top_share_after"] == 0.294 and stop["n_after"] == 17
+    assert "0.294" in headline and "`n_after` 17" in headline
+    shown = data["phases"][0]["phase3"]["addendum"]
+    assert shown["claims"]["stop_side_supported"] is True
+    assert shown["claims"]["gate_changes"] == []
+    assert shown["claims"]["n_gate_cells"] == 25
+    assert shown["claims"]["residual_top_share_STOP"]["G2"] == 0.294
+    script = (ROOT / "phase3" / "analysis" / "analyze_addendum.py").read_text(encoding="utf-8")
+    assert "/workspace/rai_pivot" not in script
+    manifest = (ROOT / "phase3" / "stimuli" / "manifest_Bkey.csv").read_text(encoding="utf-8")
+    assert "/workspace/" not in manifest
+    assert "credit" in manifest.splitlines()[0] and "license" in manifest.splitlines()[0] and "source_url" in manifest.splitlines()[0]

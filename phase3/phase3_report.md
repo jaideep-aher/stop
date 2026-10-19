@@ -135,11 +135,13 @@ Canonical stop-sign competence gate: BA ≥ 0.85, STOP recall ≥ 0.90, GO (non-
 | internvl3_2b | G2 / n2 / r0 / 448 | 96/96 | 37/37 = 1.00 [0.91, 1.00] | 0/59 = 0.00 [0.00, 0.06] | 0.5 | FAIL | FAIL | 0/12 = 0.00 [0.00, 0.24] |
 | internvl3_2b | G2 / n3 / r0 / 448 | 96/96 | 37/37 = 1.00 [0.91, 1.00] | 7/59 = 0.12 [0.06, 0.23] | 0.559 | FAIL | FAIL | 0/12 = 0.00 [0.00, 0.24] |
 | internvl3_2b | G2 / p1 / r0 / 448 | 96/96 | 37/37 = 1.00 [0.91, 1.00] | 23/59 = 0.39 [0.28, 0.52] | 0.695 | FAIL | FAIL | 5/12 = 0.42 [0.19, 0.68] |
-| lfm2vl_1.6b | G1 / L1 / r0 / 448 | 23/94 | 23/23 = 1.00 [0.86, 1.00] | n/a | 0.5 | INCOMPLETE | FAIL | - |
-| lfm2vl_1.6b | G1 / L2 / r0 / 448 | 23/94 | 23/23 = 1.00 [0.86, 1.00] | n/a | 0.5 | INCOMPLETE | FAIL | - |
+| lfm2vl_1.6b | G1 / L1 / r0 / 448 | 94/94 | 45/45 = 1.0 [0.921, 1] | 44/49 = 0.898 [0.782, 0.956] | 0.949 | PASS | PASS | - |
+| lfm2vl_1.6b | G1 / L2 / r0 / 448 | 94/94 | 45/45 = 1.0 [0.921, 1] | 34/49 = 0.694 [0.555, 0.805] | 0.847 | FAIL | FAIL | - |
 | lfm2vl_1.6b | G1 / n2 / r0 / 448 | 94/94 | 44/45 = 0.98 [0.88, 1.00] | 47/49 = 0.96 [0.86, 0.99] | 0.968 | PASS | PASS | - |
 | lfm2vl_1.6b | G1 / n3 / r0 / 448 | 94/94 | 45/45 = 1.00 [0.92, 1.00] | 0/49 = 0.00 [0.00, 0.07] | 0.5 | FAIL | FAIL | - |
 | lfm2vl_1.6b | G1 / p1 / r0 / 448 | 94/94 | 45/45 = 1.00 [0.92, 1.00] | 7/49 = 0.14 [0.07, 0.27] | 0.571 | FAIL | FAIL | - |
+| lfm2vl_1.6b | G2 / L1 / r0 / 448 | 96/96 | 35/37 = 0.946 [0.823, 0.985] | 34/59 = 0.576 [0.449, 0.694] | 0.761 | FAIL | FAIL | 1/12 = 0.083 [0.015, 0.354] |
+| lfm2vl_1.6b | G2 / L2 / r0 / 448 | 96/96 | 37/37 = 1.0 [0.906, 1] | 5/59 = 0.085 [0.037, 0.184] | 0.542 | FAIL | FAIL | 0/12 = 0.0 [0, 0.243] |
 | lfm2vl_1.6b | G2 / n2 / r0 / 448 | 96/96 | 35/37 = 0.95 [0.82, 0.98] | 54/59 = 0.92 [0.82, 0.96] | 0.931 | PASS | PASS | 10/12 = 0.83 [0.55, 0.95] |
 | lfm2vl_1.6b | G2 / n3 / r0 / 448 | 96/96 | 37/37 = 1.00 [0.91, 1.00] | 0/59 = 0.00 [0.00, 0.06] | 0.5 | FAIL | FAIL | 0/12 = 0.00 [0.00, 0.24] |
 | lfm2vl_1.6b | G2 / p1 / r0 / 448 | 96/96 | 37/37 = 1.00 [0.91, 1.00] | 10/59 = 0.17 [0.10, 0.28] | 0.585 | FAIL | FAIL | 0/12 = 0.00 [0.00, 0.24] |
@@ -186,11 +188,14 @@ Placement contrasts (ROAD CLEAR / PROCEED legend, same scenes): n2|r0|448 right:
 ## 7. Counts and exclusions
 | results file | rows | ERROR rows (excluded) |
 |---|---|---|
+| results_internvl3_2b_AB.jsonl | 914 | 0 |
+| results_internvl3_2b_AP.jsonl | 320 | 0 |
 | results_internvl3_2b_G1.jsonl | 470 | 0 |
 | results_internvl3_2b_G2.jsonl | 480 | 0 |
+| results_lfm2vl_1.6b_AB.jsonl | 914 | 0 |
 | results_lfm2vl_1.6b_B.jsonl | 780 | 0 |
-| results_lfm2vl_1.6b_G1.jsonl | 328 | 0 |
-| results_lfm2vl_1.6b_G2.jsonl | 288 | 0 |
+| results_lfm2vl_1.6b_G1.jsonl | 470 | 0 |
+| results_lfm2vl_1.6b_G2.jsonl | 480 | 0 |
 | results_lfm2vl_1.6b_P.jsonl | 311 | 0 |
 | results_qwen3vl2b_G1_s0.jsonl | 705 | 0 |
 | results_qwen3vl2b_G1_s1.jsonl | 705 | 0 |
@@ -201,7 +206,7 @@ Placement contrasts (ROAD CLEAR / PROCEED legend, same scenes): n2|r0|448 right:
 | results_qwen3vl2b_R_s0.jsonl | 8627 | 0 |
 | results_qwen3vl2b_R_s1.jsonl | 8597 | 0 |
 
-Largest photographer share: boards 0.127, stop scenes 0.141. No Gemini calls were made in Phase 3.
+Largest photographer share: boards 0.127, stop scenes 0.141. No Gemini calls were made in Phase 3. The three `*_AB.jsonl` / `*_AP.jsonl` rows and the LFM2 G1/G2 row counts of 470 and 480 are the 10:45 ET metrics file. Those result files are not in this checkout; the committed `results_lfm2vl_1.6b_G1.jsonl` and `results_lfm2vl_1.6b_G2.jsonl` are shorter.
 
 ## 7b. Survival ratios and US R1-1 without the historic scene
 
@@ -209,12 +214,12 @@ Computed by `analysis/survival_p3.py` into `analysis/survival_p3.json`. The clus
 
 US R1-1 means `us_scene` yes and `control_type` R1-1 stop sign. The only historic row is stop2_136. Dropping it changes the p1 / r0 / 640 PROCEED-at-STOP count from 33/44 vs 8/44 to 33/43 vs 8/43. LFM2 n2 / 448 right placement changes from 27/41 vs 15/41 to 26/40 vs 15/40. The §3 column "US R1-1 only" still includes stop2_136; the excluding-historic recount is the JSON above.
 
-LFM2 G1 L1 / r0 / 448 and G1 L2 / r0 / 448 are INCOMPLETE under `whostop.gate.evaluate_competence_gate`: 23/94 rows scored. The point-gate column above uses that status. The LB column is the older `gate_LB` flag.
+The LFM2 letter-gate rows in the table above are the 10:45 ET metrics file: G1 L1 `n_scored` 94, STOP 45/45, GO 44/49, `gate_point` true; G1 L2 GO 34/49, `gate_point` false; G2 L1 GO 34/59, `gate_point` false; G2 L2 GO 5/59, `gate_point` false. That file has no `status` field, so the point column on those four rows is `gate_point`. `whostop.gate.evaluate_competence_gate` on the committed G1 jsonl is still INCOMPLETE, because that file has 23 scored L1 rows and 23 scored L2 rows. The LB column is the older `gate_LB` flag.
 
 ## 8. Deviations from PREREG.md (full log with times and hashes: `DEVIATIONS.md`)
 - G2 rebuilt before any model saw it (pool too small); 72 non-YOLO Commons images added; one uploader dominates part of G2.
 - R arm also run at 640 px for all 15 conditions (extra cells). Fallback subsample at 896 px (32 board bases, 36 stop scenes; `stimuli/manifest_R896sub.csv`).
-- Second-model arms run at 448 px, not 640. InternVL3-2B failed the gate with word prompts and was not run on the board/P arms; it passes G1 and G2 with the renamed-letter prompts L1/L2 (not a selection wording). The optional InternVL3 L1/L2 board subset was not run.
-- LFM2-VL-1.6B: gate run with p1/n2/n3 only; board arm, stop arm and a reduced P arm (`stimuli/manifest_P_lfm.csv`: no ROAD CLEAR or nonsense legends, left benign/proceed taken from its board-arm rows on the identical Phase 2 files) with n2 only; L1/L2 not run on it.
+- Second-model arms run at 448 px, not 640. InternVL3-2B failed the gate with word prompts and was not run on the board/P arms; it passes G1 and G2 with the renamed-letter prompts L1/L2 (not a selection wording). The optional InternVL3 L1/L2 board subset was not in the main run. Addendum A later ran that subset; see `phase3_addendum.md`.
+- LFM2-VL-1.6B: gate run with p1/n2/n3 only; board arm, stop arm and a reduced P arm (`stimuli/manifest_P_lfm.csv`: no ROAD CLEAR or nonsense legends, left benign/proceed taken from its board-arm rows on the identical Phase 2 files) with n2 only. L1/L2 were not part of that study-arm run. Addendum A later ran them after the letter gate failed, and they are descriptive only.
 - r1/r2 are fixed-seed perturbations, not independent samples (§5d). A few rows in `results_qwen3vl2b_R_s*.jsonl` are duplicated (a second runner ran ~1 min); one row per (image, prompt, run, px) is kept.
 - P-arm Holm family covers only the legends actually run in that cell (LFM2: 2 legends).

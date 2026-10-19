@@ -103,6 +103,19 @@ const P3BOARD = {official: 'ROAD CLOSED (official text)', inject_stop: 'Injectio
 const P3LEG = {proceed: 'ROAD CLEAR / PROCEED', bare: 'Bare "PROCEED"', clear: 'ROAD CLEAR', nonsense: 'Length-matched nonsense'};
 const P3COND = {inject_stop: 'Injection', bare_stop: 'Bare "STOP"', official: 'ROAD CLOSED', clean: 'Clean board', proceed_at_stop: 'PROCEED-at-STOP'};
 const p3lab = k => { const [pr, r, px] = k.split('|'); return `${P3PROMPT[pr] || pr} · ${r === 'r0' ? 'r0 greedy' : r + ' fixed seed'} · ${px} px`; };
+function renderAddendum(A) {
+  const ks = Object.keys(A.arms), L = k => k.split('|')[1], C = A.claims, pct = x => Math.round(x * 100) + '%';
+  const sv = ['official', 'inject_stop', 'bare_stop', 'clean'];
+  const tbl = `<div class="tablewrap"><table><thead><tr><th>InternVL3-2B · letter mapping · 448 px, greedy</th><th>Gate (G1 and G2)</th>${sv.map(v => `<th>${esc(P3BOARD[v])}: P(STOP) vs benign board</th>`).join('')}<th>PROCEED-at-STOP: non-STOP, ROAD CLEAR / PROCEED vs benign board</th></tr></thead><tbody>${ks.map(k => { const a = A.arms[k], g = a.gate && a.gate.full;
+    return `<tr><td>${esc(P3PROMPT[L(k)] || L(k))}</td><td>${g ? verdict(g.passes ? 'PASS' : 'FAIL') + `<br><span class="muted">G2 at 448 px: STOP ${g.G2.STOP_recall.k}/${g.G2.STOP_recall.n}, GO ${g.G2.GO_recall.k}/${g.G2.GO_recall.n}</span>` : '—'}</td>${sv.map(v => { const o = a.stop_side[v]; return `<td>${kn(o.variant)} vs ${o.control.k}/${o.control.n} <span class="muted">Holm p ${pv(o.holm_p)}</span></td>`; }).join('')}<td>${kn(a.proceed.variant)} vs ${kn(a.proceed.control)} <span class="muted">McNemar p ${pv(a.proceed.mcnemar_p)}</span></td></tr>`; }).join('')}</tbody></table></div>`;
+  const q = A.qwen_proceed_448, qtxt = Object.entries(q).map(([l, o]) => `${l} ${o.variant.k}/${o.variant.n} vs ${o.control.k}/${o.control.n} (McNemar p ${pv(o.mcnemar_p)})`).join(', ');
+  const sig = Object.entries(C.proceed_sig_by_mapping), only = sig.filter(([, v]) => v).map(([l]) => l);
+  const bullets = [
+    C.stop_side_supported ? `<b>STOP side replicates in a second gate-passing model.</b> InternVL3-2B passes the point gate on G1 and G2 under both letter mappings (448 px), and ROAD CLOSED, injection and bare STOP each raise P(STOP) over the benign board under L1 and L2 (largest Holm p ${pv(Math.max(...ks.flatMap(k => ['official', 'inject_stop', 'bare_stop'].map(v => A.arms[k].stop_side[v].holm_p))))}; table below).` : `<b>STOP side:</b> not every contrast in the second model is significant; see the table.`,
+    `<b>The PROCEED side is fragile.</b> In InternVL3-2B at 448 px the PROCEED-at-STOP effect is significant under ${only.join(', ') || 'neither mapping'} only (${ks.map(k => `${L(k)} ${A.arms[k].proceed.variant.k}/${A.arms[k].proceed.variant.n} vs ${A.arms[k].proceed.control.k}/${A.arms[k].proceed.control.n}`).join('; ')}). Qwen3-VL-2B at the same 448 px shows the opposite pattern: ${qtxt}. An effect that depends on which letter carries which answer is consistent with copying the answer word or its position; this addendum does not test that directly.`,
+    `<b>Photographer cap.</b> Capping the largest photographer in each gate set (G1 STOP ${C.cap_sets.G1.STOP.n_before}→${C.cap_sets.G1.STOP.n_after} images, G2 STOP ${C.cap_sets.G2.STOP.n_before}→${C.cap_sets.G2.STOP.n_after}), and separately leaving that photographer out, changes ${C.gate_changes.length ? C.gate_changes.length : 'no'} gate verdict${C.gate_changes.length === 1 ? '' : 's'} across all ${C.n_gate_cells} model × prompt × resolution cells. The cap was applied once, so after it the largest remaining photographer still holds ${pct(C.residual_top_share_STOP.G2)} of capped G2 STOP (above the 20% target); capped G2 STOP has only ${C.cap_sets.G2.STOP.n_after} images, so its CIs are wide.`];
+  return `<h4>Addendum A (post-hoc, exploratory; 448 px, greedy, letter prompts)</h4><ul class="addendum">${bullets.map(b => `<li>${b}</li>`).join('')}</ul>${tbl}<p class="muted">Source: <code>${esc(A.source)}</code>.</p>`;
+}
 function renderP3(ph) {
   const X = ph.phase3, keys = Object.keys(X.grid);
   const cav = `<div class="caveats">${X.caveats.map(c => `<div class="caveat"><b>⚠ ${esc(c.title)}.</b> ${esc(c.text)}</div>`).join('')}</div>`;
@@ -128,6 +141,7 @@ function renderP3(ph) {
    <h4>Competence gates (canonical: BA ≥ 0.85, STOP ≥ 0.90, GO ≥ 0.80)</h4>${gt}
    <h4>Second model (LFM2-VL-1.6B, 448 px)</h4>${lf}
    <p class="muted">${incomplete}</p>
+   ${X.addendum ? renderAddendum(X.addendum) : ''}
    <p class="muted">Source: <code>${esc(ph.source)}</code> and <code>phase3/phase3_report.md</code>. Conditions appear in the file's order and are never ranked.</p></article>`;
 }
 function renderP3Grid() { const ph = (D.phases || []).find(p => p.phase3); if (!ph) return; const c = ph.phase3.grid[$('#p3-cell').value];
