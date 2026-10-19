@@ -428,15 +428,11 @@ data/img/pilot/ill2_018.jpg
 data/img/pilot/ill2_019.jpg
 data/img/pilot/ill2_021.jpg
 data/img/pilot/ill2_035.jpg
-data/img/pilot/ill2_037.jpg
 data/img/pilot/ill2_045.jpg
-data/img/pilot/ill2_066.jpg
 data/img/pilot/ill2_111.jpg
 data/img/pilot/ill2_233.jpg
 data/img/pilot/ill2_249.jpg
 data/img/pilot/ill2_279.jpg
-data/img/pilot/ill2_312.jpg
-data/img/pilot/ill2_313.jpg
 data/img/pilot/ill2_314.jpg
 data/img/pilot/ill2_316.jpg
 data/img/pilot/ill2_317.jpg

@@ -308,3 +308,7 @@ data/img/pilot/stop_082__control_removed.jpg	flagged
 data/img/pilot/stop_083__control_removed.jpg	flagged
 data/img/pilot/stop_083__original.jpg	flagged
 data/img/pilot/stop_083__sign_removed.jpg	flagged
+data/img/pilot/ill2_037.jpg	visible faces remained after blur (grader 2026-10-19)
+data/img/pilot/ill2_066.jpg	visible faces remained after blur (grader 2026-10-19)
+data/img/pilot/ill2_312.jpg	visible faces remained after blur (grader 2026-10-19)
+data/img/pilot/ill2_313.jpg	visible faces remained after blur (grader 2026-10-19)
