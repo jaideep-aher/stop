@@ -1,7 +1,7 @@
 # sha256 of the GitHub Pages publish set built by site/build_pages_artifact.py
 # 321 entries, including .nojekyll. Path is relative to the artifact root.
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  .nojekyll
-708bfc76b0d290dc080ff5ce848b2ec19d78876fa42b746962f0ace6ec291ec1  assets/app.js
+8b999fec13478b5a04723098b4f3ad6beeee22fbfa859c5b34cc4e2adf92c12f  assets/app.js
 8fdff15239b06cf30e55705a5305d20e4297e80a6b4bd2261b067d9281bffc23  assets/sources.js
 923ea161f5a96295e6fda92254a89b00516c36bf7cb3d8616d4720cff073c0be  assets/style.css
 3b03a361297ba6bd6761a927d1fc06d55385e4be6f7901b0a5f1164efd9e51a4  build_site_data.py
