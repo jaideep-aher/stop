@@ -34,3 +34,6 @@ figure.narrow{max-width:620px}.exgrid{display:grid;grid-template-columns:repeat(
 .legend{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0}tfoot th{background:#faf9f5;border-top:2px solid var(--line)}
 @media(max-width:760px){.herow{flex-direction:column;align-items:flex-start}.exgrid{grid-template-columns:1fr}nav{position:static}}
 .noimg.big{width:100%;height:auto;aspect-ratio:4/3;font-size:12px}
+.caveats{display:grid;gap:.6rem;margin:1rem 0}
+.caveat{border-left:5px solid #b45309;background:#fff7ed;padding:.7rem .9rem;border-radius:6px}
+.phase.p3 h4{margin:1.4rem 0 .4rem}

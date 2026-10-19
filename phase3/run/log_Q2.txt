@@ -1,0 +1,19 @@
+done qwen3vl2b R_s1 1725
+done qwen3vl2b R_s0 1737
+R 640 done 04:43:06
+done qwen3vl2b G1_s0 705
+done qwen3vl2b G1_s1 705
+G1 448,640,896 done 05:04:17
+done qwen3vl2b G2_s0 720
+done qwen3vl2b G2_s1 720
+G2 448,640,896 done 05:26:25
+done qwen3vl2b P_s0 2065
+done qwen3vl2b P_s1 2065
+P done 07:30:13
+done qwen3vl2b R_s1 3420
+done qwen3vl2b R_s0 3435
+R 448 done 08:12:29
+done qwen3vl2b R_s0 1740
+done qwen3vl2b R_s1 1740
+R 896 done 09:05:53
+ALLDONE

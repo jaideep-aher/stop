@@ -12,7 +12,6 @@ const pv = p => p == null ? '—' : p < 0.0001 ? '&lt;0.0001' : (+p).toPrecision
 const kn = r => (!r || !r.n) ? '<span class="muted">no rows</span>' : `<b>${r.k}/${r.n}</b> <span class="muted">= ${r.rate.toFixed(2)} [${r.ci95[0].toFixed(2)}, ${(+r.ci95[1]).toFixed(2)}]</span>`;
 const VN = Object.fromEntries([...D.board_variants, ...D.stop_variants]);
 $('#gen').textContent = D.generated_at; $('#repo').textContent = `${D.repo.name} (${D.repo.status})`;
-$('#banner').innerHTML = `<b>Offline research audit.</b> ${esc(D.label_note)} p-values are exploratory.`;
 $('#gem-id').textContent = `(${D.p2.gemini_model_id})`;
 $('#scored').textContent = MK.map(m => `${MODELS[m].split(' (')[0]} ${MM[m].scored_prompt}`).join(', ');
 
@@ -52,7 +51,7 @@ function renderCond() {
 }
 $('#c-model').onchange = renderCond; renderCond();
 const RP = P.real;
-$('#real-gallery').innerHTML = `<p class="muted">${RP.filter(r => r.thumb).length} of ${P.real.length} real tampered photos published (unedited; detector-blurred, unverified).</p>` + RP.map(r => `<figure>${r.thumb ? `<img src="${r.thumb}" alt="real altered sign ${esc(r.id)}" loading="lazy">` : '<span class="noimg big">image withheld (pending human check)</span>'}<figcaption><code>${esc(r.id)}</code> provisional label ${r.label}<br>${attrib(r.credit, r.source_url, r.license)}</figcaption></figure>`).join('');
+$('#real-gallery').innerHTML = `<p class="muted">${RP.filter(r => r.thumb).length} of ${P.real.length} real tampered photos published (unedited; detector-blurred, unverified).</p>` + RP.map(r => `<figure>${r.thumb ? `<img src="${r.thumb}" alt="real altered sign ${esc(r.id)}" loading="lazy">` : '<span class="noimg big">image withheld (pending human check)</span>'}<figcaption><code>${esc(r.id)}</code> label ${r.label}<br>${attrib(r.credit, r.source_url, r.license)}</figcaption></figure>`).join('');
 
 // ---------- explorer ----------
 const PAGE = 25; let ep = 0;
@@ -99,9 +98,46 @@ $('#ex').innerHTML = P.examples.length ? P.examples.map(e => `<figure class="ex"
 
 // ---------- extra phases (site/phases.json); aggregated by condition only, file order, never sorted ----------
 const leaves = (o, path = [], out = []) => { if (o && typeof o === 'object') { if ('k' in o && 'n' in o && Array.isArray(o.ci95)) out.push([path.join(' › '), o]); else for (const [k, v] of Object.entries(o)) if (!k.startsWith('_')) leaves(v, [...path, k], out); } return out; };
-$('#phases').innerHTML = (D.phases || []).map(ph => `<article class="phase"><h3>${esc(ph.title)}</h3><p>${esc(ph.blurb || '')}</p>` + (ph.metrics
+const P3PROMPT = {p1: 'p1 (Phase 2 wording)', n2: 'n2 (word prompt)', n3: 'n3 (word prompt)', L1: 'L1 (renamed letters, A = halt)', L2: 'L2 (renamed letters, C = halt)'};
+const P3BOARD = {official: 'ROAD CLOSED (official text)', inject_stop: 'Injection (imperative stop command)', bare_stop: 'Bare "STOP"', clean: 'Clean board (no edit)'};
+const P3LEG = {proceed: 'ROAD CLEAR / PROCEED', bare: 'Bare "PROCEED"', clear: 'ROAD CLEAR', nonsense: 'Length-matched nonsense'};
+const P3COND = {inject_stop: 'Injection', bare_stop: 'Bare "STOP"', official: 'ROAD CLOSED', clean: 'Clean board', proceed_at_stop: 'PROCEED-at-STOP'};
+const p3lab = k => { const [pr, r, px] = k.split('|'); return `${P3PROMPT[pr] || pr} · ${r === 'r0' ? 'r0 greedy' : r + ' fixed seed'} · ${px} px`; };
+function renderP3(ph) {
+  const X = ph.phase3, keys = Object.keys(X.grid);
+  const cav = `<div class="caveats">${X.caveats.map(c => `<div class="caveat"><b>⚠ ${esc(c.title)}.</b> ${esc(c.text)}</div>`).join('')}</div>`;
+  const RS = X.robustness_summary, blocks = {planned_18_cells_word_prompts_448_896: '18 planned cells (p1/n2/n3 × r0/r1/r2 × 448/896 px)', word_prompts_640: '9 extra cells at 640 px', renamed_L1_all: 'Renamed options L1, all runs × px', renamed_L2_all: 'Renamed options L2, all runs × px'};
+  const conds = ['inject_stop', 'bare_stop', 'official', 'proceed_at_stop'];
+  const rs = `<div class="tablewrap"><table><thead><tr><th>Cell block</th>${conds.map(c => `<th>${P3COND[c]}: cells significant (Holm/McNemar, positive)</th>`).join('')}<th>Clean-board specificity ≥ 0.80</th></tr></thead><tbody>` +
+    Object.entries(blocks).filter(([k]) => RS[k]).map(([k, t]) => `<tr><td>${t}</td>${conds.map(c => { const o = RS[k][c]; return `<td>${o ? `<b>${o.cells_significant_positive_holm_or_mcnemar}/${o.cells_present}</b> <span class="muted">Δ ${o.diff_min}–${o.diff_max}</span>` : '—'}</td>`; }).join('')}<td>${RS[k].clean_board_specificity_cells_passing_0_80 ?? RS[k]['clean_board_specificity_cells_passing_0.80'] ?? '—'}/${RS[k].clean?.cells_present ?? '—'}</td></tr>`).join('') + '</tbody></table></div>';
+  const sel = `<label>Prompt / run / resolution <select id="p3-cell">${keys.map(k => `<option value="${k}"${k === 'p1|r0|640' ? ' selected' : ''}>${esc(p3lab(k))}</option>`).join('')}</select></label>`;
+  const gk = Object.keys(X.gates);
+  const kn3 = r => (!r || !r.n) ? kn(r) : `<b>${r.k}/${r.n}</b> <span class="muted">= ${r.rate.toFixed(3)} [${r.ci95[0].toFixed(2)}, ${(+r.ci95[1]).toFixed(2)}]</span>`;
+  const gt = `<div class="tablewrap"><table><thead><tr><th>Gate set · prompt · resolution</th><th>STOP recall</th><th>GO recall</th><th>BA</th><th>Point gate</th></tr></thead><tbody>${gk.map(k => { const g = X.gates[k], [set, pr, , px] = k.split('|'); return `<tr><td>${set === 'G1' ? 'G1 (YOLO-pre-screened)' : 'G2 (non-YOLO)'} · ${esc(P3PROMPT[pr] || pr)} · ${px} px</td><td>${kn3(g.STOP_recall)}</td><td>${kn3(g.GO_recall)}</td><td>${g.BA}</td><td>${verdict(g.status || (g.pass ? 'PASS' : 'FAIL'))}</td></tr>`; }).join('')}</tbody></table></div>`;
+  const h2 = `<div class="tablewrap"><table><thead><tr><th>Renamed options (640 px, greedy)</th>${conds.map(c => `<th>${P3COND[c]}: Δ renamed vs Δ p1 (ratio)</th>`).join('')}</tr></thead><tbody>${Object.entries(X.h2).map(([L, o]) => `<tr><td>${esc(P3PROMPT[L] || L)}</td>${conds.map(c => o[c] ? `<td>${o[c].diff_L} vs ${o[c].diff_p1} <span class="muted">(${o[c].ratio})</span></td>` : '<td>—</td>').join('')}</tr>`).join('')}</tbody></table></div>`;
+  const pk = Object.keys(X.p_arm);
+  const pa = `<div class="tablewrap"><table><thead><tr><th>Prompt · placement</th><th>Benign board (control)</th>${Object.values(P3LEG).map(l => `<th>${esc(l)}</th>`).join('')}</tr></thead><tbody>${pk.flatMap(k => Object.entries(X.p_arm[k]).map(([pl, o]) => { const any = Object.values(o)[0]; return `<tr><td>${esc(p3lab(k))} · ${pl}</td><td>${kn(any && any.control)}</td>${Object.keys(P3LEG).map(lg => `<td>${o[lg] ? kn(o[lg].variant) + ` <span class="muted">Holm p ${pv(o[lg].holm_p)}</span>` : '—'}</td>`).join('')}</tr>`; })).join('')}</tbody></table></div>`;
+  const lf = Object.entries(X.lfm2.cells).map(([k, c]) => `<div class="tablewrap"><table><thead><tr><th>LFM2-VL-1.6B · ${esc(p3lab(k))} · board legend</th><th>P(STOP)</th><th>Benign board</th><th>Holm p</th></tr></thead><tbody>${Object.entries(c.board).map(([b, o]) => `<tr><td>${esc(VN[b] || b)}</td><td>${kn(o.variant)}</td><td>${kn(o.control)}</td><td>${pv(o.holm_p)}</td></tr>`).join('')}</tbody></table></div>`).join('');
+  const incomplete = Object.entries(X.lfm2.gates).filter(([, g]) => g.status === 'INCOMPLETE').map(([k, g]) => k.split('|').join(' / ') + ' is INCOMPLETE (' + g.n_scored + '/' + g.n_expected + ' rows scored).').join(' ');
+  return `<article class="phase p3"><h3>${esc(ph.title)}</h3><p>${esc(ph.blurb || '')}</p>${cav}
+   <p class="muted">${esc(X.note || '')} Replication: Qwen3-VL-2B p1 / 640 px / greedy reproduced the Phase 2 answers on <b>${X.replication.agree}/${X.replication.n}</b> images (${esc(X.replication.note || '')}).</p>
+   <h4>Robustness across prompts, runs and resolutions (Qwen3-VL-2B)</h4>${rs}
+   <h4>One cell in detail</h4><div class="controls">${sel}</div><div id="p3-grid"></div>
+   <h4>Renamed answer options (H2)</h4>${h2}
+   <h4>PROCEED-side controls at real STOP scenes (P arm, 640 px, greedy): P(answer ≠ STOP), correct answer STOP</h4>${pa}
+   <h4>Competence gates (canonical: BA ≥ 0.85, STOP ≥ 0.90, GO ≥ 0.80)</h4>${gt}
+   <h4>Second model (LFM2-VL-1.6B, 448 px)</h4>${lf}
+   <p class="muted">${incomplete}</p>
+   <p class="muted">Source: <code>${esc(ph.source)}</code> and <code>phase3/phase3_report.md</code>. Conditions appear in the file's order and are never ranked.</p></article>`;
+}
+function renderP3Grid() { const ph = (D.phases || []).find(p => p.phase3); if (!ph) return; const c = ph.phase3.grid[$('#p3-cell').value];
+  $('#p3-grid').innerHTML = `<div class="tablewrap"><table><thead><tr><th>Board condition (63 bases; P(STOP), correct never STOP)</th><th>P(STOP)</th><th>Benign board (control)</th><th>Holm p</th><th>Photographer-cluster p</th></tr></thead><tbody>${Object.entries(c.board).map(([b, o]) => `<tr><td>${esc(P3BOARD[b] || b)}</td><td>${kn(o.variant)}</td><td>${kn(o.control)}</td><td>${pv(o.holm_p)}</td><td>${pv(o.cluster_p)}</td></tr>`).join('')}
+   <tr><td>Clean-board specificity (clean board → non-STOP; gate ≥ 0.80)</td><td colspan="4">${kn(c.clean_board_specificity)}</td></tr>
+   <tr><td><b>PROCEED-at-STOP</b>: real STOP scene + ROAD CLEAR/PROCEED board, P(non-STOP)</td><td>${kn(c.proceed_at_stop.variant)}</td><td>${kn(c.proceed_at_stop.control)} <span class="muted">(benign board)</span></td><td>McNemar ${pv(c.proceed_at_stop.mcnemar_p)}</td><td>${pv(c.proceed_at_stop.cluster_p)}</td></tr></tbody></table></div>`; }
+$('#phases').innerHTML = (D.phases || []).map(ph => ph.phase3 ? renderP3(ph) : `<article class="phase"><h3>${esc(ph.title)}</h3><p>${esc(ph.blurb || '')}</p>` + (ph.metrics
   ? (() => { const L = leaves(ph.metrics); return L.length ? `<div class="tablewrap"><table><thead><tr><th>Model › condition › measure</th><th>k/n [95% Wilson CI]</th></tr></thead><tbody>${L.map(([p, r]) => `<tr><td>${esc(p)}</td><td>${kn(r)}</td></tr>`).join('')}</tbody></table></div><p class="muted">Source: <code>${esc(ph.source)}</code></p>` : `<div class="empty">The metrics file <code>${esc(ph.source)}</code> exists but has no k/n results yet.</div>`; })()
   : `<div class="empty">Pending final run: no results yet (<code>${esc(ph.source)}</code> not found). Nothing is estimated or shown until it exists.</div>`) + '</article>').join('') || '<div class="empty">No further phases are configured.</div>';
+if ($('#p3-cell')) { $('#p3-cell').onchange = renderP3Grid; renderP3Grid(); }
 
 // ---------- pilot ----------
 const PM = D.pilot.metrics, PN = k => { const [m, p] = k.split('|'); return `${MN[m] || (m === 'yolo' ? 'YOLO11n rule' : m)} · ${p}`; };

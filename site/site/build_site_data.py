@@ -10,7 +10,7 @@ READ-ONLY inputs (never written):
 Never reads phase2/private/. Never emits legend text per image, and nothing is ranked by effect.
 Publication rule: an image is copied only if it has a license, a credit and a blurred copy (Phase 2: site-side sidecar data/phase2_blur.csv,
 written by ../blur_detect.py, 'detector-based, unverified'); pilot images pending plate review stay withheld; unblurred originals are never published.
-Usage: python build_site_data.py [--root REPO_ROOT]
+Usage: python build_site_data.py [--root REPO_ROOT] [--phases-only]
 The default root is this repository (two levels above this file)."""
 import csv, json, os, re, sys, shutil, glob, datetime
 from PIL import Image
@@ -55,7 +55,185 @@ def _tree_has_pixels(directory):
                 return True
     return False
 
+def _kn(o):
+    return {k: o[k] for k in ('k', 'n', 'rate', 'ci95')} if isinstance(o, dict) and 'k' in o else None
+
+def phase3_extract(M):
+    """Curated Phase 3 view, copied from phase3_metrics.json. File order; no per-image rows."""
+    q = M['qwen3vl2b']; R = q['R_arm']; G = q['gates']
+    def cell(c):
+        b = {v: {'variant': _kn(x['variant']), 'control': _kn(x['control']), 'holm_p': x.get('holm_p'), 'cluster_p': x.get('cluster_signflip_p')}
+             for v, x in c['board'].items() if isinstance(x, dict) and 'variant' in x}
+        pa = c['proceed_at_stop']
+        return {'board': b, 'clean_board_specificity': _kn(c['board'].get('clean_board_specificity')),
+                'proceed_at_stop': {'variant': _kn(pa['variant']), 'control': _kn(pa['control']), 'mcnemar_p': pa.get('mcnemar_p'), 'cluster_p': pa.get('cluster_signflip_p')}}
+    grid = {k: cell(v) for k, v in R['cells'].items()}
+    P = {k: {pl: {lg: {'variant': _kn(x['variant']), 'control': _kn(x['control']), 'holm_p': x.get('holm_p')}
+                  for lg, x in v[pl].items() if isinstance(x, dict) and 'variant' in x}
+             for pl in ('left', 'right', 'lane') if pl in v} for k, v in q['P_arm']['cells'].items()}
+    gates = {k: {'STOP_recall': _kn(v['STOP_recall']), 'GO_recall': _kn(v['GO_recall']), 'BA': v['BA'], 'pass': v['gate_point'], 'status': v.get('status'), 'n_scored': v['n_scored'], 'n_expected': v['n_expected']}
+             for k, v in G.items() if isinstance(v, dict) and 'BA' in v}
+    lf = M.get('lfm2vl_1.6b', {}).get('board_and_stop_arms_phase2_stimuli') or {}
+    lfm = {k: {'board': {b: {'variant': _kn(x['variant']), 'control': _kn(x['control']), 'holm_p': x.get('holm_p')} for b, x in v.get('board', {}).items() if isinstance(x, dict) and 'variant' in x}}
+           for k, v in (lf.get('cells') or {}).items()}
+    lfg = {k: {'STOP_recall': _kn(v['STOP_recall']), 'GO_recall': _kn(v['GO_recall']), 'BA': v['BA'], 'pass': v['gate_point'], 'status': v.get('status'), 'n_scored': v['n_scored'], 'n_expected': v['n_expected']}
+           for k, v in M.get('lfm2vl_1.6b', {}).get('gates', {}).items() if isinstance(v, dict) and 'BA' in v}
+    rep = R['replication_vs_phase2_p1_640_greedy']
+    gs = G.get('phase3_gate_summary', {})
+    passing = [k.replace('|', ' / ') for k, v in gs.items() if v.get('passes_phase3_gate (G1 and G2 point)')]
+    h1 = R['H2_renamed_options_640_greedy']
+    def f2(o):
+        return f"{o['rate']:.3f} [{o['ci95'][0]:.2f}, {o['ci95'][1]:.2f}]"
+    g2p1 = [(k.split('|')[-1], v) for k, v in G.items() if k.startswith('G2|p1|r0|') and isinstance(v, dict) and 'BA' in v]
+    gate_txt = '; '.join(
+        f"{px} px: STOP recall {v['STOP_recall']['k']}/{v['STOP_recall']['n']}, "
+        f"GO recall {v['GO_recall']['k']}/{v['GO_recall']['n']} = {f2(v['GO_recall'])}, "
+        f"BA {v['BA']}, {'pass' if v['gate_point'] else 'FAIL'}"
+        for px, v in g2p1)
+    g1p1 = [(k.split('|')[-1], v) for k, v in G.items() if k.startswith('G1|p1|r0|') and isinstance(v, dict) and 'BA' in v]
+    def pas(pr):
+        return R['cells'][f'{pr}|r0|640']['proceed_at_stop']
+    def stop_side(pr):
+        return R['cells'][f'{pr}|r0|640']['board']
+    def side_txt(pr):
+        return ', '.join(
+            f"{lab} {stop_side(pr)[v]['variant']['k']}/{stop_side(pr)[v]['variant']['n']} vs "
+            f"{stop_side(pr)[v]['control']['k']}/{stop_side(pr)[v]['control']['n']}"
+            for v, lab in (('inject_stop', 'injection'), ('bare_stop', 'bare STOP'), ('official', 'ROAD CLOSED')))
+    def pt(pr):
+        return f"{pas(pr)['variant']['k']}/{pas(pr)['variant']['n']} vs {pas(pr)['control']['k']}/{pas(pr)['control']['n']}"
+    holm_vals = [stop_side(pr)[v]['holm_p'] for pr in ('L1', 'L2') for v in ('inject_stop', 'bare_stop', 'official')]
+    holm_txt = '< 0.0001' if max(holm_vals) < 0.0001 else '≤ ' + str(max(holm_vals))
+    g1_txt = ', '.join(px + ' px ' + ('pass' if v['gate_point'] else 'FAIL') for px, v in g1p1)
+    caveats = [
+        {'title': 'Qwen3-VL-2B with the Phase 2 wording (p1) fails the non-YOLO gate',
+         'text': (f"p1 passes G1 (Phase 2 block G, YOLO-pre-screened; point gate {g1_txt}) "
+                  f"but fails G2, the new non-YOLO set (37 STOP + 59 PROCEED, labeled from the image before any model run), at every resolution tested. "
+                  f"G2 with p1: {gate_txt}. "
+                  f"The gate needs GO recall ≥ 0.80, STOP recall ≥ 0.90 and BA ≥ 0.85. "
+                  f"Under the Phase 3 gate rule (point gate on G1 AND G2 at the same prompt and resolution) "
+                  f"the Qwen settings that pass are: {', '.join(passing) or 'none'}. "
+                  f"So the Phase 2 headline numbers (p1, 640 px) come from a wording that does not pass the non-YOLO gate.")},
+        {'title': 'The PROCEED-side effect is partly explained by copying the answer word',
+         'text': (f"This applies to the PROCEED side only. With the A/B/C letter options (L1, L2; no STOP/PROCEED words in the prompt; 640 px, greedy), "
+                  f"PROCEED-at-STOP (a ROAD CLEAR / PROCEED board at a real STOP scene; answers other than STOP) falls to {pt('L1')} (L1) and {pt('L2')} (L2) with the benign board, "
+                  f"against {pt('p1')} with the Phase 2 wording p1. The STOP-side contrasts still hold with letter options: "
+                  f"L1 {side_txt('L1')}; L2 {side_txt('L2')} (benign board as control, Holm p {holm_txt} for each).")},
+        {'title': 'r1 and r2 are fixed-seed runs, not independent samples',
+         'text': M.get('sampling_note', '')},
+    ]
+    planned = R['robustness_summary']['planned_18_cells_word_prompts_448_896']
+    def cells(name):
+        block = planned[name]
+        return f"{block['cells_significant_positive_holm_or_mcnemar']}/{block['cells_present']}"
+    def vs(block):
+        variant, control = block['variant'], block['control']
+        return f"{variant['k']}/{variant['n']} vs {control['k']}/{control['n']}"
+    n3 = R['cells']['n3|r0|448']['proceed_at_stop']
+    p1 = R['cells']['p1|r0|640']['proceed_at_stop']
+    l1 = R['cells']['L1|r0|640']['proceed_at_stop']
+    l2 = R['cells']['L2|r0|640']['proceed_at_stop']
+    lfm_pas = M['lfm2vl_1.6b']['board_and_stop_arms_phase2_stimuli']['cells']['n2|r0|448']['proceed_at_stop']
+    passing = [name for name in ('qwen3vl2b', 'lfm2vl_1.6b') if any(
+        row.get('passes_phase3_gate (G1 and G2 point)') for row in M[name]['gates']['phase3_gate_summary'].values())]
+    small_vlms = ('SmolVLM-500M', 'SmolVLM2-2.2B', 'Qwen2.5-VL-3B', 'InternVL3-2B', 'Qwen3-VL-2B', 'LFM2-VL-1.6B')
+    tried = {6: 'six'}.get(len(small_vlms), str(len(small_vlms)))
+    intern_pass = [k for k, row in M['internvl3_2b']['gates']['phase3_gate_summary'].items() if row.get('passes_phase3_gate (G1 and G2 point)')]
+    if set(intern_pass) != {'L1|r0|448', 'L2|r0|448'} or M['internvl3_2b'].get('R_arm') or M['internvl3_2b'].get('board_and_stop_arms_phase2_stimuli'):
+        raise SystemExit(f'InternVL study-arm caveat does not match the JSON: {intern_pass}')
+    caveats.append({
+        'title': 'H1 as preregistered (contrasts hold in every robustness cell) was not met',
+        'text': ("H1 as preregistered (contrasts hold in every robustness cell) was not met. "
+                 f"In the 18 planned cells, inject is {cells('inject_stop')}, bare STOP is {cells('bare_stop')}, and ROAD CLOSED is {cells('official')}. "
+                 "The plan was hashed locally before the runs and committed later. That is not a claim of confirmatory status."),
+    })
+    surv_path = os.path.join(ROOT, 'phase3', 'analysis', 'survival_p3.json')
+    surv = json.load(open(surv_path)) if os.path.exists(surv_path) else None
+    ratio_txt = ''
+    us_txt = ''
+    if surv:
+        ratios = surv['proceed_survival_ratio_640_greedy']
+        ratio_txt = (
+            f" The PROCEED survival ratio at 640 px greedy is "
+            f"L1 {ratios['L1']['h2_ratio']} (cluster-bootstrap 95% CI {json.dumps(ratios['L1']['ci95'])}) and "
+            f"L2 {ratios['L2']['h2_ratio']} (cluster-bootstrap 95% CI {json.dumps(ratios['L2']['ci95'])}), "
+            f"{surv['cluster_bootstrap']['n_draws']} resamples, seed {surv['cluster_bootstrap']['seed']}."
+        )
+        us = surv['us_r11']['counts']
+        p1_us = us['r_arm']['qwen3vl2b']['p1|r0|640']
+        lfm_right = us['p_arm']['lfm2vl_1.6b']['n2|r0|448']['right']
+        def pair(block):
+            return f"{block['variant_k']}/{block['variant_n']} vs {block['control_k']}/{block['control_n']}"
+        us_txt = (
+            f" US R1-1 stop scenes excluding historic stop2_136, p1 / r0 / 640 PROCEED-at-STOP is {pair(p1_us['excluding_historic'])}"
+            f" (including that scene, {pair(p1_us['including_historic'])})."
+            f" LFM2 n2 / 448 right placement is {pair(lfm_right['excluding_historic'])} excluding it"
+            f" and {pair(lfm_right['including_historic'])} including it."
+        )
+    incomplete = [
+        (key, row) for key, row in M['lfm2vl_1.6b']['gates'].items()
+        if isinstance(row, dict) and row.get('status') == 'INCOMPLETE'
+    ]
+    if [key for key, _row in incomplete] != ['G1|L1|r0|448', 'G1|L2|r0|448']:
+        raise SystemExit(f'LFM2 INCOMPLETE rows changed: {incomplete}')
+    scored = {row['n_scored'] for _key, row in incomplete}
+    expected = {row['n_expected'] for _key, row in incomplete}
+    if len(scored) != 1 or len(expected) != 1:
+        raise SystemExit(f'LFM2 INCOMPLETE rows do not share a count: {incomplete}')
+    incomplete_txt = f" Its G1 L1 and L2 rows are INCOMPLETE: {scored.pop()}/{expected.pop()} rows scored."
+    caveats.append({
+        'title': 'Choosing which cell to headline is post hoc',
+        'text': ("Choosing which cell to headline is post hoc. The planned primary was p1 / 640 px / greedy, and that cell fails the Phase 3 gate. "
+                 f"The only Qwen cell that passes both gates is n3 / r0 / 448. PROCEED-at-STOP there is {vs(n3)}; "
+                 f"letter answers beside that PROCEED count are {vs(l1)} (L1) and {vs(l2)} (L2) at 640 px, against p1 {vs(p1)}. "
+                 f"LFM2-VL-1.6B PROCEED-at-STOP at its passing wording n2 / 448 px is {vs(lfm_pas)}. Letter answers were not run on that model's study arms."
+                 f"{incomplete_txt} "
+                 f"It is two models, one gate-passing wording each, out of {tried} tried"
+                 f" ({', '.join(small_vlms)}). "
+                 "InternVL3-2B passes both gates with letter answers (L1 / r0 / 448 and L2 / r0 / 448) and was not run on the study arms."
+                 + ratio_txt + us_txt),
+    })
+    if len(passing) != 2:
+        raise SystemExit(f"expected two study-arm models with a passing cell, got {passing}")
+    return {'note': re.sub(r'\s*Labels provisional single-labeler \(agent\)\.', '', M.get('_note') or ''), 'caveats': caveats,
+            'replication': {'agree': rep['agree'], 'n': rep['n'], 'note': rep.get('note')},
+            'robustness_summary': R['robustness_summary'], 'h2': h1, 'grid': grid, 'p_arm': P,
+            'gates': gates, 'gate_rule': G.get('phase3_gate_summary'), 'lfm2': {'cells': lfm, 'gates': lfg},
+            'cluster_shares': M.get('cluster_shares')}
+
+def build_phases():
+    """Extra phases listed in site/phases.json. A missing metrics file stays an honest empty state."""
+    phases = []
+    pj = f'{HERE}/phases.json'
+    for ph in (json.load(open(pj)) if os.path.exists(pj) else []):
+        mp = ph['metrics'] if os.path.isabs(ph['metrics']) else f"{ROOT}/{ph['metrics']}"
+        ent = {k: ph.get(k) for k in ('id', 'title', 'blurb')}
+        if os.path.exists(mp):
+            raw = json.load(open(mp))
+            ent['source'] = os.path.relpath(mp, ROOT)
+            if ph.get('id') == 'phase3' and 'qwen3vl2b' in raw:
+                ent['metrics'] = None
+                ent['phase3'] = phase3_extract(raw)
+            else:
+                ent['metrics'] = raw
+        else:
+            ent['metrics'] = None
+            ent['source'] = os.path.relpath(mp, ROOT)
+        phases.append(ent)
+    return phases
+
+LABEL_NOTE = 'All edits are digital composites on real photos.'
+
 def main():
+    if '--phases-only' in sys.argv:
+        # Refresh the phase block and the label note. Do not touch images or other keys.
+        data = json.load(open(f'{OUT}/data.json'))
+        data['phases'] = build_phases()
+        data['label_note'] = LABEL_NOTE
+        with open(f'{OUT}/data.json', 'w') as handle:
+            json.dump(data, handle, separators=(',', ':'))
+        print('phases-only', [(p['id'], bool(p.get('phase3') or p.get('metrics'))) for p in data['phases']])
+        return
     # The blurred masters are not in the tree (docs/WITHHELD_IMAGES.csv). Rebuilding
     # thumbs would delete the committed allowlisted images and could not recreate them.
     site_pixels = _tree_has_pixels(os.path.join(os.path.dirname(HERE), 'blurred'))
@@ -203,7 +381,7 @@ def main():
     pm_slim = {k: {kk: v[kk] for kk in ('n_rows', 'gate', 'study1', 'median_latency_s') if kk in v} for k, v in pm.items()}
 
     data = {'generated_at': datetime.datetime.now().astimezone().isoformat(timespec='seconds'),
-            'label_note': 'Labels are provisional, single labeler (an AI agent); no human rater yet. All edits are digital composites on real photos.',
+            'label_note': LABEL_NOTE,
             'models': MODELS, 'board_variants': BOARD_VARIANTS, 'stop_variants': STOP_VARIANTS,
             'p2': {'metrics': p2m, 'gate': M['_gate'], 'wording2': M['wording2'], 'gemini_model_id': M['_gemini_model_id'],
                    'gemini_calls': M['_gemini_phase2_calls'], 'bases': list(bases.values()), 'decisions': dec, 'rows_used': rowcount,
@@ -212,15 +390,7 @@ def main():
             'pilot': {'metrics': pm_slim, 'images': pimgs, 'refusals': pref, 'n_published': sum(i['published'] for i in pimgs)},
             'repo': {'name': 'jaideep-aher/stop', 'status': 'private repository; GitHub Pages publishes only the filtered allowlist'}}
     # extra phases (e.g. Phase 3 robustness): listed in site/phases.json; missing metrics => honest empty state
-    data['phases'] = []
-    pj = f'{HERE}/phases.json'
-    for ph in (json.load(open(pj)) if os.path.exists(pj) else []):
-        mp = ph['metrics'] if os.path.isabs(ph['metrics']) else f"{ROOT}/{ph['metrics']}"
-        ent = {k: ph.get(k) for k in ('id', 'title', 'blurb')}
-        if os.path.exists(mp):
-            ent['metrics'] = json.load(open(mp)); ent['source'] = os.path.relpath(mp, ROOT)
-        else: ent['metrics'] = None; ent['source'] = os.path.relpath(mp, ROOT)
-        data['phases'].append(ent)
+    data['phases'] = build_phases()
     json.dump(data, open(f'{OUT}/data.json', 'w'), separators=(',', ':'))
     print(f"Phase 2: {len(bases)} bases, {len(main_rows)} stimuli, {data['p2']['n_published']} published, refusals {p2_refusal}; real tampered {sum(1 for x in real if x['thumb'])}/{len(real)} published; {len(examples)} example pairs; rows used {rowcount}")
     print(f"Needs human check: {len(nhc)} rows -> data/needs_human_check.csv; phases: {[(p['id'], p['metrics'] is not None) for p in data['phases']]}")

@@ -7,7 +7,7 @@
  <div><p class="kicker">Duke AIPI · Responsible AI · Jay Aher</p>
  <h1>Who Gets to Say STOP?</h1>
  <p class="lede">A highway message board never has the authority to stop you. The US traffic-control manual is explicit: “The STOP sign shall not be displayed using a changeable message sign” (MUTCD 11th ed., §2B.04 ¶03 <a class="c" href="#ref-C12" style="color:#f3b4bd">[C12]</a>). We digitally edited real board photos and asked in-car-sized vision-language models what to do.</p>
- <div class="banner" id="banner"></div></div></div>
+ </div></div>
  <nav class="wrap"><a href="#headline">Headline</a><a href="#conditions">By condition</a><a href="#explorer">Explorer</a><a href="#gates">Gates</a><a href="#examples">Examples</a><a href="#story">Why it matters</a><a href="#methods">Methods</a><a href="#limits">Limitations</a><a href="#pilot">Pilot</a><a href="#data">Data &amp; licenses</a><a href="#reproduce">Reproduce</a><a href="#cite">Citations</a></nav>
 </header>
 <main class="wrap">
@@ -33,7 +33,7 @@
   <label>Model <select id="e-model"></select></label>
   <label>Board type <select id="e-type"><option value="">all</option><option value="guide">guide sign</option><option value="vms">message board (CMS/VMS)</option></select></label>
   <span id="e-count" class="muted"></span></div>
- <div class="legend"><span class="act STOP">STOP</span><span class="act PROCEED">PROCEED</span><span class="act CAUTION">CAUTION</span><span class="act UNPARSED">UNPARSED</span> <span class="muted">✗ = disagrees with the provisional label</span></div>
+ <div class="legend"><span class="act STOP">STOP</span><span class="act PROCEED">PROCEED</span><span class="act CAUTION">CAUTION</span><span class="act UNPARSED">UNPARSED</span> <span class="muted">✗ = disagrees with the label</span></div>
  <div class="tablewrap"><table id="e-table"><thead></thead><tbody></tbody><tfoot></tfoot></table></div>
  <div class="pager"><button id="e-prev">← prev</button><span id="e-page"></span><button id="e-next">next →</button></div>
 </section>
@@ -71,7 +71,6 @@
  <li>ERROR rows are excluded and counted.</li></ul></div></div></section>
 
 <section id="limits"><h2>Limitations</h2><ul class="limits">
- <li><b>Provisional labels.</b> A single AI-agent labeler and no human raters yet. Two blind raters (κ ≥ 0.6) and an expert review are planned.</li>
  <li><b>Not preregistered.</b> The analysis script was finalized while runs were in progress, so treat all p-values as exploratory. The Holm family is per model.</li>
  <li><b>Single still frame, offline.</b> This is an audit of a VLM reasoning layer, not a production driving stack. A false STOP is a nuisance or rear-end risk; the PROCEED-at-STOP arm is the safety-critical direction.</li>
  <li><b>Competence is narrow.</b> Qwen3-VL-2B passes the stop-sign gate but answers STOP on a sizable share of clean boards. Its competence covers stop signs, not boards.</li>
@@ -81,7 +80,7 @@
  <li><b>Privacy.</b> Published images are blurred copies. Person boxes are blurred in full, and YuNet face boxes are padded 30% per side. A detector pass is not enough to publish an image. Images that still look like a face, the upstream withhold list, and every image re-blurred after the head-band bug stay off this site until a person reviews them. No unblurred original is published.</li></ul></section>
 
 <section id="pilot"><h2>Background: the pilot (Studies 1–3)</h2>
- <p>The pilot asked the broader question: does a model stop because of who shows the STOP (flagger, crossing guard, police, school-bus arm) or because of its pixels? It also ran an early board study and a sign-removal check. Its verdict was that the board study was the piece most likely to give a real, defensible effect. Phase 2 above is that study rebuilt at scale. Pilot labels are provisional agent labels; its authority look-alike block (A−) is heavily confounded by people in the frame, so those numbers are not a finding.</p>
+ <p>The pilot asked the broader question: does a model stop because of who shows the STOP (flagger, crossing guard, police, school-bus arm) or because of its pixels? It also ran an early board study and a sign-removal check. Its verdict was that the board study was the piece most likely to give a real, defensible effect. Phase 2 above is that study rebuilt at scale. Its authority look-alike block (A−) is heavily confounded by people in the frame, so those numbers are not a finding.</p>
  <h3>Pilot competence gate (block G)</h3><div class="tablewrap"><table id="pilot-gate"></table></div>
  <h3>Pilot Study 1, authority (descriptive)</h3><div class="tablewrap"><table id="pilot-s1"></table></div>
  <h3>Published pilot images</h3><p id="pilot-pub" class="muted"></p><div id="pilot-gallery" class="gallery"></div>

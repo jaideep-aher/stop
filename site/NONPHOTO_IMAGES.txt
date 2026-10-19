@@ -5,3 +5,6 @@ phase2/fig2_proceed_at_stop_and_script.png	matplotlib panels for the PROCEED arm
 pilot/pilot_chart.png	matplotlib pilot rates; no photo pixels
 site/site/data/img/p2/fig1.png	site copy of the phase 2 bar chart; no photo pixels
 site/site/data/img/p2/fig2_left.png	left panel of the phase 2 chart; no photo pixels
+phase3/fig1_qwen_robustness_grid.png	matplotlib robustness grid; no photo pixels
+phase3/fig2_proceed_controls_qwen3vl2b.png	matplotlib PROCEED-control chart; no photo pixels
+phase3/fig2_proceed_controls_lfm2vl_1.6b.png	matplotlib PROCEED-control chart; no photo pixels
