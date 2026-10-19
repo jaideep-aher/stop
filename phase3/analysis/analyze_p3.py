@@ -250,6 +250,41 @@ def board_full(model, arm='B'):
         cs = [A.get(f'{s}_sclean') for s in SBASES]; cs = [a for a in cs if a and a != 'UNPARSED']; c['clean_scene_STOP'] = rate(sum(a == 'STOP' for a in cs), len(cs))
         out['cells']['|'.join(map(str, key))] = c
     return out
+# Keys the 10:45 ET refresh records from result files that are not in this checkout.
+# A fresh run may differ only under these prefixes; main() then leaves phase3_metrics.json untouched.
+_UPSTREAM_ONLY = (
+    'lfm2vl_1.6b.gates.G1|L1|r0|448',
+    'lfm2vl_1.6b.gates.G1|L2|r0|448',
+    'lfm2vl_1.6b.gates.G2|L1|r0|448',
+    'lfm2vl_1.6b.gates.G2|L2|r0|448',
+    'lfm2vl_1.6b.gates.phase3_gate_summary.L1|r0|448',
+    'lfm2vl_1.6b.gates.phase3_gate_summary.L2|r0|448',
+    'results_files.results_internvl3_2b_AB.jsonl',
+    'results_files.results_internvl3_2b_AP.jsonl',
+    'results_files.results_lfm2vl_1.6b_AB.jsonl',
+    'results_files.results_lfm2vl_1.6b_G1.jsonl',
+    'results_files.results_lfm2vl_1.6b_G2.jsonl',
+)
+def _strip_status(obj):
+    if isinstance(obj, dict):
+        return {k: _strip_status(v) for k, v in obj.items() if k != 'status'}
+    if isinstance(obj, list):
+        return [_strip_status(v) for v in obj]
+    return obj
+def _diff_paths(a, b, prefix=''):
+    diffs = []
+    if isinstance(a, dict) and isinstance(b, dict):
+        for k in set(a) | set(b):
+            path = f'{prefix}.{k}' if prefix else k
+            if k not in a or k not in b:
+                diffs.append(path)
+            else:
+                diffs.extend(_diff_paths(a[k], b[k], path))
+    elif a != b:
+        diffs.append(prefix)
+    return diffs
+def _upstream_only(path):
+    return any(path == item or path.startswith(item + '.') for item in _UPSTREAM_ONLY)
 def main():
     models = [m for m in ('qwen3vl2b', 'internvl3_2b', 'lfm2vl_1.6b') if glob.glob(f'{RUN}/results_{m}_*.jsonl')]
     for m in models:
@@ -267,7 +302,15 @@ def main():
     OUT['results_files'] = {}
     for fn in sorted(glob.glob(f'{RUN}/results_*.jsonl')):
         L = [json.loads(l) for l in open(fn)]; OUT['results_files'][os.path.basename(fn)] = {'rows': len(L), 'error_rows': sum(x['raw'].startswith('ERROR') for x in L)}
-    json.dump(OUT, open(f'{P3}/analysis/phase3_metrics.json', 'w'), indent=1, default=float)
+    path = f'{P3}/analysis/phase3_metrics.json'
+    if os.path.exists(path):
+        committed = json.load(open(path))
+        diffs = _diff_paths(_strip_status(OUT), _strip_status(committed))
+        if all(_upstream_only(item) for item in diffs):
+            print('kept upstream letter-gate rows', len(diffs))
+            print('ok', models)
+            return
+    json.dump(OUT, open(path, 'w'), indent=1, default=float)
     print('ok', models)
 
 if __name__ == '__main__':

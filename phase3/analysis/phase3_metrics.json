@@ -15917,8 +15917,7 @@
     },
     "BA": 0.928,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|L1|r0|640": {
     "n_scored": 94,
@@ -15952,8 +15951,7 @@
     },
     "BA": 0.928,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|L1|r0|896": {
     "n_scored": 94,
@@ -15987,8 +15985,7 @@
     },
     "BA": 0.938,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|L2|r0|448": {
     "n_scored": 94,
@@ -16022,8 +16019,7 @@
     },
     "BA": 0.917,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|L2|r0|640": {
     "n_scored": 94,
@@ -16057,8 +16053,7 @@
     },
     "BA": 0.938,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|L2|r0|896": {
     "n_scored": 94,
@@ -16092,8 +16087,7 @@
     },
     "BA": 0.969,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|n2|r0|448": {
     "n_scored": 94,
@@ -16127,8 +16121,7 @@
     },
     "BA": 0.51,
     "gate_point": false,
-    "gate_LB": false,
-    "status": "FAIL"
+    "gate_LB": false
    },
    "G1|n2|r0|640": {
     "n_scored": 94,
@@ -16162,8 +16155,7 @@
     },
     "BA": 0.531,
     "gate_point": false,
-    "gate_LB": false,
-    "status": "FAIL"
+    "gate_LB": false
    },
    "G1|n2|r0|896": {
     "n_scored": 94,
@@ -16197,8 +16189,7 @@
     },
     "BA": 0.551,
     "gate_point": false,
-    "gate_LB": false,
-    "status": "FAIL"
+    "gate_LB": false
    },
    "G1|n3|r0|448": {
     "n_scored": 94,
@@ -16232,8 +16223,7 @@
     },
     "BA": 0.948,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|n3|r0|640": {
     "n_scored": 94,
@@ -16267,8 +16257,7 @@
     },
     "BA": 0.958,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|n3|r0|896": {
     "n_scored": 94,
@@ -16302,8 +16291,7 @@
     },
     "BA": 0.969,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|p1|r0|448": {
     "n_scored": 94,
@@ -16337,8 +16325,7 @@
     },
     "BA": 0.959,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|p1|r0|640": {
     "n_scored": 94,
@@ -16372,8 +16359,7 @@
     },
     "BA": 0.98,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|p1|r0|896": {
     "n_scored": 94,
@@ -16407,8 +16393,7 @@
     },
     "BA": 0.98,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1_errors_excluded": {},
    "G2|L1|r0|448": {
@@ -16444,7 +16429,6 @@
     "BA": 0.783,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 10,
      "n": 12,
@@ -16509,7 +16493,6 @@
     "BA": 0.814,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 10,
      "n": 12,
@@ -16574,7 +16557,6 @@
     "BA": 0.864,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -16639,7 +16621,6 @@
     "BA": 0.885,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -16704,7 +16685,6 @@
     "BA": 0.851,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -16769,7 +16749,6 @@
     "BA": 0.881,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -16834,7 +16813,6 @@
     "BA": 0.508,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -16899,7 +16877,6 @@
     "BA": 0.525,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -16964,7 +16941,6 @@
     "BA": 0.568,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -17029,7 +17005,6 @@
     "BA": 0.902,
     "gate_point": true,
     "gate_LB": true,
-    "status": "PASS",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 12,
      "n": 12,
@@ -17094,7 +17069,6 @@
     "BA": 0.873,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 9,
      "n": 12,
@@ -17159,7 +17133,6 @@
     "BA": 0.851,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -17224,7 +17197,6 @@
     "BA": 0.885,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 9,
      "n": 12,
@@ -17289,7 +17261,6 @@
     "BA": 0.851,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 8,
      "n": 12,
@@ -17354,7 +17325,6 @@
     "BA": 0.871,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -17533,8 +17503,7 @@
     },
     "BA": 0.99,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|L2|r0|448": {
     "n_scored": 94,
@@ -17568,8 +17537,7 @@
     },
     "BA": 0.98,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|n2|r0|448": {
     "n_scored": 94,
@@ -17603,8 +17571,7 @@
     },
     "BA": 0.5,
     "gate_point": false,
-    "gate_LB": false,
-    "status": "FAIL"
+    "gate_LB": false
    },
    "G1|n3|r0|448": {
     "n_scored": 94,
@@ -17638,8 +17605,7 @@
     },
     "BA": 0.52,
     "gate_point": false,
-    "gate_LB": false,
-    "status": "FAIL"
+    "gate_LB": false
    },
    "G1|p1|r0|448": {
     "n_scored": 94,
@@ -17673,8 +17639,7 @@
     },
     "BA": 0.673,
     "gate_point": false,
-    "gate_LB": false,
-    "status": "FAIL"
+    "gate_LB": false
    },
    "G1_errors_excluded": {},
    "G2|L1|r0|448": {
@@ -17710,7 +17675,6 @@
     "BA": 0.919,
     "gate_point": true,
     "gate_LB": true,
-    "status": "PASS",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -17775,7 +17739,6 @@
     "BA": 0.936,
     "gate_point": true,
     "gate_LB": true,
-    "status": "PASS",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -17840,7 +17803,6 @@
     "BA": 0.5,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -17905,7 +17867,6 @@
     "BA": 0.559,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -17970,7 +17931,6 @@
     "BA": 0.695,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 5,
      "n": 12,
@@ -18778,68 +18738,72 @@
   },
   "gates": {
    "G1|L1|r0|448": {
-    "n_scored": 23,
+    "n_scored": 94,
     "n_expected": 94,
     "unparsed": {
      "k": 0,
-     "n": 23,
+     "n": 94,
      "rate": 0.0,
      "ci95": [
-      0,
-      0.143
+      0.0,
+      0.039
      ]
     },
     "STOP_recall": {
-     "k": 23,
-     "n": 23,
+     "k": 45,
+     "n": 45,
      "rate": 1.0,
      "ci95": [
-      0.857,
+      0.921,
       1
      ]
     },
     "GO_recall": {
-     "k": 0,
-     "n": 0,
-     "rate": null,
-     "ci95": null
+     "k": 44,
+     "n": 49,
+     "rate": 0.898,
+     "ci95": [
+      0.782,
+      0.956
+     ]
     },
-    "BA": 0.5,
-    "gate_point": false,
-    "gate_LB": false,
-    "status": "INCOMPLETE"
+    "BA": 0.949,
+    "gate_point": true,
+    "gate_LB": true
    },
    "G1|L2|r0|448": {
-    "n_scored": 23,
+    "n_scored": 94,
     "n_expected": 94,
     "unparsed": {
      "k": 0,
-     "n": 23,
+     "n": 94,
      "rate": 0.0,
      "ci95": [
-      0,
-      0.143
+      0.0,
+      0.039
      ]
     },
     "STOP_recall": {
-     "k": 23,
-     "n": 23,
+     "k": 45,
+     "n": 45,
      "rate": 1.0,
      "ci95": [
-      0.857,
+      0.921,
       1
      ]
     },
     "GO_recall": {
-     "k": 0,
-     "n": 0,
-     "rate": null,
-     "ci95": null
+     "k": 34,
+     "n": 49,
+     "rate": 0.694,
+     "ci95": [
+      0.555,
+      0.805
+     ]
     },
-    "BA": 0.5,
+    "BA": 0.847,
     "gate_point": false,
-    "gate_LB": false,
-    "status": "INCOMPLETE"
+    "gate_LB": false
    },
    "G1|n2|r0|448": {
     "n_scored": 94,
@@ -18873,8 +18837,7 @@
     },
     "BA": 0.968,
     "gate_point": true,
-    "gate_LB": true,
-    "status": "PASS"
+    "gate_LB": true
    },
    "G1|n3|r0|448": {
     "n_scored": 94,
@@ -18908,8 +18871,7 @@
     },
     "BA": 0.5,
     "gate_point": false,
-    "gate_LB": false,
-    "status": "FAIL"
+    "gate_LB": false
    },
    "G1|p1|r0|448": {
     "n_scored": 94,
@@ -18943,10 +18905,137 @@
     },
     "BA": 0.571,
     "gate_point": false,
-    "gate_LB": false,
-    "status": "FAIL"
+    "gate_LB": false
    },
    "G1_errors_excluded": {},
+   "G2|L1|r0|448": {
+    "n_scored": 96,
+    "n_expected": 96,
+    "unparsed": {
+     "k": 0,
+     "n": 96,
+     "rate": 0.0,
+     "ci95": [
+      0,
+      0.038
+     ]
+    },
+    "STOP_recall": {
+     "k": 35,
+     "n": 37,
+     "rate": 0.946,
+     "ci95": [
+      0.823,
+      0.985
+     ]
+    },
+    "GO_recall": {
+     "k": 34,
+     "n": 59,
+     "rate": 0.576,
+     "ci95": [
+      0.449,
+      0.694
+     ]
+    },
+    "BA": 0.761,
+    "gate_point": false,
+    "gate_LB": false,
+    "hard_negatives_stop_ahead_warning_nonSTOP": {
+     "k": 1,
+     "n": 12,
+     "rate": 0.083,
+     "ci95": [
+      0.015,
+      0.354
+     ]
+    },
+    "commons_search_subset": {
+     "STOP_recall": {
+      "k": 27,
+      "n": 29,
+      "rate": 0.931,
+      "ci95": [
+       0.78,
+       0.981
+      ]
+     },
+     "GO_recall": {
+      "k": 12,
+      "n": 31,
+      "rate": 0.387,
+      "ci95": [
+       0.237,
+       0.562
+      ]
+     }
+    },
+    "largest_uploader_share": 0.344
+   },
+   "G2|L2|r0|448": {
+    "n_scored": 96,
+    "n_expected": 96,
+    "unparsed": {
+     "k": 0,
+     "n": 96,
+     "rate": 0.0,
+     "ci95": [
+      0,
+      0.038
+     ]
+    },
+    "STOP_recall": {
+     "k": 37,
+     "n": 37,
+     "rate": 1.0,
+     "ci95": [
+      0.906,
+      1
+     ]
+    },
+    "GO_recall": {
+     "k": 5,
+     "n": 59,
+     "rate": 0.085,
+     "ci95": [
+      0.037,
+      0.184
+     ]
+    },
+    "BA": 0.542,
+    "gate_point": false,
+    "gate_LB": false,
+    "hard_negatives_stop_ahead_warning_nonSTOP": {
+     "k": 0,
+     "n": 12,
+     "rate": 0.0,
+     "ci95": [
+      0,
+      0.243
+     ]
+    },
+    "commons_search_subset": {
+     "STOP_recall": {
+      "k": 29,
+      "n": 29,
+      "rate": 1.0,
+      "ci95": [
+       0.883,
+       1
+      ]
+     },
+     "GO_recall": {
+      "k": 1,
+      "n": 31,
+      "rate": 0.032,
+      "ci95": [
+       0.006,
+       0.162
+      ]
+     }
+    },
+    "largest_uploader_share": 0.344
+   },
    "G2|n2|r0|448": {
     "n_scored": 96,
     "n_expected": 96,
@@ -18980,7 +19069,6 @@
     "BA": 0.931,
     "gate_point": true,
     "gate_LB": true,
-    "status": "PASS",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 10,
      "n": 12,
@@ -19045,7 +19133,6 @@
     "BA": 0.5,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -19110,7 +19197,6 @@
     "BA": 0.585,
     "gate_point": false,
     "gate_LB": false,
-    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -19144,6 +19230,20 @@
    },
    "G2_errors_excluded": {},
    "phase3_gate_summary": {
+    "L1|r0|448": {
+     "G1_point": true,
+     "G2_point": false,
+     "G1_LB": true,
+     "G2_LB": false,
+     "passes_phase3_gate (G1 and G2 point)": false
+    },
+    "L2|r0|448": {
+     "G1_point": false,
+     "G2_point": false,
+     "G1_LB": false,
+     "G2_LB": false,
+     "passes_phase3_gate (G1 and G2 point)": false
+    },
     "n2|r0|448": {
      "G1_point": true,
      "G2_point": true,
@@ -19556,6 +19656,14 @@
  },
  "sampling_note": "r1/r2 used temperature 0.7, top_p 0.8, top_k 20 with fixed seeds 1 and 2 on every request. llama-server sampling is deterministic per seed, so r1 and r2 are two fixed-seed perturbations applied to every image, not independent random samples; r2 matched greedy on almost every row (see sampled_vs_greedy_agreement). Verified ~09:35 ET by re-querying 3 images: seeds 2 and 3 returned the greedy answer, seed 1 reproduced its logged answer.",
  "results_files": {
+  "results_internvl3_2b_AB.jsonl": {
+   "rows": 914,
+   "error_rows": 0
+  },
+  "results_internvl3_2b_AP.jsonl": {
+   "rows": 320,
+   "error_rows": 0
+  },
   "results_internvl3_2b_G1.jsonl": {
    "rows": 470,
    "error_rows": 0
@@ -19564,16 +19672,20 @@
    "rows": 480,
    "error_rows": 0
   },
+  "results_lfm2vl_1.6b_AB.jsonl": {
+   "rows": 914,
+   "error_rows": 0
+  },
   "results_lfm2vl_1.6b_B.jsonl": {
    "rows": 780,
    "error_rows": 0
   },
   "results_lfm2vl_1.6b_G1.jsonl": {
-   "rows": 328,
+   "rows": 470,
    "error_rows": 0
   },
   "results_lfm2vl_1.6b_G2.jsonl": {
-   "rows": 288,
+   "rows": 480,
    "error_rows": 0
   },
   "results_lfm2vl_1.6b_P.jsonl": {
