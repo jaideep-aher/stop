@@ -20,3 +20,5 @@ jobs:
         run: ruff check whostop tests
       - name: Test
         run: pytest
+      - name: Regenerated metrics match the commit
+        run: make reproduce
