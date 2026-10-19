@@ -1,0 +1,34 @@
+.env
+.env.*
+*.env
+private/
+**/private/
+raw/
+**/images_raw/
+**/thumbs_real/
+**/thumbs_board/
+**/sheets/
+venv*/
+.venv/
+__pycache__/
+*.py[cod]
+*.pyc
+# Photos that are not already tracked cannot be added by accident.
+# Charts listed in data/NONPHOTO_IMAGES.txt stay tracked.
+data/images/**/*.jpg
+data/images/**/*.jpeg
+data/images/**/*.png
+data/images/**/*.webp
+data/images/**/*.gif
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+_pages/
+*.gguf
+*.pt
+*.onnx
+*.safetensors
+*.bin
+.DS_Store
