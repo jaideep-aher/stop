@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: "Who Gets to Say STOP?"
+message: "If you use this work, please cite it."
+type: software
+authors:
+  - family-names: Aher
+    given-names: Jaideep
+    email: jaideep.aher@duke.edu
+    affiliation: Duke University
+repository-code: "https://github.com/jaideep-aher/stop"
+license: MIT
+date-released: 2026-10-19

@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "whostop"
+version = "0.1.0"
+description = "Offline audit of VLM stop/go decisions on single frames (Who Gets to Say STOP?)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Jaideep Aher", email = "jaideep.aher@duke.edu" }]
+dependencies = ["scipy>=1.11"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "pillow>=10"]
+hf = ["transformers>=4.45", "torch", "pillow>=10"]
+gemini = ["google-genai"]
+yolo = ["pillow>=10"]
+
+[project.scripts]
+whostop-score = "whostop.score:main"
+
+[tool.setuptools.packages.find]
+include = ["whostop*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["whostop", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

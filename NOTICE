@@ -1,0 +1,19 @@
+Code under whostop/metrics.py, whostop/parse.py (strip_echo), and the backend
+shapes in whostop/backends/ is derived from jaideep-aher/horn-ok-please,
+which is MIT licensed, copyright (c) 2026 Jaideep Aher. That repository was
+not modified. The functions were copied and, where this study needs different
+thresholds or a three-way STOP / CAUTION / PROCEED parser, adapted. The
+original files are src/hornok/metrics.py, src/hornok/parse.py,
+src/hornok/round3.py (flip_rate and the structure of evaluate_binary_gate),
+src/hornok/llama_server.py, src/hornok/gemini.py, and src/hornok/harness.py.
+
+Horn OK Please notice, kept with that code:
+
+Photographs are not covered by this MIT license. Each photograph keeps the
+Creative Commons or public-domain grant named for that file in the manifest
+and in phase2/LICENSES.md. Share-alike terms apply to edited derivatives,
+including digital board edits and blurred copies. Derivatives of CC BY-SA
+images are CC BY-SA and are marked modified.
+
+Photographs in this repository are blurred copies, charts, or blurred site
+thumbnails. They are not covered by the MIT license on the code.
