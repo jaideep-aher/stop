@@ -183,6 +183,20 @@ def test_detector_clears_stay_off_pages_until_a_person_reviews_them(tmp_path: Pa
     assert live == set()
 
 
+def test_possible_minors_are_absent_from_the_pages_artifact(tmp_path: Path):
+    """ill2_037, ill2_066, ill2_312, and ill2_313 must not appear in the public artifact."""
+    dest = tmp_path / "pages"
+    build(dest)
+    needles = tuple(_PAGES.HARD_EXCLUDE_IDS) + tuple(_PAGES.HARD_EXCLUDE_URLS)
+    assert set(_PAGES.HARD_EXCLUDE_IDS) == {"ill2_037", "ill2_066", "ill2_312", "ill2_313"}
+    blob = b"\n".join(path.read_bytes() for path in dest.rglob("*") if path.is_file())
+    for needle in needles:
+        assert needle.encode() not in blob
+    source = (ROOT / "site" / "site" / "data" / "data.json").read_text(encoding="utf-8")
+    for needle in needles:
+        assert needle not in source
+
+
 def test_blur_helper_import_does_not_require_a_detector():
     image = Image.new("RGB", (4, 4), "blue")
     assert image.getpixel((0, 0)) == (0, 0, 255)

@@ -39,6 +39,22 @@ WEB = REPO / "site" / "site"
 ALLOW_PATH = REPO / "site" / "PAGES_ALLOWLIST.txt"
 DENY_PATH = REPO / "site" / "PAGES_DENYLIST.txt"
 
+# possible minors; excluded entirely
+HARD_EXCLUDE_IDS = frozenset({"ill2_037", "ill2_066", "ill2_312", "ill2_313"})
+HARD_EXCLUDE_URLS = frozenset(
+    {
+        "https://commons.wikimedia.org/wiki/File:"
+        "Young_Black_Lives_Matter_activists_are_holding_a_colorful_Stop_Racism_sign_"
+        "(50115127871).jpg",
+        "https://commons.wikimedia.org/wiki/File:"
+        "Person_at_Pride_parade_holding_sign_with_text_%22Stop_biphobia%22_(51262325481).jpg",
+        "https://commons.wikimedia.org/wiki/File:"
+        "Stop_Adani%27s_coal_mine_-_-climatestrike_Melbourne_IMG_3471_(45203191905).jpg",
+        "https://commons.wikimedia.org/wiki/File:"
+        "Stop_Climate_Change_Now_-_-climatestrike_Melbourne_IMG_3491_(45390723384).jpg",
+    }
+)
+
 
 def _norm(path: str) -> str:
     return path.replace("\\", "/").lstrip("./")
@@ -140,6 +156,96 @@ def ship_ok(rel: str, *, allow: set[str], deny: set[str], flagged: set[str], blo
     return True
 
 
+def _is_hard_excluded(node: object) -> bool:
+    """True when a record names an id or Commons URL that must not be published."""
+    if not isinstance(node, dict):
+        return False
+    ident = node.get("id")
+    if isinstance(ident, str) and ident in HARD_EXCLUDE_IDS:
+        return True
+    url = node.get("source_url")
+    if isinstance(url, str) and url in HARD_EXCLUDE_URLS:
+        return True
+    for key in ("thumb", "file"):
+        value = node.get(key)
+        if isinstance(value, str) and Path(value).stem in HARD_EXCLUDE_IDS:
+            return True
+    return False
+
+
+def _drop_hard_excluded(node: object) -> None:
+    """Remove excluded records so the artifact has no id, credit, caption, or URL."""
+    if isinstance(node, dict):
+        for key in list(node.keys()):
+            value = node[key]
+            if _is_hard_excluded(value):
+                del node[key]
+            else:
+                _drop_hard_excluded(value)
+    elif isinstance(node, list):
+        node[:] = [item for item in node if not _is_hard_excluded(item)]
+        for item in node:
+            _drop_hard_excluded(item)
+
+
+def _hard_exclude_needles() -> tuple[str, ...]:
+    return tuple(HARD_EXCLUDE_IDS) + tuple(HARD_EXCLUDE_URLS)
+
+
+def _scrub_copied_text(dest: Path) -> None:
+    """Drop excluded ids and Commons URLs from every text file the artifact copied."""
+    needles = _hard_exclude_needles()
+    text_ext = {".json", ".csv", ".html", ".js", ".md", ".txt", ".css"}
+    for path in list(dest.rglob("*")):
+        if not path.is_file():
+            continue
+        if path.suffix.lower() in IMAGE_EXT and path.stem in HARD_EXCLUDE_IDS:
+            path.unlink()
+            continue
+        if path.suffix.lower() not in text_ext:
+            continue
+        text = path.read_text(encoding="utf-8")
+        if not any(needle in text for needle in needles):
+            continue
+        if path.suffix.lower() == ".json":
+            payload = json.loads(text)
+            _drop_hard_excluded(payload)
+            path.write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
+            continue
+        if path.suffix.lower() == ".csv":
+            with path.open(newline="", encoding="utf-8") as handle:
+                reader = csv.DictReader(handle)
+                fields = reader.fieldnames
+                rows = [
+                    row
+                    for row in reader
+                    if not any(needle in " ".join(row.values()) for needle in needles)
+                ]
+            with path.open("w", newline="", encoding="utf-8") as handle:
+                writer = csv.DictWriter(handle, fieldnames=fields or [], lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(rows)
+            continue
+        kept = [
+            line
+            for line in text.splitlines(keepends=True)
+            if not any(needle in line for needle in needles)
+        ]
+        path.write_text("".join(kept), encoding="utf-8")
+
+
+def _assert_hard_exclude_absent(dest: Path) -> None:
+    needles = [item.encode() for item in _hard_exclude_needles()]
+    for path in dest.rglob("*"):
+        if not path.is_file():
+            continue
+        blob = path.read_bytes()
+        for needle in needles:
+            if needle in blob:
+                rel = path.relative_to(dest).as_posix()
+                raise SystemExit(f"hard-exclude still in artifact: {rel}")
+
+
 def _scrub(node: object, present: set[str]) -> None:
     if isinstance(node, dict):
         for key in ("thumb", "file"):
@@ -164,6 +270,7 @@ def _rewrite_data(dest: Path, present: set[str]) -> None:
     if not path.is_file():
         return
     data = json.loads(path.read_text(encoding="utf-8"))
+    _drop_hard_excluded(data)
     _scrub(data, present)
     phase2 = data.get("p2")
     if isinstance(phase2, dict):
@@ -198,6 +305,11 @@ def _rewrite_data(dest: Path, present: set[str]) -> None:
                 item["published"] = False
                 item["thumb"] = None
         pilot["n_published"] = sum(1 for item in pilot["images"] if item.get("published") and item.get("thumb"))
+        refusals = pilot.get("refusals")
+        if isinstance(refusals, dict):
+            refusals["visible_face"] = sum(
+                1 for item in pilot["images"] if "visible_face" in (item.get("refusal") or [])
+            )
     if isinstance(data.get("repo"), dict):
         data["repo"]["name"] = "jaideep-aher/stop"
         data["repo"]["status"] = "private repository; this Pages build is the filtered public site"
@@ -255,6 +367,8 @@ def build(dest: Path) -> dict:
     }
     _rewrite_data(dest, present)
     _rewrite_html(dest, present)
+    _scrub_copied_text(dest)
+    _assert_hard_exclude_absent(dest)
     (dest / ".nojekyll").write_text("", encoding="utf-8")
     return {"kept": kept, "dropped": dropped, "allow": len(allow), "flagged_ids": len(flagged)}
 

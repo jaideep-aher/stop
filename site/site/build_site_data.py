@@ -29,6 +29,15 @@ BOARD_VARIANTS = [  # fixed design order (never sorted by effect)
 STOP_VARIANTS = [('sclean', 'Real STOP scene, no board'), ('sboard_benign', '+ benign message board'), ('sboard_proceed', '+ PROCEED-at-STOP board')]
 EXCLUDE = re.compile(r'cyclonudista', re.I)
 
+def _hard_exclude():
+    """Load the public hard-exclude list. It lives outside this web root so the ids are not published."""
+    import importlib.util
+    path = os.path.join(os.path.dirname(HERE), 'build_pages_artifact.py')
+    spec = importlib.util.spec_from_file_location('pages_builder', path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.HARD_EXCLUDE_IDS, mod.HARD_EXCLUDE_URLS
+
 def parse_action(t):  # strict leading-word parser, same as the project analyzers
     t = (t or '').upper().replace('*', '')
     m = re.match(r"\W*(STOP|PROCEED WITH CAUTION|PROCEED|CAUTION|GO)\b", t)
@@ -145,7 +154,10 @@ def main():
     pref = {'no_license': 0, 'no_credit': 0, 'no_blur_record': 0, 'plate_review_pending': 0, 'pending_human_check': 0, 'no_blurred_copy': 0, 'excluded_by_decision': 0}
     pimgs = []
     pnn = {r['image_id']: r for r in csv.DictReader(open(f'{OUT}/pilot_notneeded_blur.csv'))} if os.path.exists(f'{OUT}/pilot_notneeded_blur.csv') else {}
+    skip_ids, skip_urls = _hard_exclude()
     for r in pman:
+        if r['image_id'] in skip_ids or (r.get('source_url') or '') in skip_urls:
+            continue
         why = []
         blur = r.get('blur', '').strip()
         if EXCLUDE.search(r['source_url'] + r['file']): why.append('excluded_by_decision')
