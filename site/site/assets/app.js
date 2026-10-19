@@ -1,6 +1,11 @@
 import { SOURCES } from './sources.js';
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const attrib = (credit, url, license) => {
+  if (!credit && !url) return '<span class="muted">withheld</span>';
+  const who = url ? `<a href="${esc(url)}" rel="noopener">${esc(credit || 'source')}</a>` : esc(credit);
+  return license ? `${who}, ${esc(license)}` : who;
+};
 const D = await (await fetch('data/data.json')).json();
 const P = D.p2, MM = P.metrics, MODELS = D.models, MK = Object.keys(MODELS);
 const pv = p => p == null ? '—' : p < 0.0001 ? '&lt;0.0001' : (+p).toPrecision(3).replace(/\.?0+$/, '');
@@ -47,7 +52,7 @@ function renderCond() {
 }
 $('#c-model').onchange = renderCond; renderCond();
 const RP = P.real;
-$('#real-gallery').innerHTML = `<p class="muted">${RP.filter(r => r.thumb).length} of ${P.real.length} real tampered photos published (unedited; detector-blurred, unverified).</p>` + RP.map(r => `<figure>${r.thumb ? `<img src="${r.thumb}" alt="real altered sign ${esc(r.id)}" loading="lazy">` : '<span class="noimg big">image withheld (pending human check)</span>'}<figcaption><code>${esc(r.id)}</code> provisional label ${r.label}<br><a href="${esc(r.source_url)}" rel="noopener">${esc(r.credit)}</a>, ${esc(r.license)}</figcaption></figure>`).join('');
+$('#real-gallery').innerHTML = `<p class="muted">${RP.filter(r => r.thumb).length} of ${P.real.length} real tampered photos published (unedited; detector-blurred, unverified).</p>` + RP.map(r => `<figure>${r.thumb ? `<img src="${r.thumb}" alt="real altered sign ${esc(r.id)}" loading="lazy">` : '<span class="noimg big">image withheld (pending human check)</span>'}<figcaption><code>${esc(r.id)}</code> provisional label ${r.label}<br>${attrib(r.credit, r.source_url, r.license)}</figcaption></figure>`).join('');
 
 // ---------- explorer ----------
 const PAGE = 25; let ep = 0;
@@ -59,7 +64,7 @@ function renderExplorer() {
   const pages = Math.max(1, Math.ceil(bs.length / PAGE)); ep = Math.min(ep, pages - 1);
   $('#e-table thead').innerHTML = `<tr><th>Base photo</th><th>Photographer / license</th>${vars.map(([v, l]) => `<th>${esc(l)}</th>`).join('')}</tr>`;
   $('#e-table tbody').innerHTML = bs.slice(ep * PAGE, ep * PAGE + PAGE).map(b => `<tr><td class="img">${(() => { const t = (b.images.clean || b.images.sclean || {}).thumb; return t ? `<img src="${t}" alt="${esc(b.base_id)} base photo (blurred)" loading="lazy">` : '<span class="noimg">image withheld (pending human check)</span>'; })()}<div><code>${esc(b.base_id)}</code>${b.board_type ? `<br><span class="muted">${b.board_type}</span>` : ''}</div></td>
-    <td><a href="${esc(b.source_url)}" rel="noopener">${esc(b.credit)}</a><br><span class="muted">${esc(b.license)}</span></td>${vars.map(([v]) => {
+    <td>${b.credit || b.source_url ? attrib(b.credit, b.source_url, b.license) : '<span class="muted">withheld</span>'}</td>${vars.map(([v]) => {
       const im = b.images[v]; if (!im) return '<td class="muted">—</td>';
       const d = (P.decisions[im.id] || {})[m]; if (!d) return '<td class="muted">not run</td>';
       if (d.a === 'ERROR') return '<td class="muted">error (excluded)</td>';
@@ -90,7 +95,7 @@ $('#read-gate').innerHTML = MK.map(m => { const o = MM[m], rg = o.read_gate;
 
 // ---------- examples ----------
 $('#ex').innerHTML = P.examples.length ? P.examples.map(e => `<figure class="ex">${e.file ? `<img src="${e.file}" alt="${esc(e.sides.map(x => x.condition).join(' vs '))}" loading="lazy">` : '<span class="noimg big">image withheld (pending human review after blur fix)</span>'}
-  <figcaption><span class="tag alt">DIGITALLY ALTERED</span> <b>${esc(MODELS[e.model].split(' (')[0])}</b>: ${e.sides.map(x => `${esc(x.condition)} → <span class="act ${x.verdict}">${x.verdict}</span> <span class="muted">(correct: ${x.label === 'STOP' ? 'STOP' : 'PROCEED/CAUTION'})</span>`).join(' &nbsp;|&nbsp; ')}.<br>Base photo: <a href="${esc(e.source_url)}" rel="noopener">${esc(e.credit)}</a>, ${esc(e.license)}; edited for the study. Blur: ${esc(e.blur)}.${e.note ? `<br><span class="muted">This board is shown instead of the original example, whose board legend was blurred by a detector false positive and needs human review.</span>` : ''}</figcaption></figure>`).join('')
+  <figcaption><span class="tag alt">DIGITALLY ALTERED</span> <b>${esc(MODELS[e.model].split(' (')[0])}</b>: ${e.sides.map(x => `${esc(x.condition)} → <span class="act ${x.verdict}">${x.verdict}</span> <span class="muted">(correct: ${x.label === 'STOP' ? 'STOP' : 'PROCEED/CAUTION'})</span>`).join(' &nbsp;|&nbsp; ')}.<br>Base photo: ${attrib(e.credit, e.source_url, e.license)}; edited for the study. Blur: ${esc(e.blur)}.${e.note ? `<br><span class="muted">This board is shown instead of the original example, whose board legend was blurred by a detector false positive and needs human review.</span>` : ''}</figcaption></figure>`).join('')
   : '<div class="empty">No example passed the license, credit and blur checks.</div>';
 
 // ---------- extra phases (site/phases.json); aggregated by condition only, file order, never sorted ----------
@@ -108,7 +113,7 @@ const PI = D.pilot.images, PUB = PI.filter(i => i.published), R = D.pilot.refusa
 $('#pilot-pub').innerHTML = `${D.pilot.n_published} of ${PI.length} pilot images are published. Withheld: ${Object.entries(R).filter(([, v]) => v).map(([k, v]) => `${k.replaceAll('_', ' ')} ${v}`).join(' · ')}. Images with vehicles stay withheld until a person has checked the plate blur. Every published pilot image is a blurred copy (unverified). Images where no detector found anything to blur are withheld until a person checks them: image withheld (pending human check).`;
 let gp = 0; const GP = 24;
 function renderGallery() { const pages = Math.ceil(PUB.length / GP); gp = Math.max(0, Math.min(gp, pages - 1));
-  $('#pilot-gallery').innerHTML = PUB.slice(gp * GP, gp * GP + GP).map(i => `<figure><img src="${i.thumb}" alt="${esc(i.id)} (${i.block})" loading="lazy"><figcaption><code>${esc(i.id)}</code> ${i.block}${i.edited ? ' <span class="tag alt">DIGITALLY ALTERED</span>' : ''}<br><a href="${esc(i.source_url)}" rel="noopener">${esc(i.credit)}</a>, ${esc(i.license)}</figcaption></figure>`).join('');
+  $('#pilot-gallery').innerHTML = PUB.slice(gp * GP, gp * GP + GP).map(i => `<figure><img src="${i.thumb}" alt="${esc(i.id)} (${i.block})" loading="lazy"><figcaption><code>${esc(i.id)}</code> ${i.block}${i.edited ? ' <span class="tag alt">DIGITALLY ALTERED</span>' : ''}<br>${attrib(i.credit, i.source_url, i.license)}</figcaption></figure>`).join('');
   $('#g-page').textContent = `page ${gp + 1} / ${pages}`; }
 $('#g-prev').onclick = () => { gp--; renderGallery(); }; $('#g-next').onclick = () => { gp++; renderGallery(); }; renderGallery();
 
@@ -120,9 +125,9 @@ function renderManifest() {
   const set = $('#m-set').value, st = $('#m-status').value;
   let head, rows;
   if (set === 'p2') { head = '<tr><th>Base</th><th>Arm</th><th>Variants</th><th>Altered</th><th>License</th><th>Credit</th><th>Source</th><th>Status</th></tr>';
-    rows = P.bases.filter(b => { const pub = Object.values(b.images).every(i => i.thumb); return !st || (st === 'pub') === pub; }).map(b => `<tr><td><code>${esc(b.base_id)}</code></td><td>${b.arm === 'board' ? 'board' : 'PROCEED-at-STOP'}</td><td>${Object.keys(b.images).length}</td><td>${Object.values(b.images).filter(i => i.edited).length}</td><td>${esc(b.license)}</td><td>${esc(b.credit)}</td><td><a href="${esc(b.source_url)}" rel="noopener">Commons</a></td><td>${Object.values(b.images).every(i => i.thumb) ? '<span class="okc">published</span> <span class="muted">(blurred, unverified)</span>' : `<span class="muted">withheld: ${Object.values(b.images).filter(i => !i.thumb).length} variants</span>`}</td></tr>`);
+    rows = P.bases.filter(b => { const pub = Object.values(b.images).every(i => i.thumb); return !st || (st === 'pub') === pub; }).map(b => `<tr><td><code>${esc(b.base_id)}</code></td><td>${b.arm === 'board' ? 'board' : 'PROCEED-at-STOP'}</td><td>${Object.keys(b.images).length}</td><td>${Object.values(b.images).filter(i => i.edited).length}</td><td>${esc(b.license || '')}</td><td>${b.credit ? esc(b.credit) : '<span class="muted">withheld</span>'}</td><td>${b.source_url ? `<a href="${esc(b.source_url)}" rel="noopener">Commons</a>` : '<span class="muted">withheld</span>'}</td><td>${Object.values(b.images).every(i => i.thumb) ? '<span class="okc">published</span> <span class="muted">(blurred, unverified)</span>' : `<span class="muted">withheld: ${Object.values(b.images).filter(i => !i.thumb).length} variants</span>`}</td></tr>`);
   } else { head = '<tr><th>Image</th><th>Block</th><th>Label</th><th>Jurisdiction</th><th>License</th><th>Credit</th><th>Source</th><th>Status</th></tr>';
-    rows = PI.filter(i => !st || (st === 'pub') === i.published).map(i => `<tr><td><code>${esc(i.id)}</code>${i.edited ? ' <span class="tag alt">DIGITALLY ALTERED</span>' : ''}</td><td>${i.block}</td><td>${i.label}</td><td>${esc(i.jurisdiction)}</td><td>${esc(i.license)}</td><td>${esc(i.credit)}</td><td><a href="${esc(i.source_url)}" rel="noopener">Commons</a></td><td>${i.published ? '<span class="okc">published</span>' : `<span class="muted">withheld: ${esc(i.refusal.join(', ').replaceAll('_', ' '))}</span>`}</td></tr>`); }
+    rows = PI.filter(i => !st || (st === 'pub') === i.published).map(i => `<tr><td><code>${esc(i.id)}</code>${i.edited ? ' <span class="tag alt">DIGITALLY ALTERED</span>' : ''}</td><td>${i.block}</td><td>${i.label}</td><td>${esc(i.jurisdiction)}</td><td>${esc(i.license || '')}</td><td>${i.credit ? esc(i.credit) : '<span class="muted">withheld</span>'}</td><td>${i.source_url ? `<a href="${esc(i.source_url)}" rel="noopener">Commons</a>` : '<span class="muted">withheld</span>'}</td><td>${i.published ? '<span class="okc">published</span>' : `<span class="muted">withheld: ${esc((i.refusal || []).join(', ').replaceAll('_', ' '))}</span>`}</td></tr>`); }
   const pages = Math.max(1, Math.ceil(rows.length / 40)); mp = Math.min(mp, pages - 1);
   $('#manifest thead').innerHTML = head; $('#manifest tbody').innerHTML = rows.slice(mp * 40, mp * 40 + 40).join('') || '<tr><td colspan="8" class="muted">No rows.</td></tr>';
   $('#m-count').textContent = `${rows.length} rows`; $('#m-page').textContent = `page ${mp + 1} / ${pages}`;

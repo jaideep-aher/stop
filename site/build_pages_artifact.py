@@ -40,9 +40,29 @@ ALLOW_PATH = REPO / "site" / "PAGES_ALLOWLIST.txt"
 DENY_PATH = REPO / "site" / "PAGES_DENYLIST.txt"
 
 # possible minors; excluded entirely
-HARD_EXCLUDE_IDS = frozenset({"ill2_037", "ill2_066", "ill2_312", "ill2_313"})
+HARD_EXCLUDE_IDS = frozenset(
+    {
+        "ill2_017",
+        "ill2_018",
+        "ill2_019",
+        "ill2_037",
+        "ill2_066",
+        "ill2_312",
+        "ill2_313",
+        "ill2_317",
+        "ill2_318",
+    }
+)
 HARD_EXCLUDE_URLS = frozenset(
     {
+        "https://commons.wikimedia.org/wiki/File:"
+        "Person_holding_a_protest_sign_with_text_%22Stop_Putin%22_(51949180000).jpg",
+        "https://commons.wikimedia.org/wiki/File:"
+        "Person_protesting_vaccine_mandate_in_Austria_is_holding_a_%22Stop_Discrimination%22_"
+        "sign_(51694528225).jpg",
+        "https://commons.wikimedia.org/wiki/File:"
+        "Protester_holding_a_sign_that_reads_%22Stop_CO2_Emission%22_at_a_Global_Climate_Strike_"
+        "(51059102311).jpg",
         "https://commons.wikimedia.org/wiki/File:"
         "Young_Black_Lives_Matter_activists_are_holding_a_colorful_Stop_Racism_sign_"
         "(50115127871).jpg",
@@ -52,6 +72,26 @@ HARD_EXCLUDE_URLS = frozenset(
         "Stop_Adani%27s_coal_mine_-_-climatestrike_Melbourne_IMG_3471_(45203191905).jpg",
         "https://commons.wikimedia.org/wiki/File:"
         "Stop_Climate_Change_Now_-_-climatestrike_Melbourne_IMG_3491_(45390723384).jpg",
+        "https://commons.wikimedia.org/wiki/File:"
+        "Stop_thinking_about_your_next_election,_start_thinking_about_OUR_future_-_-"
+        "climatestrike_Melbourne_IMG_3477_(45203233755).jpg",
+        "https://commons.wikimedia.org/wiki/File:"
+        "Stop_thinking_about_your_next_election_-_-climatestrike_Melbourne_IMG_3519_"
+        "(45390922084).jpg",
+    }
+)
+# Identifying fields removed from any Pages entry that is not published.
+_PROVENANCE_KEYS = frozenset(
+    {
+        "credit",
+        "source_url",
+        "source",
+        "source_file",
+        "url",
+        "file_title",
+        "title",
+        "photographer",
+        "cluster_id",
     }
 )
 
@@ -147,6 +187,8 @@ def manifest_blocked_paths() -> set[str]:
 
 def ship_ok(rel: str, *, allow: set[str], deny: set[str], flagged: set[str], blocked: set[str]) -> bool:
     rel = _norm(rel)
+    if Path(rel).stem in HARD_EXCLUDE_IDS:
+        return False
     if rel in deny or rel in blocked or rel not in allow:
         return False
     if Path(rel).stem in flagged:
@@ -190,6 +232,31 @@ def _drop_hard_excluded(node: object) -> None:
 
 def _hard_exclude_needles() -> tuple[str, ...]:
     return tuple(HARD_EXCLUDE_IDS) + tuple(HARD_EXCLUDE_URLS)
+
+
+def _is_provenance_key(key: str) -> bool:
+    low = key.lower()
+    return low in _PROVENANCE_KEYS or low.endswith("_url") or "credit" in low or low.startswith("source")
+
+
+def _clear_provenance(node: dict) -> bool:
+    """Drop credit, source URL, file title, and photographer id. Return whether any were set."""
+    had = bool(node.get("credit") or node.get("source_url"))
+    for key in list(node):
+        if _is_provenance_key(key):
+            node.pop(key, None)
+    return had
+
+
+def _image_is_published(node: dict, present: set[str]) -> bool:
+    """A shipped image file, and not an explicit withhold."""
+    if node.get("published") is False:
+        return False
+    for key in ("thumb", "file"):
+        value = node.get(key)
+        if isinstance(value, str) and _norm(value) in present:
+            return True
+    return False
 
 
 def _scrub_copied_text(dest: Path) -> None:
@@ -265,13 +332,89 @@ def _scrub(node: object, present: set[str]) -> None:
             _scrub(value, present)
 
 
-def _rewrite_data(dest: Path, present: set[str]) -> None:
+def _strip_unpublished_provenance(data: dict, present: set[str]) -> int:
+    """Unpublished entries keep an id only. Published images keep credit and license."""
+    stripped = 0
+    pilot = data.get("pilot")
+    if isinstance(pilot, dict):
+        for item in pilot.get("images") or []:
+            if isinstance(item, dict) and not _image_is_published(item, present):
+                if _clear_provenance(item):
+                    stripped += 1
+                item["published"] = False
+                item["thumb"] = None
+    phase2 = data.get("p2")
+    if isinstance(phase2, dict):
+        for base in phase2.get("bases") or []:
+            images = list((base.get("images") or {}).values())
+            if not any(isinstance(item, dict) and _image_is_published(item, present) for item in images):
+                if _clear_provenance(base):
+                    stripped += 1
+            for item in images:
+                if isinstance(item, dict) and not _image_is_published(item, present) and _clear_provenance(item):
+                    stripped += 1
+        for item in phase2.get("real") or []:
+            if isinstance(item, dict) and not _image_is_published(item, present) and _clear_provenance(item):
+                stripped += 1
+        for item in phase2.get("examples") or []:
+            if isinstance(item, dict) and not _image_is_published(item, present) and _clear_provenance(item):
+                stripped += 1
+    return stripped
+
+
+def _scrub_public_tables(dest: Path, present: set[str]) -> None:
+    """Public CSV rows for unpublished images keep the id and lose source paths."""
+    published_ids = {Path(path).stem for path in present}
+    for path in dest.rglob("*.csv"):
+        with path.open(newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            fields = reader.fieldnames
+            rows = list(reader)
+        if not fields or "image_id" not in fields:
+            continue
+        kept = []
+        changed = False
+        for row in rows:
+            image_id = (row.get("image_id") or "").strip()
+            if image_id in HARD_EXCLUDE_IDS:
+                changed = True
+                continue
+            if image_id not in published_ids:
+                for key in list(row):
+                    if _is_provenance_key(key) and row.get(key):
+                        row[key] = ""
+                        changed = True
+            kept.append(row)
+        if not changed:
+            continue
+        with path.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
+            writer.writeheader()
+            writer.writerows(kept)
+
+
+def _rewrite_data(dest: Path, present: set[str]) -> int:
     path = dest / "data" / "data.json"
     if not path.is_file():
-        return
+        return 0
     data = json.loads(path.read_text(encoding="utf-8"))
+    dropped = 0
+
+    def _count_dropped(node: object) -> None:
+        nonlocal dropped
+        if isinstance(node, dict):
+            if _is_hard_excluded(node) and (node.get("credit") or node.get("source_url")):
+                dropped += 1
+            for value in node.values():
+                _count_dropped(value)
+        elif isinstance(node, list):
+            for value in node:
+                _count_dropped(value)
+
+    _count_dropped(data)
     _drop_hard_excluded(data)
     _scrub(data, present)
+    stripped = _strip_unpublished_provenance(data, present)
     phase2 = data.get("p2")
     if isinstance(phase2, dict):
         examples = phase2.get("examples")
@@ -314,6 +457,7 @@ def _rewrite_data(dest: Path, present: set[str]) -> None:
         data["repo"]["name"] = "jaideep-aher/stop"
         data["repo"]["status"] = "private repository; this Pages build is the filtered public site"
     path.write_text(json.dumps(data, separators=(",", ":")), encoding="utf-8")
+    return stripped + dropped
 
 
 def _rewrite_html(dest: Path, present: set[str]) -> None:
@@ -365,12 +509,19 @@ def build(dest: Path) -> dict:
         for path in dest.rglob("*")
         if path.is_file() and path.suffix.lower() in IMAGE_EXT
     }
-    _rewrite_data(dest, present)
+    stripped = _rewrite_data(dest, present)
     _rewrite_html(dest, present)
+    _scrub_public_tables(dest, present)
     _scrub_copied_text(dest)
     _assert_hard_exclude_absent(dest)
     (dest / ".nojekyll").write_text("", encoding="utf-8")
-    return {"kept": kept, "dropped": dropped, "allow": len(allow), "flagged_ids": len(flagged)}
+    return {
+        "kept": kept,
+        "dropped": dropped,
+        "allow": len(allow),
+        "flagged_ids": len(flagged),
+        "provenance_stripped": stripped,
+    }
 
 
 def check(dest: Path) -> list[str]:
@@ -437,7 +588,8 @@ def main(argv: list[str] | None = None) -> int:
     print(
         f"pages artifact {args.out}: kept {summary['kept']} images, "
         f"dropped {summary['dropped']}, allowlist {summary['allow']}, "
-        f"flagged ids {summary['flagged_ids']}"
+        f"flagged ids {summary['flagged_ids']}, "
+        f"withheld entries stripped of credit {summary['provenance_stripped']}"
     )
     if args.check:
         errors = check(args.out)
