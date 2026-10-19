@@ -11,7 +11,7 @@ const P = D.p2, MM = P.metrics, MODELS = D.models, MK = Object.keys(MODELS);
 const pv = p => p == null ? '—' : p < 0.0001 ? '&lt;0.0001' : (+p).toPrecision(3).replace(/\.?0+$/, '');
 const kn = r => (!r || !r.n) ? '<span class="muted">no rows</span>' : `<b>${r.k}/${r.n}</b> <span class="muted">= ${r.rate.toFixed(2)} [${r.ci95[0].toFixed(2)}, ${(+r.ci95[1]).toFixed(2)}]</span>`;
 const VN = Object.fromEntries([...D.board_variants, ...D.stop_variants]);
-$('#gen').textContent = D.generated_at; $('#repo').textContent = `${D.repo.name} (${D.repo.status})`;
+$('#gen').textContent = D.generated_at;
 $('#gem-id').textContent = `(${D.p2.gemini_model_id})`;
 $('#scored').textContent = MK.map(m => `${MODELS[m].split(' (')[0]} ${MM[m].scored_prompt}`).join(', ');
 
