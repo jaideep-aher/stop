@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Median request latency from committed Phase 2 and pilot results.
+"""Median request latency from committed pilot, Phase 2, and Phase 3 results.
 
-Reads ``latency_s`` from ``pilot/run/results_*.jsonl`` and
-``phase2/run/results_*.jsonl``. Prints the median seconds per request for
-each model and the sum of ``latency_s`` divided by 3600. That sum is
-wall-clock request time, not true CPU-hours: several model processes ran
-at once, and ``latency_s`` is the wait for one request.
+Reads ``latency_s`` from ``pilot/run/results_*.jsonl``,
+``phase2/run/results_*.jsonl``, and ``phase3/run/results_*.jsonl``. Prints
+the median seconds per request for each model and the sum of ``latency_s``
+divided by 3600. That sum is wall-clock request time, not true CPU-hours:
+several model processes ran at once, and ``latency_s`` is the wait for one
+request.
 """
 
 from __future__ import annotations
@@ -20,6 +21,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GLOBS = (
     "pilot/run/results_*.jsonl",
     "phase2/run/results_*.jsonl",
+    "phase3/run/results_*.jsonl",
 )
 
 
@@ -28,7 +30,7 @@ def main() -> int:
     for pattern in GLOBS:
         files.extend(sorted(glob.glob(os.path.join(ROOT, pattern))))
     if not files:
-        print("No committed Phase 2 or pilot result files found.")
+        print("No committed pilot, Phase 2, or Phase 3 result files found.")
         return 1
 
     by_model: dict[str, list[float]] = {}
@@ -50,9 +52,12 @@ def main() -> int:
         if rows and len(latencies) != rows:
             missing.append(os.path.relpath(path, ROOT))
 
-    print("source: committed pilot/run/results_*.jsonl and phase2/run/results_*.jsonl")
+    print(
+        "source: committed pilot/run/results_*.jsonl, "
+        "phase2/run/results_*.jsonl, and phase3/run/results_*.jsonl"
+    )
     if missing and not by_model:
-        print("Committed Phase 2 and pilot result files have no latency_s field.")
+        print("Committed result files have no latency_s field.")
         for name in missing:
             print(name)
         return 0

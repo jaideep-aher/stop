@@ -10,7 +10,7 @@ READ-ONLY inputs (never written):
 Never reads phase2/private/. Never emits legend text per image, and nothing is ranked by effect.
 Publication rule: an image is copied only if it has a license, a credit and a blurred copy (Phase 2: site-side sidecar data/phase2_blur.csv,
 written by ../blur_detect.py, 'detector-based, unverified'); pilot images pending plate review stay withheld; unblurred originals are never published.
-Usage: python build_site_data.py [--root REPO_ROOT]
+Usage: python build_site_data.py [--root REPO_ROOT] [--phases-only]
 The default root is this repository (two levels above this file)."""
 import csv, json, os, re, sys, shutil, glob, datetime
 from PIL import Image
@@ -55,7 +55,31 @@ def _tree_has_pixels(directory):
                 return True
     return False
 
+def phase_entries():
+    """Phases listed in site/phases.json. A missing metrics file stays an honest empty state."""
+    entries = []
+    pj = f'{HERE}/phases.json'
+    for ph in (json.load(open(pj)) if os.path.exists(pj) else []):
+        mp = ph['metrics'] if os.path.isabs(ph['metrics']) else f"{ROOT}/{ph['metrics']}"
+        ent = {k: ph.get(k) for k in ('id', 'title', 'blurb')}
+        if os.path.exists(mp):
+            ent['metrics'] = json.load(open(mp))
+            ent['source'] = os.path.relpath(mp, ROOT)
+        else:
+            ent['metrics'] = None
+            ent['source'] = os.path.relpath(mp, ROOT)
+        entries.append(ent)
+    return entries
+
 def main():
+    if '--phases-only' in sys.argv:
+        # Refresh the phase block from committed metrics. Do not touch images or other keys.
+        data = json.load(open(f'{OUT}/data.json'))
+        data['phases'] = phase_entries()
+        with open(f'{OUT}/data.json', 'w') as handle:
+            json.dump(data, handle, separators=(',', ':'))
+        print('phases-only', [(p['id'], p['metrics'] is not None) for p in data['phases']])
+        return
     # The blurred masters are not in the tree (docs/WITHHELD_IMAGES.csv). Rebuilding
     # thumbs would delete the committed allowlisted images and could not recreate them.
     site_pixels = _tree_has_pixels(os.path.join(os.path.dirname(HERE), 'blurred'))
@@ -212,15 +236,7 @@ def main():
             'pilot': {'metrics': pm_slim, 'images': pimgs, 'refusals': pref, 'n_published': sum(i['published'] for i in pimgs)},
             'repo': {'name': 'jaideep-aher/stop', 'status': 'private repository; GitHub Pages publishes only the filtered allowlist'}}
     # extra phases (e.g. Phase 3 robustness): listed in site/phases.json; missing metrics => honest empty state
-    data['phases'] = []
-    pj = f'{HERE}/phases.json'
-    for ph in (json.load(open(pj)) if os.path.exists(pj) else []):
-        mp = ph['metrics'] if os.path.isabs(ph['metrics']) else f"{ROOT}/{ph['metrics']}"
-        ent = {k: ph.get(k) for k in ('id', 'title', 'blurb')}
-        if os.path.exists(mp):
-            ent['metrics'] = json.load(open(mp)); ent['source'] = os.path.relpath(mp, ROOT)
-        else: ent['metrics'] = None; ent['source'] = os.path.relpath(mp, ROOT)
-        data['phases'].append(ent)
+    data['phases'] = phase_entries()
     json.dump(data, open(f'{OUT}/data.json', 'w'), separators=(',', ':'))
     print(f"Phase 2: {len(bases)} bases, {len(main_rows)} stimuli, {data['p2']['n_published']} published, refusals {p2_refusal}; real tampered {sum(1 for x in real if x['thumb'])}/{len(real)} published; {len(examples)} example pairs; rows used {rowcount}")
     print(f"Needs human check: {len(nhc)} rows -> data/needs_human_check.csv; phases: {[(p['id'], p['metrics'] is not None) for p in data['phases']]}")

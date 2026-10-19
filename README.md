@@ -30,19 +30,21 @@ Optional extras, not installed in CI: `hf` (transformers), `gemini` (google-gena
 
 **llama.cpp.** The Phase 2 and Phase 3 runs used llama.cpp release b11723 (CPU x64): https://github.com/ggml-org/llama.cpp/releases/tag/b11723 . [`models.lock`](models.lock) pins the local filename and the sha256 computed on that machine for every GGUF the runs loaded. The Qwen3-VL-2B Q8_0 file and its mmproj differ from the current Hugging Face objects, which may have been re-uploaded. The other pins match the current Hugging Face LFS oid of the same filename. Point a local `llama-server` at the GGUF and mmproj, then call `whostop.backends.LlamaServerBackend` at that server's base URL. This repository does not download weights.
 
-**Hardware and runtime.** The box is an 8-vCPU shared Intel Xeon with 15 GiB RAM, CPU only, no GPU, running llama.cpp release b11723 llama-server with 2 to 4 threads per model process (several models ran concurrently). [`scripts/runtime_summary.py`](scripts/runtime_summary.py) reads `latency_s` from the committed Phase 2 and pilot result files. Phase 3 runtime is added when Phase 3 lands. The script's output:
+**Hardware and runtime.** The box is an 8-vCPU shared Intel Xeon with 15 GiB RAM, CPU only, no GPU, running llama.cpp release b11723 llama-server with 2 to 4 threads per model process (several models ran concurrently). [`scripts/runtime_summary.py`](scripts/runtime_summary.py) reads `latency_s` from the committed pilot, Phase 2, and Phase 3 result files. Each median is over every committed request for that model name, so the Qwen3-VL-2B median includes the Phase 3 prefix-cached calls as well as the Phase 2 calls. The script's output:
 
 ```
-source: committed pilot/run/results_*.jsonl and phase2/run/results_*.jsonl
+source: committed pilot/run/results_*.jsonl, phase2/run/results_*.jsonl, and phase3/run/results_*.jsonl
 model	n_requests	median_s_per_request
 gemini	2369	3.1000
+internvl3_2b	950	0.9300
+lfm2vl_1.6b	1707	4.3600
 qwen25vl3b	164	11.8150
-qwen3vl2b	1822	5.0250
+qwen3vl2b	26026	0.5100
 smolvlm	1941	2.0600
 smolvlm2	94	8.9900
 yolo	394	1.7450
-sum_latency_s	31284.8900
-wall_clock_request_time_hours	8.6902	wall-clock request time, not true CPU-hours
+sum_latency_s	81296.2800
+wall_clock_request_time_hours	22.5823	wall-clock request time, not true CPU-hours
 ```
 
 **Gemini.** The key is read only from the environment variable `GEMINI_API_KEY`. Set `GEMINI_MODEL` to the pinned id (the Phase 2 file records `gemini-3.8-flash`). There is no key in the repo, the notebook, or CI. `.env*` is git-ignored. CI sets `WHOSTOP_FORBID_REMOTE=1` and the tests pass fake clients.
@@ -53,7 +55,7 @@ wall_clock_request_time_hours	8.6902	wall-clock request time, not true CPU-hours
 make reproduce
 ```
 
-That runs `phase2/analysis/analyze_p2.py` and `pilot/run/analyze.py`. Both resolve paths from the repository root. They rewrite `phase2/analysis/phase2_metrics.json` and `pilot/run/pilot_metrics.json` from the committed JSONL files, and `make reproduce` fails if either file differs from the commit. CI runs the same check.
+That runs `phase2/analysis/analyze_p2.py`, `pilot/run/analyze.py`, and `phase3/analysis/analyze_p3.py`. They resolve paths from the repository root. They rewrite `phase2/analysis/phase2_metrics.json`, `pilot/run/pilot_metrics.json`, and `phase3/analysis/phase3_metrics.json` from the committed JSONL files, and `make reproduce` fails if any of those files differs from the commit. CI runs the same check.
 
 `whostop.gate.evaluate_competence_gate` is the competence gate for new runs. The Phase 2 gate table in `phase2_metrics.json` uses the same rule: PASS on the point estimates, FAIL when the best case over unscored rows still misses a floor, INCOMPLETE only when the best case would pass and the worst case would not.
 
@@ -78,7 +80,7 @@ Gemini n2 passes on point estimates (STOP 44/45), but its STOP-recall Wilson 95%
 ## Limitations
 
 - Agent labels, one labeler. There is no human κ yet. Every rate above is provisional.
-- The gate set is the YOLO-assisted pilot block G. A non-YOLO gate was part of the Phase 3 plan and is not a result here.
+- The Phase 2 gate set is the YOLO-assisted pilot block G. Phase 3 adds G2, a gate that does not use YOLO. Qwen3-VL-2B prompt p1 fails G2. The counts are in the Phase 3 section.
 - One gate-passing small model in Phase 2: Qwen3-VL-2B. SmolVLM-500M and SmolVLM2 do not clear the gate. Qwen2.5-VL-3B is a determinable FAIL (see the errata), not an incomplete run.
 - Qwen in Phase 2 is one wording (p1), one run, 640 px.
 - Some scenes are outside the United States. The MUTCD §2B.04 label does not govern them. The errata counts 18/63 board bases and 9/71 stop scenes as non-US, plus one historic stop scene.
@@ -103,20 +105,33 @@ Phase 2 had no preregistration. `phase2/analysis/analyze_p2.py` changed after th
 
 ## Phase 3
 
-Phase 3 runs are in progress. They will produce `phase3/analysis/phase3_metrics.json`. No Phase 3 numbers are in this repository. The slot is described in [`phase3/README.md`](phase3/README.md).
+Phase 3 numbers below are copied from [`phase3/analysis/phase3_metrics.json`](phase3/analysis/phase3_metrics.json), sha256 `f9690fd943d4cd3d10b4b4ec282dd84bfbccd786b4938760300e497de5583a32`. The narrative report is [`phase3/phase3_report.md`](phase3/phase3_report.md). `make reproduce` rewrites the JSON from `phase3/run/results_*.jsonl` and the committed manifests. The regenerated file matches that sha256. Every `results_files` entry has `error_rows` 0. The result files name qwen3vl2b, internvl3_2b, and lfm2vl_1.6b. There is no Gemini model in those files.
+
+The Phase 2 headline replicates on a second gate-passing model, LFM2-VL-1.6B. The passing cell is n2 / 448 px / greedy: `lfm2vl_1.6b.gates.phase3_gate_summary["n2|r0|448"]` has `passes_phase3_gate (G1 and G2 point)` true. On the Phase 2 stimuli, `lfm2vl_1.6b.board_and_stop_arms_phase2_stimuli.cells["n2|r0|448"]`: inject STOP is 53/63 against benign 3/63, bare STOP is 61/63, ROAD CLOSED is 46/63, clean-board specificity is 55/63, and PROCEED-at-STOP is 43/71 against a benign board 14/71.
+
+A/B/C answer-word renaming shows the PROCEED effect is partly answer-word copying. At 640 px greedy, `qwen3vl2b.R_arm.cells["L1|r0|640"].proceed_at_stop` is 16/71 against a benign control of 0/71, and `qwen3vl2b.R_arm.cells["L2|r0|640"].proceed_at_stop` is 22/71 against 0/71. The P-arm left placement matches those counts: `qwen3vl2b.P_arm.cells["L1|r0|640"].left.proceed` is 16/71 against 0/71, and `qwen3vl2b.P_arm.cells["L2|r0|640"].left.proceed` is 22/71 against 0/71. The word prompt at the same resolution, `qwen3vl2b.R_arm.cells["p1|r0|640"].proceed_at_stop`, is 45/71 against 14/71.
+
+Qwen3-VL-2B with prompt p1 fails the gate that does not use YOLO. G2 GO recall is 47/59 (rate 0.797) at 448 px and at 896 px, keys `qwen3vl2b.gates["G2|p1|r0|448"].GO_recall` and `qwen3vl2b.gates["G2|p1|r0|896"].GO_recall`. At 640 px the same recall is 43/59 (rate 0.729), key `qwen3vl2b.gates["G2|p1|r0|640"].GO_recall`. Clean-board specificity at p1 / r0 / 640 is 46/63 (rate 0.73), key `qwen3vl2b.R_arm.cells["p1|r0|640"].board.clean_board_specificity`. The 47/59 figure is the 448 px and 896 px cells. The 46/63 figure is the 640 px cell. `gate_point` is false on all three p1 G2 cells.
+
+Fixed-seed sampling means r1 and r2 are not true run-to-run variance. `sampling_note` records temperature 0.7 with fixed seeds 1 and 2 on every request, so those runs are two fixed-seed perturbations.
+
+InternVL3-2B failed the gate on the word prompts. `internvl3_2b.gates.phase3_gate_summary` is false for `p1|r0|448`, `n2|r0|448`, and `n3|r0|448`. The same summary is true for the letter prompts `L1|r0|448` and `L2|r0|448`. Those letter cells were not the selection wording, and InternVL3-2B was not run on the study arms.
+
+The three Phase 3 figures are matplotlib charts with no photo pixels (`phase3/fig1_qwen_robustness_grid.png`, `phase3/fig2_proceed_controls_qwen3vl2b.png`, `phase3/fig2_proceed_controls_lfm2vl_1.6b.png`). Stimulus images are not in this tree.
 
 ## Responsible AI concepts to files
 
 | Concept | Files |
 |---|---|
-| Harm direction and asymmetric errors | [README.md](README.md) (false STOP on a board versus overriding a real STOP); [phase2/phase2_report.md](phase2/phase2_report.md) |
+| Harm direction and asymmetric errors | [README.md](README.md) (false STOP on a board versus overriding a real STOP); [phase2/phase2_report.md](phase2/phase2_report.md); [phase3/phase3_report.md](phase3/phase3_report.md) |
 | Law-grounded labels (MUTCD) | [docs/sources.md](docs/sources.md); [phase3/legal/legal_manifest.csv](phase3/legal/legal_manifest.csv); [phase3/ERRATA_phase2.md](phase3/ERRATA_phase2.md) |
-| The competence gate | [whostop/gate.py](whostop/gate.py) |
+| The competence gate | [whostop/gate.py](whostop/gate.py); [phase3/analysis/analyze_p3.py](phase3/analysis/analyze_p3.py); [phase3/phase3_report.md](phase3/phase3_report.md) |
+| Phase 3 robustness, second model, and answer-word controls | [phase3/phase3_report.md](phase3/phase3_report.md); [phase3/analysis/phase3_metrics.json](phase3/analysis/phase3_metrics.json); [phase3/PREREG.md](phase3/PREREG.md) |
 | Misuse and dual-use controls (images only, no physical tampering guidance) | [README.md](README.md#misuse-disclosure-privacy); [docs/build_plan.md](docs/build_plan.md) |
 | Disclosure plan | [README.md](README.md#misuse-disclosure-privacy); [phase2/phase2_report.md](phase2/phase2_report.md); [docs/build_plan.md](docs/build_plan.md) |
 | Licensing and attribution | [phase2/LICENSES.md](phase2/LICENSES.md); [phase3/legal/legal_manifest.csv](phase3/legal/legal_manifest.csv); [LICENSE](LICENSE); [NOTICE](NOTICE) |
 | Privacy by design | [pilot/v2work/blur_cv4.py](pilot/v2work/blur_cv4.py); [docs/PRIVACY_AUDIT.md](docs/PRIVACY_AUDIT.md); [site/PAGES_ALLOWLIST.txt](site/PAGES_ALLOWLIST.txt); [site/PAGES_DENYLIST.txt](site/PAGES_DENYLIST.txt); [site/build_pages_artifact.py](site/build_pages_artifact.py) (hard-exclude) |
-| Reproducibility | [models.lock](models.lock); [Makefile](Makefile) (`make reproduce`); [docs/PAGES_SHA256.txt](docs/PAGES_SHA256.txt); [docs/SITE_SHA256.txt](docs/SITE_SHA256.txt) |
+| Reproducibility | [models.lock](models.lock); [Makefile](Makefile) (`make reproduce`); [phase3/analysis/phase3_metrics.json](phase3/analysis/phase3_metrics.json); [docs/PAGES_SHA256.txt](docs/PAGES_SHA256.txt); [docs/SITE_SHA256.txt](docs/SITE_SHA256.txt) |
 | Transparency about deviations | [docs/DEVIATIONS.md](docs/DEVIATIONS.md); [phase3/DEVIATIONS.md](phase3/DEVIATIONS.md) |
 
 ## Poster

@@ -1,5 +1,5 @@
 [
   {"id": "phase3", "title": "Phase 3: robustness",
-   "blurb": "Robustness re-runs of the Study 2 conditions. Results are aggregated by condition only.",
+   "blurb": "The Phase 2 headline replicates on a second gate-passing model, LFM2-VL-1.6B, at n2 / 448 px / greedy (inject 53/63 vs benign 3/63, bare STOP 61/63, ROAD CLOSED 46/63, PROCEED-at-STOP 43/71 vs 14/71). A/B/C answer-word renaming shows the PROCEED effect is partly answer-word copying: at 640 px, L1 is 16/71 against 0/71 and L2 is 22/71 against 0/71. Qwen3-VL-2B prompt p1 fails the gate that does not use YOLO: G2 GO recall is 47/59 (0.797) at 448 px and at 896 px, and 43/59 (0.729) at 640 px. Clean-board specificity at p1 / r0 / 640 is 46/63 (0.73). Fixed-seed sampling means r1 and r2 are not true run-to-run variance. InternVL3-2B failed the gate on the word prompts p1, n2, and n3. Counts are aggregated by condition from phase3/analysis/phase3_metrics.json.",
    "metrics": "phase3/analysis/phase3_metrics.json"}
 ]

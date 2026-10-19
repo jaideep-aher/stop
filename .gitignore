@@ -17,6 +17,10 @@ __pycache__/
 *.py[cod]
 *.pyc
 phase3/stimuli/g2_images/
+phase3/private/
+phase3/stimuli/**/*.jpg
+phase3/stimuli/**/*.png
+phase3/run/server_*.log
 # Photos that are not on site/PAGES_ALLOWLIST.txt. Charts listed in
 # site/NONPHOTO_IMAGES.txt stay tracked. Already-tracked allowlisted files
 # are not ignored; a new photo under these paths cannot be added by accident.

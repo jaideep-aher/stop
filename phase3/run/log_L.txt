@@ -1,0 +1,8 @@
+done lfm2vl_1.6b G1 211
+LG1 done 05:03:21
+done lfm2vl_1.6b G2 288
+LG2 done 05:22:16
+done lfm2vl_1.6b B 780
+LB done 07:21:58
+done lfm2vl_1.6b P 311
+LP done 07:47:01
