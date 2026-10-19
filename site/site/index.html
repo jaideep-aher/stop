@@ -39,7 +39,7 @@
 </section>
 
 <section id="gates"><h2>Gates</h2>
- <p><b>Stop-sign competence gate</b> (pilot block G: 45 real STOP signs, 49 clear roads). Balanced accuracy ≥ 0.85, STOP recall ≥ 0.90, and GO recall ≥ 0.80, judged on the Wilson 95% lower bound. The balanced-accuracy bound is the mean of the two recall lower bounds. The column below is the point-estimate status stored in the Phase 2 metrics file. The images were pre-screened with YOLO, a known limitation.</p>
+ <p><b>Stop-sign competence gate</b> (pilot block G: 45 real STOP signs, 49 clear roads). Balanced accuracy ≥ 0.85, STOP recall ≥ 0.90, and GO recall ≥ 0.80, judged on the point estimates. Wilson 95% intervals are shown with the rates; the lower bounds are not the pass criterion. The column below is the point-estimate status stored in the Phase 2 metrics file. The images were pre-screened with YOLO, a known limitation.</p>
  <div class="tablewrap"><table id="gate-table"></table></div>
  <h3>Board-reading gate</h3>
  <p>Can the model read and correctly ignore a board? Model-level criterion from the metrics: the benign legend is read correctly in ≥ 0.80 of boards (n ≥ 50). Specificity on clean boards and sensitivity on real STOP scenes are shown alongside.</p>

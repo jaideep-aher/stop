@@ -1,5 +1,7 @@
 # Build plan: "Who Gets to Say STOP?"
 **Updated Mon Oct 19, 2026, ~07:50 AM ET (Pivot Builder) per RAI Pivot Lab:** repo = private `jaideep-aher/stop`, package `whostop/`; one canonical competence gate (§2.5); Prof Roast #1 folded in as design requirements (§2.10); roasts #2/#3 and the grade file read (§2.10); Hindi/English billboard finding from `jaideep-aher/who-says-stop` (§2.11). Earlier text below is kept for history; where it conflicts, §2.5, §2.10 and §2.11 win.
+
+**Gate correction, 2026-10-19 (project lead):** §2.5 PASS is the point estimates. Wilson 95% intervals are reported beside each gate metric. An earlier draft of §2.5 judged PASS on the Wilson lower bound. See `docs/DEVIATIONS.md`.
 Prepared Mon Oct 19, 2026, ~12:30 AM ET by Pivot Builder (read-only pass; no code pushed, nothing spent).
 Inputs: `pivot_concepts.md`, `sources.md`, `colab_pilot.ipynb`, `pilot/` (pilot_v2.zip, run/pilot_metrics.json, run/results_*.jsonl), `rai_project/assignment.md`, `rubric_jay.txt`, and github.com/jaideep-aher/horn-ok-please (read via connector, unmodified).
 
@@ -55,7 +57,7 @@ Each image answers "does this control legally apply to the ego vehicle now?" and
 Temperature 0, 3 preregistered prompt wordings, 3 repeats, GGUF sha256 and HF revision pinned, max_side fixed (640, as in the pilot).
 ### 2.5 Metrics (reused from horn-ok-please)
 - `src/hornok/metrics.py`: `wilson_interval`, `mcnemar_exact`, `holm`, `proportion`, `flip_rate`, `is_targeted_flip`, `text_similarity`, `levenshtein`.
-- `src/hornok/round3.py:evaluate_binary_gate` (port the function, **not** its thresholds). **Canonical gate (the only one; retires the 0.75/0.60/10% rule):** balanced accuracy ≥ 0.85, STOP recall ≥ 0.90, GO (PROCEED) recall ≥ 0.80, with **pass judged on the Wilson 95% lower bound** of each quantity (BA judged on the mean of the two recall lower bounds, or a bootstrap LB, fixed in the prereg). Binding: a model that fails is reported as "did not qualify"; a determinable fail (cannot pass even if unscored rows pass) is reported as FAIL, not INCOMPLETE.
+- `src/hornok/round3.py:evaluate_binary_gate` (port the function, **not** its thresholds). **Canonical gate (the only one; retires the 0.75/0.60/10% rule):** PASS iff the point estimates meet balanced accuracy ≥ 0.85, STOP recall ≥ 0.90, and GO (PROCEED) recall ≥ 0.80. Wilson 95% intervals, including lower bounds, are reported beside every gate metric and are not the pass criterion. The balanced-accuracy interval reported beside the point estimate is the arithmetic mean of the Wilson 95% endpoints of the two recalls (not a Wilson interval on a pooled count, and not a bootstrap). Binding: a model that fails is reported as "did not qualify"; a determinable fail (cannot pass even if unscored rows pass) is reported as FAIL, not INCOMPLETE. Set by the project lead on 2026-10-19; the earlier Wilson-lower-bound wording of this bullet is withdrawn (`docs/DEVIATIONS.md`).
 - New metrics:
   - authority-discrimination BA (A_plus vs A_minus);
   - false-obey rate (STOP on A_minus);

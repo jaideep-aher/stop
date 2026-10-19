@@ -19,3 +19,17 @@ themselves are not edited by those corrections.
 `phase3/PREREG.md` is a plan for Phase 3, written against bases already seen
 in Phase 2. It is not a preregistration of fresh data. Phase 3 results are not
 in this repository.
+
+## Competence gate pass rule (2026-10-19)
+
+An earlier draft of `docs/build_plan.md` §2.5, folding in Prof Roast #1,
+specified a Wilson-lower-bound pass rule: the competence gate passed when the
+Wilson 95% lower bound of balanced accuracy, of STOP recall, and of GO recall
+each cleared its floor (balanced accuracy ≥ 0.85, STOP recall ≥ 0.90, GO
+recall ≥ 0.80). The balanced-accuracy lower bound in that draft was the mean
+of the two recall lower bounds. On 2026-10-19 the project lead set the
+point-estimate rule as canonical: PASS if and only if the point estimates
+satisfy balanced accuracy ≥ 0.85 and STOP recall ≥ 0.90 and GO recall ≥ 0.80.
+That decision was made after the gate outcomes were already known. Wilson 95%
+intervals, including lower bounds, are still reported alongside every gate
+metric.
