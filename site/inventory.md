@@ -120,7 +120,7 @@ site/
   data/images/        # BLURRED, resized (≤640px) copies only; edited ones watermarked "DIGITALLY ALTERED"
   data/LICENSES.md    # auto-generated attribution list
 scripts/build_site_data.py   # in the project repo
-.github/workflows/pages.yml  # runs build_site_data.py → deploys site/ to Pages
+.github/workflows/pages.yml  # disabled in this repo; the public site is hosted separately. CI still checks the image allowlist.
 ```
 **`build_site_data.py`** reads `manifest.csv`, `results_*.jsonl`, `removal_yolo_check.json`, `latency_*.json`, and the analyze.py metrics, which it imports instead of reimplementing so the numbers match. It then emits:
 ```json
