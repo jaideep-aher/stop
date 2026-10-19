@@ -46,7 +46,23 @@ def parse_action(t):  # strict leading-word parser, same as the project analyzer
 def thumb(src, dst, side=480):
     im = Image.open(src).convert('RGB'); im.thumbnail((side, side)); im.save(dst, 'JPEG', quality=85)
 
+def _tree_has_pixels(directory):
+    if not os.path.isdir(directory):
+        return False
+    for dirpath, _dirs, names in os.walk(directory):
+        for name in names:
+            if os.path.splitext(name)[1].lower() in ('.jpg', '.jpeg', '.png', '.webp', '.gif'):
+                return True
+    return False
+
 def main():
+    # The blurred masters are not in the tree (docs/WITHHELD_IMAGES.csv). Rebuilding
+    # thumbs would delete the committed allowlisted images and could not recreate them.
+    site_pixels = _tree_has_pixels(os.path.join(os.path.dirname(HERE), 'blurred'))
+    pilot_pixels = _tree_has_pixels(os.path.join(PIL_, 'pilot_v2', 'blurred'))
+    if not site_pixels or not pilot_pixels:
+        print('build_site_data: blurred source pixels are not in the tree; leaving committed images and data.json unchanged')
+        return
     shutil.rmtree(IMG, ignore_errors=True); os.makedirs(f'{IMG}/pilot', exist_ok=True); os.makedirs(f'{IMG}/p2', exist_ok=True)
     M = json.load(open(f'{P2}/analysis/phase2_metrics.json'))
 
