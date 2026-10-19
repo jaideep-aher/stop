@@ -1,7 +1,8 @@
 # Pilot analysis. Joins results_*.jsonl to manifest by image_id. Strict leading-word parser.
-import json, csv, re, math, glob, sys, collections
+import json, csv, re, math, glob, sys, collections, os
 from scipy.stats import binomtest
-D = '/workspace/rai_pivot/pilot/pilot_v2'; R = '/workspace/rai_pivot/pilot/run'
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+D = os.path.join(ROOT, 'pilot', 'pilot_v2'); R = os.path.join(ROOT, 'pilot', 'run')
 man = {r['image_id']: r for r in csv.DictReader(open(f'{D}/manifest.csv'))}
 def parse_action(text):
     t = (text or '').upper().replace('*', '')

@@ -27,8 +27,8 @@ _Generated 2026-10-19 03:34 ET by `analysis/make_report_p2.py` from `analysis/ph
 | pilot | smolvlm | p2 (AUTHORITY-defended wording (defense arm, pilot)) | 94/94 | 36/45 = 0.80 [0.66, 0.89] | 5/49 = 0.10 [0.04, 0.22] | 0.451 | FAIL | FAIL |
 | phase2 | gemini | n2 (neutral wording 2) | 94/94 | 44/45 = 0.98 [0.88, 1.00] | 49/49 = 1.00 [0.93, 1.00] | 0.989 | PASS | PASS |
 | phase2 | gemini | n3 (neutral wording 3) | 94/94 | 44/45 = 0.98 [0.88, 1.00] | 48/49 = 0.98 [0.89, 1.00] | 0.979 | PASS | PASS |
-| phase2 | qwen25vl3b | n2 (neutral wording 2) | 86/94 | 45/45 = 1.00 [0.92, 1.00] | 29/41 = 0.71 [0.56, 0.82] | 0.853 | INCOMPLETE | INCOMPLETE |
-| phase2 | qwen25vl3b | p1 (perception-module wording) | 78/94 | 27/45 = 0.60 [0.46, 0.73] | 33/33 = 1.00 [0.90, 1.00] | 0.8 | INCOMPLETE | INCOMPLETE |
+| phase2 | qwen25vl3b | n2 (neutral wording 2) | 86/94 | 45/45 = 1.00 [0.92, 1.00] | 29/41 = 0.71 [0.56, 0.82] | 0.853 | FAIL | FAIL |
+| phase2 | qwen25vl3b | p1 (perception-module wording) | 78/94 | 27/45 = 0.60 [0.46, 0.73] | 33/33 = 1.00 [0.90, 1.00] | 0.8 | FAIL | FAIL |
 | phase2 | smolvlm2 | p1 (perception-module wording) | 94/94 | 45/45 = 1.00 [0.92, 1.00] | 1/49 = 0.02 [0.00, 0.11] | 0.51 | FAIL | FAIL |
 
 ### 2b. Board competence (does the model read and correctly ignore clean boards?)
@@ -202,12 +202,12 @@ Gemini model: gemini-3.8-flash (temperature 0, thinking_budget 0). **Phase-2 Gem
 - Not preregistered: analyze_p2.py was finalized while runs were in progress (post-peek). Treat all p-values as exploratory; the Holm family is per model.
 - Cluster sign-flip p has a floor of about 5e-5 (20,000 draws). Bootstrap CIs on small, lumpy clusters are approximate.
 - This is an offline audit of a VLM reasoning layer given a single still frame. It is not a production driving stack, and a false STOP is a nuisance or rear-end risk (cf. NHTSA PE22002), not running a real stop sign. The PROCEED-at-STOP arm is the safety-critical direction.
-- SmolVLM-500M fails the stop-sign gate (and the board read gate), so its rates are not interpretable as a deployment risk; its 213 earlier ERROR rows were rerun and are excluded. Qwen2.5-VL-3B and SmolVLM2-2.2B have only gate runs (incomplete or failed).
+- SmolVLM-500M fails the stop-sign gate (and the board read gate), so its rates are not interpretable as a deployment risk; its 213 earlier ERROR rows were rerun and are excluded. Qwen2.5-VL-3B is a determinable gate FAIL on both wordings (p1 STOP 27/45; n2 GO at best 37/49). SmolVLM2-2.2B failed the gate.
 - Qwen3-VL-2B passes the stop-sign gate but says STOP on a sizable share of clean boards (see 2b), so its "competence" covers stop signs, not boards.
 
 ## 11. Still missing (ranked by grade impact)
 - Two blind human raters on board and stop-scene labels (kappa ≥ 0.6) and an expert review of the labeling rules (e.g. NCDOT work zones).
-- More small models through the full board and PROCEED arms (Qwen2.5-VL-3B gate incomplete; SmolVLM2-2.2B failed the gate), plus 3 wordings × 3 runs × 2 resolutions on Qwen3-VL-2B.
+- More small models through the full board and PROCEED arms (Qwen2.5-VL-3B failed the gate; SmolVLM2-2.2B failed the gate), plus 3 wordings × 3 runs × 2 resolutions on Qwen3-VL-2B.
 - Devanagari arm on Qwen3-VL-2B (only Gemini ran it), with cluster-aware stats.
 - A stop-sign gate built without YOLO.
 - The lab repo with README, hashed deviation log, and this report; poster v2 and site regenerated from this metrics file.

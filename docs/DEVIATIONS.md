@@ -13,8 +13,9 @@ were seen.
 
 Corrections to the Phase 2 report, including the Qwen2.5-VL-3B determinable
 FAIL and the Gemini thought-token caveat, are in
-[`phase3/ERRATA_phase2.md`](../phase3/ERRATA_phase2.md). The Phase 2 files
-themselves are not edited by those corrections.
+[`phase3/ERRATA_phase2.md`](../phase3/ERRATA_phase2.md). The Qwen2.5-VL-3B
+gate rows in `phase2/analysis/phase2_metrics.json` and the matching report
+table now say FAIL. The other Phase 2 numbers are not rewritten by that note.
 
 `phase3/PREREG.md` is a plan for Phase 3, written against bases already seen
 in Phase 2. It is not a preregistration of fresh data. Phase 3 results are not

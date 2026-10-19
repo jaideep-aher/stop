@@ -65,6 +65,23 @@ def test_ship_ok_refuses_sources_and_flags():
     )
 
 
+def test_upstream_withhold_stays_off_the_artifact_unless_the_audit_cleared_it(tmp_path: Path):
+    """The site developer's 252-image withhold list is denied unless the audit cleared it."""
+    import csv
+
+    audit = list(csv.DictReader((ROOT / "docs" / "privacy_audit.csv").open(newline="", encoding="utf-8")))
+    denied_ids = {row["image_id"] for row in audit if row["upstream_withhold"] == "yes" and row["decision"] == "deny"}
+    cleared_ids = {row["image_id"] for row in audit if row["decision"] == "cleared"}
+    assert "ill2_037" in denied_ids
+    assert len(denied_ids) + len(cleared_ids) == 252
+    dest = tmp_path / "pages"
+    build(dest)
+    shipped = {path.stem for path in dest.rglob("*") if path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}}
+    assert denied_ids.isdisjoint(shipped)
+    for image_id in ("ill2_037", "ill2_066", "ill2_312", "ill2_313"):
+        assert image_id not in shipped
+
+
 def test_blur_helper_import_does_not_require_a_detector():
     image = Image.new("RGB", (4, 4), "blue")
     assert image.getpixel((0, 0)) == (0, 0, 255)

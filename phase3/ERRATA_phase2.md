@@ -7,7 +7,7 @@ Written Mon 19 Oct 2026 ~04:09 ET by the Phase 3 executor. Every count below was
    254/260 Devanagari, 107/110 second-wording and 17/17 real-photo rows. Thinking could not be disabled for this model. Correct wording:
    "temperature 0; thinking_budget 0 requested but not honoured (thought tokens on 757/780 main rows)". This is a deviation, not a data error;
    the Gemini numbers stand but describe Gemini *with* internal reasoning.
-2. **Qwen2.5-VL-3B is a gate FAIL, not INCOMPLETE.** Report §2a rows 30–31 and `phase2_metrics.json` `_gate[8]`, `_gate[9]` say INCOMPLETE.
+2. **Qwen2.5-VL-3B is a gate FAIL, not INCOMPLETE.** Report §2a rows 30–31 and `phase2_metrics.json` `_gate` for qwen25vl3b originally said INCOMPLETE. They now say FAIL.
    - p1: STOP recall 27/45 = 0.60 with all 45 STOP rows scored → fails STOP ≥ 0.90 regardless of the 16 unscored GO rows.
    - n2: 86/94 rows scored; all 8 missing rows are GO images. GO recall 29/41; even if all 8 missing rows were correct, GO ≤ 37/49 = 0.755 < 0.80.
    - Correct status: **FAIL (determinable) on both wordings.** (Phase 3 does not re-run it.)
