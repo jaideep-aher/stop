@@ -492,7 +492,7 @@ def build(dest: Path) -> dict:
     blocked |= manifest_blocked_paths()
     if dest.exists():
         shutil.rmtree(dest)
-    shutil.copytree(WEB, dest)
+    shutil.copytree(WEB, dest, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     kept = 0
     dropped = 0
     for path in list(dest.rglob("*")):

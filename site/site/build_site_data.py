@@ -55,30 +55,98 @@ def _tree_has_pixels(directory):
                 return True
     return False
 
-def phase_entries():
-    """Phases listed in site/phases.json. A missing metrics file stays an honest empty state."""
-    entries = []
+def _kn(o):
+    return {k: o[k] for k in ('k', 'n', 'rate', 'ci95')} if isinstance(o, dict) and 'k' in o else None
+
+def _frac(o):
+    return f"{o['k']}/{o['n']} ({o['rate']})"
+
+def phase3_extract(M):
+    """Curated Phase 3 view, copied from phase3_metrics.json. File order; no per-image rows."""
+    q = M['qwen3vl2b']; R = q['R_arm']; G = q['gates']
+    def cell(c):
+        b = {v: {'variant': _kn(x['variant']), 'control': _kn(x['control']), 'holm_p': x.get('holm_p'), 'cluster_p': x.get('cluster_signflip_p')}
+             for v, x in c['board'].items() if isinstance(x, dict) and 'variant' in x}
+        pa = c['proceed_at_stop']
+        return {'board': b, 'clean_board_specificity': _kn(c['board'].get('clean_board_specificity')),
+                'proceed_at_stop': {'variant': _kn(pa['variant']), 'control': _kn(pa['control']), 'mcnemar_p': pa.get('mcnemar_p'), 'cluster_p': pa.get('cluster_signflip_p')}}
+    grid = {k: cell(v) for k, v in R['cells'].items()}
+    P = {k: {pl: {lg: {'variant': _kn(x['variant']), 'control': _kn(x['control']), 'holm_p': x.get('holm_p')}
+                  for lg, x in v[pl].items() if isinstance(x, dict) and 'variant' in x}
+             for pl in ('left', 'right', 'lane') if pl in v} for k, v in q['P_arm']['cells'].items()}
+    gates = {k: {'STOP_recall': _kn(v['STOP_recall']), 'GO_recall': _kn(v['GO_recall']), 'BA': v['BA'], 'pass': v['gate_point']}
+             for k, v in G.items() if isinstance(v, dict) and 'BA' in v}
+    lf = M.get('lfm2vl_1.6b', {}).get('board_and_stop_arms_phase2_stimuli') or {}
+    lfm = {k: {'board': {b: {'variant': _kn(x['variant']), 'control': _kn(x['control']), 'holm_p': x.get('holm_p')} for b, x in v.get('board', {}).items() if isinstance(x, dict) and 'variant' in x}}
+           for k, v in (lf.get('cells') or {}).items()}
+    lfg = {k: {'STOP_recall': _kn(v['STOP_recall']), 'GO_recall': _kn(v['GO_recall']), 'BA': v['BA'], 'pass': v['gate_point']}
+           for k, v in M.get('lfm2vl_1.6b', {}).get('gates', {}).items() if isinstance(v, dict) and 'BA' in v}
+    rep = R['replication_vs_phase2_p1_640_greedy']
+    gs = G.get('phase3_gate_summary', {})
+    passing = [k.replace('|', ' / ') for k, v in gs.items() if v.get('passes_phase3_gate (G1 and G2 point)')]
+    g448, g640, g896 = (G[k]['GO_recall'] for k in ('G2|p1|r0|448', 'G2|p1|r0|640', 'G2|p1|r0|896'))
+    clean = R['cells']['p1|r0|640']['board']['clean_board_specificity']
+    h1 = R['H2_renamed_options_640_greedy']
+    r_l1 = R['cells']['L1|r0|640']['proceed_at_stop']
+    r_l2 = R['cells']['L2|r0|640']['proceed_at_stop']
+    p_l1 = q['P_arm']['cells']['L1|r0|640']['left']['proceed']
+    p_l2 = q['P_arm']['cells']['L2|r0|640']['left']['proceed']
+    ratio_l1 = h1['L1']['proceed_at_stop']['ratio']
+    ratio_l2 = h1['L2']['proceed_at_stop']['ratio']
+    # Share of the p1 paired difference that does not remain: round((1 - ratio) * 100), ratio = diff_L / diff_p1.
+    gone_l1 = round((1 - ratio_l1) * 100)
+    gone_l2 = round((1 - ratio_l2) * 100)
+    caveats = [
+        {'title': 'Qwen3-VL-2B with prompt p1 fails the gate that does not use YOLO',
+         'text': (f"GO recall is {_frac(g640)} at 640 px, and {_frac(g448)} at 448 px and at 896 px. "
+                  f"Clean-board specificity at p1 / r0 / 640 is {_frac(clean)}. "
+                  f"p1 fails G2 at 448, 640, and 896 px. "
+                  f"The Qwen cells that pass both gates are: {', '.join(passing) or 'none'}.")},
+        {'title': 'Part of the PROCEED effect is the model copying the answer word',
+         'text': (f"At 640 px greedy, R_arm proceed_at_stop is L1 {_frac(r_l1['variant'])} against control {_frac(r_l1['control'])} "
+                  f"and L2 {_frac(r_l2['variant'])} against {_frac(r_l2['control'])}. "
+                  f"P_arm left proceed is L1 {_frac(p_l1['variant'])} against {_frac(p_l1['control'])} "
+                  f"and L2 {_frac(p_l2['variant'])} against {_frac(p_l2['control'])}. "
+                  f"The share of the p1 paired difference that does not remain is round((1 - ratio) * 100), "
+                  f"where ratio is diff_L / diff_p1: L1 {gone_l1}% (ratio {ratio_l1}) and L2 {gone_l2}% (ratio {ratio_l2}).")},
+        {'title': 'r1 and r2 are fixed-seed runs, not independent samples',
+         'text': M.get('sampling_note', '')},
+    ]
+    return {'note': M.get('_note'), 'caveats': caveats,
+            'replication': {'agree': rep['agree'], 'n': rep['n'], 'note': rep.get('note')},
+            'robustness_summary': R['robustness_summary'], 'h2': h1, 'grid': grid, 'p_arm': P,
+            'gates': gates, 'gate_rule': G.get('phase3_gate_summary'), 'lfm2': {'cells': lfm, 'gates': lfg},
+            'cluster_shares': M.get('cluster_shares')}
+
+def build_phases():
+    """Extra phases listed in site/phases.json. A missing metrics file stays an honest empty state."""
+    phases = []
     pj = f'{HERE}/phases.json'
     for ph in (json.load(open(pj)) if os.path.exists(pj) else []):
         mp = ph['metrics'] if os.path.isabs(ph['metrics']) else f"{ROOT}/{ph['metrics']}"
         ent = {k: ph.get(k) for k in ('id', 'title', 'blurb')}
         if os.path.exists(mp):
-            ent['metrics'] = json.load(open(mp))
+            raw = json.load(open(mp))
             ent['source'] = os.path.relpath(mp, ROOT)
+            if ph.get('id') == 'phase3' and 'qwen3vl2b' in raw:
+                ent['metrics'] = None
+                ent['phase3'] = phase3_extract(raw)
+            else:
+                ent['metrics'] = raw
         else:
             ent['metrics'] = None
             ent['source'] = os.path.relpath(mp, ROOT)
-        entries.append(ent)
-    return entries
+        phases.append(ent)
+    return phases
 
 def main():
     if '--phases-only' in sys.argv:
         # Refresh the phase block from committed metrics. Do not touch images or other keys.
         data = json.load(open(f'{OUT}/data.json'))
-        data['phases'] = phase_entries()
+        data['phases'] = build_phases()
         with open(f'{OUT}/data.json', 'w') as handle:
             json.dump(data, handle, separators=(',', ':'))
-        print('phases-only', [(p['id'], p['metrics'] is not None) for p in data['phases']])
+        print('phases-only', [(p['id'], bool(p.get('phase3') or p.get('metrics'))) for p in data['phases']])
         return
     # The blurred masters are not in the tree (docs/WITHHELD_IMAGES.csv). Rebuilding
     # thumbs would delete the committed allowlisted images and could not recreate them.
@@ -236,7 +304,7 @@ def main():
             'pilot': {'metrics': pm_slim, 'images': pimgs, 'refusals': pref, 'n_published': sum(i['published'] for i in pimgs)},
             'repo': {'name': 'jaideep-aher/stop', 'status': 'private repository; GitHub Pages publishes only the filtered allowlist'}}
     # extra phases (e.g. Phase 3 robustness): listed in site/phases.json; missing metrics => honest empty state
-    data['phases'] = phase_entries()
+    data['phases'] = build_phases()
     json.dump(data, open(f'{OUT}/data.json', 'w'), separators=(',', ':'))
     print(f"Phase 2: {len(bases)} bases, {len(main_rows)} stimuli, {data['p2']['n_published']} published, refusals {p2_refusal}; real tampered {sum(1 for x in real if x['thumb'])}/{len(real)} published; {len(examples)} example pairs; rows used {rowcount}")
     print(f"Needs human check: {len(nhc)} rows -> data/needs_human_check.csv; phases: {[(p['id'], p['metrics'] is not None) for p in data['phases']]}")
