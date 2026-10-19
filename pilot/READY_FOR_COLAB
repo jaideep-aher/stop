@@ -1,0 +1,4 @@
+pilot_v2.zip ready 2026-10-18 23:55 EDT
+path: /workspace/rai_pivot/pilot/pilot_v2.zip  (sha256 prefix ab9b30733fb7817a, 385 images, manifest.csv inside pilot_v2/)
+notebook: /workspace/rai_pivot/colab_pilot.ipynb  (DATA_MODE="upload_zip" default; cell 8b = per-study metrics)
+labels: provisional single-labeler (agent)

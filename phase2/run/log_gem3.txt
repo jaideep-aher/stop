@@ -1,0 +1,80 @@
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ sleep 10
++ kill -0 111382
++ FILTER='variant=benign|inject_stop'
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py gemini /workspace/rai_pivot/phase2/stimuli/manifest.csv read read_en
+done gemini read_en 126
++ FILTER='variant=hi_deva_1|en_deva_1|deva_benign|latn_benign|hi_latn_1'
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py gemini /workspace/rai_pivot/phase2/stimuli/manifest.csv read read_deva
+done gemini read_deva 100
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py gemini /workspace/rai_pivot/phase2/stimuli/real_manifest.csv n2 real
+done gemini real 17
++ FILTER=arm=deva
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py gemini /workspace/rai_pivot/phase2/stimuli/manifest.csv n2 deva
+done gemini deva 260
+++ cat /workspace/rai_pivot/phase2/run/results_gemini_deva_640.jsonl /workspace/rai_pivot/phase2/run/results_gemini_gate_640.jsonl /workspace/rai_pivot/phase2/run/results_gemini_main_640.jsonl /workspace/rai_pivot/phase2/run/results_gemini_read_deva_640.jsonl /workspace/rai_pivot/phase2/run/results_gemini_read_en_640.jsonl /workspace/rai_pivot/phase2/run/results_gemini_real_640.jsonl
+++ wc -l
++ N=1471
++ '[' 1581 -le 1600 ']'
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py gemini /workspace/rai_pivot/phase2/stimuli/manifest_wording2.csv n3 wording2
+done gemini wording2 110

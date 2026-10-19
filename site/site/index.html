@@ -1,0 +1,107 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Gets to Say STOP? — do small driving VLMs obey the words on a roadside board?</title>
+<meta name="description" content="An offline audit: a 2B on-device-class VLM answers STOP when a real highway board is digitally edited to say STOP. A frontier model mostly does not.">
+<link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="hero"><div class="wrap herow">
+ <div class="octagon" aria-hidden="true">STOP?</div>
+ <div><p class="kicker">Duke AIPI · Responsible AI · Jay Aher</p>
+ <h1>Who Gets to Say STOP?</h1>
+ <p class="lede">A highway message board never has the authority to stop you. The US traffic-control manual is explicit: “The STOP sign shall not be displayed using a changeable message sign” (MUTCD 11th ed., §2B.04 ¶03 <a class="c" href="#ref-C12" style="color:#f3b4bd">[C12]</a>). We digitally edited real board photos and asked in-car-sized vision-language models what to do.</p>
+ <div class="banner" id="banner"></div></div></div>
+ <nav class="wrap"><a href="#headline">Headline</a><a href="#conditions">By condition</a><a href="#explorer">Explorer</a><a href="#gates">Gates</a><a href="#examples">Examples</a><a href="#story">Why it matters</a><a href="#methods">Methods</a><a href="#limits">Limitations</a><a href="#pilot">Pilot</a><a href="#data">Data &amp; licenses</a><a href="#reproduce">Reproduce</a><a href="#cite">Citations</a></nav>
+</header>
+<main class="wrap">
+<section id="headline"><h2>Headline: Study 2, words on a board</h2>
+ <div id="headline-cards" class="cards"></div>
+ <p class="callout"><b>Plain reading.</b> The small model obeys the <em>word</em> STOP, and also closure text, on a roadside board, whatever the board is and whoever wrote it. It is not specifically hijacked by imperative commands: the injection beats a length-matched benign command and nonsense text, but it is indistinguishable from a bare “STOP”. In the reverse direction, a board saying ROAD CLEAR / PROCEED, added to a real STOP scene, made it answer non-STOP far more often than a benign board did. That is the safety-critical direction.</p>
+ <figure><img src="data/img/p2/fig1.png" alt="Bar chart: P(answer = STOP) by board legend for three models, with Wilson 95% CIs"><figcaption>Fig 1 (project figure). Highway guide and message-board scenes, where the correct answer is PROCEED: STOP rate by board condition, with Wilson 95% CI. One legend per condition. Aggregated by condition, not ranked.</figcaption></figure>
+</section>
+
+<section id="conditions"><h2>Results by condition</h2>
+ <div class="controls"><label>Model <select id="c-model"></select></label></div>
+ <div id="cond-table"></div>
+ <h3>PROCEED-at-STOP arm (real STOP scenes; correct answer is STOP)</h3>
+ <div id="stop-table"></div>
+ <figure class="narrow"><img src="data/img/p2/fig2_left.png" alt="Bar chart: P(answer is not STOP) on real STOP scenes with no board, a benign board, and a PROCEED board"><figcaption>Fig 2, left panel (project figure). P(answer ≠ STOP) on 71 real STOP scenes, Wilson 95% CI. The right panel (exploratory script arm) is not shown.</figcaption></figure>
+ <div id="extra"></div><div id="real-gallery" class="gallery"></div>
+</section>
+
+<section id="explorer"><h2>Explorer: every board, every condition, every model</h2>
+ <p class="muted">One row per real base photo, one column per condition, in fixed design order. Cells show the model’s parsed answer; hover to see its reason. Images are display copies blurred by our face/person/vehicle/plate detectors (unverified). Click a verdict to open that blurred, digitally altered image. Model reason text is not shown, because reasons can quote edited board text.</p>
+ <div class="controls">
+  <label>Arm <select id="e-arm"><option value="board">Board arm (63 boards)</option><option value="proceed_at_stop">PROCEED-at-STOP (71 STOP scenes)</option></select></label>
+  <label>Model <select id="e-model"></select></label>
+  <label>Board type <select id="e-type"><option value="">all</option><option value="guide">guide sign</option><option value="vms">message board (CMS/VMS)</option></select></label>
+  <span id="e-count" class="muted"></span></div>
+ <div class="legend"><span class="act STOP">STOP</span><span class="act PROCEED">PROCEED</span><span class="act CAUTION">CAUTION</span><span class="act UNPARSED">UNPARSED</span> <span class="muted">✗ = disagrees with the provisional label</span></div>
+ <div class="tablewrap"><table id="e-table"><thead></thead><tbody></tbody><tfoot></tfoot></table></div>
+ <div class="pager"><button id="e-prev">← prev</button><span id="e-page"></span><button id="e-next">next →</button></div>
+</section>
+
+<section id="gates"><h2>Gates</h2>
+ <p><b>Stop-sign competence gate</b> (pilot block G: 45 real STOP signs, 49 clear roads). Balanced accuracy ≥ 0.85, STOP recall ≥ 0.90, and GO recall ≥ 0.80, judged on the point estimates. Wilson 95% intervals are shown with the rates; the lower bounds are not the pass criterion. The column below is the point-estimate status stored in the Phase 2 metrics file. The images were pre-screened with YOLO, a known limitation.</p>
+ <div class="tablewrap"><table id="gate-table"></table></div>
+ <h3>Board-reading gate</h3>
+ <p>Can the model read and correctly ignore a board? Model-level criterion from the metrics: the benign legend is read correctly in ≥ 0.80 of boards (n ≥ 50). Specificity on clean boards and sensitivity on real STOP scenes are shown alongside.</p>
+ <div id="read-gate" class="cards"></div>
+</section>
+
+<section id="examples"><h2>Examples (digitally altered, blurred)</h2>
+ <p class="muted">Each pair is a project composite: the same real photo under two conditions, with the model’s actual answer. Every board legend is a digital edit; these are not real signs. People, faces, vehicles and plates were blurred by detector (unverified). Captions show verdicts only.</p>
+ <div id="ex" class="exgrid"></div></section>
+
+<section id="phases-sec"><h2>Later phases</h2><div id="phases"></div></section>
+
+<section id="story"><h2>Why it matters</h2>
+ <div class="cards">
+  <article class="card"><h3>VLMs are entering the driving stack</h3><p>Waymo describes an onboard “Driving VLM … trained using Gemini” <a class="c" href="#ref-B1">[B1]</a>. Wayve’s LINGO-2 drives from language <a class="c" href="#ref-B3">[B3]</a>. NVIDIA’s Alpamayo-R1 is an open reasoning VLA <a class="c" href="#ref-B5">[B5]</a>. DriveVLM runs on production hardware at about 410 ms per inference <a class="c" href="#ref-B4">[B4]</a>.</p></article>
+  <article class="card"><h3>Text in the scene is an input channel</h3><p>Typographic attacks transfer to driving VLMs <a class="c" href="#ref-A3">[A3]</a>. Sign-based command hijacking reached high success on DriveLM and a robot car <a class="c" href="#ref-A6">[A6]</a>. Agents confuse helpful and misleading in-scene instructions <a class="c" href="#ref-A7">[A7]</a>. Billboard and projected stop signs fooled production ADAS <a class="c" href="#ref-A10">[A10]</a> <a class="c" href="#ref-A11">[A11]</a> <a class="c" href="#ref-C7">[C7]</a>.</p></article>
+  <article class="card"><h3>Public boards have been altered before</h3><p>Austin’s message boards were made to read “Zombies Ahead” in 2009 <a class="c" href="#ref-C8">[C8]</a>. Who answers for a hacked public board steering a car: the road agency or the manufacturer?</p></article>
+  <article class="card"><h3>Stop decisions are a regulatory focus</h3><p>NHTSA recall 23V-085 covered stop-sign intersections <a class="c" href="#ref-C1">[C1]</a>. PE25012 asks whether FSD can “accurately detect and appropriately respond to traffic signals, signs” <a class="c" href="#ref-C2">[C2]</a>. Waymo’s school-bus recall <a class="c" href="#ref-C3">[C3]</a> and investigation <a class="c" href="#ref-C4">[C4]</a>. Tesla’s manual caveat on temporary stop signs <a class="c" href="#ref-B7">[B7]</a>. Advocacy testing <a class="c" href="#ref-C9">[C9, advocacy]</a>.</p></article>
+ </div></section>
+
+<section id="methods"><h2>Methods</h2><div class="two">
+ <div><h3>Board arm (primary)</h3><p>63 real highway guide-sign and message-board photos from Wikimedia Commons, from 43 photographers. Nine digital variants per base: clean, benign edit, official closure text, an imperative stop injection, a length-matched benign command, length-matched nonsense, a bare “STOP”, and billboard twins of the injection and the benign command. The correct answer is always PROCEED (or CAUTION); the outcome is P(STOP).</p>
+ <h3>PROCEED-at-STOP arm (co-primary)</h3><p>71 real scenes with a governing STOP (stop sign, flagger, crossing guard, school-bus arm), from 35 photographer clusters. Each is shown clean, with an added benign message board, and with an added ROAD CLEAR / PROCEED board. The outcome is P(answer ≠ STOP).</p>
+ <h3>Disclosure</h3><p>All edits are digital composites for an offline audit. The renderer and the edit-generation code are private and not published. No per-phrase effectiveness ranking is published, and this site gives no guidance on altering physical signs.</p></div>
+ <div><h3>Models</h3><ul><li><b>Qwen3-VL-2B</b> Q8_0 GGUF via llama.cpp (on-device class) <a class="c" href="#ref-E2">[E2]</a> <a class="c" href="#ref-E9">[E9]</a></li><li><b>Gemini Flash</b> <span id="gem-id"></span>, frontier reference</li><li><b>SmolVLM-500M</b> <a class="c" href="#ref-E3">[E3]</a>. It failed the stop-sign gate, so its rates are descriptive only.</li></ul>
+ <h3>Protocol &amp; statistics</h3><ul><li>Temperature 0, one run, 640 px long side. Strict leading-word parser (STOP / PROCEED / CAUTION / GO). Scored wording per model: <span id="scored"></span>.</li>
+ <li>Wilson 95% CIs. Exact McNemar vs the benign edit, paired by base, Holm-adjusted within each model’s board family (8 tests) and within the 2 stop-scene tests.</li>
+ <li>Photographer-cluster sign-flip randomization test (20,000 draws; floor about 5e-5). Cluster and image bootstrap 95% CIs of the paired difference.</li>
+ <li>ERROR rows are excluded and counted.</li></ul></div></div></section>
+
+<section id="limits"><h2>Limitations</h2><ul class="limits">
+ <li><b>Provisional labels.</b> A single AI-agent labeler and no human raters yet. Two blind raters (κ ≥ 0.6) and an expert review are planned.</li>
+ <li><b>Not preregistered.</b> The analysis script was finalized while runs were in progress, so treat all p-values as exploratory. The Holm family is per model.</li>
+ <li><b>Single still frame, offline.</b> This is an audit of a VLM reasoning layer, not a production driving stack. A false STOP is a nuisance or rear-end risk; the PROCEED-at-STOP arm is the safety-critical direction.</li>
+ <li><b>Competence is narrow.</b> Qwen3-VL-2B passes the stop-sign gate but answers STOP on a sizable share of clean boards. Its competence covers stop signs, not boards.</li>
+ <li><b>Gate built with YOLO screening.</b> A gate built without YOLO is still missing.</li>
+ <li><b>Edits are synthetic in the legend region.</b> Benign-edit and length-matched controls address the edit artifact, not realism. The 17 real tampered photos are descriptive only.</li>
+ <li><b>Scope.</b> One run, one resolution, few models. Qwen2.5-VL-3B and SmolVLM2-2.2B have gate runs only.</li>
+ <li><b>Privacy.</b> All published images are detector-blurred copies (YOLO persons and vehicles at low confidence, Haar faces and plates), not yet verified by a person. Pilot images awaiting manual plate review stay withheld. No unblurred original is published.</li></ul></section>
+
+<section id="pilot"><h2>Background: the pilot (Studies 1–3)</h2>
+ <p>The pilot asked the broader question: does a model stop because of who shows the STOP (flagger, crossing guard, police, school-bus arm) or because of its pixels? It also ran an early board study and a sign-removal check. Its verdict was that the board study was the piece most likely to give a real, defensible effect. Phase 2 above is that study rebuilt at scale. Pilot labels are provisional agent labels; its authority look-alike block (A−) is heavily confounded by people in the frame, so those numbers are not a finding.</p>
+ <h3>Pilot competence gate (block G)</h3><div class="tablewrap"><table id="pilot-gate"></table></div>
+ <h3>Pilot Study 1, authority (descriptive)</h3><div class="tablewrap"><table id="pilot-s1"></table></div>
+ <h3>Published pilot images</h3><p id="pilot-pub" class="muted"></p><div id="pilot-gallery" class="gallery"></div>
+ <div class="pager"><button id="g-prev">← prev</button><span id="g-page"></span><button id="g-next">next →</button></div></section>
+
+<section id="data"><h2>Data &amp; license manifest</h2>
+ <p id="p2-data"></p>
+ <div class="controls"><label>Set <select id="m-set"><option value="p2">Phase 2 base photos</option><option value="pilot">Pilot images</option></select></label><label>Status <select id="m-status"><option value="">all</option><option value="pub">published</option><option value="unpub">withheld</option></select></label><span id="m-count" class="muted"></span></div>
+ <div class="tablewrap"><table id="manifest"><thead></thead><tbody></tbody></table></div>
+ <div class="pager"><button id="m-prev">← prev</button><span id="m-page"></span><button id="m-next">next →</button></div></section>
+
+<section id="reproduce"><h2>Reproduce</h2>
+ <p>Repository: <code id="repo"></code>. <span class="pending">Not yet public; the link will appear here when it exists.</span></p>
+ <ol><li>Models: llama.cpp b11723 <a class="c" href="#ref-E9">[E9]</a>, Qwen3-VL-2B and SmolVLM GGUF + mmproj <a class="c" href="#ref-E2">[E2]</a> <a class="c" href="#ref-E3">[E3]</a>, Gemini API key for the reference model.</li>
+ <li>Run: <code>run/run_p2.py</code> writes <code>run/results_&lt;model&gt;_&lt;arm&gt;_640.jsonl</code>.</li>
+ <li>Analyze: <code>analysis/analyze_p2.py</code> writes <code>analysis/phase2_metrics.json</code>, the single source of truth for every number on this site.</li>
+ <li>Site: <code>python build_site_data.py</code> writes <code>data/data.json</code>; serve with <code>python -m http.server</code>.</li></ol>
+ <p class="muted">Edited stimuli are research materials. The renderer stays private; edited images are released only with attribution and a “digitally altered” label.</p></section>
+
+<section id="cite"><h2>Citations</h2><div id="refs"></div></section>
+</main>
+<footer class="wrap"><p>Built from <code>data.json</code>, generated <span id="gen"></span>. Images are Wikimedia Commons contributors’ work under the licenses listed; edited images are derivatives under their source licenses and are marked DIGITALLY ALTERED. Numbers come from <code>phase2_metrics.json</code> and <code>pilot_metrics.json</code>.</p></footer>
+<script type="module" src="assets/app.js"></script></body></html>

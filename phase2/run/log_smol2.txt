@@ -1,0 +1,5 @@
++ FILTER=arm=proceed_at_stop
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py smolvlm /workspace/rai_pivot/phase2/stimuli/manifest.csv p1 main
+done smolvlm main 213
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py smolvlm /workspace/rai_pivot/phase2/stimuli/real_manifest.csv p1 real
+done smolvlm real 17

@@ -1,0 +1,57 @@
++ PY=/workspace/rai_pivot/pilot/venv/bin/python
++ M=/workspace/rai_pivot/phase2/stimuli/manifest.csv
++ cd /workspace/rai_pivot/phase2/run
++ kill -0 130047
++ sleep 10
++ kill -0 130047
++ sleep 10
++ kill -0 130047
++ sleep 10
++ kill -0 130047
++ sleep 10
++ kill -0 130047
++ sleep 10
++ kill -0 130047
++ sleep 10
++ kill -0 130047
++ sleep 10
++ kill -0 130047
++ sleep 10
++ kill -0 130047
++ sleep 10
++ kill -0 130047
++ kill -0 130048
++ wait
++ SHARD=0/2
++ FILTER='variant=benign|inject_stop'
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py qwen3vl2b /workspace/rai_pivot/phase2/stimuli/manifest.csv read read_en
++ PORT=8095
++ SHARD=1/2
++ FILTER='variant=benign|inject_stop'
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py qwen3vl2b /workspace/rai_pivot/phase2/stimuli/manifest.csv read read_en
+done qwen3vl2b read_en 63
+done qwen3vl2b read_en 63
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py qwen3vl2b /workspace/rai_pivot/phase2/stimuli/real_manifest.csv p1 real
+done qwen3vl2b real 17
++ kill 111198 129944
++ sleep 3
++ cd /workspace/rai_pivot/bench
++ export LD_LIBRARY_PATH=/workspace/rai_pivot/bench/llama/llama-b11723
++ LD_LIBRARY_PATH=/workspace/rai_pivot/bench/llama/llama-b11723
++ curl -sf 127.0.0.1:8091/health
++ nohup llama/llama-b11723/llama-server -m models/SmolVLM-500M-Instruct-Q8_0.gguf --mmproj models/mmproj-SmolVLM-500M-Instruct-Q8_0.gguf -t 8 -c 4096 -np 1 --cache-ram 0 --port 8091 --host 127.0.0.1
++ sleep 2
++ curl -sf 127.0.0.1:8091/health
++ sleep 2
++ curl -sf 127.0.0.1:8091/health
++ cd /workspace/rai_pivot/phase2/run
++ FILTER='arm=en|proceed_at_stop'
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py smolvlm /workspace/rai_pivot/phase2/stimuli/manifest.csv p1 main
+done smolvlm main 373
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py smolvlm /workspace/rai_pivot/phase2/stimuli/real_manifest.csv p1 real
+done smolvlm real 17
++ FILTER='variant=benign|inject_stop'
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py smolvlm /workspace/rai_pivot/phase2/stimuli/manifest.csv read read_en
+done smolvlm read_en 126
++ echo FINISHED
+FINISHED
