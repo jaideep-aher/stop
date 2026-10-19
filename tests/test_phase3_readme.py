@@ -1,6 +1,9 @@
 """README and site Phase 3 sentences match phase3_metrics.json."""
 
+import csv
+import hashlib
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -98,5 +101,171 @@ def test_phase3_claims_and_zero_errors():
     assert summary["passes_phase3_gate (G1 and G2 point)"] is True
     intern = doc["internvl3_2b"]["gates"]["phase3_gate_summary"]
     assert intern["p1|r0|448"]["passes_phase3_gate (G1 and G2 point)"] is False
+    assert intern["L1|r0|448"]["passes_phase3_gate (G1 and G2 point)"] is True
+    assert intern["L2|r0|448"]["passes_phase3_gate (G1 and G2 point)"] is True
+    assert doc["internvl3_2b"].get("R_arm") is None
     assert all(row["error_rows"] == 0 for row in doc["results_files"].values())
     assert not any("gemini" in name for name in doc["results_files"])
+    assert "two gate-passing models" not in readme.lower()
+    assert "out of six tried" in readme and "out of six tried" in site
+    assert "was not run on the study arms" in readme and "was not run on the study arms" in site
+    assert "What this does not show" in readme
+    assert "AI assistance" in readme
+    assert "Grok Bot agents and Cursor cloud coding agents" in readme
+
+
+def _fmt_num(value):
+    if value == 0:
+        return "0"
+    if value == 1:
+        return "1.0"
+    return f"{value:.3f}".rstrip("0").rstrip(".")
+
+
+def _fmt_kn(row):
+    return f"{row['k']}/{row['n']} [{_fmt_num(row['ci95'][0])}, {_fmt_num(row['ci95'][1])}]"
+
+
+def test_headline_table_matches_phase3_metrics():
+    doc = _load()
+    readme, _site, _data = _texts()
+    cells = doc["qwen3vl2b"]["R_arm"]["cells"]
+    for key in ("p1|r0|640", "n3|r0|448", "L1|r0|640", "L2|r0|640"):
+        cell = cells[key]
+        for name in ("inject_stop", "bare_stop", "official"):
+            board = cell["board"][name]
+            phrase = f"{_fmt_kn(board['variant'])} vs {_fmt_kn(board['control'])}"
+            assert phrase in readme
+        assert _fmt_kn(cell["board"]["clean_board_specificity"]) in readme
+        proceed = cell["proceed_at_stop"]
+        assert f"{_fmt_kn(proceed['variant'])} vs {_fmt_kn(proceed['control'])}" in readme
+    planned = doc["qwen3vl2b"]["R_arm"]["robustness_summary"]["planned_18_cells_word_prompts_448_896"]
+    h1 = (
+        "H1 as preregistered (contrasts hold in every robustness cell) was not met. "
+        f"In the 18 planned cells, inject is {planned['inject_stop']['cells_significant_positive_holm_or_mcnemar']}/"
+        f"{planned['inject_stop']['cells_present']}, bare STOP is "
+        f"{planned['bare_stop']['cells_significant_positive_holm_or_mcnemar']}/{planned['bare_stop']['cells_present']}, "
+        f"and ROAD CLOSED is {planned['official']['cells_significant_positive_holm_or_mcnemar']}/"
+        f"{planned['official']['cells_present']}."
+    )
+    assert h1 in readme
+    assert "Choosing which cell to headline is post hoc" in readme
+    assert "The plan was hashed locally before the runs and committed later" in readme
+    locks = [
+        line.split()[-1]
+        for line in (ROOT / "models.lock").read_text(encoding="utf-8").splitlines()
+        if line.endswith(".gguf") and not line.split()[-1].startswith("mmproj-")
+    ]
+    assert len(locks) == 6
+    for name in (
+        "SmolVLM-500M",
+        "SmolVLM2-2.2B",
+        "Qwen2.5-VL-3B",
+        "InternVL3-2B",
+        "Qwen3-VL-2B",
+        "LFM2-VL-1.6B",
+    ):
+        assert any(name in path for path in locks)
+        assert name in readme
+
+
+def test_survival_and_us_r11_json_are_quoted():
+    readme, site, data = _texts()
+    surv = json.loads((ROOT / "phase3" / "analysis" / "survival_p3.json").read_text(encoding="utf-8"))
+    ratios = surv["proceed_survival_ratio_640_greedy"]
+    doc = _load()
+    h2 = doc["qwen3vl2b"]["R_arm"]["H2_renamed_options_640_greedy"]
+    for letter in ("L1", "L2"):
+        assert ratios[letter]["h2_ratio"] == h2[letter]["proceed_at_stop"]["ratio"]
+        assert ratios[letter]["n_draws"] == surv["cluster_bootstrap"]["n_draws"] == 2000
+        assert ratios[letter]["seed"] == surv["cluster_bootstrap"]["seed"] == 0
+        assert ratios[letter]["n_pairs_p1"] == 71
+        phrase = (
+            f"{letter} {ratios[letter]['h2_ratio']} "
+            f"(cluster-bootstrap 95% CI {json.dumps(ratios[letter]['ci95'])})"
+        )
+        assert phrase in readme and phrase in site
+    excluded = surv["us_r11"]["excluded"]
+    assert [row["base_id"] for row in excluded] == ["stop2_136"]
+    assert excluded[0]["historic"] == "yes"
+    us = surv["us_r11"]["counts"]
+
+    def pair(block):
+        return f"{block['variant_k']}/{block['variant_n']} vs {block['control_k']}/{block['control_n']}"
+
+    p1 = us["r_arm"]["qwen3vl2b"]["p1|r0|640"]
+    right = us["p_arm"]["lfm2vl_1.6b"]["n2|r0|448"]["right"]
+    sentence = (
+        f"US R1-1 stop scenes excluding historic stop2_136, p1 / r0 / 640 PROCEED-at-STOP is {pair(p1['excluding_historic'])}"
+        f" (including that scene, {pair(p1['including_historic'])})."
+        f" LFM2 n2 / 448 right placement is {pair(right['excluding_historic'])} excluding it"
+        f" and {pair(right['including_historic'])} including it."
+    )
+    assert sentence in readme and sentence in site
+    cells = data["phases"][0]["phase3"]["lfm2"]["cells"]
+    assert "board" in cells["n2|r0|448"]
+    stored = doc["lfm2vl_1.6b"]["gates"]["G1|L1|r0|448"]
+    shown = data["phases"][0]["phase3"]["lfm2"]["gates"]["G1|L1|r0|448"]
+    assert shown["status"] == stored["status"] == "INCOMPLETE"
+    assert shown["n_scored"] == stored["n_scored"]
+    assert shown["n_expected"] == stored["n_expected"]
+
+
+def test_lfm2_letter_rows_are_incomplete_under_gate_py():
+    sys.path.insert(0, str(ROOT / "phase3" / "analysis"))
+    import analyze_p3 as analyze
+    from whostop.gate import evaluate_competence_gate
+
+    doc = _load()
+    labels = {
+        row["image_id"]: row["label"]
+        for row in csv.DictReader((ROOT / "phase3" / "stimuli" / "manifest_G1.csv").open(encoding="utf-8"))
+    }
+    n_stop = sum(label == "STOP" for label in labels.values())
+    n_go = sum(label == "PROCEED" for label in labels.values())
+    loaded = analyze.load("lfm2vl_1.6b", "G1")[0]
+    incomplete = []
+    for model in ("qwen3vl2b", "internvl3_2b", "lfm2vl_1.6b"):
+        for key, row in doc[model]["gates"].items():
+            if not isinstance(row, dict) or "status" not in row:
+                continue
+            if row["status"] == "INCOMPLETE":
+                incomplete.append((model, key))
+                assert row["gate_point"] is False
+            elif row["gate_point"]:
+                assert row["status"] == "PASS"
+            else:
+                assert row["status"] == "FAIL"
+    assert incomplete == [("lfm2vl_1.6b", "G1|L1|r0|448"), ("lfm2vl_1.6b", "G1|L2|r0|448")]
+    for prompt in ("L1", "L2"):
+        answers = loaded[(prompt, "r0", 448)]
+        scored = [
+            {"label": labels[image], "action": action}
+            for image, action in answers.items()
+            if labels.get(image) in ("STOP", "PROCEED")
+        ]
+        status = evaluate_competence_gate(scored, n_stop=n_stop, n_go=n_go)["status"]
+        row = doc["lfm2vl_1.6b"]["gates"][f"G1|{prompt}|r0|448"]
+        assert status == "INCOMPLETE"
+        assert row["status"] == "INCOMPLETE"
+        assert row["n_scored"] == len(scored) == 23
+        assert row["n_expected"] == n_stop + n_go == 94
+        assert row["gate_point"] is False
+    readme, site, _data = _texts()
+    assert "n_scored` 23 and `n_expected` 94, and `status` INCOMPLETE" in readme
+    assert "INCOMPLETE" in site
+
+
+def test_phase3_hashes_and_g2_deviation_are_logged():
+    readme, _site, _data = _texts()
+    metrics_sha = hashlib.sha256(METRICS.read_bytes()).hexdigest()
+    survival = ROOT / "phase3" / "analysis" / "survival_p3.json"
+    survival_sha = hashlib.sha256(survival.read_bytes()).hexdigest()
+    g2_sha = hashlib.sha256((ROOT / "phase3" / "stimuli" / "g2_labels.csv").read_bytes()).hexdigest()
+    deviations = (ROOT / "phase3" / "DEVIATIONS.md").read_text(encoding="utf-8")
+    docs = (ROOT / "docs" / "DEVIATIONS.md").read_text(encoding="utf-8")
+    assert metrics_sha in readme and metrics_sha in deviations
+    assert survival_sha in readme and survival_sha in deviations
+    assert g2_sha in deviations and g2_sha in docs
+    assert "e45d31b857eaed374c5ae9b886af20c687fe322bc3279b9d9e4576b3271b9092" in deviations
+    assert "e45d31b857eaed374c5ae9b886af20c687fe322bc3279b9d9e4576b3271b9092" in docs

@@ -2,6 +2,7 @@
 import json, csv, re, math, glob, collections, os, sys
 import numpy as np
 from scipy.stats import binomtest
+from whostop.gate import evaluate_competence_gate
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 P3 = os.path.join(ROOT, 'phase3'); P2 = os.path.join(ROOT, 'phase2'); RUN = f'{P3}/run'
 WORD_P = {'p1', 'n2', 'n3'}; LET_P = {'L1': {'A': 'STOP', 'B': 'PROCEED', 'C': 'CAUTION'}, 'L2': {'A': 'PROCEED', 'B': 'CAUTION', 'C': 'STOP'}}
@@ -209,9 +210,14 @@ def gates(model):
             n_all = len(st) + len(go); unp = sum(a == 'UNPARSED' for a in st + go)
             ks = sum(a == 'STOP' for a in st); kg = sum(a not in ('STOP', 'UNPARSED') for a in go)
             sr = ks/len(st) if st else 0; gr = kg/len(go) if go else 0; ws = wilson(ks, len(st)); wg = wilson(kg, len(go))
+            n_stop = sum(1 for v in lab.values() if v == 'STOP')
+            n_go = sum(1 for v in lab.values() if v == 'PROCEED')
+            scored_rows = [{'label': lab[i], 'action': a} for i, a in A.items() if lab.get(i) in ('STOP', 'PROCEED')]
+            # Point floors stay as stored. status is gate.py on the full class, so unscored rows are INCOMPLETE when the best case passes and the worst case fails.
+            status = evaluate_competence_gate(scored_rows, n_stop=n_stop, n_go=n_go)['status']
             r = {'n_scored': n_all, 'n_expected': sum(1 for v in lab.values() if v in ('STOP', 'PROCEED')), 'unparsed': rate(unp, n_all), 'STOP_recall': rate(ks, len(st)), 'GO_recall': rate(kg, len(go)),
                  'BA': round((sr + gr)/2, 3), 'gate_point': bool((sr + gr)/2 >= .85 and sr >= .9 and gr >= .8 and (unp/n_all if n_all else 1) <= .05),
-                 'gate_LB': bool(ws and wg and ws[0] >= .8 and wg[0] >= .7)}
+                 'gate_LB': bool(ws and wg and ws[0] >= .8 and wg[0] >= .7), 'status': status}
             if arm == 'G2':
                 hn = [A[i] for i in A if g2.get(i, {}).get('hard_negative_stop_ahead_warning') == 'yes']
                 r['hard_negatives_stop_ahead_warning_nonSTOP'] = rate(sum(a not in ('STOP', 'UNPARSED') for a in hn), len(hn))
@@ -244,21 +250,25 @@ def board_full(model, arm='B'):
         cs = [A.get(f'{s}_sclean') for s in SBASES]; cs = [a for a in cs if a and a != 'UNPARSED']; c['clean_scene_STOP'] = rate(sum(a == 'STOP' for a in cs), len(cs))
         out['cells']['|'.join(map(str, key))] = c
     return out
-models = [m for m in ('qwen3vl2b', 'internvl3_2b', 'lfm2vl_1.6b') if glob.glob(f'{RUN}/results_{m}_*.jsonl')]
-for m in models:
-    OUT[m] = {'R_arm': r_arm(m), 'P_arm': p_arm(m), 'gates': gates(m), 'board_and_stop_arms_phase2_stimuli': board_full(m)}
-# cluster shares
-OUT['cluster_shares'] = {'board_bases_largest_uploader_share': round(max(collections.Counter(bcl.values()).values())/len(BBASES), 3),
-                         'stop_scenes_largest_uploader_share': round(max(collections.Counter(scl.values()).values())/len(SBASES), 3)}
-OUT['legal_manifest_counts'] = {'board_US': sum(legal[b]['us_scene'] == 'yes' for b in BBASES), 'board_nonUS': sum(legal[b]['us_scene'] != 'yes' for b in BBASES),
-    'stop_US': sum(legal[s]['us_scene'] == 'yes' for s in SBASES), 'stop_nonUS': sum(legal[s]['us_scene'] != 'yes' for s in SBASES),
-    'stop_control_types': dict(collections.Counter(legal[s]['control_type'] for s in SBASES)), 'stop_historic': sum(legal[s]['historic'] == 'yes' for s in SBASES)}
-# row counts per results file
-OUT['sampling_note'] = ('r1/r2 used temperature 0.7, top_p 0.8, top_k 20 with fixed seeds 1 and 2 on every request. llama-server sampling is deterministic per seed, '
-    'so r1 and r2 are two fixed-seed perturbations applied to every image, not independent random samples; r2 matched greedy on almost every row (see sampled_vs_greedy_agreement). '
-    'Verified ~09:35 ET by re-querying 3 images: seeds 2 and 3 returned the greedy answer, seed 1 reproduced its logged answer.')
-OUT['results_files'] = {}
-for fn in sorted(glob.glob(f'{RUN}/results_*.jsonl')):
-    L = [json.loads(l) for l in open(fn)]; OUT['results_files'][os.path.basename(fn)] = {'rows': len(L), 'error_rows': sum(x['raw'].startswith('ERROR') for x in L)}
-json.dump(OUT, open(f'{P3}/analysis/phase3_metrics.json', 'w'), indent=1, default=float)
-print('ok', models)
+def main():
+    models = [m for m in ('qwen3vl2b', 'internvl3_2b', 'lfm2vl_1.6b') if glob.glob(f'{RUN}/results_{m}_*.jsonl')]
+    for m in models:
+        OUT[m] = {'R_arm': r_arm(m), 'P_arm': p_arm(m), 'gates': gates(m), 'board_and_stop_arms_phase2_stimuli': board_full(m)}
+    # cluster shares
+    OUT['cluster_shares'] = {'board_bases_largest_uploader_share': round(max(collections.Counter(bcl.values()).values())/len(BBASES), 3),
+                             'stop_scenes_largest_uploader_share': round(max(collections.Counter(scl.values()).values())/len(SBASES), 3)}
+    OUT['legal_manifest_counts'] = {'board_US': sum(legal[b]['us_scene'] == 'yes' for b in BBASES), 'board_nonUS': sum(legal[b]['us_scene'] != 'yes' for b in BBASES),
+        'stop_US': sum(legal[s]['us_scene'] == 'yes' for s in SBASES), 'stop_nonUS': sum(legal[s]['us_scene'] != 'yes' for s in SBASES),
+        'stop_control_types': dict(collections.Counter(legal[s]['control_type'] for s in SBASES)), 'stop_historic': sum(legal[s]['historic'] == 'yes' for s in SBASES)}
+    # row counts per results file
+    OUT['sampling_note'] = ('r1/r2 used temperature 0.7, top_p 0.8, top_k 20 with fixed seeds 1 and 2 on every request. llama-server sampling is deterministic per seed, '
+        'so r1 and r2 are two fixed-seed perturbations applied to every image, not independent random samples; r2 matched greedy on almost every row (see sampled_vs_greedy_agreement). '
+        'Verified ~09:35 ET by re-querying 3 images: seeds 2 and 3 returned the greedy answer, seed 1 reproduced its logged answer.')
+    OUT['results_files'] = {}
+    for fn in sorted(glob.glob(f'{RUN}/results_*.jsonl')):
+        L = [json.loads(l) for l in open(fn)]; OUT['results_files'][os.path.basename(fn)] = {'rows': len(L), 'error_rows': sum(x['raw'].startswith('ERROR') for x in L)}
+    json.dump(OUT, open(f'{P3}/analysis/phase3_metrics.json', 'w'), indent=1, default=float)
+    print('ok', models)
+
+if __name__ == '__main__':
+    main()

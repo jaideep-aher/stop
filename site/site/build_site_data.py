@@ -71,12 +71,12 @@ def phase3_extract(M):
     P = {k: {pl: {lg: {'variant': _kn(x['variant']), 'control': _kn(x['control']), 'holm_p': x.get('holm_p')}
                   for lg, x in v[pl].items() if isinstance(x, dict) and 'variant' in x}
              for pl in ('left', 'right', 'lane') if pl in v} for k, v in q['P_arm']['cells'].items()}
-    gates = {k: {'STOP_recall': _kn(v['STOP_recall']), 'GO_recall': _kn(v['GO_recall']), 'BA': v['BA'], 'pass': v['gate_point']}
+    gates = {k: {'STOP_recall': _kn(v['STOP_recall']), 'GO_recall': _kn(v['GO_recall']), 'BA': v['BA'], 'pass': v['gate_point'], 'status': v.get('status'), 'n_scored': v['n_scored'], 'n_expected': v['n_expected']}
              for k, v in G.items() if isinstance(v, dict) and 'BA' in v}
     lf = M.get('lfm2vl_1.6b', {}).get('board_and_stop_arms_phase2_stimuli') or {}
     lfm = {k: {'board': {b: {'variant': _kn(x['variant']), 'control': _kn(x['control']), 'holm_p': x.get('holm_p')} for b, x in v.get('board', {}).items() if isinstance(x, dict) and 'variant' in x}}
            for k, v in (lf.get('cells') or {}).items()}
-    lfg = {k: {'STOP_recall': _kn(v['STOP_recall']), 'GO_recall': _kn(v['GO_recall']), 'BA': v['BA'], 'pass': v['gate_point']}
+    lfg = {k: {'STOP_recall': _kn(v['STOP_recall']), 'GO_recall': _kn(v['GO_recall']), 'BA': v['BA'], 'pass': v['gate_point'], 'status': v.get('status'), 'n_scored': v['n_scored'], 'n_expected': v['n_expected']}
            for k, v in M.get('lfm2vl_1.6b', {}).get('gates', {}).items() if isinstance(v, dict) and 'BA' in v}
     rep = R['replication_vs_phase2_p1_640_greedy']
     gs = G.get('phase3_gate_summary', {})
@@ -122,6 +122,79 @@ def phase3_extract(M):
         {'title': 'r1 and r2 are fixed-seed runs, not independent samples',
          'text': M.get('sampling_note', '')},
     ]
+    planned = R['robustness_summary']['planned_18_cells_word_prompts_448_896']
+    def cells(name):
+        block = planned[name]
+        return f"{block['cells_significant_positive_holm_or_mcnemar']}/{block['cells_present']}"
+    def vs(block):
+        variant, control = block['variant'], block['control']
+        return f"{variant['k']}/{variant['n']} vs {control['k']}/{control['n']}"
+    n3 = R['cells']['n3|r0|448']['proceed_at_stop']
+    p1 = R['cells']['p1|r0|640']['proceed_at_stop']
+    l1 = R['cells']['L1|r0|640']['proceed_at_stop']
+    l2 = R['cells']['L2|r0|640']['proceed_at_stop']
+    lfm_pas = M['lfm2vl_1.6b']['board_and_stop_arms_phase2_stimuli']['cells']['n2|r0|448']['proceed_at_stop']
+    passing = [name for name in ('qwen3vl2b', 'lfm2vl_1.6b') if any(
+        row.get('passes_phase3_gate (G1 and G2 point)') for row in M[name]['gates']['phase3_gate_summary'].values())]
+    small_vlms = ('SmolVLM-500M', 'SmolVLM2-2.2B', 'Qwen2.5-VL-3B', 'InternVL3-2B', 'Qwen3-VL-2B', 'LFM2-VL-1.6B')
+    tried = {6: 'six'}.get(len(small_vlms), str(len(small_vlms)))
+    intern_pass = [k for k, row in M['internvl3_2b']['gates']['phase3_gate_summary'].items() if row.get('passes_phase3_gate (G1 and G2 point)')]
+    if set(intern_pass) != {'L1|r0|448', 'L2|r0|448'} or M['internvl3_2b'].get('R_arm') or M['internvl3_2b'].get('board_and_stop_arms_phase2_stimuli'):
+        raise SystemExit(f'InternVL study-arm caveat does not match the JSON: {intern_pass}')
+    caveats.append({
+        'title': 'H1 as preregistered (contrasts hold in every robustness cell) was not met',
+        'text': ("H1 as preregistered (contrasts hold in every robustness cell) was not met. "
+                 f"In the 18 planned cells, inject is {cells('inject_stop')}, bare STOP is {cells('bare_stop')}, and ROAD CLOSED is {cells('official')}. "
+                 "The plan was hashed locally before the runs and committed later. That is not a claim of confirmatory status."),
+    })
+    surv_path = os.path.join(ROOT, 'phase3', 'analysis', 'survival_p3.json')
+    surv = json.load(open(surv_path)) if os.path.exists(surv_path) else None
+    ratio_txt = ''
+    us_txt = ''
+    if surv:
+        ratios = surv['proceed_survival_ratio_640_greedy']
+        ratio_txt = (
+            f" The PROCEED survival ratio at 640 px greedy is "
+            f"L1 {ratios['L1']['h2_ratio']} (cluster-bootstrap 95% CI {json.dumps(ratios['L1']['ci95'])}) and "
+            f"L2 {ratios['L2']['h2_ratio']} (cluster-bootstrap 95% CI {json.dumps(ratios['L2']['ci95'])}), "
+            f"{surv['cluster_bootstrap']['n_draws']} resamples, seed {surv['cluster_bootstrap']['seed']}."
+        )
+        us = surv['us_r11']['counts']
+        p1_us = us['r_arm']['qwen3vl2b']['p1|r0|640']
+        lfm_right = us['p_arm']['lfm2vl_1.6b']['n2|r0|448']['right']
+        def pair(block):
+            return f"{block['variant_k']}/{block['variant_n']} vs {block['control_k']}/{block['control_n']}"
+        us_txt = (
+            f" US R1-1 stop scenes excluding historic stop2_136, p1 / r0 / 640 PROCEED-at-STOP is {pair(p1_us['excluding_historic'])}"
+            f" (including that scene, {pair(p1_us['including_historic'])})."
+            f" LFM2 n2 / 448 right placement is {pair(lfm_right['excluding_historic'])} excluding it"
+            f" and {pair(lfm_right['including_historic'])} including it."
+        )
+    incomplete = [
+        (key, row) for key, row in M['lfm2vl_1.6b']['gates'].items()
+        if isinstance(row, dict) and row.get('status') == 'INCOMPLETE'
+    ]
+    if [key for key, _row in incomplete] != ['G1|L1|r0|448', 'G1|L2|r0|448']:
+        raise SystemExit(f'LFM2 INCOMPLETE rows changed: {incomplete}')
+    scored = {row['n_scored'] for _key, row in incomplete}
+    expected = {row['n_expected'] for _key, row in incomplete}
+    if len(scored) != 1 or len(expected) != 1:
+        raise SystemExit(f'LFM2 INCOMPLETE rows do not share a count: {incomplete}')
+    incomplete_txt = f" Its G1 L1 and L2 rows are INCOMPLETE: {scored.pop()}/{expected.pop()} rows scored."
+    caveats.append({
+        'title': 'Choosing which cell to headline is post hoc',
+        'text': ("Choosing which cell to headline is post hoc. The planned primary was p1 / 640 px / greedy, and that cell fails the Phase 3 gate. "
+                 f"The only Qwen cell that passes both gates is n3 / r0 / 448. PROCEED-at-STOP there is {vs(n3)}; "
+                 f"letter answers beside that PROCEED count are {vs(l1)} (L1) and {vs(l2)} (L2) at 640 px, against p1 {vs(p1)}. "
+                 f"LFM2-VL-1.6B PROCEED-at-STOP at its passing wording n2 / 448 px is {vs(lfm_pas)}. Letter answers were not run on that model's study arms."
+                 f"{incomplete_txt} "
+                 f"It is two models, one gate-passing wording each, out of {tried} tried"
+                 f" ({', '.join(small_vlms)}). "
+                 "InternVL3-2B passes both gates with letter answers (L1 / r0 / 448 and L2 / r0 / 448) and was not run on the study arms."
+                 + ratio_txt + us_txt),
+    })
+    if len(passing) != 2:
+        raise SystemExit(f"expected two study-arm models with a passing cell, got {passing}")
     return {'note': M.get('_note'), 'caveats': caveats,
             'replication': {'agree': rep['agree'], 'n': rep['n'], 'note': rep.get('note')},
             'robustness_summary': R['robustness_summary'], 'h2': h1, 'grid': grid, 'p_arm': P,

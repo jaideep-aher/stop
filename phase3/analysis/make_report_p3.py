@@ -67,7 +67,8 @@ A("|---|---|---|---|---|---|---|---|---|")
 for m in [x for x in ('qwen3vl2b', 'internvl3_2b', 'lfm2vl_1.6b') if x in d]:
     for k, v in sorted(d[m]['gates'].items()):
         if not isinstance(v, dict) or 'BA' not in v: continue
-        A(f"| {m} | {k.replace('|', ' / ')} | {v['n_scored']}/{v['n_expected']} | {R(v['STOP_recall'])} | {R(v['GO_recall'])} | {v['BA']} | {'PASS' if v['gate_point'] else 'FAIL'} | {'PASS' if v['gate_LB'] else 'FAIL'} | {R(v.get('hard_negatives_stop_ahead_warning_nonSTOP')) if 'hard_negatives_stop_ahead_warning_nonSTOP' in v else '-'} |")
+        point = v.get('status') or ('PASS' if v['gate_point'] else 'FAIL')
+        A(f"| {m} | {k.replace('|', ' / ')} | {v['n_scored']}/{v['n_expected']} | {R(v['STOP_recall'])} | {R(v['GO_recall'])} | {v['BA']} | {point} | {'PASS' if v['gate_LB'] else 'FAIL'} | {R(v.get('hard_negatives_stop_ahead_warning_nonSTOP')) if 'hard_negatives_stop_ahead_warning_nonSTOP' in v else '-'} |")
 A("\nRecorded statuses from Phase 2 data (not re-run): **Qwen2.5-VL-3B FAIL** on both wordings (p1 STOP 27/45; n2 GO at most 37/49) and **SmolVLM2-2.2B FAIL** (GO 1/49); see ERRATA_phase2.md item 2.\n")
 A("**Board-specificity gate** (clean board → non-STOP ≥ 0.80, n = 63): reported per cell in §2 for Qwen and §5 for the second model.\n")
 # ---- second model

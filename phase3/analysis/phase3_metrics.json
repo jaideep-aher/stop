@@ -15917,7 +15917,8 @@
     },
     "BA": 0.928,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|L1|r0|640": {
     "n_scored": 94,
@@ -15951,7 +15952,8 @@
     },
     "BA": 0.928,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|L1|r0|896": {
     "n_scored": 94,
@@ -15985,7 +15987,8 @@
     },
     "BA": 0.938,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|L2|r0|448": {
     "n_scored": 94,
@@ -16019,7 +16022,8 @@
     },
     "BA": 0.917,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|L2|r0|640": {
     "n_scored": 94,
@@ -16053,7 +16057,8 @@
     },
     "BA": 0.938,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|L2|r0|896": {
     "n_scored": 94,
@@ -16087,7 +16092,8 @@
     },
     "BA": 0.969,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|n2|r0|448": {
     "n_scored": 94,
@@ -16121,7 +16127,8 @@
     },
     "BA": 0.51,
     "gate_point": false,
-    "gate_LB": false
+    "gate_LB": false,
+    "status": "FAIL"
    },
    "G1|n2|r0|640": {
     "n_scored": 94,
@@ -16155,7 +16162,8 @@
     },
     "BA": 0.531,
     "gate_point": false,
-    "gate_LB": false
+    "gate_LB": false,
+    "status": "FAIL"
    },
    "G1|n2|r0|896": {
     "n_scored": 94,
@@ -16189,7 +16197,8 @@
     },
     "BA": 0.551,
     "gate_point": false,
-    "gate_LB": false
+    "gate_LB": false,
+    "status": "FAIL"
    },
    "G1|n3|r0|448": {
     "n_scored": 94,
@@ -16223,7 +16232,8 @@
     },
     "BA": 0.948,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|n3|r0|640": {
     "n_scored": 94,
@@ -16257,7 +16267,8 @@
     },
     "BA": 0.958,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|n3|r0|896": {
     "n_scored": 94,
@@ -16291,7 +16302,8 @@
     },
     "BA": 0.969,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|p1|r0|448": {
     "n_scored": 94,
@@ -16325,7 +16337,8 @@
     },
     "BA": 0.959,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|p1|r0|640": {
     "n_scored": 94,
@@ -16359,7 +16372,8 @@
     },
     "BA": 0.98,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|p1|r0|896": {
     "n_scored": 94,
@@ -16393,7 +16407,8 @@
     },
     "BA": 0.98,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1_errors_excluded": {},
    "G2|L1|r0|448": {
@@ -16429,6 +16444,7 @@
     "BA": 0.783,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 10,
      "n": 12,
@@ -16493,6 +16509,7 @@
     "BA": 0.814,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 10,
      "n": 12,
@@ -16557,6 +16574,7 @@
     "BA": 0.864,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -16621,6 +16639,7 @@
     "BA": 0.885,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -16685,6 +16704,7 @@
     "BA": 0.851,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -16749,6 +16769,7 @@
     "BA": 0.881,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -16813,6 +16834,7 @@
     "BA": 0.508,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -16877,6 +16899,7 @@
     "BA": 0.525,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -16941,6 +16964,7 @@
     "BA": 0.568,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -17005,6 +17029,7 @@
     "BA": 0.902,
     "gate_point": true,
     "gate_LB": true,
+    "status": "PASS",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 12,
      "n": 12,
@@ -17069,6 +17094,7 @@
     "BA": 0.873,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 9,
      "n": 12,
@@ -17133,6 +17159,7 @@
     "BA": 0.851,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -17197,6 +17224,7 @@
     "BA": 0.885,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 9,
      "n": 12,
@@ -17261,6 +17289,7 @@
     "BA": 0.851,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 8,
      "n": 12,
@@ -17325,6 +17354,7 @@
     "BA": 0.871,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -17503,7 +17533,8 @@
     },
     "BA": 0.99,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|L2|r0|448": {
     "n_scored": 94,
@@ -17537,7 +17568,8 @@
     },
     "BA": 0.98,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|n2|r0|448": {
     "n_scored": 94,
@@ -17571,7 +17603,8 @@
     },
     "BA": 0.5,
     "gate_point": false,
-    "gate_LB": false
+    "gate_LB": false,
+    "status": "FAIL"
    },
    "G1|n3|r0|448": {
     "n_scored": 94,
@@ -17605,7 +17638,8 @@
     },
     "BA": 0.52,
     "gate_point": false,
-    "gate_LB": false
+    "gate_LB": false,
+    "status": "FAIL"
    },
    "G1|p1|r0|448": {
     "n_scored": 94,
@@ -17639,7 +17673,8 @@
     },
     "BA": 0.673,
     "gate_point": false,
-    "gate_LB": false
+    "gate_LB": false,
+    "status": "FAIL"
    },
    "G1_errors_excluded": {},
    "G2|L1|r0|448": {
@@ -17675,6 +17710,7 @@
     "BA": 0.919,
     "gate_point": true,
     "gate_LB": true,
+    "status": "PASS",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -17739,6 +17775,7 @@
     "BA": 0.936,
     "gate_point": true,
     "gate_LB": true,
+    "status": "PASS",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 11,
      "n": 12,
@@ -17803,6 +17840,7 @@
     "BA": 0.5,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -17867,6 +17905,7 @@
     "BA": 0.559,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -17931,6 +17970,7 @@
     "BA": 0.695,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 5,
      "n": 12,
@@ -18766,7 +18806,8 @@
     },
     "BA": 0.5,
     "gate_point": false,
-    "gate_LB": false
+    "gate_LB": false,
+    "status": "INCOMPLETE"
    },
    "G1|L2|r0|448": {
     "n_scored": 23,
@@ -18797,7 +18838,8 @@
     },
     "BA": 0.5,
     "gate_point": false,
-    "gate_LB": false
+    "gate_LB": false,
+    "status": "INCOMPLETE"
    },
    "G1|n2|r0|448": {
     "n_scored": 94,
@@ -18831,7 +18873,8 @@
     },
     "BA": 0.968,
     "gate_point": true,
-    "gate_LB": true
+    "gate_LB": true,
+    "status": "PASS"
    },
    "G1|n3|r0|448": {
     "n_scored": 94,
@@ -18865,7 +18908,8 @@
     },
     "BA": 0.5,
     "gate_point": false,
-    "gate_LB": false
+    "gate_LB": false,
+    "status": "FAIL"
    },
    "G1|p1|r0|448": {
     "n_scored": 94,
@@ -18899,7 +18943,8 @@
     },
     "BA": 0.571,
     "gate_point": false,
-    "gate_LB": false
+    "gate_LB": false,
+    "status": "FAIL"
    },
    "G1_errors_excluded": {},
    "G2|n2|r0|448": {
@@ -18935,6 +18980,7 @@
     "BA": 0.931,
     "gate_point": true,
     "gate_LB": true,
+    "status": "PASS",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 10,
      "n": 12,
@@ -18999,6 +19045,7 @@
     "BA": 0.5,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
@@ -19063,6 +19110,7 @@
     "BA": 0.585,
     "gate_point": false,
     "gate_LB": false,
+    "status": "FAIL",
     "hard_negatives_stop_ahead_warning_nonSTOP": {
      "k": 0,
      "n": 12,
