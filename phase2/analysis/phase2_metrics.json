@@ -6315,12 +6315,12 @@
    },
    "balanced_acc": 0.853,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "INCOMPLETE",
+   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "FAIL",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.921,
     "go_recall_lb": 0.555
    },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "INCOMPLETE"
+   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "FAIL"
   },
   {
    "source": "phase2",
@@ -6350,12 +6350,12 @@
    },
    "balanced_acc": 0.8,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "INCOMPLETE",
+   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "FAIL",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.455,
     "go_recall_lb": 0.896
    },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "INCOMPLETE"
+   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "FAIL"
   },
   {
    "source": "phase2",

@@ -24,17 +24,19 @@ pip install -e ".[dev]"
 
 Optional extras, not installed in CI: `hf` (transformers), `gemini` (google-genai), `yolo` (Pillow is already in `dev`). Detector weights (`.pt`, `.onnx`) and GGUF files are git-ignored.
 
-**llama.cpp.** The Phase 2 runs used llama.cpp release b11723 (CPU x64): https://github.com/ggml-org/llama.cpp/releases/tag/b11723 . Qwen3-VL-2B-Instruct GGUF and its mmproj are at https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct-GGUF . SmolVLM GGUF weights are linked from `docs/sources.md` (E3). Point a local `llama-server` at the GGUF and mmproj, then call `whostop.backends.LlamaServerBackend` at that server's base URL. This repository does not download weights.
+**llama.cpp.** The Phase 2 runs used llama.cpp release b11723 (CPU x64): https://github.com/ggml-org/llama.cpp/releases/tag/b11723 . Filenames and sha256 pins for the GGUF and mmproj files those runs used are in [`models.lock`](models.lock). Point a local `llama-server` at the GGUF and mmproj, then call `whostop.backends.LlamaServerBackend` at that server's base URL. This repository does not download weights.
 
 **Gemini.** The key is read only from the environment variable `GEMINI_API_KEY`. Set `GEMINI_MODEL` to the pinned id (the Phase 2 file records `gemini-3.8-flash`). There is no key in the repo, the notebook, or CI. `.env*` is git-ignored. CI sets `WHOSTOP_FORBID_REMOTE=1` and the tests pass fake clients.
 
-**Reproduce the committed analysis.** The metrics JSON files were written by the original scripts, which are kept unchanged in `phase2/analysis/` and `pilot/run/` (they still contain the absolute paths of the machine that produced them). The committed inputs are the JSONL files under `phase2/run/` and `pilot/run/`. Re-parse a file offline, with no model call:
+**Reproduce the committed analysis.** From a fresh checkout, with no model call:
 
 ```bash
-python -m whostop.score phase2/run/results_qwen3vl2b_main_640.jsonl --prompt-id p1
+make reproduce
 ```
 
-`whostop.gate.evaluate_competence_gate` is the competence gate for new runs. It does not rewrite `phase2_metrics.json`.
+That runs `phase2/analysis/analyze_p2.py` and `pilot/run/analyze.py`. Both resolve paths from the repository root. They rewrite `phase2/analysis/phase2_metrics.json` and `pilot/run/pilot_metrics.json` from the committed JSONL files, and `make reproduce` fails if either file differs from the commit. CI runs the same check.
+
+`whostop.gate.evaluate_competence_gate` is the competence gate for new runs. The Phase 2 gate table in `phase2_metrics.json` uses the same rule: PASS on the point estimates, FAIL when the best case over unscored rows still misses a floor, INCOMPLETE only when the best case would pass and the worst case would not.
 
 ## Design decisions
 
@@ -98,7 +100,7 @@ Image-level analysis only. Edits are digital only. This repository has no guidan
 
 Before a public write-up of the Qwen or Gemini behavior, send a responsible-disclosure note to the Qwen team and to Google. The private repository is not that notice.
 
-Faces and plates are blurred on the copies that are committed. Many pilot rows are still marked `plate blur best-effort, MANUAL REVIEW` in the manifest `blur` column; the publish filter refuses those. Site sidecars (`site/site/data/*_blur.csv`, `needs_human_check.csv`) set `needs_human_check`. An image with no detector boxes was not committed when that copy would have been an unverified re-encode; the 218 withheld names are listed in `EXCLUDED_withheld_blurred.txt`. The public Pages build is a further cut: only paths in `site/PAGES_ALLOWLIST.txt`.
+Published images are detector-blurred copies. The pilot display script used to blur only the top 22% of each person box. That head strip is not a coordinate bug: on crowd photos the top of the box is hair, a raised arm, or a placard, and the face sits below it (ill2_037). `pilot/v2work/blur_cv4.py` now blurs the whole person box and pads YuNet faces by 30% on each side. The YuNet file is opencv_zoo `face_detection_yunet_2023mar.onnx`, sha256 `8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4` (also in `models.lock`). The audit is [`docs/PRIVACY_AUDIT.md`](docs/PRIVACY_AUDIT.md). Plate rows still marked `MANUAL REVIEW` stay off the public Pages artifact, which ships only `site/PAGES_ALLOWLIST.txt`.
 
 ## Tests
 

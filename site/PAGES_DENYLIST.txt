@@ -312,3 +312,113 @@ data/img/pilot/ill2_037.jpg	visible faces remained after blur (grader 2026-10-19
 data/img/pilot/ill2_066.jpg	visible faces remained after blur (grader 2026-10-19)
 data/img/pilot/ill2_312.jpg	visible faces remained after blur (grader 2026-10-19)
 data/img/pilot/ill2_313.jpg	visible faces remained after blur (grader 2026-10-19)
+data/img/p2/stim/b091_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b091_bb_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b091_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b091_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b091_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b091_clean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b091_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b091_nonsense.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b091_official.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b103_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b103_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b103_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b103_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b103_nonsense.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b103_official.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b118_bb_benign_cmd.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/b118_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/b118_clean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/legit_019_sboard_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/legit_019_sboard_proceed.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/legit_019_sclean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/legit_126_sboard_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/legit_126_sboard_proceed.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/legit_126_sclean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/legit_132_sboard_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/legit_132_sboard_proceed.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/legit_169_sboard_benign.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/legit_169_sboard_proceed.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/legit_169_sclean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/legit_171_sboard_benign.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/legit_171_sboard_proceed.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/legit_171_sclean.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/n031_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n031_bb_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n031_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n031_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n031_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n031_clean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n031_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n031_nonsense.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n031_official.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n033_bare_stop.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/n033_bb_benign_cmd.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/n033_bb_inject_stop.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/n033_benign.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/n033_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n033_clean.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/n033_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n033_nonsense.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n033_official.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n040_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n040_bb_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n040_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n040_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n040_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n040_clean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n040_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n040_nonsense.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n040_official.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n047_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n056_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n056_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n056_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n056_clean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n056_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n056_nonsense.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n056_official.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n072_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n072_bb_benign_cmd.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/n072_bb_inject_stop.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/n072_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n072_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n072_clean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n072_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n072_nonsense.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n072_official.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n073_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n073_bb_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n073_bb_inject_stop.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/p2/stim/n073_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n073_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n073_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/n078_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/stop2_039_sboard_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/stop2_039_sboard_proceed.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/stop2_039_sclean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/stop2_186_sboard_benign.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/stop2_186_sboard_proceed.jpg	upstream withhold; two-detector audit did not clear it
+data/img/p2/stim/stop2_186_sclean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/board_118__clean.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/board_118__inject_go.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/ill2_017.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/ill2_045.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/ill3_133.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/ill3_136.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/pilot/legit_000.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/pilot/legit_028.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/legit_108.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/pilot/legit_109.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/pilot/legit_167.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/pilot/legit_169.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/pilot/road_039.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/stop2_030__control_removed.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/stop2_030__original.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/stop2_170__control_removed.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/stop2_177.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/stop_021__sign_removed.jpg	upstream withhold; two-detector audit did not clear it
+data/img/pilot/stop_031__control_removed.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/pilot/stop_031__original.jpg	upstream withhold; full-person reblur did not clear both detectors
+data/img/pilot/stop_031__sign_removed.jpg	upstream withhold; full-person reblur did not clear both detectors

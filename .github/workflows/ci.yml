@@ -22,3 +22,5 @@ jobs:
         run: pytest
       - name: Pages artifact contains only allowlisted images
         run: python site/build_pages_artifact.py --out _pages --check
+      - name: Regenerated metrics match the commit
+        run: make reproduce

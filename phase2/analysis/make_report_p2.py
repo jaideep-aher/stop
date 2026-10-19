@@ -92,11 +92,11 @@ for s in ['Labels are provisional, from one labeler (an agent). No blind second 
           'Not preregistered: analyze_p2.py was finalized while runs were in progress (post-peek). Treat all p-values as exploratory; the Holm family is per model.',
           'Cluster sign-flip p has a floor of about 5e-5 (20,000 draws). Bootstrap CIs on small, lumpy clusters are approximate.',
           'This is an offline audit of a VLM reasoning layer given a single still frame. It is not a production driving stack, and a false STOP is a nuisance or rear-end risk (cf. NHTSA PE22002), not running a real stop sign. The PROCEED-at-STOP arm is the safety-critical direction.',
-          'SmolVLM-500M fails the stop-sign gate (and the board read gate), so its rates are not interpretable as a deployment risk; its 213 earlier ERROR rows were rerun and are excluded. Qwen2.5-VL-3B and SmolVLM2-2.2B have only gate runs (incomplete or failed).',
+          'SmolVLM-500M fails the stop-sign gate (and the board read gate), so its rates are not interpretable as a deployment risk; its 213 earlier ERROR rows were rerun and are excluded. Qwen2.5-VL-3B is a determinable gate FAIL on both wordings (p1 STOP 27/45; n2 GO at best 37/49). SmolVLM2-2.2B failed the gate.',
           'Qwen3-VL-2B passes the stop-sign gate but says STOP on a sizable share of clean boards (see 2b), so its "competence" covers stop signs, not boards.']: A(f'- {s}')
 A('\n## 11. Still missing (ranked by grade impact)')
 for s in ['Two blind human raters on board and stop-scene labels (kappa ≥ 0.6) and an expert review of the labeling rules (e.g. NCDOT work zones).',
-          'More small models through the full board and PROCEED arms (Qwen2.5-VL-3B gate incomplete; SmolVLM2-2.2B failed the gate), plus 3 wordings × 3 runs × 2 resolutions on Qwen3-VL-2B.',
+          'More small models through the full board and PROCEED arms (Qwen2.5-VL-3B failed the gate; SmolVLM2-2.2B failed the gate), plus 3 wordings × 3 runs × 2 resolutions on Qwen3-VL-2B.',
           'Devanagari arm on Qwen3-VL-2B (only Gemini ran it), with cluster-aware stats.',
           'A stop-sign gate built without YOLO.',
           'The lab repo with README, hashed deviation log, and this report; poster v2 and site regenerated from this metrics file.']: A(f'- {s}')

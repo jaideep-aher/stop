@@ -147,6 +147,22 @@ def test_error_rows_are_excluded_and_counted():
     assert gate["status"] == "PASS"
 
 
+def test_committed_qwen25_gate_rows_are_fail():
+    """phase2_metrics.json records the determinable FAIL, not INCOMPLETE."""
+    import json
+    from pathlib import Path
+
+    data = json.loads(Path("phase2/analysis/phase2_metrics.json").read_text(encoding="utf-8"))
+    rows = [row for row in data["_gate"] if row["model"] == "qwen25vl3b"]
+    assert {row["prompt"] for row in rows} == {"p1", "n2"}
+    point = "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)"
+    for row in rows:
+        assert row[point] == "FAIL"
+    p1 = next(row for row in rows if row["prompt"] == "p1")
+    assert p1["stop_recall"]["k"] == 27
+    assert p1["stop_recall"]["n"] == 45
+
+
 def test_both_classes_required():
     with pytest.raises(ValueError):
         evaluate_competence_gate([], n_stop=0, n_go=10)
