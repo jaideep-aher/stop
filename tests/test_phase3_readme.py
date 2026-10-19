@@ -150,6 +150,10 @@ def test_headline_table_matches_phase3_metrics():
     )
     assert h1 in readme
     assert "Choosing which cell to headline is post hoc" in readme
+    headline = readme.split("## Why it matters", 1)[0]
+    proceed = "fragile; depends on letter mapping; consistent with answer-word or position copying; not directly tested"
+    assert proceed in headline
+    assert "likely" not in headline.lower()
     assert "The plan was hashed locally before the runs and committed later" in readme
     locks = [
         line.split()[-1]
