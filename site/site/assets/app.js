@@ -113,7 +113,8 @@ function renderP3(ph) {
     Object.entries(blocks).filter(([k]) => RS[k]).map(([k, t]) => `<tr><td>${t}</td>${conds.map(c => { const o = RS[k][c]; return `<td>${o ? `<b>${o.cells_significant_positive_holm_or_mcnemar}/${o.cells_present}</b> <span class="muted">Δ ${o.diff_min}–${o.diff_max}</span>` : '—'}</td>`; }).join('')}<td>${RS[k].clean_board_specificity_cells_passing_0_80 ?? RS[k]['clean_board_specificity_cells_passing_0.80'] ?? '—'}/${RS[k].clean?.cells_present ?? '—'}</td></tr>`).join('') + '</tbody></table></div>';
   const sel = `<label>Prompt / run / resolution <select id="p3-cell">${keys.map(k => `<option value="${k}"${k === 'p1|r0|640' ? ' selected' : ''}>${esc(p3lab(k))}</option>`).join('')}</select></label>`;
   const gk = Object.keys(X.gates);
-  const gt = `<div class="tablewrap"><table><thead><tr><th>Gate set · prompt · px</th><th>STOP recall</th><th>GO recall</th><th>BA</th><th>Point gate</th></tr></thead><tbody>${gk.map(k => { const g = X.gates[k], [set, pr, , px] = k.split('|'); return `<tr><td>${set === 'G1' ? 'G1 (YOLO-pre-screened)' : 'G2 (non-YOLO)'} · ${esc(P3PROMPT[pr] || pr)} · ${px} px</td><td>${kn(g.STOP_recall)}</td><td>${kn(g.GO_recall)}</td><td>${g.BA}</td><td>${verdict(g.pass ? 'PASS' : 'FAIL')}</td></tr>`; }).join('')}</tbody></table></div>`;
+  const kn3 = r => (!r || !r.n) ? kn(r) : `<b>${r.k}/${r.n}</b> <span class="muted">= ${r.rate.toFixed(3)} [${r.ci95[0].toFixed(2)}, ${(+r.ci95[1]).toFixed(2)}]</span>`;
+  const gt = `<div class="tablewrap"><table><thead><tr><th>Gate set · prompt · resolution</th><th>STOP recall</th><th>GO recall</th><th>BA</th><th>Point gate</th></tr></thead><tbody>${gk.map(k => { const g = X.gates[k], [set, pr, , px] = k.split('|'); return `<tr><td>${set === 'G1' ? 'G1 (YOLO-pre-screened)' : 'G2 (non-YOLO)'} · ${esc(P3PROMPT[pr] || pr)} · ${px} px</td><td>${kn3(g.STOP_recall)}</td><td>${kn3(g.GO_recall)}</td><td>${g.BA}</td><td>${verdict(g.pass ? 'PASS' : 'FAIL')}</td></tr>`; }).join('')}</tbody></table></div>`;
   const h2 = `<div class="tablewrap"><table><thead><tr><th>Renamed options (640 px, greedy)</th>${conds.map(c => `<th>${P3COND[c]}: Δ renamed vs Δ p1 (ratio)</th>`).join('')}</tr></thead><tbody>${Object.entries(X.h2).map(([L, o]) => `<tr><td>${esc(P3PROMPT[L] || L)}</td>${conds.map(c => o[c] ? `<td>${o[c].diff_L} vs ${o[c].diff_p1} <span class="muted">(${o[c].ratio})</span></td>` : '<td>—</td>').join('')}</tr>`).join('')}</tbody></table></div>`;
   const pk = Object.keys(X.p_arm);
   const pa = `<div class="tablewrap"><table><thead><tr><th>Prompt · placement</th><th>Benign board (control)</th>${Object.values(P3LEG).map(l => `<th>${esc(l)}</th>`).join('')}</tr></thead><tbody>${pk.flatMap(k => Object.entries(X.p_arm[k]).map(([pl, o]) => { const any = Object.values(o)[0]; return `<tr><td>${esc(p3lab(k))} · ${pl}</td><td>${kn(any && any.control)}</td>${Object.keys(P3LEG).map(lg => `<td>${o[lg] ? kn(o[lg].variant) + ` <span class="muted">Holm p ${pv(o[lg].holm_p)}</span>` : '—'}</td>`).join('')}</tr>`; })).join('')}</tbody></table></div>`;
@@ -123,9 +124,9 @@ function renderP3(ph) {
    <h4>Robustness across prompts, runs and resolutions (Qwen3-VL-2B)</h4>${rs}
    <h4>One cell in detail</h4><div class="controls">${sel}</div><div id="p3-grid"></div>
    <h4>Renamed answer options (H2)</h4>${h2}
-   <h4>PROCEED-side controls at real STOP scenes (P arm): P(answer ≠ STOP), correct answer STOP</h4>${pa}
-   <h4>Competence gates (BA ≥ 0.85, STOP ≥ 0.90, GO ≥ 0.80). Each row names its resolution.</h4>${gt}
-   <h4>Second model</h4>${lf}
+   <h4>PROCEED-side controls at real STOP scenes (P arm, 640 px, greedy): P(answer ≠ STOP), correct answer STOP</h4>${pa}
+   <h4>Competence gates (canonical: BA ≥ 0.85, STOP ≥ 0.90, GO ≥ 0.80)</h4>${gt}
+   <h4>Second model (LFM2-VL-1.6B, 448 px)</h4>${lf}
    <p class="muted">Source: <code>${esc(ph.source)}</code> and <code>phase3/phase3_report.md</code>. Labels are provisional (single labeler). Conditions appear in the file's order and are never ranked.</p></article>`;
 }
 function renderP3Grid() { const ph = (D.phases || []).find(p => p.phase3); if (!ph) return; const c = ph.phase3.grid[$('#p3-cell').value];
