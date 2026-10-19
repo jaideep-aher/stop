@@ -1,7 +1,7 @@
 image_id,path,upstream_withhold,haar_before,yunet_before,hog_before,action,decision,note
 example_1,data/img/p2/example_1.jpg,no,0,0,0,clean,keep,
-example_2,data/img/p2/example_2.jpg,no,1,0,0,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
-example_3,data/img/p2/example_3.jpg,no,1,0,0,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
+example_2,data/img/p2/example_2.jpg,no,1,0,0,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
+example_3,data/img/p2/example_3.jpg,no,1,0,0,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
 example_4,data/img/p2/example_4.jpg,no,0,0,0,clean,keep,
 example_5,data/img/p2/example_5.jpg,no,0,0,0,clean,keep,
 real_026,data/img/p2/real/real_026.jpg,no,0,0,0,clean,keep,
@@ -15,24 +15,24 @@ b013_clean,data/img/p2/stim/b013_clean.jpg,no,0,0,0,clean,keep,
 b013_inject_stop,data/img/p2/stim/b013_inject_stop.jpg,no,0,0,0,clean,keep,
 b013_nonsense,data/img/p2/stim/b013_nonsense.jpg,no,0,0,0,clean,keep,
 b013_official,data/img/p2/stim/b013_official.jpg,no,0,0,0,clean,keep,
-b022_bare_stop,data/img/p2/stim/b022_bare_stop.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b022_bb_benign_cmd,data/img/p2/stim/b022_bb_benign_cmd.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b022_bb_inject_stop,data/img/p2/stim/b022_bb_inject_stop.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b022_benign,data/img/p2/stim/b022_benign.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b022_benign_cmd,data/img/p2/stim/b022_benign_cmd.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b022_clean,data/img/p2/stim/b022_clean.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b022_inject_stop,data/img/p2/stim/b022_inject_stop.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b022_nonsense,data/img/p2/stim/b022_nonsense.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b022_official,data/img/p2/stim/b022_official.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b032_bare_stop,data/img/p2/stim/b032_bare_stop.jpg,yes,1,0,1,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+b022_bare_stop,data/img/p2/stim/b022_bare_stop.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b022_bb_benign_cmd,data/img/p2/stim/b022_bb_benign_cmd.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b022_bb_inject_stop,data/img/p2/stim/b022_bb_inject_stop.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b022_benign,data/img/p2/stim/b022_benign.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b022_benign_cmd,data/img/p2/stim/b022_benign_cmd.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b022_clean,data/img/p2/stim/b022_clean.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b022_inject_stop,data/img/p2/stim/b022_inject_stop.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b022_nonsense,data/img/p2/stim/b022_nonsense.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b022_official,data/img/p2/stim/b022_official.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b032_bare_stop,data/img/p2/stim/b032_bare_stop.jpg,yes,1,0,1,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 b032_bb_benign_cmd,data/img/p2/stim/b032_bb_benign_cmd.jpg,no,0,0,0,clean,keep,
 b032_bb_inject_stop,data/img/p2/stim/b032_bb_inject_stop.jpg,no,0,0,0,clean,keep,
-b032_benign,data/img/p2/stim/b032_benign.jpg,no,1,0,1,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
-b032_benign_cmd,data/img/p2/stim/b032_benign_cmd.jpg,yes,1,0,1,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b032_clean,data/img/p2/stim/b032_clean.jpg,no,1,0,1,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
-b032_inject_stop,data/img/p2/stim/b032_inject_stop.jpg,yes,1,0,1,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b032_nonsense,data/img/p2/stim/b032_nonsense.jpg,yes,1,0,1,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b032_official,data/img/p2/stim/b032_official.jpg,yes,1,0,1,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+b032_benign,data/img/p2/stim/b032_benign.jpg,no,1,0,1,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
+b032_benign_cmd,data/img/p2/stim/b032_benign_cmd.jpg,yes,1,0,1,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b032_clean,data/img/p2/stim/b032_clean.jpg,no,1,0,1,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
+b032_inject_stop,data/img/p2/stim/b032_inject_stop.jpg,yes,1,0,1,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b032_nonsense,data/img/p2/stim/b032_nonsense.jpg,yes,1,0,1,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b032_official,data/img/p2/stim/b032_official.jpg,yes,1,0,1,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 b033_bare_stop,data/img/p2/stim/b033_bare_stop.jpg,no,0,0,0,clean,keep,
 b033_bb_benign_cmd,data/img/p2/stim/b033_bb_benign_cmd.jpg,no,0,0,0,clean,keep,
 b033_bb_inject_stop,data/img/p2/stim/b033_bb_inject_stop.jpg,no,0,0,0,clean,keep,
@@ -132,15 +132,15 @@ b114_clean,data/img/p2/stim/b114_clean.jpg,no,0,0,0,clean,keep,
 b114_inject_stop,data/img/p2/stim/b114_inject_stop.jpg,no,0,0,0,clean,keep,
 b114_nonsense,data/img/p2/stim/b114_nonsense.jpg,no,0,0,0,clean,keep,
 b114_official,data/img/p2/stim/b114_official.jpg,no,0,0,0,clean,keep,
-b118_bare_stop,data/img/p2/stim/b118_bare_stop.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+b118_bare_stop,data/img/p2/stim/b118_bare_stop.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 b118_bb_benign_cmd,data/img/p2/stim/b118_bb_benign_cmd.jpg,yes,0,0,1,no_region,deny,upstream withhold kept: haar_after=0 yunet_after=0 regions=0
 b118_bb_inject_stop,data/img/p2/stim/b118_bb_inject_stop.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
-b118_benign,data/img/p2/stim/b118_benign.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b118_benign_cmd,data/img/p2/stim/b118_benign_cmd.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+b118_benign,data/img/p2/stim/b118_benign.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b118_benign_cmd,data/img/p2/stim/b118_benign_cmd.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 b118_clean,data/img/p2/stim/b118_clean.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
-b118_inject_stop,data/img/p2/stim/b118_inject_stop.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b118_nonsense,data/img/p2/stim/b118_nonsense.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-b118_official,data/img/p2/stim/b118_official.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+b118_inject_stop,data/img/p2/stim/b118_inject_stop.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b118_nonsense,data/img/p2/stim/b118_nonsense.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+b118_official,data/img/p2/stim/b118_official.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 b121_bare_stop,data/img/p2/stim/b121_bare_stop.jpg,no,0,0,0,clean,keep,
 b121_bb_benign_cmd,data/img/p2/stim/b121_bb_benign_cmd.jpg,no,0,0,0,clean,keep,
 b121_bb_inject_stop,data/img/p2/stim/b121_bb_inject_stop.jpg,no,0,0,0,clean,keep,
@@ -151,7 +151,7 @@ b121_inject_stop,data/img/p2/stim/b121_inject_stop.jpg,no,0,0,0,clean,keep,
 b121_nonsense,data/img/p2/stim/b121_nonsense.jpg,no,0,0,0,clean,keep,
 b121_official,data/img/p2/stim/b121_official.jpg,no,0,0,0,clean,keep,
 b127_bare_stop,data/img/p2/stim/b127_bare_stop.jpg,no,0,0,0,clean,keep,
-b127_bb_benign_cmd,data/img/p2/stim/b127_bb_benign_cmd.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+b127_bb_benign_cmd,data/img/p2/stim/b127_bb_benign_cmd.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 b127_bb_inject_stop,data/img/p2/stim/b127_bb_inject_stop.jpg,no,0,0,0,clean,keep,
 b127_benign,data/img/p2/stim/b127_benign.jpg,no,0,0,0,clean,keep,
 b127_benign_cmd,data/img/p2/stim/b127_benign_cmd.jpg,no,0,0,0,clean,keep,
@@ -182,7 +182,7 @@ legit_000_sboard_proceed,data/img/p2/stim/legit_000_sboard_proceed.jpg,no,0,0,0,
 legit_000_sclean,data/img/p2/stim/legit_000_sclean.jpg,no,0,0,0,clean,keep,
 legit_005_sboard_benign,data/img/p2/stim/legit_005_sboard_benign.jpg,no,0,0,0,clean,keep,
 legit_005_sboard_proceed,data/img/p2/stim/legit_005_sboard_proceed.jpg,no,0,0,0,clean,keep,
-legit_005_sclean,data/img/p2/stim/legit_005_sclean.jpg,yes,2,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+legit_005_sclean,data/img/p2/stim/legit_005_sclean.jpg,yes,2,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 legit_019_sboard_benign,data/img/p2/stim/legit_019_sboard_benign.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 legit_019_sboard_proceed,data/img/p2/stim/legit_019_sboard_proceed.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 legit_019_sclean,data/img/p2/stim/legit_019_sclean.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
@@ -195,9 +195,9 @@ legit_126_sclean,data/img/p2/stim/legit_126_sclean.jpg,yes,0,0,0,no_face_to_rebl
 legit_132_sboard_benign,data/img/p2/stim/legit_132_sboard_benign.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 legit_132_sboard_proceed,data/img/p2/stim/legit_132_sboard_proceed.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 legit_132_sclean,data/img/p2/stim/legit_132_sclean.jpg,no,0,0,0,clean,keep,
-legit_165_sboard_benign,data/img/p2/stim/legit_165_sboard_benign.jpg,yes,1,1,1,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-legit_165_sboard_proceed,data/img/p2/stim/legit_165_sboard_proceed.jpg,yes,1,1,1,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-legit_165_sclean,data/img/p2/stim/legit_165_sclean.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+legit_165_sboard_benign,data/img/p2/stim/legit_165_sboard_benign.jpg,yes,1,1,1,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+legit_165_sboard_proceed,data/img/p2/stim/legit_165_sboard_proceed.jpg,yes,1,1,1,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+legit_165_sclean,data/img/p2/stim/legit_165_sclean.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 legit_169_sboard_benign,data/img/p2/stim/legit_169_sboard_benign.jpg,yes,0,0,1,no_region,deny,upstream withhold kept: haar_after=0 yunet_after=0 regions=0
 legit_169_sboard_proceed,data/img/p2/stim/legit_169_sboard_proceed.jpg,yes,0,0,1,no_region,deny,upstream withhold kept: haar_after=0 yunet_after=0 regions=0
 legit_169_sclean,data/img/p2/stim/legit_169_sclean.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
@@ -360,15 +360,15 @@ n078_official,data/img/p2/stim/n078_official.jpg,no,0,0,0,clean,keep,
 stop2_000_sboard_benign,data/img/p2/stim/stop2_000_sboard_benign.jpg,no,0,0,0,clean,keep,
 stop2_000_sboard_proceed,data/img/p2/stim/stop2_000_sboard_proceed.jpg,no,0,0,0,clean,keep,
 stop2_000_sclean,data/img/p2/stim/stop2_000_sclean.jpg,no,0,0,0,clean,keep,
-stop2_002_sboard_benign,data/img/p2/stim/stop2_002_sboard_benign.jpg,no,0,1,0,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
-stop2_002_sboard_proceed,data/img/p2/stim/stop2_002_sboard_proceed.jpg,no,0,1,0,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
+stop2_002_sboard_benign,data/img/p2/stim/stop2_002_sboard_benign.jpg,no,0,1,0,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
+stop2_002_sboard_proceed,data/img/p2/stim/stop2_002_sboard_proceed.jpg,no,0,1,0,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
 stop2_002_sclean,data/img/p2/stim/stop2_002_sclean.jpg,no,0,0,0,clean,keep,
 stop2_007_sboard_benign,data/img/p2/stim/stop2_007_sboard_benign.jpg,no,0,0,0,clean,keep,
 stop2_007_sboard_proceed,data/img/p2/stim/stop2_007_sboard_proceed.jpg,no,0,0,0,clean,keep,
 stop2_007_sclean,data/img/p2/stim/stop2_007_sclean.jpg,no,0,0,0,clean,keep,
-stop2_011_sboard_benign,data/img/p2/stim/stop2_011_sboard_benign.jpg,no,0,1,1,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
-stop2_011_sboard_proceed,data/img/p2/stim/stop2_011_sboard_proceed.jpg,no,0,1,1,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
-stop2_011_sclean,data/img/p2/stim/stop2_011_sclean.jpg,no,0,1,1,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
+stop2_011_sboard_benign,data/img/p2/stim/stop2_011_sboard_benign.jpg,no,0,1,1,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
+stop2_011_sboard_proceed,data/img/p2/stim/stop2_011_sboard_proceed.jpg,no,0,1,1,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
+stop2_011_sclean,data/img/p2/stim/stop2_011_sclean.jpg,no,0,1,1,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
 stop2_013_sboard_benign,data/img/p2/stim/stop2_013_sboard_benign.jpg,no,0,0,0,clean,keep,
 stop2_013_sboard_proceed,data/img/p2/stim/stop2_013_sboard_proceed.jpg,no,0,0,0,clean,keep,
 stop2_013_sclean,data/img/p2/stim/stop2_013_sclean.jpg,no,0,0,0,clean,keep,
@@ -384,8 +384,8 @@ stop2_039_sclean,data/img/p2/stim/stop2_039_sclean.jpg,yes,0,0,0,no_face_to_rebl
 stop2_099_sboard_benign,data/img/p2/stim/stop2_099_sboard_benign.jpg,no,0,0,0,clean,keep,
 stop2_099_sboard_proceed,data/img/p2/stim/stop2_099_sboard_proceed.jpg,no,0,0,0,clean,keep,
 stop2_099_sclean,data/img/p2/stim/stop2_099_sclean.jpg,no,0,0,0,clean,keep,
-stop2_117_sboard_benign,data/img/p2/stim/stop2_117_sboard_benign.jpg,no,0,1,0,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
-stop2_117_sboard_proceed,data/img/p2/stim/stop2_117_sboard_proceed.jpg,no,0,1,0,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
+stop2_117_sboard_benign,data/img/p2/stim/stop2_117_sboard_benign.jpg,no,0,1,0,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
+stop2_117_sboard_proceed,data/img/p2/stim/stop2_117_sboard_proceed.jpg,no,0,1,0,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
 stop2_117_sclean,data/img/p2/stim/stop2_117_sclean.jpg,no,0,0,0,clean,keep,
 stop2_119_sboard_benign,data/img/p2/stim/stop2_119_sboard_benign.jpg,no,0,0,0,clean,keep,
 stop2_119_sboard_proceed,data/img/p2/stim/stop2_119_sboard_proceed.jpg,no,0,0,0,clean,keep,
@@ -418,62 +418,62 @@ stop_035_sboard_benign,data/img/p2/stim/stop_035_sboard_benign.jpg,no,0,0,0,clea
 stop_035_sboard_proceed,data/img/p2/stim/stop_035_sboard_proceed.jpg,no,0,0,0,clean,keep,
 stop_035_sclean,data/img/p2/stim/stop_035_sclean.jpg,no,0,0,0,clean,keep,
 board_014__official,data/img/pilot/board_014__official.jpg,no,0,0,0,clean,keep,
-board_118__benign,data/img/pilot/board_118__benign.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+board_118__benign,data/img/pilot/board_118__benign.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 board_118__clean,data/img/pilot/board_118__clean.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 board_118__inject_go,data/img/pilot/board_118__inject_go.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
-board_118__inject_stop,data/img/pilot/board_118__inject_stop.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-board_118__official,data/img/pilot/board_118__official.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+board_118__inject_stop,data/img/pilot/board_118__inject_stop.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+board_118__official,data/img/pilot/board_118__official.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 ill2_017,data/img/pilot/ill2_017.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
-ill2_018,data/img/pilot/ill2_018.jpg,yes,0,5,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-ill2_019,data/img/pilot/ill2_019.jpg,yes,0,3,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-ill2_021,data/img/pilot/ill2_021.jpg,yes,0,2,1,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-ill2_035,data/img/pilot/ill2_035.jpg,yes,0,4,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+ill2_018,data/img/pilot/ill2_018.jpg,yes,0,5,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+ill2_019,data/img/pilot/ill2_019.jpg,yes,0,3,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+ill2_021,data/img/pilot/ill2_021.jpg,yes,0,2,1,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+ill2_035,data/img/pilot/ill2_035.jpg,yes,0,4,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 ill2_045,data/img/pilot/ill2_045.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 ill2_111,data/img/pilot/ill2_111.jpg,no,0,0,0,clean,keep,
-ill2_233,data/img/pilot/ill2_233.jpg,yes,0,4,2,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+ill2_233,data/img/pilot/ill2_233.jpg,yes,0,4,2,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 ill2_249,data/img/pilot/ill2_249.jpg,no,0,0,0,clean,keep,
-ill2_279,data/img/pilot/ill2_279.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+ill2_279,data/img/pilot/ill2_279.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 ill2_314,data/img/pilot/ill2_314.jpg,no,0,0,0,clean,keep,
-ill2_316,data/img/pilot/ill2_316.jpg,yes,1,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-ill2_317,data/img/pilot/ill2_317.jpg,yes,0,2,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-ill2_318,data/img/pilot/ill2_318.jpg,yes,0,9,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-ill3_128,data/img/pilot/ill3_128.jpg,yes,0,15,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+ill2_316,data/img/pilot/ill2_316.jpg,yes,1,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+ill2_317,data/img/pilot/ill2_317.jpg,yes,0,2,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+ill2_318,data/img/pilot/ill2_318.jpg,yes,0,9,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+ill3_128,data/img/pilot/ill3_128.jpg,yes,0,15,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 ill3_133,data/img/pilot/ill3_133.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 ill3_136,data/img/pilot/ill3_136.jpg,yes,1,2,1,reblur_still_flagged,deny,upstream withhold kept: haar_after=0 yunet_after=1 regions=6
-ill3_137,data/img/pilot/ill3_137.jpg,yes,0,8,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-ill3_148,data/img/pilot/ill3_148.jpg,yes,0,35,3,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-ill3_150,data/img/pilot/ill3_150.jpg,yes,0,18,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+ill3_137,data/img/pilot/ill3_137.jpg,yes,0,8,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+ill3_148,data/img/pilot/ill3_148.jpg,yes,0,35,3,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+ill3_150,data/img/pilot/ill3_150.jpg,yes,0,18,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 illegit_168,data/img/pilot/illegit_168.jpg,no,0,0,0,clean,keep,
 illegit_172,data/img/pilot/illegit_172.jpg,no,0,0,0,clean,keep,
 illegit_180,data/img/pilot/illegit_180.jpg,no,0,0,0,clean,keep,
 legit_000,data/img/pilot/legit_000.jpg,yes,0,0,1,no_region,deny,upstream withhold kept: haar_after=0 yunet_after=0 regions=0
 legit_028,data/img/pilot/legit_028.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
-legit_083,data/img/pilot/legit_083.jpg,yes,0,2,1,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+legit_083,data/img/pilot/legit_083.jpg,yes,0,2,1,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 legit_108,data/img/pilot/legit_108.jpg,yes,0,0,2,no_region,deny,upstream withhold kept: haar_after=0 yunet_after=0 regions=0
 legit_109,data/img/pilot/legit_109.jpg,yes,0,0,2,no_region,deny,upstream withhold kept: haar_after=0 yunet_after=0 regions=0
-legit_133,data/img/pilot/legit_133.jpg,yes,0,16,5,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-legit_134,data/img/pilot/legit_134.jpg,yes,0,2,2,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-legit_138,data/img/pilot/legit_138.jpg,yes,1,2,4,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-legit_147,data/img/pilot/legit_147.jpg,yes,1,0,3,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-legit_148,data/img/pilot/legit_148.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-legit_159,data/img/pilot/legit_159.jpg,yes,1,0,1,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-legit_165,data/img/pilot/legit_165.jpg,yes,1,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+legit_133,data/img/pilot/legit_133.jpg,yes,0,16,5,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+legit_134,data/img/pilot/legit_134.jpg,yes,0,2,2,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+legit_138,data/img/pilot/legit_138.jpg,yes,1,2,4,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+legit_147,data/img/pilot/legit_147.jpg,yes,1,0,3,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+legit_148,data/img/pilot/legit_148.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+legit_159,data/img/pilot/legit_159.jpg,yes,1,0,1,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+legit_165,data/img/pilot/legit_165.jpg,yes,1,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 legit_167,data/img/pilot/legit_167.jpg,yes,1,0,2,reblur_still_flagged,deny,upstream withhold kept: haar_after=1 yunet_after=0 regions=4
 legit_169,data/img/pilot/legit_169.jpg,yes,2,1,2,reblur_still_flagged,deny,upstream withhold kept: haar_after=0 yunet_after=1 regions=7
 road_039,data/img/pilot/road_039.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 road_063,data/img/pilot/road_063.jpg,no,0,0,0,clean,keep,
 road_106,data/img/pilot/road_106.jpg,no,0,0,0,clean,keep,
 road_147,data/img/pilot/road_147.jpg,no,0,0,0,clean,keep,
-stop2_025,data/img/pilot/stop2_025.jpg,yes,0,1,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+stop2_025,data/img/pilot/stop2_025.jpg,yes,0,1,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 stop2_030__control_removed,data/img/pilot/stop2_030__control_removed.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 stop2_030__original,data/img/pilot/stop2_030__original.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
-stop2_030__sign_removed,data/img/pilot/stop2_030__sign_removed.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
-stop2_097__control_removed,data/img/pilot/stop2_097__control_removed.jpg,no,1,0,0,full_person_reblur,keep,faces re-blurred; both detectors empty afterward
+stop2_030__sign_removed,data/img/pilot/stop2_030__sign_removed.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
+stop2_097__control_removed,data/img/pilot/stop2_097__control_removed.jpg,no,1,0,0,full_person_reblur,pending_human,faces re-blurred; both detectors empty afterward; pending human review after blur fix
 stop2_119,data/img/pilot/stop2_119.jpg,no,0,0,0,clean,keep,
 stop2_156,data/img/pilot/stop2_156.jpg,no,0,0,0,clean,keep,
 stop2_170__control_removed,data/img/pilot/stop2_170__control_removed.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 stop2_177,data/img/pilot/stop2_177.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
-stop2_178__control_removed,data/img/pilot/stop2_178__control_removed.jpg,yes,1,0,0,full_person_reblur,cleared,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad
+stop2_178__control_removed,data/img/pilot/stop2_178__control_removed.jpg,yes,1,0,0,full_person_reblur,pending_human,upstream withhold cleared: both detectors empty after full person region + 30% YuNet pad; pending human review after blur fix
 stop_021__sign_removed,data/img/pilot/stop_021__sign_removed.jpg,yes,0,0,0,no_face_to_reblur,deny,"upstream withhold kept: no face for a full-person reblur, so it is not cleared"
 stop_031__control_removed,data/img/pilot/stop_031__control_removed.jpg,yes,0,0,2,no_region,deny,upstream withhold kept: haar_after=0 yunet_after=0 regions=0
 stop_031__original,data/img/pilot/stop_031__original.jpg,yes,0,0,2,no_region,deny,upstream withhold kept: haar_after=0 yunet_after=0 regions=0

@@ -89,7 +89,7 @@ $('#read-gate').innerHTML = MK.map(m => { const o = MM[m], rg = o.read_gate;
    <tr><td>Clean board → non-STOP</td><td>${kn(o.clean_board_specificity_nonSTOP)}</td></tr><tr><td>Real STOP scene → STOP</td><td>${kn(o.real_stop_scene_sensitivity_clean)}</td></tr></table></article>`; }).join('');
 
 // ---------- examples ----------
-$('#ex').innerHTML = P.examples.length ? P.examples.map(e => `<figure class="ex"><img src="${e.file}" alt="${esc(e.sides.map(x => x.condition).join(' vs '))}" loading="lazy">
+$('#ex').innerHTML = P.examples.length ? P.examples.map(e => `<figure class="ex">${e.file ? `<img src="${e.file}" alt="${esc(e.sides.map(x => x.condition).join(' vs '))}" loading="lazy">` : '<span class="noimg big">image withheld (pending human review after blur fix)</span>'}
   <figcaption><span class="tag alt">DIGITALLY ALTERED</span> <b>${esc(MODELS[e.model].split(' (')[0])}</b>: ${e.sides.map(x => `${esc(x.condition)} → <span class="act ${x.verdict}">${x.verdict}</span> <span class="muted">(correct: ${x.label === 'STOP' ? 'STOP' : 'PROCEED/CAUTION'})</span>`).join(' &nbsp;|&nbsp; ')}.<br>Base photo: <a href="${esc(e.source_url)}" rel="noopener">${esc(e.credit)}</a>, ${esc(e.license)}; edited for the study. Blur: ${esc(e.blur)}.${e.note ? `<br><span class="muted">This board is shown instead of the original example, whose board legend was blurred by a detector false positive and needs human review.</span>` : ''}</figcaption></figure>`).join('')
   : '<div class="empty">No example passed the license, credit and blur checks.</div>';
 

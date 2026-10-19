@@ -1,30 +1,44 @@
-# Weights named by the Phase 2 and pilot run scripts.
+# Weights the pilot, Phase 2, and Phase 3 runs loaded.
 # llama.cpp release b11723 (CPU x64).
-# sha256 values are the Hugging Face LFS oids of the Q8_0 files, read 2026-10-19.
-# gguf_sha256.txt from the original machine is not in this checkout.
-# The launch scripts call the Qwen3 files Qwen3-VL-2B-Instruct-Q8_0.gguf and
-# mmproj-Qwen3-VL-2B-Instruct-Q8_0.gguf. The published objects use Qwen3VL in the name.
+# sha256 values are the local file hashes from the machine that ran the models.
+# The filename is the local name those scripts used.
 # Gemini is an API model (gemini-3.8-flash), not a GGUF.
+# Compared with Hugging Face LFS oids on 2026-10-19.
 
-# Qwen3-VL-2B, pilot and Phase 2 headline model
+# Qwen3-VL-2B, pilot and Phase 2 headline model.
+# Launch scripts call Qwen3-VL-2B-Instruct-Q8_0.gguf and mmproj-Qwen3-VL-2B-Instruct-Q8_0.gguf.
 # https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct-GGUF
-1e8db19207c8ce0733ddd78c2eff8a9e22c27c82f4443df94c25792ed8fe04f2  Qwen3VL-2B-Instruct-Q8_0.gguf
-f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82  mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf
+# local file hash; differs from the current HF object, which may have been re-uploaded.
+# Current HF object Qwen3VL-2B-Instruct-Q8_0.gguf is 1e8db19207c8ce0733ddd78c2eff8a9e22c27c82f4443df94c25792ed8fe04f2.
+# Current HF object mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf is f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82.
+b7802e29f71a9e5b5e3f83f613df898a2204342dcea71a231ea501d481813c39  Qwen3-VL-2B-Instruct-Q8_0.gguf
+69066c8f279ec85ff48ab4059f6ebba0d2932ca57667f2bbdac7d9805bca9e7b  mmproj-Qwen3-VL-2B-Instruct-Q8_0.gguf
 
-# SmolVLM-500M, pilot and Phase 2
+# SmolVLM-500M, pilot and Phase 2. Local file hash matches the current HF LFS oid.
 # https://huggingface.co/ggml-org/SmolVLM-500M-Instruct-GGUF
 9d4612de6a42214499e301494a3ecc2be0abdd9de44e663bda63f1152fad1bf4  SmolVLM-500M-Instruct-Q8_0.gguf
 d1eb8b6b23979205fdf63703ed10f788131a3f812c7b1f72e0119d5d81295150  mmproj-SmolVLM-500M-Instruct-Q8_0.gguf
 
-# Qwen2.5-VL-3B, Phase 2 gate only (determinable FAIL; not re-run)
+# Qwen2.5-VL-3B, Phase 2 gate only (determinable FAIL; not re-run).
+# The run used Q4_K_M and the f16 mmproj. Local file hash matches the current HF LFS oid of these filenames.
 # https://huggingface.co/ggml-org/Qwen2.5-VL-3B-Instruct-GGUF
-fa8aeb3b6bf6152774e87d13e09892aa065f4e0c4abe90806cd8ab18ff72d9fe  Qwen2.5-VL-3B-Instruct-Q8_0.gguf
-980c9b2f78c04e6cff93d277ada09e768394f112d75db3b4e9dea8a69f9fb904  mmproj-Qwen2.5-VL-3B-Instruct-Q8_0.gguf
+d02fe9b69ad8cadbbd228e387667af66612c44bed29ffc8eb1e7caf9ac486c12  Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf
+b9160fe9d814d1fadf68395677468534778b39ac33c2e7561b7b218626e60d5e  mmproj-Qwen2.5-VL-3B-Instruct-f16.gguf
 
-# SmolVLM2-2.2B, Phase 2 gate only (FAIL)
+# SmolVLM2-2.2B, Phase 2 gate only (FAIL). Local file hash matches the current HF LFS oid.
 # https://huggingface.co/ggml-org/SmolVLM2-2.2B-Instruct-GGUF
 c850ffa51b0708be8911766e1d35e8e71365e987c8efb2513a7f237baade074f  SmolVLM2-2.2B-Instruct-Q8_0.gguf
 ae07ea1facd07dd3230c4483b63e8cda96c6944ad2481f33d531f79e892dd024  mmproj-SmolVLM2-2.2B-Instruct-Q8_0.gguf
+
+# InternVL3-2B, Phase 3 candidate (gate FAIL, not selected). Local file hash matches the current HF LFS oid.
+# https://huggingface.co/ggml-org/InternVL3-2B-Instruct-GGUF
+b09d7858d8b111f103a38b4ac333c8d41ca6faf34da7d4c3f76c646318004410  InternVL3-2B-Instruct-Q8_0.gguf
+a91c525291f65b0469f82544e82f202c4df1c093268f0ce27deec10664078a0c  mmproj-InternVL3-2B-Instruct-Q8_0.gguf
+
+# LFM2-VL-1.6B, Phase 3 selected second model. Local file hash matches the current HF LFS oid.
+# https://huggingface.co/LiquidAI/LFM2-VL-1.6B-GGUF
+4c3b66c0a6bf25d5ef876edf118a96deebc15de04d58f4e280cdcfda708b7932  LFM2-VL-1.6B-Q8_0.gguf
+65ec437db88d65fff93f472d00c145e09880769ac67fedff5cd1c0f8d8301d87  mmproj-LFM2-VL-1.6B-Q8_0.gguf
 
 # Face detector used by the privacy blur (opencv_zoo). Not a GGUF. .onnx is git-ignored.
 8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4  face_detection_yunet_2023mar.onnx
