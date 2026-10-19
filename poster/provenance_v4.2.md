@@ -1,3 +1,83 @@
+# Provenance for poster_v4.2 (Phase 3 final; built Mon Oct 19, 2026, ~09:42 ET)
+
+poster_v4.2.pdf sha256 fdc30d8751c870e320e5381be1ceff57b0959028d62034ac936e9d1acdf94da0. Built by build_poster_v4.2.py (run with .venv/bin/python). This supersedes the pre-Phase-3 v4.2 build (sha 07f1bb5a…).
+
+Outputs: poster_v4.2.png (150 dpi), poster_v4.2_preview.jpg (1800 px, JPEG q88), poster_v4.2_talk.md.
+
+Inputs are unchanged and read-only:
+- phase2/analysis/phase2_metrics.json, sha256 2307afeb…564bad (same file as v4/v4.1).
+- phase3/analysis/phase3_metrics.json, sha256 f9690fd943d4cd3d10b4b4ec282dd84bfbccd786b4938760300e497de5583a32 (09:33 ET). Source of every Phase 3 number.
+- phase3/phase3_report.md, sha256 3a1e27ce…8751ceb. Used for context only (cell meanings, decoding notes, which arms ran on which model).
+
+## Phase 3 integration (lead steering, 09:35 ET)
+
+P3 = phase3_metrics.json. Every value is read at build time; nothing is typed in. CIs on the poster are the JSON `ci95` fields, rounded to whole percent.
+
+| Poster location | Text / value | Field |
+|---|---|---|
+| Headline line 1 | "…a second small model, in 43/71." | P3['lfm2vl_1.6b']['board_and_stop_arms_phase2_stimuli']['cells']['n2\|r0\|448']['proceed_at_stop']['variant'] k=43 n=71 |
+| Headline line 2 | "Both mostly follow the stop/go meaning… not matched non-traffic commands or nonsense." | Qwen: Phase 2 §5. LFM2 same cell: benign_cmd 7/63, nonsense 10/63 (Holm 0.0625) vs control 3/63, hence "mostly" |
+| §3 gate row | LFM2-VL-1.6B (Phase 3)‡ PASS STOP 44/45 GO 47/49 | P3['lfm2vl_1.6b']['gates']['G1\|n2\|r0\|448'] STOP_recall, GO_recall. Build asserts phase3_gate_summary['n2\|r0\|448'] passes (G2 also passes: STOP 35/37, GO 54/59) |
+| §3 FAIL line | InternVL3-2B‡ GO 17/49 | P3['internvl3_2b']['gates']['G1\|p1\|r0\|448'].GO_recall (STOP 45/45, BA 0.673). Build asserts the p1/n2/n3 448 wordings all fail the Phase 3 gate |
+| §3 footnote ‡ | "LFM2 passed with 1 of 3 wordings, also on a new non-YOLO set; InternVL3 failed with all 3." | lfm2 phase3_gate_summary: only n2\|r0\|448 passes (n3, p1 fail). InternVL3 passes only with letter prompts L1/L2, which were not run on its board/STOP arms, so it is not tested further |
+| Phase 3 bullet 1 | LFM2: PROCEED at a real STOP 43/71 (CI 49–71%) vs 14/71; STOP-command board: STOP 53/63 (CI 73–91%) vs 3/63 | lfm2 cell n2\|r0\|448: proceed_at_stop.variant [0.489, 0.711], .control 14/71 (flips 29, reverse 0, McNemar p 3.7e-9); board.inject_stop.variant [0.732, 0.911], .control 3/63 (Holm p 0) |
+| Phase 3 bullet 2 | Qwen, board in the lane: PROCEED 30/32 (CI 80–98%) vs 10/32 | P3['qwen3vl2b']['P_arm']['cells']['p1\|r0\|640']['lane']['proceed'] variant [0.799, 0.983], control; Holm p 6e-6 |
+| Phase 3 bullet 3 | 18 settings (3 wordings × 2 image sizes × 3 decoding settings): significant in 16 | qwen3vl2b.R_arm.robustness_summary.planned_18_cells_word_prompts_448_896.proceed_at_stop: cells_present 18, cells_significant_positive_holm_or_mcnemar 16. "Decoding settings", not "runs": the report notes r1/r2 are fixed-seed perturbations, not independent samples |
+| Phase 3 bullet 4 | Letters A/B/C: PROCEED 16/71 (CI 14–34%) vs 0/71; STOP side holds | qwen3vl2b.P_arm.cells['L1\|r0\|640'].left.proceed (Holm 0.000122). "STOP side holds" = R_arm.H2_renamed_options_640_greedy.L1: inject_stop ratio 0.857 survives (bare 0.875, official 1.109); proceed_at_stop ratio 0.515 |
+| Phase 3 bullet 5 (caveat) | Qwen first wording fails the non-YOLO gate: GO 43/59 (CI 60–83%); clean-board check 46/63 (CI 61–82%; target 80%) | qwen3vl2b.gates['G2\|p1\|r0\|640'] GO_recall, gate_point false (STOP 36/37, BA 0.851); R_arm.cells['p1\|r0\|640'].board.clean_board_specificity [0.61, 0.824]; 80% = the GO floor from the gate key |
+| §8 Scope | "two small models; panels 4–5 show Qwen's first wording, one run" | Replaces "one small model, one wording, one run" |
+| §8 Next | "Next: two human labelers with an agreement score." | "a second small model" removed (done in Phase 3) |
+| Contribution box | "…small models that pass a competence gate…"; novelty: "two gate-passing small models" | Wording only |
+
+### Lead-quoted numbers vs JSON
+All match: (a) 53/63 vs 3/63 and PROCEED 43/71 vs 14/71; (b) 30/32 vs 10/32; (d) clean-board 46/63, and G2 GO-recall fail (43/59); (e) InternVL3-2B FAIL.
+Nuance on (c): with letters, only the PROCEED-side effect shrinks (L1 16/71 vs 0/71; diff 0.225 vs 0.437 with words, ratio 0.515; L2 22/71, ratio 0.709). The STOP-side effects survive (L1 inject ratio 0.857; L2 inject 1.102). The poster says exactly that.
+
+### Disclosed, not overclaimed
+- LFM2's gate pass depends on wording: it passes only with n2 at 448 px (p1 GO 7/49, n3 GO 0/49). Its board/STOP arms ran with n2 only, and letters were not run on it.
+- Qwen passes the full Phase 3 gate (G1 and G2) only with n3 at 448 px. Its p1 wording, used in panels 4–5, passes G1 but fails G2. The gate list still shows Qwen's Phase 2 pass; the caveat bullet states the Phase 3 failure.
+- Qwen clean-board specificity across the 18 cells ranges 0.143–0.875 (3 cells pass 0.80). Not on the poster.
+
+### Layout changes made to fit
+- §2 photos 2.6 → 2.25 in. §6 photos 3.0 → 2.4 in. "(one run each)" dropped from §3. §1 Waymo and NHTSA bullets shortened (same quotes, same citations [C3], [C2]).
+- The SmolVLM and Qwen2.5 FAIL rows merged into a single FAIL line with InternVL3. Footnote † shortened to "Cannot pass even if every unscored road were right."
+- §4 legend shortened to "Qwen3-VL-2B" / "Gemini Flash". Gemini p-value note shortened to "exact paired tests, corrected for multiple tests; exploratory."
+- The sign-removal bullet merged into the digital-edits bullet. The YOLO pre-screen mention moved to the Phase 3 caveat.
+- The dashed PENDING placeholder was removed.
+
+## Gate line (§3, unchanged from the earlier v4.2 build)
+> Competence gate: before we test tricks, a model must first get ordinary real stop signs (45) and open roads (49) right (at least 90% STOP, 80% GO); models that can't are dropped.
+
+- 90% and 80% are parsed from the gate key `'gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)'` in phase2 M['_gate'].
+- 45 and 49 are GATE[('pilot','qwen3vl2b','p1')].stop_recall.n and go_recall_nonSTOP.n.
+- BA is omitted because the build asserts (0.90+0.80)/2 ≥ 0.85. The Phase 3 point gate uses the same floors.
+
+## Talk script (poster_v4.2_talk.md)
+- 585 spoken words, about 4:10 at 140 wpm.
+- Adds a Phase 3 beat: 43/71 vs 14/71, 53/63 vs 3/63, 30/32 vs 10/32, 16 of 18, 16/71 vs 0/71, 43/59, 46/63.
+- Keeps the 45/71 build (14/71, 31 flipped and 0 back, Gemini 0/71).
+- Only poster numbers are used. No CIs are spoken.
+
+## Newest grade file (reviews/grade_2026-10-19_bb136e3.md): poster deductions (47/50)
+| Criterion | Deduction | Status |
+|---|---|---|
+| ≤5 min (9/10) | Script over 4:30; panels dense | Script 585 words, about 4:10. The Phase 3 panel adds density, kept to 5 bullets |
+| Outsiders (9/10) | Needs a gate gloss; codenames | Gloss added. Model names kept |
+| Contribution (9/10) | Waits on Phase 3 | Phase 3 is now on the poster (second model, lane board, letters control, caveat) |
+| Communication (4/5) | Site and QR not live | Still 404, so the QR stays PENDING |
+| Submission | Poster PDF not committed to the repo | Not done; repos were not modified |
+
+Non-poster items left for the lab: human κ, the legacy gate_LB/unparsed fields, the g2_labels.csv sha mismatch, a hardware/runtime line in the README, an RAI-concept table, and the builder recommendation in the README.
+
+## Checks
+- **Fonts and images:** 24 × 24 in (1728 pt). 6 DejaVu subsets, all embedded. 6 images at 310–427 ppi.
+- **Overflow:** the bbox scan found no word crossing into another column, past the edge, or across the footer rule at 2.60 in. Two ≤ 0.1 in gutter overhangs remain, unchanged from v4/v4.1 ("STOP" in §2, "range)" on the §5 axis).
+- **Asserts:** the column-1 assert passed. The column-3 box bottom is 3.07 in (> 2.95). A visual check at 150 dpi was OK.
+- **QR:** https://jaideep-aher.github.io/stop/ returned HTTP 404 at 09:41 ET, so the QR stays PENDING (qr_rendered false). The cv2 encode/decode self-test passed.
+
+# (earlier pre-Phase-3 v4.2 notes superseded above; older provenance retained below)
+---
+# (v4.1 provenance, retained)
 # Provenance for poster_v4.1 (built Mon Oct 19, 2026, ~08:47 ET)
 
 - **Poster:** poster_v4.1.pdf, sha256 842490b56b8c4919739084a6fdc3182e79c2f7eebf875821ebb939588b97595f.

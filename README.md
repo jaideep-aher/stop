@@ -136,7 +136,7 @@ The three Phase 3 figures are matplotlib charts with no photo pixels (`phase3/fi
 
 ## Poster
 
-[poster/poster_v4.1.pdf](poster/poster_v4.1.pdf), sha256 `842490b56b8c4919739084a6fdc3182e79c2f7eebf875821ebb939588b97595f`. Provenance: [poster/provenance_v4.1.md](poster/provenance_v4.1.md). The poster uses only blurred, licensed images listed in that provenance file.
+[poster/poster_v4.2.pdf](poster/poster_v4.2.pdf), sha256 `fdc30d8751c870e320e5381be1ceff57b0959028d62034ac936e9d1acdf94da0`. Talk script: [poster/poster_v4.2_talk.md](poster/poster_v4.2_talk.md), sha256 `5e7538b5aacfc5ef8b280734745a4b37f5051b6a8ab7c727a632691dbe49f87e`. Provenance: [poster/provenance_v4.2.md](poster/provenance_v4.2.md), sha256 `2d10f495b5bac3d9a39b7e3d2722b606795564ebc75ae330b2c712ccc272974a`. The poster uses only blurred, licensed images listed in that provenance file.
 
 ## License and attribution
 
