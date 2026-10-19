@@ -6035,12 +6035,11 @@
    },
    "balanced_acc": 0.945,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "FAIL",
+   "status": "FAIL",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.765,
     "go_recall_lb": 0.927
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "FAIL"
+   }
   },
   {
    "source": "pilot",
@@ -6070,12 +6069,11 @@
    },
    "balanced_acc": 0.989,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "PASS",
+   "status": "PASS",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.884,
     "go_recall_lb": 0.927
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "PASS"
+   }
   },
   {
    "source": "pilot",
@@ -6105,12 +6103,11 @@
    },
    "balanced_acc": 0.98,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "PASS",
+   "status": "PASS",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.921,
     "go_recall_lb": 0.863
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "PASS"
+   }
   },
   {
    "source": "pilot",
@@ -6140,12 +6137,11 @@
    },
    "balanced_acc": 0.704,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "FAIL",
+   "status": "FAIL",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.921,
     "go_recall_lb": 0.282
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "FAIL"
+   }
   },
   {
    "source": "pilot",
@@ -6175,12 +6171,11 @@
    },
    "balanced_acc": 0.655,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "FAIL",
+   "status": "FAIL",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.195,
     "go_recall_lb": 0.927
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "FAIL"
+   }
   },
   {
    "source": "pilot",
@@ -6210,12 +6205,11 @@
    },
    "balanced_acc": 0.451,
    "unparsed": 1,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "FAIL",
+   "status": "FAIL",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.662,
     "go_recall_lb": 0.044
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "FAIL"
+   }
   },
   {
    "source": "phase2",
@@ -6245,12 +6239,11 @@
    },
    "balanced_acc": 0.989,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "PASS",
+   "status": "PASS",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.884,
     "go_recall_lb": 0.927
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "PASS"
+   }
   },
   {
    "source": "phase2",
@@ -6280,12 +6273,11 @@
    },
    "balanced_acc": 0.979,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "PASS",
+   "status": "PASS",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.884,
     "go_recall_lb": 0.893
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "PASS"
+   }
   },
   {
    "source": "phase2",
@@ -6315,12 +6307,11 @@
    },
    "balanced_acc": 0.853,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "FAIL",
+   "status": "FAIL",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.921,
     "go_recall_lb": 0.555
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "FAIL"
+   }
   },
   {
    "source": "phase2",
@@ -6350,12 +6341,11 @@
    },
    "balanced_acc": 0.8,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "FAIL",
+   "status": "FAIL",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.455,
     "go_recall_lb": 0.896
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "FAIL"
+   }
   },
   {
    "source": "phase2",
@@ -6385,12 +6375,11 @@
    },
    "balanced_acc": 0.51,
    "unparsed": 0,
-   "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)": "FAIL",
+   "status": "FAIL",
    "wilson_lower_bounds": {
     "stop_recall_lb": 0.921,
     "go_recall_lb": 0.004
-   },
-   "gate_LB (STOPrec LB>=.80 & GOrec LB>=.70; secondary, roast #1 item 4 suggestion)": "FAIL"
+   }
   }
  ],
  "wording2": {

@@ -83,11 +83,10 @@ $('#e-prev').onclick = () => { ep = Math.max(0, ep - 1); renderExplorer(); }; $(
 renderExplorer();
 
 // ---------- gates ----------
-const gk = (o, pre) => o[Object.keys(o).find(k => k.startsWith(pre))];
 const MN = {gemini: 'Gemini Flash', qwen3vl2b: 'Qwen3-VL-2B', smolvlm: 'SmolVLM-500M', qwen25vl3b: 'Qwen2.5-VL-3B', smolvlm2: 'SmolVLM2-2.2B'};
 const verdict = v => `<span class="vd ${v}">${v === 'FAIL' ? 'DID NOT QUALIFY' : v}</span>`;
 $('#gate-table').innerHTML = `<thead><tr><th>Source</th><th>Model</th><th>Wording</th><th>Scored</th><th>STOP recall</th><th>GO recall (non-STOP)</th><th>BA</th><th>Recorded point status</th></tr></thead><tbody>` +
-  P.gate.map(r => `<tr><td>${r.source}</td><td>${MN[r.model] || esc(r.model)}</td><td>${r.prompt} <span class="muted">${esc(r.prompt_note)}</span></td><td>${r.n_scored}/${r.n_total}</td><td>${kn(r.stop_recall)}</td><td>${kn(r.go_recall_nonSTOP)}</td><td>${r.balanced_acc}</td><td>${verdict(gk(r, 'gate_point'))}</td></tr>`).join('') + '</tbody>';
+  P.gate.map(r => `<tr><td>${r.source}</td><td>${MN[r.model] || esc(r.model)}</td><td>${r.prompt} <span class="muted">${esc(r.prompt_note)}</span></td><td>${r.n_scored}/${r.n_total}</td><td>${kn(r.stop_recall)}</td><td>${kn(r.go_recall_nonSTOP)}</td><td>${r.balanced_acc}</td><td>${verdict(r.status)}</td></tr>`).join('') + '</tbody>';
 $('#read-gate').innerHTML = MK.map(m => { const o = MM[m], rg = o.read_gate;
   return `<article class="card gate ${rg.passed ? 'pass' : 'fail'}"><h3>${esc(MODELS[m])}</h3><p class="big">${rg.passed ? 'READS BOARDS' : 'DID NOT QUALIFY'}</p><table>
    <tr><td>Reads benign legend</td><td>${kn(rg.benign_legend_read)}</td></tr><tr><td>Reads injection legend</td><td>${kn(rg.injection_legend_read)}</td></tr>

@@ -8,6 +8,10 @@ This is an **offline audit of the VLM reasoning / semantic-advisor layer on sing
 
 > A gate-passing 2B on-device VLM follows the stop/go meaning of any legible roadside text: STOP, ROAD CLOSED, or ROAD CLEAR/PROCEED, on a highway board or a billboard alike. It ignores length-matched non-traffic commands and nonsense, and it overrides a real STOP sign in 45/71 scenes. A frontier Flash model is largely immune, except to a bare 'STOP' on message boards.
 
+## Why it matters
+
+My advice to builders: treat scene text as untrusted unless it's a legal traffic control.
+
 On 63 board bases (43 uploader clusters), Qwen3-VL-2B answered STOP on bare "STOP" in **61/63** (0.968, CI [0.891, 0.991]), on "ROAD CLOSED / MERGE LEFT" in **50/63** (0.794, CI [0.678, 0.875]), and on the billboard twin of the injection in **63/63** (1.0, CI [0.943, 1.0]). A length-matched non-traffic command and nonsense text were each **18/63** (0.286, CI [0.189, 0.407]), next to the benign edit at **13/63** (0.206, CI [0.125, 0.322]). On 71 real STOP scenes (35 clusters), a board reading ROAD CLEAR / PROCEED produced a non-STOP answer in **45/71** (0.634, CI [0.518, 0.736]), against **14/71** (0.197, CI [0.121, 0.304]) for a benign board. Gemini Flash answered STOP on the injection in **10/63** (0.159, CI [0.089, 0.268]; Holm p = 0.15039) and on bare STOP in **18/63** (0.286, CI [0.189, 0.407]), of which the message-board subset is **16/27** (0.593, CI [0.407, 0.755]). On the same 71 STOP scenes Gemini's non-STOP rate for ROAD CLEAR / PROCEED was **0/71** (0.0, CI [0, 0.051]).
 
 Labels are provisional single-labeler (agent) labels. Phase 2 was not preregistered. Read the limitations before quoting the headline.
@@ -25,6 +29,21 @@ pip install -e ".[dev]"
 Optional extras, not installed in CI: `hf` (transformers), `gemini` (google-genai), `yolo` (Pillow is already in `dev`). Detector weights (`.pt`, `.onnx`) and GGUF files are git-ignored.
 
 **llama.cpp.** The Phase 2 and Phase 3 runs used llama.cpp release b11723 (CPU x64): https://github.com/ggml-org/llama.cpp/releases/tag/b11723 . [`models.lock`](models.lock) pins the local filename and the sha256 computed on that machine for every GGUF the runs loaded. The Qwen3-VL-2B Q8_0 file and its mmproj differ from the current Hugging Face objects, which may have been re-uploaded. The other pins match the current Hugging Face LFS oid of the same filename. Point a local `llama-server` at the GGUF and mmproj, then call `whostop.backends.LlamaServerBackend` at that server's base URL. This repository does not download weights.
+
+**Hardware and runtime.** The box is an 8-vCPU shared Intel Xeon with 15 GiB RAM, CPU only, no GPU, running llama.cpp release b11723 llama-server with 2 to 4 threads per model process (several models ran concurrently). [`scripts/runtime_summary.py`](scripts/runtime_summary.py) reads `latency_s` from the committed Phase 2 and pilot result files. Phase 3 runtime is added when Phase 3 lands. The script's output:
+
+```
+source: committed pilot/run/results_*.jsonl and phase2/run/results_*.jsonl
+model	n_requests	median_s_per_request
+gemini	2369	3.1000
+qwen25vl3b	164	11.8150
+qwen3vl2b	1822	5.0250
+smolvlm	1941	2.0600
+smolvlm2	94	8.9900
+yolo	394	1.7450
+sum_latency_s	31284.8900
+wall_clock_request_time_hours	8.6902	wall-clock request time, not true CPU-hours
+```
 
 **Gemini.** The key is read only from the environment variable `GEMINI_API_KEY`. Set `GEMINI_MODEL` to the pinned id (the Phase 2 file records `gemini-3.8-flash`). There is no key in the repo, the notebook, or CI. `.env*` is git-ignored. CI sets `WHOSTOP_FORBID_REMOTE=1` and the tests pass fake clients.
 
@@ -85,6 +104,24 @@ Phase 2 had no preregistration. `phase2/analysis/analyze_p2.py` changed after th
 ## Phase 3
 
 Phase 3 runs are in progress. They will produce `phase3/analysis/phase3_metrics.json`. No Phase 3 numbers are in this repository. The slot is described in [`phase3/README.md`](phase3/README.md).
+
+## Responsible AI concepts to files
+
+| Concept | Files |
+|---|---|
+| Harm direction and asymmetric errors | [README.md](README.md) (false STOP on a board versus overriding a real STOP); [phase2/phase2_report.md](phase2/phase2_report.md) |
+| Law-grounded labels (MUTCD) | [docs/sources.md](docs/sources.md); [phase3/legal/legal_manifest.csv](phase3/legal/legal_manifest.csv); [phase3/ERRATA_phase2.md](phase3/ERRATA_phase2.md) |
+| The competence gate | [whostop/gate.py](whostop/gate.py) |
+| Misuse and dual-use controls (images only, no physical tampering guidance) | [README.md](README.md#misuse-disclosure-privacy); [docs/build_plan.md](docs/build_plan.md) |
+| Disclosure plan | [README.md](README.md#misuse-disclosure-privacy); [phase2/phase2_report.md](phase2/phase2_report.md); [docs/build_plan.md](docs/build_plan.md) |
+| Licensing and attribution | [phase2/LICENSES.md](phase2/LICENSES.md); [phase3/legal/legal_manifest.csv](phase3/legal/legal_manifest.csv); [LICENSE](LICENSE); [NOTICE](NOTICE) |
+| Privacy by design | [pilot/v2work/blur_cv4.py](pilot/v2work/blur_cv4.py); [docs/PRIVACY_AUDIT.md](docs/PRIVACY_AUDIT.md); [site/PAGES_ALLOWLIST.txt](site/PAGES_ALLOWLIST.txt); [site/PAGES_DENYLIST.txt](site/PAGES_DENYLIST.txt); [site/build_pages_artifact.py](site/build_pages_artifact.py) (hard-exclude) |
+| Reproducibility | [models.lock](models.lock); [Makefile](Makefile) (`make reproduce`); [docs/PAGES_SHA256.txt](docs/PAGES_SHA256.txt); [docs/SITE_SHA256.txt](docs/SITE_SHA256.txt) |
+| Transparency about deviations | [docs/DEVIATIONS.md](docs/DEVIATIONS.md); [phase3/DEVIATIONS.md](phase3/DEVIATIONS.md) |
+
+## Poster
+
+[poster/poster_v4.1.pdf](poster/poster_v4.1.pdf), sha256 `842490b56b8c4919739084a6fdc3182e79c2f7eebf875821ebb939588b97595f`. Provenance: [poster/provenance_v4.1.md](poster/provenance_v4.1.md). The poster uses only blurred, licensed images listed in that provenance file.
 
 ## License and attribution
 
