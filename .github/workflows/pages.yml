@@ -1,37 +1,19 @@
+# Disabled. GitHub Pages is not enabled, and this repository is private, so the
+# configure-pages step fails. The public site is hosted separately. The image
+# allowlist is still enforced by the tests workflow
+# (site/build_pages_artifact.py --check). Do not re-enable this deploy until
+# Pages is turned on for a public repository.
 name: pages
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build the filtered public site
-        run: python3 site/build_pages_artifact.py --out _pages --check
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _pages
-
   deploy:
-    needs: build
+    if: false
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - run: echo "GitHub Pages deploy is disabled. The public site is hosted separately."

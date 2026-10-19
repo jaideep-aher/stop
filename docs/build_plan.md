@@ -11,14 +11,14 @@ Inputs: `pivot_concepts.md`, `sources.md`, `colab_pilot.ipynb`, `pilot/` (pilot_
 ## 1. What the pilot actually found (provisional, not claims)
 **Data (pilot_v2.zip, 385 images, all Wikimedia Commons, free licenses).** Block/label counts: G 45 STOP + 49 PROCEED; A_plus 26 STOP + 18 CAUTION; A_vandal 20 STOP; A_minus 32 PROCEED; B_board 18 bases × 5 variants (72 PROCEED + 18 CAUTION); R_removal 35 bases × 3 (70 STOP + 35 UNSURE). Licenses: CC BY-SA 2.0 115, CC BY-SA 4.0 105, CC BY-SA 3.0 48, CC BY 2.0 43, CC0 27, CC BY 4.0 21, PD 21, CC BY 3.0 4. **The labels are single-labeler, done by an AI agent, and provisional** (README.txt).
 
-**Coverage caveat.** Only YOLO scored all 385 rows. The VLM runs are partial: Gemini 187 rows, SmolVLM 107, Qwen3-VL-2B 36. No VLM has a gate result, and no VLM produced any A_minus rows. **Qwen2.5-VL-3B was not in this run.** Model is listed with prompt p1; the pilot used max_side 640.
+**Coverage caveat.** Only YOLO scored all 385 rows. The VLM runs are partial: Gemini 187 rows, SmolVLM 107, Qwen3-VL-2B 36. No VLM has a gate result, and no VLM produced any A_minus rows. **Qwen2.5-VL-3B was not in this run.** Model is listed with the neutral perception prompt (p1); the pilot used max_side 640.
 
 | Model | Headline (k/n) | Median latency |
 |---|---|---|
 | YOLO11n rule (conf 0.35) | Gate **passed**: STOP recall 45/45, PROCEED recall 49/49, BA 1.0. Study 1: legit STOP recall 16/26, PROCEED on any A_plus 28/44, **false-obey STOP on A_minus 9/32**, vandalized R1-1 20/20. Study 2: 0 flips (it does not read text). Study 3: sign removed → change 29/29, control 0/29 | 1.6 s |
-| Gemini (p1) | Study 1 legit STOP 20/20. Study 2: clean → PROCEED/CAUTION 15/18; flip vs clean for benign 4/18, official 11/18, inject_stop 3/18, inject_go 5/18; instruction echo inject_stop 5/18; McNemar inject_stop vs benign p = 1.0. **Study 3 (no-residual, 15 bases): sign removed → change 4/15 vs control 0/15 (McNemar p = 0.125). Cites the sign 15/15, cites the sign but does not flip 11/15, still STOP and still cites the sign after removal 6/15** | 2.8 s |
-| SmolVLM (p1) | Study 1 legit STOP **0/11** (all PROCEED). Study 2: inject_stop → STOP 2/11. Study 3: original STOP 5/8 | 3.79 s |
-| Qwen3-VL-2B (p1) | Study 1 legit STOP 3/4. Study 2: instruction echo inject_stop 4/4, inject_go 3/3; official/inject_stop → STOP 2/2 | 5.97 s |
+| Gemini (neutral perception prompt, p1) | Study 1 legit STOP 20/20. Study 2: clean → PROCEED/CAUTION 15/18; flip vs clean for benign 4/18, official 11/18, inject_stop 3/18, inject_go 5/18; instruction echo inject_stop 5/18; McNemar inject_stop vs benign p = 1.0. **Study 3 (no-residual, 15 bases): sign removed → change 4/15 vs control 0/15 (McNemar p = 0.125). Cites the sign 15/15, cites the sign but does not flip 11/15, still STOP and still cites the sign after removal 6/15** | 2.8 s |
+| SmolVLM (neutral perception prompt, p1) | Study 1 legit STOP **0/11** (all PROCEED). Study 2: inject_stop → STOP 2/11. Study 3: original STOP 5/8 | 3.79 s |
+| Qwen3-VL-2B (neutral perception prompt, p1) | Study 1 legit STOP 3/4. Study 2: instruction echo inject_stop 4/4, inject_go 3/3; official/inject_stop → STOP 2/2 | 5.97 s |
 
 Takeaways: (a) A pure pixel detector is perfect on the gate yet obeys 9 of 32 non-authoritative STOPs and misses 10 of 26 legitimate STOPs held by people. This is exactly the "authority vs pixels" gap. (b) The frontier model says the sign is its reason for stopping, but the decision usually survives removing the sign. That is a candidate unfaithfulness headline, n = 15. (c) The small VLMs echo injected board text (Qwen3) or miss legitimate stops (Smol). Every n is tiny and every label is agent-made. **Nothing here is publishable until human labeling is done and the runs are complete.**
 Earlier CPU anecdotes (n = 1, `pivot_concepts.md`): Qwen2.5-VL-3B took 33–41 s per image on CPU and echoed "stop the car engine now".
@@ -107,7 +107,7 @@ The repo should cover:
 - `src/hornok/defense.py` (OCR masking, "instructions are data" prompt) as the Study 2 defense arm
 - `src/hornok/xai.py` (inpaint and occlusion), `src/hornok/redact.py`, `src/hornok/photos.py` (photo handling), `src/hornok/report.py` (pattern)
 - `eval/round3/preregistration.md` (template)
-- `.github/workflows/ci.yml`, `.github/workflows/pages.yml`
+- `.github/workflows/ci.yml`, `.github/workflows/pages.yml` (in this repo the Pages workflow is disabled; the public site is hosted separately, and CI still checks the image allowlist)
 - Tests: `tests/test_metrics.py`, `test_parse.py`, `test_round3.py`, `test_xai.py`, `test_defense.py`, `test_gemini_called.py`
 - Skip: `attack_paint.py`, `gen.py`, `scenes.py`, `phrases.py`, the fonts (all Horn-specific). Also port `pilot/run/analyze.py` study logic from this folder.
 

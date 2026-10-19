@@ -1,5 +1,6 @@
 # Tracked composites that contain photo pixels. These are not Pages images
-# and they are not no-photo charts. Each file is a reviewed poster render of
-# the blurred, licensed images named in poster/provenance_v4.2.md.
-# Paths are relative to the repository root.
-poster/poster_v4.2.png	150 dpi render of poster_v4.2.pdf; blurred licensed photos only; see poster/provenance_v4.2.md
+# and they are not no-photo charts. Paths are relative to the repository root.
+# poster/poster_final_v6.2.pdf is Jay's final poster. It is a PDF, not a
+# tracked image, so it is not listed here. The v4.2 PNG composite was removed
+# with the stale poster versions. Add a row before committing any new photo
+# composite.

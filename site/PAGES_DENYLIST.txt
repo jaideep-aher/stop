@@ -1,166 +1,31 @@
 # image files referenced by data.json that must NOT ship in the Pages artifact (reason)
-data/img/p2/real/real_249.jpg	flagged
 data/img/p2/real/realb_010.jpg	flagged
-data/img/p2/real/realb_011.jpg	flagged
-data/img/p2/real/realb_028.jpg	flagged
-data/img/p2/real/realb_040.jpg	flagged
 data/img/p2/real/realb_047.jpg	flagged
 data/img/p2/real/realb_075.jpg	flagged
-data/img/p2/stim/b001_bare_stop.jpg	flagged
-data/img/p2/stim/b001_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b001_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b001_benign.jpg	flagged
-data/img/p2/stim/b001_benign_cmd.jpg	flagged
-data/img/p2/stim/b001_clean.jpg	flagged
-data/img/p2/stim/b001_inject_stop.jpg	flagged
-data/img/p2/stim/b001_nonsense.jpg	flagged
-data/img/p2/stim/b001_official.jpg	flagged
-data/img/p2/stim/b003_bare_stop.jpg	flagged
-data/img/p2/stim/b003_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b003_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b003_benign.jpg	flagged
-data/img/p2/stim/b003_benign_cmd.jpg	flagged
-data/img/p2/stim/b003_clean.jpg	flagged
-data/img/p2/stim/b003_inject_stop.jpg	flagged
-data/img/p2/stim/b003_nonsense.jpg	flagged
-data/img/p2/stim/b003_official.jpg	flagged
-data/img/p2/stim/b014_bare_stop.jpg	flagged
-data/img/p2/stim/b014_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b014_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b014_benign.jpg	flagged
-data/img/p2/stim/b014_benign_cmd.jpg	flagged
-data/img/p2/stim/b014_clean.jpg	flagged
-data/img/p2/stim/b014_inject_stop.jpg	flagged
-data/img/p2/stim/b014_nonsense.jpg	flagged
-data/img/p2/stim/b014_official.jpg	flagged
-data/img/p2/stim/b016_bare_stop.jpg	flagged
-data/img/p2/stim/b016_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b016_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b016_benign.jpg	flagged
-data/img/p2/stim/b016_benign_cmd.jpg	flagged
-data/img/p2/stim/b016_clean.jpg	flagged
-data/img/p2/stim/b016_inject_stop.jpg	flagged
-data/img/p2/stim/b016_nonsense.jpg	flagged
-data/img/p2/stim/b016_official.jpg	flagged
-data/img/p2/stim/b018_bare_stop.jpg	flagged
-data/img/p2/stim/b018_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b018_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b018_benign.jpg	flagged
-data/img/p2/stim/b018_benign_cmd.jpg	flagged
-data/img/p2/stim/b018_clean.jpg	flagged
-data/img/p2/stim/b018_inject_stop.jpg	flagged
-data/img/p2/stim/b018_nonsense.jpg	flagged
-data/img/p2/stim/b018_official.jpg	flagged
 data/img/p2/stim/b028_bare_stop.jpg	flagged
-data/img/p2/stim/b028_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b028_bb_inject_stop.jpg	flagged
 data/img/p2/stim/b028_benign.jpg	flagged
 data/img/p2/stim/b028_benign_cmd.jpg	flagged
 data/img/p2/stim/b028_clean.jpg	flagged
 data/img/p2/stim/b028_inject_stop.jpg	flagged
 data/img/p2/stim/b028_nonsense.jpg	flagged
 data/img/p2/stim/b028_official.jpg	flagged
-data/img/p2/stim/b052_bare_stop.jpg	flagged
 data/img/p2/stim/b052_bb_benign_cmd.jpg	flagged
 data/img/p2/stim/b052_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b052_benign.jpg	flagged
-data/img/p2/stim/b052_benign_cmd.jpg	flagged
 data/img/p2/stim/b052_clean.jpg	flagged
-data/img/p2/stim/b052_inject_stop.jpg	flagged
-data/img/p2/stim/b052_nonsense.jpg	flagged
-data/img/p2/stim/b052_official.jpg	flagged
-data/img/p2/stim/b100_bare_stop.jpg	flagged
-data/img/p2/stim/b100_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b100_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b100_benign.jpg	flagged
-data/img/p2/stim/b100_benign_cmd.jpg	flagged
-data/img/p2/stim/b100_clean.jpg	flagged
-data/img/p2/stim/b100_inject_stop.jpg	flagged
-data/img/p2/stim/b100_nonsense.jpg	flagged
-data/img/p2/stim/b100_official.jpg	flagged
-data/img/p2/stim/b125_bare_stop.jpg	flagged
-data/img/p2/stim/b125_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b125_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b125_benign.jpg	flagged
-data/img/p2/stim/b125_benign_cmd.jpg	flagged
-data/img/p2/stim/b125_clean.jpg	flagged
-data/img/p2/stim/b125_inject_stop.jpg	flagged
-data/img/p2/stim/b125_nonsense.jpg	flagged
-data/img/p2/stim/b125_official.jpg	flagged
-data/img/p2/stim/b139_bare_stop.jpg	flagged
-data/img/p2/stim/b139_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b139_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b139_benign.jpg	flagged
-data/img/p2/stim/b139_benign_cmd.jpg	flagged
-data/img/p2/stim/b139_clean.jpg	flagged
-data/img/p2/stim/b139_inject_stop.jpg	flagged
-data/img/p2/stim/b139_nonsense.jpg	flagged
-data/img/p2/stim/b139_official.jpg	flagged
-data/img/p2/stim/b147_bare_stop.jpg	flagged
-data/img/p2/stim/b147_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b147_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b147_benign.jpg	flagged
-data/img/p2/stim/b147_benign_cmd.jpg	flagged
-data/img/p2/stim/b147_clean.jpg	flagged
-data/img/p2/stim/b147_inject_stop.jpg	flagged
-data/img/p2/stim/b147_nonsense.jpg	flagged
-data/img/p2/stim/b147_official.jpg	flagged
-data/img/p2/stim/b155_bare_stop.jpg	flagged
-data/img/p2/stim/b155_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/b155_bb_inject_stop.jpg	flagged
-data/img/p2/stim/b155_benign.jpg	flagged
-data/img/p2/stim/b155_benign_cmd.jpg	flagged
-data/img/p2/stim/b155_clean.jpg	flagged
-data/img/p2/stim/b155_inject_stop.jpg	flagged
-data/img/p2/stim/b155_nonsense.jpg	flagged
-data/img/p2/stim/b155_official.jpg	flagged
 data/img/p2/stim/legit_006_sboard_benign.jpg	flagged
 data/img/p2/stim/legit_006_sboard_proceed.jpg	flagged
 data/img/p2/stim/legit_006_sclean.jpg	flagged
 data/img/p2/stim/legit_020_sboard_benign.jpg	flagged
 data/img/p2/stim/legit_020_sboard_proceed.jpg	flagged
 data/img/p2/stim/legit_020_sclean.jpg	flagged
-data/img/p2/stim/legit_021_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_021_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_021_sclean.jpg	flagged
-data/img/p2/stim/legit_056_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_056_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_056_sclean.jpg	flagged
-data/img/p2/stim/legit_084_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_084_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_084_sclean.jpg	flagged
-data/img/p2/stim/legit_104_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_104_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_104_sclean.jpg	flagged
-data/img/p2/stim/legit_111_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_111_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_111_sclean.jpg	flagged
 data/img/p2/stim/legit_116_sboard_benign.jpg	flagged
 data/img/p2/stim/legit_116_sboard_proceed.jpg	flagged
 data/img/p2/stim/legit_116_sclean.jpg	flagged
-data/img/p2/stim/legit_133_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_133_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_133_sclean.jpg	flagged
 data/img/p2/stim/legit_138_sboard_benign.jpg	flagged
 data/img/p2/stim/legit_138_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_138_sclean.jpg	flagged
-data/img/p2/stim/legit_147_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_147_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_147_sclean.jpg	flagged
 data/img/p2/stim/legit_148_sboard_benign.jpg	flagged
 data/img/p2/stim/legit_148_sboard_proceed.jpg	flagged
 data/img/p2/stim/legit_148_sclean.jpg	flagged
-data/img/p2/stim/legit_159_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_159_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_159_sclean.jpg	flagged
-data/img/p2/stim/legit_164_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_164_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_164_sclean.jpg	flagged
-data/img/p2/stim/legit_167_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_167_sboard_proceed.jpg	flagged
-data/img/p2/stim/legit_167_sclean.jpg	flagged
-data/img/p2/stim/legit_168_sboard_benign.jpg	flagged
-data/img/p2/stim/legit_168_sboard_proceed.jpg	flagged
 data/img/p2/stim/legit_168_sclean.jpg	flagged
 data/img/p2/stim/legit_170_sboard_benign.jpg	flagged
 data/img/p2/stim/legit_170_sboard_proceed.jpg	flagged
@@ -174,15 +39,6 @@ data/img/p2/stim/n011_clean.jpg	flagged
 data/img/p2/stim/n011_inject_stop.jpg	flagged
 data/img/p2/stim/n011_nonsense.jpg	flagged
 data/img/p2/stim/n011_official.jpg	flagged
-data/img/p2/stim/n024_bare_stop.jpg	flagged
-data/img/p2/stim/n024_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/n024_bb_inject_stop.jpg	flagged
-data/img/p2/stim/n024_benign.jpg	flagged
-data/img/p2/stim/n024_benign_cmd.jpg	flagged
-data/img/p2/stim/n024_clean.jpg	flagged
-data/img/p2/stim/n024_inject_stop.jpg	flagged
-data/img/p2/stim/n024_nonsense.jpg	flagged
-data/img/p2/stim/n024_official.jpg	flagged
 data/img/p2/stim/n026_bare_stop.jpg	flagged
 data/img/p2/stim/n026_bb_benign_cmd.jpg	flagged
 data/img/p2/stim/n026_bb_inject_stop.jpg	flagged
@@ -192,297 +48,63 @@ data/img/p2/stim/n026_clean.jpg	flagged
 data/img/p2/stim/n026_inject_stop.jpg	flagged
 data/img/p2/stim/n026_nonsense.jpg	flagged
 data/img/p2/stim/n026_official.jpg	flagged
-data/img/p2/stim/n032_bare_stop.jpg	flagged
 data/img/p2/stim/n032_bb_benign_cmd.jpg	flagged
 data/img/p2/stim/n032_bb_inject_stop.jpg	flagged
-data/img/p2/stim/n032_benign.jpg	flagged
-data/img/p2/stim/n032_benign_cmd.jpg	flagged
-data/img/p2/stim/n032_clean.jpg	flagged
-data/img/p2/stim/n032_inject_stop.jpg	flagged
-data/img/p2/stim/n032_nonsense.jpg	flagged
-data/img/p2/stim/n032_official.jpg	flagged
-data/img/p2/stim/n054_bare_stop.jpg	flagged
-data/img/p2/stim/n054_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/n054_bb_inject_stop.jpg	flagged
-data/img/p2/stim/n054_benign.jpg	flagged
-data/img/p2/stim/n054_benign_cmd.jpg	flagged
-data/img/p2/stim/n054_clean.jpg	flagged
-data/img/p2/stim/n054_inject_stop.jpg	flagged
-data/img/p2/stim/n054_nonsense.jpg	flagged
-data/img/p2/stim/n054_official.jpg	flagged
-data/img/p2/stim/n060_bare_stop.jpg	flagged
-data/img/p2/stim/n060_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/n060_bb_inject_stop.jpg	flagged
-data/img/p2/stim/n060_benign.jpg	flagged
-data/img/p2/stim/n060_benign_cmd.jpg	flagged
-data/img/p2/stim/n060_clean.jpg	flagged
-data/img/p2/stim/n060_inject_stop.jpg	flagged
-data/img/p2/stim/n060_nonsense.jpg	flagged
-data/img/p2/stim/n060_official.jpg	flagged
-data/img/p2/stim/n071_bare_stop.jpg	flagged
-data/img/p2/stim/n071_bb_benign_cmd.jpg	flagged
-data/img/p2/stim/n071_bb_inject_stop.jpg	flagged
-data/img/p2/stim/n071_benign.jpg	flagged
-data/img/p2/stim/n071_benign_cmd.jpg	flagged
-data/img/p2/stim/n071_clean.jpg	flagged
-data/img/p2/stim/n071_inject_stop.jpg	flagged
-data/img/p2/stim/n071_nonsense.jpg	flagged
-data/img/p2/stim/n071_official.jpg	flagged
-data/img/p2/stim/stop2_006_sboard_benign.jpg	flagged
-data/img/p2/stim/stop2_006_sboard_proceed.jpg	flagged
-data/img/p2/stim/stop2_006_sclean.jpg	flagged
 data/img/p2/stim/stop2_009_sboard_benign.jpg	flagged
 data/img/p2/stim/stop2_009_sboard_proceed.jpg	flagged
 data/img/p2/stim/stop2_009_sclean.jpg	flagged
-data/img/p2/stim/stop2_020_sboard_benign.jpg	flagged
-data/img/p2/stim/stop2_020_sboard_proceed.jpg	flagged
-data/img/p2/stim/stop2_020_sclean.jpg	flagged
 data/img/p2/stim/stop2_025_sboard_benign.jpg	flagged
 data/img/p2/stim/stop2_025_sboard_proceed.jpg	flagged
 data/img/p2/stim/stop2_025_sclean.jpg	flagged
-data/img/p2/stim/stop2_088_sboard_benign.jpg	flagged
-data/img/p2/stim/stop2_088_sboard_proceed.jpg	flagged
-data/img/p2/stim/stop2_088_sclean.jpg	flagged
 data/img/p2/stim/stop2_091_sboard_benign.jpg	flagged
 data/img/p2/stim/stop2_091_sboard_proceed.jpg	flagged
-data/img/p2/stim/stop2_091_sclean.jpg	flagged
 data/img/p2/stim/stop2_139_sboard_benign.jpg	flagged
-data/img/p2/stim/stop2_139_sboard_proceed.jpg	flagged
 data/img/p2/stim/stop2_139_sclean.jpg	flagged
-data/img/p2/stim/stop2_177_sboard_benign.jpg	flagged
-data/img/p2/stim/stop2_177_sboard_proceed.jpg	flagged
-data/img/p2/stim/stop2_177_sclean.jpg	flagged
 data/img/p2/stim/stop2_214_sboard_benign.jpg	flagged
 data/img/p2/stim/stop2_214_sboard_proceed.jpg	flagged
 data/img/p2/stim/stop2_214_sclean.jpg	flagged
-data/img/p2/stim/stop_026_sboard_benign.jpg	flagged
-data/img/p2/stim/stop_026_sboard_proceed.jpg	flagged
-data/img/p2/stim/stop_026_sclean.jpg	flagged
-data/img/p2/stim/stop_056_sboard_benign.jpg	flagged
-data/img/p2/stim/stop_056_sboard_proceed.jpg	flagged
-data/img/p2/stim/stop_056_sclean.jpg	flagged
-data/img/p2/stim/stop_065_sboard_benign.jpg	flagged
-data/img/p2/stim/stop_065_sboard_proceed.jpg	flagged
-data/img/p2/stim/stop_065_sclean.jpg	flagged
-data/img/pilot/board_014__clean.jpg	flagged
-data/img/pilot/board_034__benign.jpg	flagged
-data/img/pilot/board_034__inject_go.jpg	flagged
-data/img/pilot/board_034__inject_stop.jpg	flagged
-data/img/pilot/board_034__official.jpg	flagged
-data/img/pilot/board_100__benign.jpg	flagged
-data/img/pilot/board_100__clean.jpg	flagged
-data/img/pilot/board_100__official.jpg	flagged
-data/img/pilot/ill2_108.jpg	flagged
 data/img/pilot/ill2_139.jpg	flagged
-data/img/pilot/ill2_165.jpg	flagged
-data/img/pilot/ill2_248.jpg	flagged
 data/img/pilot/ill2_280.jpg	flagged
-data/img/pilot/illegit_142.jpg	flagged
 data/img/pilot/illegit_149.jpg	flagged
-data/img/pilot/illegit_154.jpg	flagged
 data/img/pilot/illegit_163.jpg	flagged
-data/img/pilot/illegit_173.jpg	flagged
-data/img/pilot/illegit_176.jpg	flagged
 data/img/pilot/illegit_185.jpg	flagged
 data/img/pilot/road_008.jpg	flagged
 data/img/pilot/road_065.jpg	flagged
-data/img/pilot/road_066.jpg	flagged
-data/img/pilot/road_069.jpg	flagged
-data/img/pilot/road_075.jpg	flagged
-data/img/pilot/road_076.jpg	flagged
 data/img/pilot/road_098.jpg	flagged
-data/img/pilot/road_107.jpg	flagged
-data/img/pilot/stop2_006.jpg	flagged
-data/img/pilot/stop2_020.jpg	flagged
 data/img/pilot/stop2_090__control_removed.jpg	flagged
 data/img/pilot/stop2_139.jpg	flagged
-data/img/pilot/stop2_170__sign_removed.jpg	flagged
-data/img/pilot/stop2_178__original.jpg	flagged
 data/img/pilot/stop2_178__sign_removed.jpg	flagged
-data/img/pilot/stop2_217__original.jpg	flagged
 data/img/pilot/stop2_217__sign_removed.jpg	flagged
-data/img/pilot/stop_006__original.jpg	flagged
-data/img/pilot/stop_065.jpg	flagged
 data/img/pilot/stop_068__sign_removed.jpg	flagged
-data/img/pilot/stop_082__control_removed.jpg	flagged
-data/img/pilot/stop_083__control_removed.jpg	flagged
-data/img/pilot/stop_083__original.jpg	flagged
-data/img/pilot/stop_083__sign_removed.jpg	flagged
 data/img/pilot/ill2_037.jpg	visible faces remained after blur (grader 2026-10-19)
 data/img/pilot/ill2_066.jpg	visible faces remained after blur (grader 2026-10-19)
 data/img/pilot/ill2_312.jpg	visible faces remained after blur (grader 2026-10-19)
 data/img/pilot/ill2_313.jpg	visible faces remained after blur (grader 2026-10-19)
-data/img/p2/stim/b091_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b091_bb_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b091_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b091_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b091_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b091_clean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b091_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b091_nonsense.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b091_official.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b103_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b103_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b103_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b103_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b103_nonsense.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b103_official.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b118_bb_benign_cmd.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/b118_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/b118_clean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/legit_019_sboard_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/legit_019_sboard_proceed.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/legit_019_sclean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/legit_126_sboard_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/legit_126_sboard_proceed.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/legit_126_sclean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/legit_132_sboard_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/legit_132_sboard_proceed.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/legit_169_sboard_benign.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/legit_169_sboard_proceed.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/legit_169_sclean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/legit_171_sboard_benign.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/legit_171_sboard_proceed.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/legit_171_sclean.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/n031_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n031_bb_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n031_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n031_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n031_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n031_clean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n031_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n031_nonsense.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n031_official.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n033_bare_stop.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/n033_bb_benign_cmd.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/n033_bb_inject_stop.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/n033_benign.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/n033_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n033_clean.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/n033_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n033_nonsense.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n033_official.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n040_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n040_bb_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n040_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n040_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n040_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n040_clean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n040_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n040_nonsense.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n040_official.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n047_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n056_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n056_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n056_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n056_clean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n056_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n056_nonsense.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n056_official.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n072_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n072_bb_benign_cmd.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/n072_bb_inject_stop.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/n072_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n072_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n072_clean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n072_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n072_nonsense.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n072_official.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n073_bare_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n073_bb_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n073_bb_inject_stop.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/n073_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n073_benign_cmd.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n073_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/n078_bb_inject_stop.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/stop2_039_sboard_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/stop2_039_sboard_proceed.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/stop2_039_sclean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/stop2_186_sboard_benign.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/stop2_186_sboard_proceed.jpg	upstream withhold; two-detector audit did not clear it
-data/img/p2/stim/stop2_186_sclean.jpg	upstream withhold; two-detector audit did not clear it
-data/img/pilot/board_118__clean.jpg	upstream withhold; two-detector audit did not clear it
 data/img/pilot/board_118__inject_go.jpg	upstream withhold; two-detector audit did not clear it
 data/img/pilot/ill2_017.jpg	upstream withhold; two-detector audit did not clear it
 data/img/pilot/ill2_045.jpg	upstream withhold; two-detector audit did not clear it
 data/img/pilot/ill3_133.jpg	upstream withhold; two-detector audit did not clear it
 data/img/pilot/ill3_136.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/pilot/legit_000.jpg	upstream withhold; full-person reblur did not clear both detectors
 data/img/pilot/legit_028.jpg	upstream withhold; two-detector audit did not clear it
-data/img/pilot/legit_108.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/pilot/legit_109.jpg	upstream withhold; full-person reblur did not clear both detectors
 data/img/pilot/legit_167.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/pilot/legit_169.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/pilot/road_039.jpg	upstream withhold; two-detector audit did not clear it
-data/img/pilot/stop2_030__control_removed.jpg	upstream withhold; two-detector audit did not clear it
-data/img/pilot/stop2_030__original.jpg	upstream withhold; two-detector audit did not clear it
-data/img/pilot/stop2_170__control_removed.jpg	upstream withhold; two-detector audit did not clear it
-data/img/pilot/stop2_177.jpg	upstream withhold; two-detector audit did not clear it
-data/img/pilot/stop_021__sign_removed.jpg	upstream withhold; two-detector audit did not clear it
-data/img/pilot/stop_031__control_removed.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/pilot/stop_031__original.jpg	upstream withhold; full-person reblur did not clear both detectors
 data/img/pilot/stop_031__sign_removed.jpg	upstream withhold; full-person reblur did not clear both detectors
-data/img/p2/stim/b022_bare_stop.jpg	pending human review after blur fix
-data/img/p2/stim/b022_bb_benign_cmd.jpg	pending human review after blur fix
-data/img/p2/stim/b022_bb_inject_stop.jpg	pending human review after blur fix
-data/img/p2/stim/b022_benign.jpg	pending human review after blur fix
-data/img/p2/stim/b022_benign_cmd.jpg	pending human review after blur fix
-data/img/p2/stim/b022_clean.jpg	pending human review after blur fix
-data/img/p2/stim/b022_inject_stop.jpg	pending human review after blur fix
-data/img/p2/stim/b022_nonsense.jpg	pending human review after blur fix
-data/img/p2/stim/b022_official.jpg	pending human review after blur fix
-data/img/p2/stim/b032_bare_stop.jpg	pending human review after blur fix
-data/img/p2/stim/b032_benign_cmd.jpg	pending human review after blur fix
-data/img/p2/stim/b032_inject_stop.jpg	pending human review after blur fix
-data/img/p2/stim/b032_nonsense.jpg	pending human review after blur fix
-data/img/p2/stim/b032_official.jpg	pending human review after blur fix
-data/img/p2/stim/b118_bare_stop.jpg	pending human review after blur fix
-data/img/p2/stim/b118_benign.jpg	pending human review after blur fix
-data/img/p2/stim/b118_benign_cmd.jpg	pending human review after blur fix
-data/img/p2/stim/b118_inject_stop.jpg	pending human review after blur fix
-data/img/p2/stim/b118_nonsense.jpg	pending human review after blur fix
-data/img/p2/stim/b118_official.jpg	pending human review after blur fix
-data/img/p2/stim/b127_bb_benign_cmd.jpg	pending human review after blur fix
-data/img/pilot/board_118__benign.jpg	pending human review after blur fix
 data/img/pilot/board_118__inject_stop.jpg	pending human review after blur fix
 data/img/pilot/board_118__official.jpg	pending human review after blur fix
 data/img/pilot/ill2_018.jpg	pending human review after blur fix
 data/img/pilot/ill2_019.jpg	pending human review after blur fix
 data/img/pilot/ill2_021.jpg	pending human review after blur fix
 data/img/pilot/ill2_035.jpg	pending human review after blur fix
-data/img/pilot/ill2_233.jpg	pending human review after blur fix
 data/img/pilot/ill2_279.jpg	pending human review after blur fix
-data/img/pilot/ill2_316.jpg	pending human review after blur fix
 data/img/pilot/ill2_317.jpg	pending human review after blur fix
 data/img/pilot/ill2_318.jpg	pending human review after blur fix
 data/img/pilot/ill3_128.jpg	pending human review after blur fix
 data/img/pilot/ill3_137.jpg	pending human review after blur fix
 data/img/pilot/ill3_148.jpg	pending human review after blur fix
 data/img/pilot/ill3_150.jpg	pending human review after blur fix
-data/img/p2/stim/legit_005_sclean.jpg	pending human review after blur fix
-data/img/pilot/legit_083.jpg	pending human review after blur fix
-data/img/pilot/legit_133.jpg	pending human review after blur fix
 data/img/pilot/legit_134.jpg	pending human review after blur fix
 data/img/pilot/legit_138.jpg	pending human review after blur fix
-data/img/pilot/legit_147.jpg	pending human review after blur fix
 data/img/pilot/legit_148.jpg	pending human review after blur fix
-data/img/pilot/legit_159.jpg	pending human review after blur fix
 data/img/pilot/legit_165.jpg	pending human review after blur fix
-data/img/p2/stim/legit_165_sboard_benign.jpg	pending human review after blur fix
-data/img/p2/stim/legit_165_sboard_proceed.jpg	pending human review after blur fix
-data/img/p2/stim/legit_165_sclean.jpg	pending human review after blur fix
 data/img/pilot/stop2_025.jpg	pending human review after blur fix
-data/img/pilot/stop2_030__sign_removed.jpg	pending human review after blur fix
 data/img/pilot/stop2_178__control_removed.jpg	pending human review after blur fix
-data/img/p2/example_2.jpg	pending human review after blur fix
-data/img/p2/example_3.jpg	pending human review after blur fix
-data/img/p2/stim/b032_benign.jpg	pending human review after blur fix
-data/img/p2/stim/b032_clean.jpg	pending human review after blur fix
-data/img/p2/stim/stop2_002_sboard_benign.jpg	pending human review after blur fix
-data/img/p2/stim/stop2_002_sboard_proceed.jpg	pending human review after blur fix
-data/img/p2/stim/stop2_011_sboard_benign.jpg	pending human review after blur fix
-data/img/p2/stim/stop2_011_sboard_proceed.jpg	pending human review after blur fix
-data/img/p2/stim/stop2_011_sclean.jpg	pending human review after blur fix
-data/img/p2/stim/stop2_117_sboard_benign.jpg	pending human review after blur fix
-data/img/p2/stim/stop2_117_sboard_proceed.jpg	pending human review after blur fix
 data/img/pilot/stop2_097__control_removed.jpg	pending human review after blur fix

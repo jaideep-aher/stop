@@ -44,3 +44,7 @@ Ids both detectors called empty after the full person-region re-blur, now pendin
 `ill2_037`, `ill2_066`, `ill2_312`, and `ill2_313` stay denied. Their committed image files were deleted.
 
 Nothing on the public site relies on the two-detector check alone. Every id in `docs/upstream_withhold.csv` stays off the Pages artifact until a person has looked at the re-blurred file.
+
+## Human check, 2026-10-19
+
+Jaideep Aher checked 588 blurred copies (`site/HUMAN_CHECKED.csv`). Those paths are on the allowlist and the files are in `site/site/data/img/`. `docs/WITHHELD_IMAGES.csv` now lists the 180 that remain off the site: 9 possible minors, held until each id is confirmed, and 171 blur re-check failures. The counts above describe the audit before that check.
