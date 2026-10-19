@@ -188,13 +188,81 @@ def test_possible_minors_are_absent_from_the_pages_artifact(tmp_path: Path):
     dest = tmp_path / "pages"
     build(dest)
     needles = tuple(_PAGES.HARD_EXCLUDE_IDS) + tuple(_PAGES.HARD_EXCLUDE_URLS)
-    assert set(_PAGES.HARD_EXCLUDE_IDS) == {"ill2_037", "ill2_066", "ill2_312", "ill2_313"}
+    assert set(_PAGES.HARD_EXCLUDE_IDS) == {
+        "ill2_017",
+        "ill2_018",
+        "ill2_019",
+        "ill2_037",
+        "ill2_066",
+        "ill2_312",
+        "ill2_313",
+        "ill2_317",
+        "ill2_318",
+    }
     blob = b"\n".join(path.read_bytes() for path in dest.rglob("*") if path.is_file())
     for needle in needles:
         assert needle.encode() not in blob
     source = (ROOT / "site" / "site" / "data" / "data.json").read_text(encoding="utf-8")
     for needle in needles:
         assert needle not in source
+
+
+def test_unpublished_entries_keep_no_credit_or_source(tmp_path: Path):
+    """A Pages entry that is not published has no credit, source, or URL fields."""
+    dest = tmp_path / "pages"
+    build(dest)
+    data = json.loads((dest / "data" / "data.json").read_text(encoding="utf-8"))
+    present = {
+        path.relative_to(dest).as_posix()
+        for path in dest.rglob("*")
+        if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".gif"}
+    }
+
+    def published(node: dict) -> bool:
+        if node.get("published") is False:
+            return False
+        for key in ("thumb", "file"):
+            value = node.get(key)
+            if isinstance(value, str) and value in present:
+                return True
+        return False
+
+    def assert_no_provenance(node: dict) -> None:
+        for key, value in node.items():
+            low = key.lower()
+            assert "credit" not in low
+            assert not low.startswith("source")
+            assert low not in {"url", "file_title", "title", "photographer", "cluster_id"}
+            assert not low.endswith("_url")
+            if isinstance(value, str):
+                assert not value.startswith(("http://", "https://"))
+                assert "commons.wikimedia.org" not in value
+
+    for item in data["pilot"]["images"]:
+        if published(item):
+            assert item.get("credit") and item.get("source_url")
+        else:
+            assert_no_provenance(item)
+    for base in data["p2"]["bases"]:
+        images = list(base["images"].values())
+        if any(published(item) for item in images):
+            assert base.get("credit") and base.get("source_url")
+        else:
+            assert_no_provenance(base)
+        for item in images:
+            if not published(item):
+                assert_no_provenance(item)
+    for item in data["p2"]["real"]:
+        if published(item):
+            assert item.get("credit") and item.get("source_url")
+        else:
+            assert_no_provenance(item)
+    for item in data["p2"]["examples"]:
+        if published(item):
+            assert item.get("credit") and item.get("source_url")
+        else:
+            assert_no_provenance(item)
+    assert not any(path.name == "LICENSES.md" for path in dest.rglob("*"))
 
 
 def test_blur_helper_import_does_not_require_a_detector():
