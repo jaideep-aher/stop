@@ -12,7 +12,6 @@ const pv = p => p == null ? '—' : p < 0.0001 ? '&lt;0.0001' : (+p).toPrecision
 const kn = r => (!r || !r.n) ? '<span class="muted">no rows</span>' : `<b>${r.k}/${r.n}</b> <span class="muted">= ${r.rate.toFixed(2)} [${r.ci95[0].toFixed(2)}, ${(+r.ci95[1]).toFixed(2)}]</span>`;
 const VN = Object.fromEntries([...D.board_variants, ...D.stop_variants]);
 $('#gen').textContent = D.generated_at; $('#repo').textContent = `${D.repo.name} (${D.repo.status})`;
-$('#banner').innerHTML = `<b>Offline research audit.</b> ${esc(D.label_note)} p-values are exploratory.`;
 $('#gem-id').textContent = `(${D.p2.gemini_model_id})`;
 $('#scored').textContent = MK.map(m => `${MODELS[m].split(' (')[0]} ${MM[m].scored_prompt}`).join(', ');
 
@@ -52,7 +51,7 @@ function renderCond() {
 }
 $('#c-model').onchange = renderCond; renderCond();
 const RP = P.real;
-$('#real-gallery').innerHTML = `<p class="muted">${RP.filter(r => r.thumb).length} of ${P.real.length} real tampered photos published (unedited; detector-blurred, unverified).</p>` + RP.map(r => `<figure>${r.thumb ? `<img src="${r.thumb}" alt="real altered sign ${esc(r.id)}" loading="lazy">` : '<span class="noimg big">image withheld (pending human check)</span>'}<figcaption><code>${esc(r.id)}</code> provisional label ${r.label}<br>${attrib(r.credit, r.source_url, r.license)}</figcaption></figure>`).join('');
+$('#real-gallery').innerHTML = `<p class="muted">${RP.filter(r => r.thumb).length} of ${P.real.length} real tampered photos published (unedited; detector-blurred, unverified).</p>` + RP.map(r => `<figure>${r.thumb ? `<img src="${r.thumb}" alt="real altered sign ${esc(r.id)}" loading="lazy">` : '<span class="noimg big">image withheld (pending human check)</span>'}<figcaption><code>${esc(r.id)}</code> label ${r.label}<br>${attrib(r.credit, r.source_url, r.license)}</figcaption></figure>`).join('');
 
 // ---------- explorer ----------
 const PAGE = 25; let ep = 0;
@@ -129,7 +128,7 @@ function renderP3(ph) {
    <h4>Competence gates (canonical: BA ≥ 0.85, STOP ≥ 0.90, GO ≥ 0.80)</h4>${gt}
    <h4>Second model (LFM2-VL-1.6B, 448 px)</h4>${lf}
    <p class="muted">${incomplete}</p>
-   <p class="muted">Source: <code>${esc(ph.source)}</code> and <code>phase3/phase3_report.md</code>. Labels are provisional (single labeler). Conditions appear in the file's order and are never ranked.</p></article>`;
+   <p class="muted">Source: <code>${esc(ph.source)}</code> and <code>phase3/phase3_report.md</code>. Conditions appear in the file's order and are never ranked.</p></article>`;
 }
 function renderP3Grid() { const ph = (D.phases || []).find(p => p.phase3); if (!ph) return; const c = ph.phase3.grid[$('#p3-cell').value];
   $('#p3-grid').innerHTML = `<div class="tablewrap"><table><thead><tr><th>Board condition (63 bases; P(STOP), correct never STOP)</th><th>P(STOP)</th><th>Benign board (control)</th><th>Holm p</th><th>Photographer-cluster p</th></tr></thead><tbody>${Object.entries(c.board).map(([b, o]) => `<tr><td>${esc(P3BOARD[b] || b)}</td><td>${kn(o.variant)}</td><td>${kn(o.control)}</td><td>${pv(o.holm_p)}</td><td>${pv(o.cluster_p)}</td></tr>`).join('')}

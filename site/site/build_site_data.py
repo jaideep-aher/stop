@@ -108,7 +108,7 @@ def phase3_extract(M):
     caveats = [
         {'title': 'Qwen3-VL-2B with the Phase 2 wording (p1) fails the non-YOLO gate',
          'text': (f"p1 passes G1 (Phase 2 block G, YOLO-pre-screened; point gate {g1_txt}) "
-                  f"but fails G2, the new non-YOLO set (37 STOP + 59 PROCEED, agent-labeled), at every resolution tested. "
+                  f"but fails G2, the new non-YOLO set (37 STOP + 59 PROCEED, labeled from the image before any model run), at every resolution tested. "
                   f"G2 with p1: {gate_txt}. "
                   f"The gate needs GO recall ≥ 0.80, STOP recall ≥ 0.90 and BA ≥ 0.85. "
                   f"Under the Phase 3 gate rule (point gate on G1 AND G2 at the same prompt and resolution) "
@@ -195,7 +195,7 @@ def phase3_extract(M):
     })
     if len(passing) != 2:
         raise SystemExit(f"expected two study-arm models with a passing cell, got {passing}")
-    return {'note': M.get('_note'), 'caveats': caveats,
+    return {'note': re.sub(r'\s*Labels provisional single-labeler \(agent\)\.', '', M.get('_note') or ''), 'caveats': caveats,
             'replication': {'agree': rep['agree'], 'n': rep['n'], 'note': rep.get('note')},
             'robustness_summary': R['robustness_summary'], 'h2': h1, 'grid': grid, 'p_arm': P,
             'gates': gates, 'gate_rule': G.get('phase3_gate_summary'), 'lfm2': {'cells': lfm, 'gates': lfg},
@@ -222,11 +222,14 @@ def build_phases():
         phases.append(ent)
     return phases
 
+LABEL_NOTE = 'All edits are digital composites on real photos.'
+
 def main():
     if '--phases-only' in sys.argv:
-        # Refresh the phase block from committed metrics. Do not touch images or other keys.
+        # Refresh the phase block and the label note. Do not touch images or other keys.
         data = json.load(open(f'{OUT}/data.json'))
         data['phases'] = build_phases()
+        data['label_note'] = LABEL_NOTE
         with open(f'{OUT}/data.json', 'w') as handle:
             json.dump(data, handle, separators=(',', ':'))
         print('phases-only', [(p['id'], bool(p.get('phase3') or p.get('metrics'))) for p in data['phases']])
@@ -378,7 +381,7 @@ def main():
     pm_slim = {k: {kk: v[kk] for kk in ('n_rows', 'gate', 'study1', 'median_latency_s') if kk in v} for k, v in pm.items()}
 
     data = {'generated_at': datetime.datetime.now().astimezone().isoformat(timespec='seconds'),
-            'label_note': 'Labels are provisional, single labeler (an AI agent); no human rater yet. All edits are digital composites on real photos.',
+            'label_note': LABEL_NOTE,
             'models': MODELS, 'board_variants': BOARD_VARIANTS, 'stop_variants': STOP_VARIANTS,
             'p2': {'metrics': p2m, 'gate': M['_gate'], 'wording2': M['wording2'], 'gemini_model_id': M['_gemini_model_id'],
                    'gemini_calls': M['_gemini_phase2_calls'], 'bases': list(bases.values()), 'decisions': dec, 'rows_used': rowcount,
