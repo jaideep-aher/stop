@@ -1,0 +1,1196 @@
+[
+{
+"image_id": "stop_001__original",
+"yolo_stop": [
+[
+0.9426997303962708,
+[
+182,
+165,
+403,
+377
+]
+]
+]
+},
+{
+"image_id": "stop_001__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_001__control_removed",
+"yolo_stop": [
+[
+0.9429946541786194,
+[
+182,
+165,
+403,
+377
+]
+]
+]
+},
+{
+"image_id": "stop_003__original",
+"yolo_stop": [
+[
+0.9528232216835022,
+[
+353,
+143,
+554,
+392
+]
+]
+]
+},
+{
+"image_id": "stop_003__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_003__control_removed",
+"yolo_stop": [
+[
+0.9518963098526001,
+[
+353,
+143,
+554,
+392
+]
+]
+]
+},
+{
+"image_id": "stop_006__original",
+"yolo_stop": [
+[
+0.9534421563148499,
+[
+311,
+309,
+651,
+695
+]
+]
+]
+},
+{
+"image_id": "stop_006__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_006__control_removed",
+"yolo_stop": [
+[
+0.9598025679588318,
+[
+311,
+309,
+652,
+694
+]
+]
+]
+},
+{
+"image_id": "stop_012__original",
+"yolo_stop": [
+[
+0.9262575507164001,
+[
+131,
+145,
+238,
+267
+]
+]
+]
+},
+{
+"image_id": "stop_012__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_012__control_removed",
+"yolo_stop": [
+[
+0.922639012336731,
+[
+131,
+145,
+239,
+267
+]
+]
+]
+},
+{
+"image_id": "stop_014__original",
+"yolo_stop": [
+[
+0.921724796295166,
+[
+495,
+153,
+601,
+259
+]
+],
+[
+0.36641302704811096,
+[
+133,
+400,
+151,
+419
+]
+]
+]
+},
+{
+"image_id": "stop_014__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_014__control_removed",
+"yolo_stop": [
+[
+0.9195773601531982,
+[
+495,
+153,
+602,
+259
+]
+],
+[
+0.3763462007045746,
+[
+133,
+400,
+151,
+419
+]
+]
+]
+},
+{
+"image_id": "stop_015__original",
+"yolo_stop": [
+[
+0.9425551295280457,
+[
+375,
+241,
+528,
+389
+]
+]
+]
+},
+{
+"image_id": "stop_015__sign_removed",
+"yolo_stop": [
+[
+0.29948198795318604,
+[
+402,
+406,
+499,
+497
+]
+]
+]
+},
+{
+"image_id": "stop_015__control_removed",
+"yolo_stop": [
+[
+0.9425435066223145,
+[
+375,
+241,
+528,
+389
+]
+]
+]
+},
+{
+"image_id": "stop_016__original",
+"yolo_stop": [
+[
+0.8564806580543518,
+[
+422,
+254,
+526,
+363
+]
+]
+]
+},
+{
+"image_id": "stop_016__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_016__control_removed",
+"yolo_stop": [
+[
+0.8571008443832397,
+[
+422,
+254,
+526,
+363
+]
+]
+]
+},
+{
+"image_id": "stop_021__original",
+"yolo_stop": [
+[
+0.9517284631729126,
+[
+436,
+618,
+614,
+953
+]
+]
+]
+},
+{
+"image_id": "stop_021__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_021__control_removed",
+"yolo_stop": [
+[
+0.951362133026123,
+[
+436,
+618,
+614,
+953
+]
+]
+]
+},
+{
+"image_id": "stop_029__original",
+"yolo_stop": [
+[
+0.8599466681480408,
+[
+288,
+348,
+340,
+401
+]
+]
+]
+},
+{
+"image_id": "stop_029__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_029__control_removed",
+"yolo_stop": [
+[
+0.8597325086593628,
+[
+288,
+348,
+340,
+401
+]
+]
+]
+},
+{
+"image_id": "stop_031__original",
+"yolo_stop": [
+[
+0.8771790266036987,
+[
+776,
+269,
+872,
+361
+]
+]
+]
+},
+{
+"image_id": "stop_031__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_031__control_removed",
+"yolo_stop": [
+[
+0.8801682591438293,
+[
+776,
+269,
+872,
+361
+]
+]
+]
+},
+{
+"image_id": "stop_034__original",
+"yolo_stop": [
+[
+0.7283903360366821,
+[
+26,
+24,
+113,
+125
+]
+]
+]
+},
+{
+"image_id": "stop_034__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_034__control_removed",
+"yolo_stop": [
+[
+0.7272952198982239,
+[
+26,
+24,
+113,
+125
+]
+]
+]
+},
+{
+"image_id": "stop_039__original",
+"yolo_stop": [
+[
+0.8721056580543518,
+[
+175,
+387,
+245,
+464
+]
+]
+]
+},
+{
+"image_id": "stop_039__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_039__control_removed",
+"yolo_stop": [
+[
+0.8784394264221191,
+[
+175,
+387,
+246,
+464
+]
+]
+]
+},
+{
+"image_id": "stop_049__original",
+"yolo_stop": [
+[
+0.974351704120636,
+[
+12,
+4,
+412,
+407
+]
+]
+]
+},
+{
+"image_id": "stop_049__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_049__control_removed",
+"yolo_stop": [
+[
+0.564736008644104,
+[
+11,
+3,
+428,
+405
+]
+]
+]
+},
+{
+"image_id": "stop_050__original",
+"yolo_stop": [
+[
+0.9299178123474121,
+[
+491,
+119,
+596,
+225
+]
+],
+[
+0.9073100090026855,
+[
+496,
+222,
+597,
+327
+]
+]
+]
+},
+{
+"image_id": "stop_050__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_050__control_removed",
+"yolo_stop": [
+[
+0.9291173219680786,
+[
+491,
+119,
+596,
+225
+]
+],
+[
+0.9056563973426819,
+[
+496,
+222,
+597,
+327
+]
+]
+]
+},
+{
+"image_id": "stop_067__original",
+"yolo_stop": [
+[
+0.9329828023910522,
+[
+110,
+28,
+333,
+259
+]
+]
+]
+},
+{
+"image_id": "stop_067__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_067__control_removed",
+"yolo_stop": [
+[
+0.9365316033363342,
+[
+110,
+28,
+333,
+257
+]
+]
+]
+},
+{
+"image_id": "stop_068__original",
+"yolo_stop": [
+[
+0.9560072422027588,
+[
+218,
+93,
+393,
+264
+]
+]
+]
+},
+{
+"image_id": "stop_068__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_068__control_removed",
+"yolo_stop": [
+[
+0.8225110769271851,
+[
+227,
+93,
+393,
+264
+]
+]
+]
+},
+{
+"image_id": "stop_069__original",
+"yolo_stop": [
+[
+0.9425627589225769,
+[
+590,
+106,
+718,
+239
+]
+]
+]
+},
+{
+"image_id": "stop_069__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_069__control_removed",
+"yolo_stop": [
+[
+0.9424316883087158,
+[
+590,
+106,
+718,
+239
+]
+]
+]
+},
+{
+"image_id": "stop_082__original",
+"yolo_stop": [
+[
+0.9475557804107666,
+[
+792,
+198,
+876,
+319
+]
+]
+]
+},
+{
+"image_id": "stop_082__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_082__control_removed",
+"yolo_stop": [
+[
+0.9463112354278564,
+[
+792,
+198,
+876,
+319
+]
+]
+]
+},
+{
+"image_id": "stop_083__original",
+"yolo_stop": [
+[
+0.9231754541397095,
+[
+493,
+133,
+584,
+233
+]
+]
+]
+},
+{
+"image_id": "stop_083__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop_083__control_removed",
+"yolo_stop": [
+[
+0.9229302406311035,
+[
+493,
+133,
+584,
+233
+]
+]
+]
+},
+{
+"image_id": "stop2_030__original",
+"yolo_stop": [
+[
+0.9340683221817017,
+[
+414,
+239,
+569,
+442
+]
+]
+]
+},
+{
+"image_id": "stop2_030__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_030__control_removed",
+"yolo_stop": [
+[
+0.9344857931137085,
+[
+414,
+239,
+569,
+442
+]
+]
+]
+},
+{
+"image_id": "stop2_080__original",
+"yolo_stop": [
+[
+0.9272620677947998,
+[
+206,
+350,
+315,
+466
+]
+]
+]
+},
+{
+"image_id": "stop2_080__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_080__control_removed",
+"yolo_stop": [
+[
+0.9265701174736023,
+[
+206,
+350,
+315,
+466
+]
+]
+]
+},
+{
+"image_id": "stop2_090__original",
+"yolo_stop": [
+[
+0.9211587905883789,
+[
+40,
+262,
+303,
+487
+]
+]
+]
+},
+{
+"image_id": "stop2_090__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_090__control_removed",
+"yolo_stop": [
+[
+0.9196739196777344,
+[
+40,
+262,
+303,
+487
+]
+]
+]
+},
+{
+"image_id": "stop2_097__original",
+"yolo_stop": [
+[
+0.9434619545936584,
+[
+200,
+169,
+345,
+381
+]
+],
+[
+0.6512881517410278,
+[
+442,
+76,
+521,
+271
+]
+]
+]
+},
+{
+"image_id": "stop2_097__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_097__control_removed",
+"yolo_stop": [
+[
+0.9440018534660339,
+[
+200,
+169,
+345,
+381
+]
+],
+[
+0.6438518762588501,
+[
+442,
+76,
+520,
+270
+]
+]
+]
+},
+{
+"image_id": "stop2_098__original",
+"yolo_stop": [
+[
+0.9607693552970886,
+[
+104,
+227,
+476,
+574
+]
+]
+]
+},
+{
+"image_id": "stop2_098__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_098__control_removed",
+"yolo_stop": [
+[
+0.5635705590248108,
+[
+105,
+231,
+493,
+574
+]
+]
+]
+},
+{
+"image_id": "stop2_100__original",
+"yolo_stop": [
+[
+0.9627012610435486,
+[
+34,
+386,
+555,
+875
+]
+]
+]
+},
+{
+"image_id": "stop2_100__sign_removed",
+"yolo_stop": [
+[
+0.25220736861228943,
+[
+2,
+629,
+530,
+992
+]
+]
+]
+},
+{
+"image_id": "stop2_100__control_removed",
+"yolo_stop": [
+[
+0.6997149586677551,
+[
+36,
+391,
+643,
+876
+]
+]
+]
+},
+{
+"image_id": "stop2_121__original",
+"yolo_stop": [
+[
+0.9391173124313354,
+[
+130,
+172,
+234,
+301
+]
+]
+]
+},
+{
+"image_id": "stop2_121__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_121__control_removed",
+"yolo_stop": [
+[
+0.939833402633667,
+[
+130,
+172,
+234,
+301
+]
+]
+]
+},
+{
+"image_id": "stop2_125__original",
+"yolo_stop": [
+[
+0.8917908072471619,
+[
+615,
+379,
+713,
+481
+]
+]
+]
+},
+{
+"image_id": "stop2_125__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_125__control_removed",
+"yolo_stop": [
+[
+0.8915840983390808,
+[
+615,
+379,
+713,
+481
+]
+]
+]
+},
+{
+"image_id": "stop2_140__original",
+"yolo_stop": [
+[
+0.8552950620651245,
+[
+601,
+94,
+701,
+193
+]
+]
+]
+},
+{
+"image_id": "stop2_140__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_140__control_removed",
+"yolo_stop": [
+[
+0.854080855846405,
+[
+601,
+94,
+701,
+193
+]
+]
+]
+},
+{
+"image_id": "stop2_152__original",
+"yolo_stop": [
+[
+0.9221826791763306,
+[
+73,
+524,
+542,
+1213
+]
+]
+]
+},
+{
+"image_id": "stop2_152__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_152__control_removed",
+"yolo_stop": [
+[
+0.8219764232635498,
+[
+76,
+534,
+609,
+1197
+]
+]
+]
+},
+{
+"image_id": "stop2_170__original",
+"yolo_stop": [
+[
+0.9740356206893921,
+[
+379,
+302,
+741,
+657
+]
+]
+]
+},
+{
+"image_id": "stop2_170__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_170__control_removed",
+"yolo_stop": [
+[
+0.7699318528175354,
+[
+296,
+300,
+741,
+657
+]
+]
+]
+},
+{
+"image_id": "stop2_171__original",
+"yolo_stop": [
+[
+0.9433988332748413,
+[
+630,
+187,
+901,
+436
+]
+]
+]
+},
+{
+"image_id": "stop2_171__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_171__control_removed",
+"yolo_stop": [
+[
+0.9467963576316833,
+[
+630,
+187,
+901,
+436
+]
+]
+]
+},
+{
+"image_id": "stop2_178__original",
+"yolo_stop": [
+[
+0.9537339806556702,
+[
+562,
+271,
+868,
+631
+]
+]
+]
+},
+{
+"image_id": "stop2_178__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_178__control_removed",
+"yolo_stop": [
+[
+0.9563848376274109,
+[
+561,
+271,
+868,
+631
+]
+]
+]
+},
+{
+"image_id": "stop2_180__original",
+"yolo_stop": [
+[
+0.8671724796295166,
+[
+634,
+243,
+758,
+375
+]
+]
+]
+},
+{
+"image_id": "stop2_180__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_180__control_removed",
+"yolo_stop": [
+[
+0.8700351119041443,
+[
+634,
+243,
+758,
+375
+]
+]
+]
+},
+{
+"image_id": "stop2_195__original",
+"yolo_stop": [
+[
+0.9159495830535889,
+[
+564,
+276,
+673,
+394
+]
+]
+]
+},
+{
+"image_id": "stop2_195__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_195__control_removed",
+"yolo_stop": [
+[
+0.9149434566497803,
+[
+564,
+276,
+673,
+394
+]
+]
+]
+},
+{
+"image_id": "stop2_217__original",
+"yolo_stop": [
+[
+0.9633960127830505,
+[
+129,
+126,
+523,
+634
+]
+]
+]
+},
+{
+"image_id": "stop2_217__sign_removed",
+"yolo_stop": []
+},
+{
+"image_id": "stop2_217__control_removed",
+"yolo_stop": [
+[
+0.4702497720718384,
+[
+131,
+119,
+608,
+623
+]
+]
+]
+}
+]

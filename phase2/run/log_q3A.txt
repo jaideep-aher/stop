@@ -1,0 +1,4 @@
++ SHARD=0/2
++ FILTER='arm=en|proceed_at_stop'
++ /workspace/rai_pivot/pilot/venv/bin/python run_p2.py qwen3vl2b /workspace/rai_pivot/phase2/stimuli/manifest.csv p1 main
+done qwen3vl2b main 237

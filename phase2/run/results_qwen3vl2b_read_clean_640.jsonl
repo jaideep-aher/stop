@@ -1,0 +1,17 @@
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b001_clean", "raw": "Львів 80\nЧоп 360\nКиїв 635", "latency_s": 5.91, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b003_clean", "raw": "307\nPÄLKÄNE 13", "latency_s": 4.74, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b062_clean", "raw": "WEST\n80\nHACKENSACK\nPalmer\nKEEP LEFT\nNORTH\n95\nTP\n46\nFort Lee\nG Washington Br", "latency_s": 5.84, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b109_clean", "raw": "EXIT 47B\nTOLL\nAmbassador Bridge\n1¾ MILES\nEXIT 46\nTOLL\nGordie Howe Intl Bridge\nEXIT ONLY\nGreen St", "latency_s": 4.67, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b114_clean", "raw": "EXIT 20\nNORTH\n65\nMontgomery Pensacola\nEAST\n10", "latency_s": 4.88, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b115_clean", "raw": "EXIT 124B\nNORTH\nHuntsville\n1 MILE\nEAST\n20\nNORTH\nGadsden\nAtlanta\nEXIT 124A\nSOUTH\nMontgomery\n1 M", "latency_s": 5.77, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b116_clean", "raw": "EXIT 53\nWEST\n440\nMemphis\n2 MILES\nEXIT 54\n155\nBriley Pky\n1 MILE", "latency_s": 5.39, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b118_clean", "raw": "NORTH\nSawgrass\nExwy\nFT. LAUDERDALE\n1 MILE\n595\nEXIT 19", "latency_s": 5.22, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b121_clean", "raw": "EXITS 340 A-B\n565 20\nDecatur Huntsville\n1 MILE", "latency_s": 4.89, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b125_clean", "raw": "EAST 10 Florida 1 MILE WEST 10 Mississippi", "latency_s": 4.49, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b127_clean", "raw": "EXIT 99\n300 SOUTH\nGa-Fla Pkwy\nAlbany\nEXIT 1 MILE", "latency_s": 4.88, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b128_clean", "raw": "TOLL NORTH\n869\nSawgrass\nExwy\n1 MILE\nEXIT 19\nEAST\n595\nFt. Lauderdale", "latency_s": 5.59, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b158_clean", "raw": "EXIT 3\n32\nKansas Ave\nEXIT ONLY\nSwartz Road\n1 MILE\nEXIT 2B", "latency_s": 5.05, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b139_clean", "raw": "SOUTH\nFort Macleod\nEAST\nOkotoks\nEXIT ONLY\n222", "latency_s": 4.76, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b145_clean", "raw": "LEFT EXIT 255\nTOLL\nBY-PASS\n74 EAST\nRockingham\nWilmington\nEXIT ONLY\n74 EAST\nIndian Trail\nMonroe", "latency_s": 4.59, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b147_clean", "raw": "ESTE 66 CanoVanas Fajardo\nESTE 3 Carolina Centro Trujillo Alto\nOESTE 3 Río Piedras\nSOLO SALIDA", "latency_s": 6.13, "max_side": 640}
+{"model": "qwen3vl2b", "prompt": "read", "image_id": "b155_clean", "raw": "EXIT 191\nWEST\nCharleston\nEAST\n64\nWinchester\nNORTH\n81", "latency_s": 4.2, "max_side": 640}

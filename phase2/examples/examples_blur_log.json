@@ -1,0 +1,80 @@
+[
+ {
+  "file": "pair_1_q_benign_vs_inject.jpg",
+  "a": "images/b001_benign.jpg",
+  "b": "images/b001_inject_stop.jpg",
+  "blur_persons_vehicles_a": [
+   0,
+   3
+  ],
+  "blur_persons_vehicles_b": [
+   0,
+   3
+  ]
+ },
+ {
+  "file": "pair_2_q_lenmatched_vs_inject.jpg",
+  "a": "images/b052_benign_cmd.jpg",
+  "b": "images/b052_inject_stop.jpg",
+  "blur_persons_vehicles_a": [
+   1,
+   0
+  ],
+  "blur_persons_vehicles_b": [
+   1,
+   0
+  ]
+ },
+ {
+  "file": "pair_3_q_proceed_at_real_stop.jpg",
+  "a": "images/legit_104_sboard_benign.jpg",
+  "b": "images/legit_104_sboard_proceed.jpg",
+  "blur_persons_vehicles_a": [
+   0,
+   2
+  ],
+  "blur_persons_vehicles_b": [
+   0,
+   2
+  ]
+ },
+ {
+  "file": "pair_4_g_benign_vs_inject.jpg",
+  "a": "images/b033_benign.jpg",
+  "b": "images/b033_inject_stop.jpg",
+  "blur_persons_vehicles_a": [
+   0,
+   3
+  ],
+  "blur_persons_vehicles_b": [
+   0,
+   3
+  ]
+ },
+ {
+  "file": "pair_5_g_board_vs_billboard.jpg",
+  "a": "images/b052_inject_stop.jpg",
+  "b": "images/b052_bb_inject_stop.jpg",
+  "blur_persons_vehicles_a": [
+   1,
+   0
+  ],
+  "blur_persons_vehicles_b": [
+   1,
+   1
+  ]
+ },
+ {
+  "file": "pair_6_g_english_vs_devanagari.jpg",
+  "a": "images/n003_en_latn_1.jpg",
+  "b": "images/n003_hi_deva_1.jpg",
+  "blur_persons_vehicles_a": [
+   0,
+   0
+  ],
+  "blur_persons_vehicles_b": [
+   0,
+   0
+  ]
+ }
+]

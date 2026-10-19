@@ -1,0 +1,5 @@
+[
+  {"id": "phase3", "title": "Phase 3: robustness",
+   "blurb": "Robustness re-runs of the Study 2 conditions. Results are aggregated by condition only.",
+   "metrics": "phase3/analysis/phase3_metrics.json"}
+]

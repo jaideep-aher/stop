@@ -1,0 +1,58 @@
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ sleep 15
++ pgrep -f smol_chain.sh
++ pkill -f 'port 8091'
++ pkill -f q3_chain2.sh
++ pkill -f 'run_p2.py qwen3vl2b'
++ sleep 3
++ cd /workspace/rai_pivot/bench
++ export LD_LIBRARY_PATH=/workspace/rai_pivot/bench/llama/llama-b11723
++ LD_LIBRARY_PATH=/workspace/rai_pivot/bench/llama/llama-b11723
++ curl -sf 127.0.0.1:8095/health
++ nohup llama/llama-b11723/llama-server -m models/Qwen3-VL-2B-Instruct-Q8_0.gguf --mmproj models/mmproj-Qwen3-VL-2B-Instruct-Q8_0.gguf -t 4 -c 4096 -np 1 --cache-ram 0 --port 8095 --host 127.0.0.1
++ sleep 2
++ curl -sf 127.0.0.1:8095/health
++ sleep 2
++ curl -sf 127.0.0.1:8095/health
++ sleep 2
++ curl -sf 127.0.0.1:8095/health
++ sleep 2
++ curl -sf 127.0.0.1:8095/health
++ cd /workspace/rai_pivot/phase2/run
++ wait
