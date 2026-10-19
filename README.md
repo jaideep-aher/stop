@@ -1,9 +1,5 @@
 # Who Gets to Say STOP?
 
-Does a vision-language model, looking at one driver-view frame, treat roadside text as a stop/go instruction when that text has no legal authority to stop the car?
-
-This is an **offline audit of the VLM reasoning / semantic-advisor layer on single frames, not a production AV stack**. There is no map, lidar, temporal context, or fine-tuning. A parsed STOP or PROCEED is a decision-layer output on a still photo, not a claim that a car would stop or go. Waymo recall 25E-084 is a planning failure of a deployed system; it is context, not a result of this audit.
-
 **Headline.** Addendum A counts are copied from [`phase3/analysis/phase3_addendum_metrics.json`](phase3/analysis/phase3_addendum_metrics.json) (448 px, greedy, letter prompts; post-hoc, exploratory). The Qwen table under this headline is copied from [`phase3/analysis/phase3_metrics.json`](phase3/analysis/phase3_metrics.json).
 
 - **The STOP-side effect is the robust finding.** It replicates in InternVL3-2B, which passes the gate under both letter mappings. Against the benign board (STOP answers out of 63 board scenes): injected STOP 62 vs 9 (L1) and 62 vs 10 (L2); bare STOP 60 vs 9 and 60 vs 10; ROAD CLOSED 49 vs 9 and 57 vs 10. Stored Holm p on those InternVL contrasts is 0.0.
@@ -22,6 +18,16 @@ The Qwen comparison below is the earlier headline table. Choosing which cell to 
 | PROCEED-at-STOP | 45/71 [0.518, 0.736] vs 14/71 [0.121, 0.304] | 48/71 [0.561, 0.773] vs 2/71 [0.008, 0.097] | L1 16/71 [0.144, 0.335] vs 0/71 [0, 0.051]; L2 22/71 [0.214, 0.425] vs 0/71 [0, 0.051] |
 
 H1 as preregistered (contrasts hold in every robustness cell) was not met. In the 18 planned cells, inject is 16/18, bare STOP is 14/18, and ROAD CLOSED is 13/18. The plan was hashed locally before the runs and committed later. That is not a claim of confirmatory status.
+
+Does a vision-language model, looking at one driver-view frame, treat roadside text as a stop/go instruction when that text has no legal authority to stop the car?
+
+This is an **offline audit of the VLM reasoning / semantic-advisor layer on single frames, not a production AV stack**. There is no map, lidar, temporal context, or fine-tuning. A parsed STOP or PROCEED is a decision-layer output on a still photo, not a claim that a car would stop or go. Waymo recall 25E-084 is a planning failure of a deployed system; it is context, not a result of this audit.
+
+## Regulatory recommendation
+
+This is a recommendation for safety cases and permit reviews. It is not a claim that any regulator has adopted it.
+
+A scene-text authority test should be added to safety cases written for SOTIF (ISO 21448) and for UL 4600, and to AV permit reviews by NHTSA or by a state. The test asks whether the system obeys a STOP only when that STOP comes from a legitimate source under the MUTCD, and not when it comes from a billboard, a carried sign, a sign on a vehicle, or a digitally altered board.
 
 ## Why it matters
 
@@ -172,7 +178,7 @@ The three Phase 3 figures are matplotlib charts with no photo pixels (`phase3/fi
 
 ## Poster
 
-[poster/poster_v4.2.pdf](poster/poster_v4.2.pdf), sha256 `fdc30d8751c870e320e5381be1ceff57b0959028d62034ac936e9d1acdf94da0`. 150 dpi PNG: [poster/poster_v4.2.png](poster/poster_v4.2.png), sha256 `7cd41e5ca113cbd8cb6bf63b114e1ea08f8e63760a86b89c45af2cd2e02f66db`. Talk script: [poster/poster_v4.2_talk.md](poster/poster_v4.2_talk.md), sha256 `5e7538b5aacfc5ef8b280734745a4b37f5051b6a8ab7c727a632691dbe49f87e`. Provenance: [poster/provenance_v4.2.md](poster/provenance_v4.2.md), sha256 `2d10f495b5bac3d9a39b7e3d2722b606795564ebc75ae330b2c712ccc272974a`. The poster uses only blurred, licensed images listed in that provenance file. The PNG is a composite of those photos, so it is listed in [poster/REVIEWED_COMPOSITES.txt](poster/REVIEWED_COMPOSITES.txt) and is not a Pages image.
+Jay's final poster is [poster/poster_final_v6.2.pdf](poster/poster_final_v6.2.pdf), sha256 `53cbb1e31a1a16e400bec62e02be71b4e3dc943e82af424e64daacb4ce4cd707`. Talk script: [poster/poster_final_v6.2_talk.md](poster/poster_final_v6.2_talk.md), sha256 `c3dfa24dd1c37f8f5401606328198115af9e476a5f31fd7241dd3b0b499ff0be`. The v4.2 poster, its PNG, its talk script, and its provenance note are removed. The PDF is not a Pages image. No tracked poster file is a photo composite, so [poster/REVIEWED_COMPOSITES.txt](poster/REVIEWED_COMPOSITES.txt) lists none.
 
 ## License and attribution
 

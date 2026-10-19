@@ -30,7 +30,7 @@ def test_tracked_images_are_allowlisted_or_charts():
     allow = _first_field(ALLOW)
     charts = _first_field(CHARTS)
     composites = _first_field(COMPOSITES)
-    assert composites
+    assert COMPOSITES.is_file()
     assert composites.isdisjoint(charts)
     assert all(not rel.startswith("site/site/") for rel in composites)
     bad = []
