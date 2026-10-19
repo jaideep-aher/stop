@@ -1,0 +1,7 @@
+# Tracked images with no photo pixels. Every other tracked image must be on
+# site/PAGES_ALLOWLIST.txt. Paths are relative to the repository root.
+phase2/fig1_board_stop_rates.png	matplotlib bar chart of P(STOP) by legend; no photo pixels
+phase2/fig2_proceed_at_stop_and_script.png	matplotlib panels for the PROCEED arm and the script arm; no photo pixels
+pilot/pilot_chart.png	matplotlib pilot rates; no photo pixels
+site/site/data/img/p2/fig1.png	site copy of the phase 2 bar chart; no photo pixels
+site/site/data/img/p2/fig2_left.png	left panel of the phase 2 chart; no photo pixels

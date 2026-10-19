@@ -33,7 +33,7 @@ Crowd and protest boxes are cut off by the frame. The top of the box is hair, a 
 | Kept denied (no region applied) | 21 |
 | Kept denied (a detector still fired after the re-blur) | 3 |
 
-The Pages allow list went from 483 paths to 373 when this audit denied the upstream withholds it did not clear. A detector pass is not enough to publish an image after the head-band miss. Those 52 ids are on `site/PAGES_DENYLIST.txt` with reason `pending human review after blur fix`. The blurred files stay in this private repository. `data.json` shows them as withheld.
+The Pages allow list went from 483 paths to 373 when this audit denied the upstream withholds it did not clear. A detector pass is not enough to publish an image after the head-band miss. Those 52 ids are on `site/PAGES_DENYLIST.txt` with reason `pending human review after blur fix`. The blurred files are not in the working tree; each removed path and its sha256 is in `docs/WITHHELD_IMAGES.csv`. `data.json` shows them as withheld.
 
 Twelve previously published images that were not on the upstream list had a face hit and were re-blurred the same way. Both detectors were empty afterward. They follow the same rule and are on the denylist with the same reason: `example_2`, `example_3`, `b032_benign`, `b032_clean`, `stop2_002_sboard_benign`, `stop2_002_sboard_proceed`, `stop2_011_sboard_benign`, `stop2_011_sboard_proceed`, `stop2_011_sclean`, `stop2_117_sboard_benign`, `stop2_117_sboard_proceed`, `stop2_097__control_removed`.
 

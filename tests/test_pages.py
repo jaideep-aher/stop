@@ -151,10 +151,16 @@ def test_detector_clears_stay_off_pages_until_a_person_reviews_them(tmp_path: Pa
             continue
         path, _, reason = line.partition("\t")
         denied[Path(path).stem] = reason
+    withheld = {
+        row["path"]: row["reason"]
+        for row in csv.DictReader((ROOT / "docs" / "WITHHELD_IMAGES.csv").open(newline="", encoding="utf-8"))
+    }
     for image_id in PENDING_HUMAN:
         assert denied[image_id] == "pending human review after blur fix"
         row = next(item for item in audit if item["image_id"] == image_id)
-        assert (ROOT / "site" / "site" / row["path"]).is_file()
+        rel = "site/site/" + row["path"]
+        assert not (ROOT / rel).is_file()
+        assert withheld[rel] == "pending_human_review"
     dest = tmp_path / "pages"
     build(dest)
     shipped = {path.stem for path in dest.rglob("*") if path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}}
