@@ -133,8 +133,19 @@ PENDING_HUMAN = {
 }
 
 
+def _human_checked() -> set[str]:
+    import csv
+
+    found = set()
+    with (ROOT / "site" / "HUMAN_CHECKED.csv").open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            if (row.get("human_checked_by") or "").strip() and (row.get("human_checked_date") or "").strip():
+                found.add((row.get("image_id") or "").strip())
+    return found
+
+
 def test_detector_clears_stay_off_pages_until_a_person_reviews_them(tmp_path: Path):
-    """A detector pass after the head-band miss does not publish an image."""
+    """A detector pass after the head-band miss does not publish an image no person has checked."""
     import csv
 
     audit = list(csv.DictReader((ROOT / "docs" / "privacy_audit.csv").open(newline="", encoding="utf-8")))
@@ -143,6 +154,9 @@ def test_detector_clears_stay_off_pages_until_a_person_reviews_them(tmp_path: Pa
     upstream = {row["image_id"] for row in audit if row["upstream_withhold"] == "yes"}
     assert len(upstream) == 252
     assert "ill2_037" not in pending
+    checked = _human_checked()
+    assert len(checked) == 588
+    assert _PAGES.HARD_EXCLUDE_IDS.isdisjoint(checked)
     deny_lines = (ROOT / "site" / "PAGES_DENYLIST.txt").read_text(encoding="utf-8").splitlines()
     denied = {}
     for line in deny_lines:
@@ -151,21 +165,32 @@ def test_detector_clears_stay_off_pages_until_a_person_reviews_them(tmp_path: Pa
             continue
         path, _, reason = line.partition("\t")
         denied[Path(path).stem] = reason
+    allow = set()
+    for line in (ROOT / "site" / "PAGES_ALLOWLIST.txt").read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            allow.add(line.split("\t", 1)[0].strip())
     withheld = {
         row["path"]: row["reason"]
         for row in csv.DictReader((ROOT / "docs" / "WITHHELD_IMAGES.csv").open(newline="", encoding="utf-8"))
     }
-    for image_id in PENDING_HUMAN:
+    for image_id in PENDING_HUMAN - checked:
         assert denied[image_id] == "pending human review after blur fix"
         row = next(item for item in audit if item["image_id"] == image_id)
         rel = "site/site/" + row["path"]
         assert not (ROOT / rel).is_file()
-        assert withheld[rel] == "pending_human_review"
+        assert row["path"] not in allow
+        assert withheld[rel]
+    for image_id in PENDING_HUMAN & checked:
+        assert image_id not in denied
+        row = next(item for item in audit if item["image_id"] == image_id)
+        assert row["path"] in allow
     dest = tmp_path / "pages"
     build(dest)
     shipped = {path.stem for path in dest.rglob("*") if path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}}
-    assert upstream.isdisjoint(shipped)
-    assert PENDING_HUMAN.isdisjoint(shipped)
+    assert (upstream - checked).isdisjoint(shipped)
+    assert (PENDING_HUMAN - checked).isdisjoint(shipped)
+    assert _PAGES.HARD_EXCLUDE_IDS.isdisjoint(shipped)
     for image_id in ("ill2_037", "ill2_066", "ill2_312", "ill2_313"):
         assert image_id not in shipped
     data = json.loads((ROOT / "site" / "site" / "data" / "data.json").read_text(encoding="utf-8"))
@@ -186,7 +211,7 @@ def test_detector_clears_stay_off_pages_until_a_person_reviews_them(tmp_path: Pa
                 walk(value)
 
     walk(data)
-    assert live == set()
+    assert live <= checked
 
 
 def test_possible_minors_are_absent_from_the_pages_artifact(tmp_path: Path):

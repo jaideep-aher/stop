@@ -38,6 +38,8 @@ REPO = Path(__file__).resolve().parents[1]
 WEB = REPO / "site" / "site"
 ALLOW_PATH = REPO / "site" / "PAGES_ALLOWLIST.txt"
 DENY_PATH = REPO / "site" / "PAGES_DENYLIST.txt"
+# ids a person cleared after checking the blurred copy (human_checked_by, human_checked_date)
+HUMAN_CHECKED_PATH = REPO / "site" / "HUMAN_CHECKED.csv"
 
 # possible minors; excluded entirely
 HARD_EXCLUDE_IDS = frozenset(
@@ -135,7 +137,19 @@ def flagged_ids(web: Path) -> set[str]:
                     flagged.add(image_id)
                 elif "MANUAL REVIEW" in reason.upper():
                     flagged.add(image_id)
-    return flagged
+    return flagged - human_checked_ids()
+
+
+def human_checked_ids() -> set[str]:
+    """Ids with a recorded human check of the blurred copy; these flags are cleared."""
+    if not HUMAN_CHECKED_PATH.is_file():
+        return set()
+    with HUMAN_CHECKED_PATH.open(newline="", encoding="utf-8") as handle:
+        return {
+            (row.get("image_id") or "").strip()
+            for row in csv.DictReader(handle)
+            if (row.get("human_checked_by") or "").strip() and (row.get("human_checked_date") or "").strip()
+        }
 
 
 def blocked_source_paths(payload: object, found: set[str]) -> None:
