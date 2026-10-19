@@ -27,18 +27,20 @@ Crowd and protest boxes are cut off by the frame. The top of the box is hair, a 
 
 | decision | count |
 |---|---|
-| Cleared and kept on the allow list | 52 |
+| Detector-empty after re-blur, then held for a person (`pending_human`) | 52 |
 | Kept denied (already not on the allow list) | 90 |
 | Kept denied (no face detection to re-blur) | 86 |
 | Kept denied (no region applied) | 21 |
 | Kept denied (a detector still fired after the re-blur) | 3 |
 
-The Pages allow list went from 483 paths to 373. The 110 removed paths are upstream withholds that this audit did not clear. Twelve allowlisted images that were not on that list had a face hit, were re-blurred the same way, and stayed published because both detectors were empty afterward: `example_2`, `example_3`, `b032_benign`, `b032_clean`, `stop2_002_sboard_benign`, `stop2_002_sboard_proceed`, `stop2_011_sboard_benign`, `stop2_011_sboard_proceed`, `stop2_011_sclean`, `stop2_117_sboard_benign`, `stop2_117_sboard_proceed`, `stop2_097__control_removed`.
+The Pages allow list went from 483 paths to 373 when this audit denied the upstream withholds it did not clear. A detector pass is not enough to publish an image after the head-band miss. Those 52 ids are on `site/PAGES_DENYLIST.txt` with reason `pending human review after blur fix`. The blurred files stay in this private repository. `data.json` shows them as withheld.
 
-Cleared ids (both detectors empty after the full person-region re-blur):
+Twelve previously published images that were not on the upstream list had a face hit and were re-blurred the same way. Both detectors were empty afterward. They follow the same rule and are on the denylist with the same reason: `example_2`, `example_3`, `b032_benign`, `b032_clean`, `stop2_002_sboard_benign`, `stop2_002_sboard_proceed`, `stop2_011_sboard_benign`, `stop2_011_sboard_proceed`, `stop2_011_sclean`, `stop2_117_sboard_benign`, `stop2_117_sboard_proceed`, `stop2_097__control_removed`.
+
+Ids both detectors called empty after the full person-region re-blur, now pending human review:
 
 `b022_bare_stop`, `b022_bb_benign_cmd`, `b022_bb_inject_stop`, `b022_benign`, `b022_benign_cmd`, `b022_clean`, `b022_inject_stop`, `b022_nonsense`, `b022_official`, `b032_bare_stop`, `b032_benign_cmd`, `b032_inject_stop`, `b032_nonsense`, `b032_official`, `b118_bare_stop`, `b118_benign`, `b118_benign_cmd`, `b118_inject_stop`, `b118_nonsense`, `b118_official`, `b127_bb_benign_cmd`, `board_118__benign`, `board_118__inject_stop`, `board_118__official`, `ill2_018`, `ill2_019`, `ill2_021`, `ill2_035`, `ill2_233`, `ill2_279`, `ill2_316`, `ill2_317`, `ill2_318`, `ill3_128`, `ill3_137`, `ill3_148`, `ill3_150`, `legit_005_sclean`, `legit_083`, `legit_133`, `legit_134`, `legit_138`, `legit_147`, `legit_148`, `legit_159`, `legit_165`, `legit_165_sboard_benign`, `legit_165_sboard_proceed`, `legit_165_sclean`, `stop2_025`, `stop2_030__sign_removed`, `stop2_178__control_removed`.
 
 `ill2_037`, `ill2_066`, `ill2_312`, and `ill2_313` stay denied. Their committed image files were deleted.
 
-The local site should keep withholding any id in `docs/upstream_withhold.csv` until a person has looked at the re-blurred file, including the 52 cleared above. This audit's clearance is the two-detector check, not a human review.
+Nothing on the public site relies on the two-detector check alone. Every id in `docs/upstream_withhold.csv` stays off the Pages artifact until a person has looked at the re-blurred file.
