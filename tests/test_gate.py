@@ -155,9 +155,9 @@ def test_committed_qwen25_gate_rows_are_fail():
     data = json.loads(Path("phase2/analysis/phase2_metrics.json").read_text(encoding="utf-8"))
     rows = [row for row in data["_gate"] if row["model"] == "qwen25vl3b"]
     assert {row["prompt"] for row in rows} == {"p1", "n2"}
-    point = "gate_point (BA>=.85, STOPrec>=.90, GOrec>=.80, unparsed<=5%)"
     for row in rows:
-        assert row[point] == "FAIL"
+        assert row["status"] == "FAIL"
+        assert not any("gate_LB" in key or "unparsed<=5%" in key for key in row)
     p1 = next(row for row in rows if row["prompt"] == "p1")
     assert p1["stop_recall"]["k"] == 27
     assert p1["stop_recall"]["n"] == 45

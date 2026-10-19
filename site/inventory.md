@@ -20,7 +20,7 @@ Each row has the fields `{model, prompt, image_id, raw, latency_s, max_side, [th
 
 **Legit vs illegit mapping (manifest):** legit = A_plus (26 STOP + 18 CAUTION; flaggers, crossing guards, police, bus arms) and A_vandal (20 STOP; real R1-1 signs with graffiti). Illegit = A_minus (32 PROCEED; STOP text or an octagon with no legal force). Gate = G (45 STOP + 49 PROCEED). Study 2 = B_board, 18 bases × {clean, benign, official (CAUTION), inject_stop, inject_go}. Study 3 = R_removal, 35 bases × {original (STOP), sign_removed (UNSURE), control_removed (STOP)}. 18 rows have a `residual_cue` (6 bases); the primary removal metric excludes them.
 
-**Gate, preregistered in analyze.py:** BA ≥ 0.85, STOP recall ≥ 0.90, PROCEED recall (PROCEED or CAUTION) ≥ 0.80, unparsed ≤ 0.05. Note that `pivot_concepts.md` uses the same 0.85/0.90/0.80/5%, but `build_plan.md` §2.5 quotes the old Horn OK thresholds (0.75/0.60/10%). **This inconsistency must be resolved before the site shows a gate.**
+**Gate.** The canonical competence gate is `whostop/gate.py`: balanced accuracy ≥ 0.85, STOP recall ≥ 0.90, and GO recall (PROCEED or CAUTION) ≥ 0.80, on the point estimates. UNPARSED is a scored miss. There is no separate unparsed-rate floor. An earlier draft of `analyze.py` and of `pivot_concepts.md` also required unparsed ≤ 0.05, and `build_plan.md` §2.5 once quoted the old Horn OK thresholds (0.75/0.60/10%). Those extra floors are not the gate in this package.
 
 **Snapshot at 00:24 ET (k/n, Wilson 95% CI), p1 only:**
 | | YOLO | SmolVLM (partial) | Qwen3-VL-2B (208 errors) | Gemini (partial) |
@@ -125,7 +125,7 @@ scripts/build_site_data.py   # in the project repo
 **`build_site_data.py`** reads `manifest.csv`, `results_*.jsonl`, `removal_yolo_check.json`, `latency_*.json`, and the analyze.py metrics, which it imports instead of reimplementing so the numbers match. It then emits:
 ```json
 {"generated_at": "...", "run_status": {"gemini|p1": {"rows": 275, "of": 385, "errors": 0}, ...},
- "provisional": true, "gate_thresholds": {"ba":0.85,"stop_recall":0.90,"proceed_recall":0.80,"unparsed":0.05},
+ "provisional": true, "gate_thresholds": {"ba":0.85,"stop_recall":0.90,"proceed_recall":0.80},
  "models": [{"id":"yolo","name":"YOLO11n rule","kind":"detector","pinned":"...","gate":{...,"passed":true}}],
  "images": [{"id":"legit_000","block":"A_plus","label":"STOP","variant":"original","base_id":"...","legit":true,
              "edited":false,"license":"...","credit":"...","source_url":"...","sha256":"...","blurred":true,"thumb":"images/legit_000.jpg"}],

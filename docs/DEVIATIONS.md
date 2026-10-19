@@ -34,3 +34,9 @@ satisfy balanced accuracy ≥ 0.85 and STOP recall ≥ 0.90 and GO recall ≥ 0.
 That decision was made after the gate outcomes were already known. Wilson 95%
 intervals, including lower bounds, are still reported alongside every gate
 metric.
+
+## G2 labels path (2026-10-19)
+
+phase3/stimuli/g2_labels.csv: the `file` column changed from absolute /workspace/... paths to repo-relative paths at commit f4a65ba487b43aa9e9f6f44545bd813f16113afe. Labels unchanged. Old sha256 e45d31b857eaed374c5ae9b886af20c687fe322bc3279b9d9e4576b3271b9092 (as logged), new sha256 a62263ae462b3f2f3324f45c9fd6feec9114908048bc4de56a8dfb930d87ac59.
+
+That commit is the first commit of the file. `git log -S '/workspace/' -- phase3/stimuli/g2_labels.csv` finds no committed blob with absolute paths. The logged hash is the pre-commit file.
