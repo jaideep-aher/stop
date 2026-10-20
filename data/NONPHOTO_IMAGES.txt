@@ -4,7 +4,6 @@
 results/phase2/fig1_board_stop_rates.png	matplotlib bar chart of P(STOP) by legend; no photo pixels
 results/phase2/fig2_proceed_at_stop_and_script.png	matplotlib panels for the PROCEED arm and the script arm; no photo pixels
 results/pilot/pilot_chart.png	matplotlib pilot rates; no photo pixels
-data/images/p2/fig1.png	site copy of the phase 2 bar chart; no photo pixels
 data/images/p2/fig2_left.png	left panel of the phase 2 chart; no photo pixels
 results/phase3/fig1_qwen_robustness_grid.png	matplotlib robustness grid; no photo pixels
 results/phase3/fig2_proceed_controls_qwen3vl2b.png	matplotlib PROCEED-control chart; no photo pixels
