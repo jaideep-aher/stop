@@ -34,40 +34,60 @@ def test_readme_quotes_json_counts():
     addendum = json.loads(
         (ROOT / "results" / "phase3" / "phase3_addendum_metrics.json").read_text(encoding="utf-8")
     )
+    gates = doc["qwen3vl2b"]["gates"]["phase3_gate_summary"]
+    assert gates["p1|r0|640"]["passes_phase3_gate (G1 and G2 point)"] is False
+    assert gates["n3|r0|448"]["passes_phase3_gate (G1 and G2 point)"] is True
     qwen = doc["qwen3vl2b"]["R_arm"]["cells"]["p1|r0|640"]
+    passing = doc["qwen3vl2b"]["R_arm"]["cells"]["n3|r0|448"]
     inject = qwen["board"]["inject_stop"]
     proceed = qwen["proceed_at_stop"]
+    passed_inject = passing["board"]["inject_stop"]
+    passed_proceed = passing["proceed_at_stop"]
     lfm = doc["lfm2vl_1.6b"]["board_and_stop_arms_phase2_stimuli"]["cells"]["n2|r0|448"]["proceed_at_stop"]
     lane = doc["qwen3vl2b"]["P_arm"]["cells"]["p1|r0|640"]["lane"]["proceed"]
-    intern = addendum["letter_arms"]["internvl3_2b|L1|r0|448"]["board_STOP_side_vs_benign"]["inject_stop"]
+    intern_l1 = addendum["letter_arms"]["internvl3_2b|L1|r0|448"]["board_STOP_side_vs_benign"]["inject_stop"]
+    intern_l2 = addendum["letter_arms"]["internvl3_2b|L2|r0|448"]["board_STOP_side_vs_benign"]["inject_stop"]
     gemini = p2["gemini"]["stop_scenes"]["sboard_proceed"]["non_stop_rate"]
-    clean = p2["qwen3vl2b"]["board_all"]["clean"]["stop_rate"]
     letters = {
         letter: doc["qwen3vl2b"]["R_arm"]["cells"][f"{letter}|r0|640"]["proceed_at_stop"]
         for letter in ("L1", "L2")
     }
     assert _pair(inject["variant"]) == "62/63" and _pair(inject["control"]) == "13/63"
     assert _pair(proceed["variant"]) == "45/71" and _pair(proceed["control"]) == "14/71"
+    assert _pair(passed_inject["variant"]) == "63/63" and _pair(passed_inject["control"]) == "17/63"
+    assert _pair(passed_proceed["variant"]) == "48/71" and _pair(passed_proceed["control"]) == "2/71"
     assert _pair(lfm["variant"]) == "43/71" and _pair(lfm["control"]) == "14/71"
     assert _pair(gemini) == "0/71"
     assert _pair(lane["variant"]) == "30/32" and _pair(lane["control"]) == "10/32"
-    assert _pair(intern["variant"]) == "62/63" and _pair(intern["control"]) == "9/63"
-    assert _pair(clean) == "17/63"
+    assert _pair(intern_l1["variant"]) == "62/63" and _pair(intern_l1["control"]) == "9/63"
+    assert _pair(intern_l2["variant"]) == "62/63" and _pair(intern_l2["control"]) == "10/63"
     assert letters["L1"]["variant"]["k"] == 16 and letters["L2"]["variant"]["k"] == 22
     assert letters["L1"]["control"]["k"] == letters["L2"]["control"]["k"] == 0
+    gemini_pass = [
+        row["prompt"]
+        for row in p2["_gate"]
+        if row["model"] == "gemini" and row["source"] == "phase2" and row["status"] == "PASS"
+    ]
+    assert gemini_pass == ["n2", "n3"]
     for snippet in (
+        "main wording; this wording misses the stricter gate",
         "62/63 vs 13/63",
         "45/71 vs 14/71",
+        "63/63 vs 17/63",
+        "48/71 vs 2/71",
+        "after seeing the results",
         "43/71 vs 14/71",
         "0/71",
-        "17/63",
         "16/71",
         "22/71",
         "30/32",
         "10/32",
-        "62/63 against 9/63",
+        "62/63 vs 9/63",
+        "62/63 vs 10/63",
         "consistent with copying",
-        "models that passed the gate",
+        "passed on more than one wording",
+        "InternVL3-2B passes the gate",
+        "LFM2-VL-1.6B passes the gate",
     ):
         assert snippet in readme
 
@@ -84,7 +104,7 @@ def test_readme_is_first_person_and_short():
         assert banned not in readme
     assert "SOTIF" in readme and "UL 4600" in readme and "NHTSA" in readme
     assert "MUTCD" in readme
-    assert len(readme.split()) < 1200
+    assert len(readme.split()) < 650
 
 
 def test_phase3_gate_facts_stay_in_json():
@@ -218,7 +238,7 @@ def test_addendum_and_manifest_stay_internally_consistent():
     assert shown["claims"]["n_gate_cells"] == 25
     assert shown["claims"]["residual_top_share_STOP"]["G2"] == 0.294
     script = (ROOT / "scripts" / "analyze_addendum.py").read_text(encoding="utf-8")
-    assert "/workspace/rai_pivot" not in script
+    assert "/workspace/" not in script
     manifest = (ROOT / "data" / "manifests" / "phase3" / "manifest_Bkey.csv").read_text(encoding="utf-8")
     assert "/workspace/" not in manifest
     header = manifest.splitlines()[0]
