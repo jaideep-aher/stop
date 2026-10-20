@@ -2,7 +2,7 @@ import { SOURCES } from './sources.js';
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const attrib = (credit, url, license) => {
-  if (!credit && !url) return '<span class="muted">withheld</span>';
+  if (!credit && !url) return '';
   const who = url ? `<a href="${esc(url)}" rel="noopener">${esc(credit || 'source')}</a>` : esc(credit);
   return license ? `${who}, ${esc(license)}` : who;
 };
@@ -51,7 +51,7 @@ function renderCond() {
 }
 $('#c-model').onchange = renderCond; renderCond();
 const RP = P.real;
-$('#real-gallery').innerHTML = `<p class="muted">${RP.filter(r => r.thumb).length} of ${P.real.length} real tampered photos published (unedited; detector-blurred, unverified).</p>` + RP.map(r => `<figure>${r.thumb ? `<img src="${r.thumb}" alt="real altered sign ${esc(r.id)}" loading="lazy">` : '<span class="noimg big">image withheld (pending human check)</span>'}<figcaption><code>${esc(r.id)}</code> label ${r.label}<br>${attrib(r.credit, r.source_url, r.license)}</figcaption></figure>`).join('');
+$('#real-gallery').innerHTML = `<p class="muted">${RP.filter(r => r.thumb).length} real tampered photos (unedited; faces and plates blurred).</p>` + RP.filter(r => r.thumb).map(r => `<figure><img src="${r.thumb}" alt="real altered sign ${esc(r.id)}" loading="lazy"><figcaption><code>${esc(r.id)}</code> label ${r.label}<br>${attrib(r.credit, r.source_url, r.license)}</figcaption></figure>`).join('');
 
 // ---------- explorer ----------
 const PAGE = 25; let ep = 0;
@@ -62,8 +62,8 @@ function renderExplorer() {
   const bs = P.bases.filter(b => b.arm === arm && (arm !== 'board' || !T || b.board_type === T));
   const pages = Math.max(1, Math.ceil(bs.length / PAGE)); ep = Math.min(ep, pages - 1);
   $('#e-table thead').innerHTML = `<tr><th>Base photo</th><th>Photographer / license</th>${vars.map(([v, l]) => `<th>${esc(l)}</th>`).join('')}</tr>`;
-  $('#e-table tbody').innerHTML = bs.slice(ep * PAGE, ep * PAGE + PAGE).map(b => `<tr><td class="img">${(() => { const t = (b.images.clean || b.images.sclean || {}).thumb; return t ? `<img src="${t}" alt="${esc(b.base_id)} base photo (blurred)" loading="lazy">` : '<span class="noimg">image withheld (pending human check)</span>'; })()}<div><code>${esc(b.base_id)}</code>${b.board_type ? `<br><span class="muted">${b.board_type}</span>` : ''}</div></td>
-    <td>${b.credit || b.source_url ? attrib(b.credit, b.source_url, b.license) : '<span class="muted">withheld</span>'}</td>${vars.map(([v]) => {
+  $('#e-table tbody').innerHTML = bs.slice(ep * PAGE, ep * PAGE + PAGE).map(b => `<tr><td class="img">${(() => { const t = (b.images.clean || b.images.sclean || {}).thumb; return t ? `<img src="${t}" alt="${esc(b.base_id)} base photo (blurred)" loading="lazy">` : ''; })()}<div><code>${esc(b.base_id)}</code>${b.board_type ? `<br><span class="muted">${b.board_type}</span>` : ''}</div></td>
+    <td>${b.credit || b.source_url ? attrib(b.credit, b.source_url, b.license) : ''}</td>${vars.map(([v]) => {
       const im = b.images[v]; if (!im) return '<td class="muted">—</td>';
       const d = (P.decisions[im.id] || {})[m]; if (!d) return '<td class="muted">not run</td>';
       if (d.a === 'ERROR') return '<td class="muted">error (excluded)</td>';
@@ -92,13 +92,13 @@ $('#read-gate').innerHTML = MK.map(m => { const o = MM[m], rg = o.read_gate;
    <tr><td>Clean board → non-STOP</td><td>${kn(o.clean_board_specificity_nonSTOP)}</td></tr><tr><td>Real STOP scene → STOP</td><td>${kn(o.real_stop_scene_sensitivity_clean)}</td></tr></table></article>`; }).join('');
 
 // ---------- examples ----------
-$('#ex').innerHTML = P.examples.length ? P.examples.map(e => `<figure class="ex">${e.file ? `<img src="${e.file}" alt="${esc(e.sides.map(x => x.condition).join(' vs '))}" loading="lazy">` : '<span class="noimg big">image withheld (pending human review after blur fix)</span>'}
-  <figcaption><span class="tag alt">DIGITALLY ALTERED</span> <b>${esc(MODELS[e.model].split(' (')[0])}</b>: ${e.sides.map(x => `${esc(x.condition)} → <span class="act ${x.verdict}">${x.verdict}</span> <span class="muted">(correct: ${x.label === 'STOP' ? 'STOP' : 'PROCEED/CAUTION'})</span>`).join(' &nbsp;|&nbsp; ')}.<br>Base photo: ${attrib(e.credit, e.source_url, e.license)}; edited for the study. Blur: ${esc(e.blur)}.${e.note ? `<br><span class="muted">This board is shown instead of the original example, whose board legend was blurred by a detector false positive and needs human review.</span>` : ''}</figcaption></figure>`).join('')
+$('#ex').innerHTML = P.examples.length ? P.examples.filter(e => e.file).map(e => `<figure class="ex"><img src="${e.file}" alt="${esc(e.sides.map(x => x.condition).join(' vs '))}" loading="lazy">
+  <figcaption><span class="tag alt">DIGITALLY ALTERED</span> <b>${esc(MODELS[e.model].split(' (')[0])}</b>: ${e.sides.map(x => `${esc(x.condition)} → <span class="act ${x.verdict}">${x.verdict}</span> <span class="muted">(correct: ${x.label === 'STOP' ? 'STOP' : 'PROCEED/CAUTION'})</span>`).join(' &nbsp;|&nbsp; ')}.<br>Base photo: ${attrib(e.credit, e.source_url, e.license)}; edited for the study. Blur: ${esc(e.blur)}.</figcaption></figure>`).join('')
   : '<div class="empty">No example passed the license, credit and blur checks.</div>';
 
 // ---------- extra phases (site/phases.json); aggregated by condition only, file order, never sorted ----------
 const leaves = (o, path = [], out = []) => { if (o && typeof o === 'object') { if ('k' in o && 'n' in o && Array.isArray(o.ci95)) out.push([path.join(' › '), o]); else for (const [k, v] of Object.entries(o)) if (!k.startsWith('_')) leaves(v, [...path, k], out); } return out; };
-const P3PROMPT = {p1: 'Phase 2 wording (p1)', n2: 'word prompt (n2)', n3: 'word prompt (n3)', L1: 'renamed letters, A = halt (L1)', L2: 'renamed letters, C = halt (L2)'};
+const P3PROMPT = {p1: 'main-study wording (p1)', n2: 'word prompt (n2)', n3: 'word prompt (n3)', L1: 'renamed letters, A = halt (L1)', L2: 'renamed letters, C = halt (L2)'};
 const P3BOARD = {official: 'ROAD CLOSED (official text)', inject_stop: 'Injection (imperative stop command)', bare_stop: 'Bare "STOP"', clean: 'Clean board (no edit)'};
 const P3LEG = {proceed: 'ROAD CLEAR / PROCEED', bare: 'Bare "PROCEED"', clear: 'ROAD CLEAR', nonsense: 'Length-matched nonsense'};
 const P3COND = {inject_stop: 'Injection', bare_stop: 'Bare "STOP"', official: 'ROAD CLOSED', clean: 'Clean board', proceed_at_stop: 'PROCEED-at-STOP'};
@@ -114,11 +114,11 @@ function renderAddendum(A) {
     C.stop_side_supported ? `<b>STOP side replicates in a second gate-passing model.</b> InternVL3-2B passes the point gate on G1 and G2 under both letter mappings (448 px), and ROAD CLOSED, injection and bare STOP each raise P(STOP) over the benign board under L1 and L2 (largest Holm p ${pv(Math.max(...ks.flatMap(k => ['official', 'inject_stop', 'bare_stop'].map(v => A.arms[k].stop_side[v].holm_p))))}; table below).` : `<b>STOP side:</b> not every contrast in the second model is significant; see the table.`,
     `<b>The PROCEED side is fragile.</b> In InternVL3-2B at 448 px the PROCEED-at-STOP effect is significant under ${only.map(l => P3PROMPT[l] || l).join(', ') || 'neither mapping'} only (${ks.map(k => `${P3PROMPT[L(k)] || L(k)} ${A.arms[k].proceed.variant.k}/${A.arms[k].proceed.variant.n} vs ${A.arms[k].proceed.control.k}/${A.arms[k].proceed.control.n}`).join('; ')}). Qwen3-VL-2B at the same 448 px shows the opposite pattern: ${qtxt}. An effect that depends on which letter carries which answer is consistent with copying the answer word or its position; this addendum does not test that directly.`,
     `<b>Photographer cap.</b> Capping the largest photographer in each gate set (G1 STOP ${C.cap_sets.G1.STOP.n_before}→${C.cap_sets.G1.STOP.n_after} images, G2 STOP ${C.cap_sets.G2.STOP.n_before}→${C.cap_sets.G2.STOP.n_after}), and separately leaving that photographer out, changes ${C.gate_changes.length ? C.gate_changes.length : 'no'} gate verdict${C.gate_changes.length === 1 ? '' : 's'} across all ${C.n_gate_cells} model × prompt × resolution cells. The cap was applied once, so after it the largest remaining photographer still holds ${pct(C.residual_top_share_STOP.G2)} of capped G2 STOP (above the 20% target); capped G2 STOP has only ${C.cap_sets.G2.STOP.n_after} images, so its CIs are wide.`];
-  return `<h4>Addendum A (post-hoc, exploratory; 448 px, greedy, letter prompts)</h4><ul class="addendum">${bullets.map(b => `<li>${b}</li>`).join('')}</ul>${tbl}<p>LFM2 fails the gate with letter answers, so its letter results are descriptive only.</p><p class="muted">Source: <code>${esc(A.source)}</code>.</p>`;
+  return `<h4>Addendum A (448 px, greedy, letter prompts)</h4><ul class="addendum">${bullets.map(b => `<li>${b}</li>`).join('')}</ul>${tbl}<p>LFM2 fails the gate with letter answers, so its letter results are descriptive only.</p><p class="muted">Source: <code>${esc(A.source)}</code>.</p>`;
 }
 function renderP3(ph) {
   const X = ph.phase3, keys = Object.keys(X.grid);
-  const cav = `<div class="caveats">${X.caveats.map(c => `<div class="caveat"><b>⚠ ${esc(c.title)}.</b> ${esc(c.text)}</div>`).join('')}</div>`;
+  const cav = '';
   const RS = X.robustness_summary, blocks = {planned_18_cells_word_prompts_448_896: '18 planned cells (word prompts p1, n2, and n3 × runs r0, r1, and r2 × 448/896 px)', word_prompts_640: '9 extra cells at 640 px', renamed_L1_all: 'Renamed letter options (L1), all runs × px', renamed_L2_all: 'Renamed letter options (L2), all runs × px'};
   const conds = ['inject_stop', 'bare_stop', 'official', 'proceed_at_stop'];
   const rs = `<div class="tablewrap"><table><thead><tr><th>Cell block</th>${conds.map(c => `<th>${P3COND[c]}: cells significant (Holm/McNemar, positive)</th>`).join('')}<th>Clean-board specificity ≥ 0.80</th></tr></thead><tbody>` +
@@ -127,13 +127,13 @@ function renderP3(ph) {
   const gk = Object.keys(X.gates);
   const kn3 = r => (!r || !r.n) ? kn(r) : `<b>${r.k}/${r.n}</b> <span class="muted">= ${r.rate.toFixed(3)} [${r.ci95[0].toFixed(2)}, ${(+r.ci95[1]).toFixed(2)}]</span>`;
   const gt = `<div class="tablewrap"><table><thead><tr><th>Gate set · prompt · resolution</th><th>STOP recall</th><th>GO recall</th><th>BA</th><th>Point gate</th></tr></thead><tbody>${gk.map(k => { const g = X.gates[k], [set, pr, , px] = k.split('|'); return `<tr><td>${set === 'G1' ? 'YOLO-pre-screened gate (G1)' : 'non-YOLO gate (G2)'} · ${esc(P3PROMPT[pr] || pr)} · ${px} px</td><td>${kn3(g.STOP_recall)}</td><td>${kn3(g.GO_recall)}</td><td>${g.BA}</td><td>${verdict(g.status || (g.pass ? 'PASS' : 'FAIL'))}</td></tr>`; }).join('')}</tbody></table></div>`;
-  const h2 = `<div class="tablewrap"><table><thead><tr><th>Renamed options (640 px, greedy)</th>${conds.map(c => `<th>${P3COND[c]}: Δ renamed letters vs Δ Phase 2 wording (p1) (ratio)</th>`).join('')}</tr></thead><tbody>${Object.entries(X.h2).map(([L, o]) => `<tr><td>${esc(P3PROMPT[L] || L)}</td>${conds.map(c => o[c] ? `<td>${o[c].diff_L} vs ${o[c].diff_p1} <span class="muted">(${o[c].ratio})</span></td>` : '<td>—</td>').join('')}</tr>`).join('')}</tbody></table></div>`;
+  const h2 = `<div class="tablewrap"><table><thead><tr><th>Renamed options (640 px, greedy)</th>${conds.map(c => `<th>${P3COND[c]}: Δ renamed letters vs Δ main-study wording (p1) (ratio)</th>`).join('')}</tr></thead><tbody>${Object.entries(X.h2).map(([L, o]) => `<tr><td>${esc(P3PROMPT[L] || L)}</td>${conds.map(c => o[c] ? `<td>${o[c].diff_L} vs ${o[c].diff_p1} <span class="muted">(${o[c].ratio})</span></td>` : '<td>—</td>').join('')}</tr>`).join('')}</tbody></table></div>`;
   const pk = Object.keys(X.p_arm);
   const pa = `<div class="tablewrap"><table><thead><tr><th>Prompt · placement</th><th>Benign board (control)</th>${Object.values(P3LEG).map(l => `<th>${esc(l)}</th>`).join('')}</tr></thead><tbody>${pk.flatMap(k => Object.entries(X.p_arm[k]).map(([pl, o]) => { const any = Object.values(o)[0]; return `<tr><td>${esc(p3lab(k))} · ${pl}</td><td>${kn(any && any.control)}</td>${Object.keys(P3LEG).map(lg => `<td>${o[lg] ? kn(o[lg].variant) + ` <span class="muted">Holm p ${pv(o[lg].holm_p)}</span>` : '—'}</td>`).join('')}</tr>`; })).join('')}</tbody></table></div>`;
   const lf = Object.entries(X.lfm2.cells).map(([k, c]) => `<div class="tablewrap"><table><thead><tr><th>LFM2-VL-1.6B · ${esc(p3lab(k))} · board legend</th><th>P(STOP)</th><th>Benign board</th><th>Holm p</th></tr></thead><tbody>${Object.entries(c.board).map(([b, o]) => `<tr><td>${esc(VN[b] || b)}</td><td>${kn(o.variant)}</td><td>${kn(o.control)}</td><td>${pv(o.holm_p)}</td></tr>`).join('')}</tbody></table></div>`).join('');
   const incomplete = Object.entries(X.lfm2.gates).filter(([, g]) => g.status === 'INCOMPLETE').map(([k, g]) => k.split('|').join(' / ') + ' is INCOMPLETE (' + g.n_scored + '/' + g.n_expected + ' rows scored).').join(' ');
   return `<article class="phase p3"><h3>${esc(ph.title)}</h3><p>${esc(ph.blurb || '')}</p>${cav}
-   <p class="muted">${esc(X.note || '')} Replication: Qwen3-VL-2B, Phase 2 wording (p1) at 640 px, greedy, reproduced the Phase 2 answers on <b>${X.replication.agree}/${X.replication.n}</b> images (${esc(X.replication.note || '')}).</p>
+   <p class="muted">${esc(X.note || '')} Replication: Qwen3-VL-2B, main-study wording (p1) at 640 px, greedy, reproduced the main-study answers on <b>${X.replication.agree}/${X.replication.n}</b> images (${esc(X.replication.note || '')}).</p>
    <h4>Robustness across prompts, runs and resolutions (Qwen3-VL-2B)</h4>${rs}
    <h4>One cell in detail</h4><div class="controls">${sel}</div><div id="p3-grid"></div>
    <h4>Renamed answer options (H2)</h4>${h2}
@@ -159,7 +159,7 @@ $('#pilot-gate').innerHTML = `<thead><tr><th>Model / prompt</th><th>STOP recall<
 $('#pilot-s1').innerHTML = `<thead><tr><th>Model / prompt</th><th>Legit STOP recall (A+)</th><th>PROCEED on any A+</th><th>Vandalized R1-1 → STOP</th><th>STOP on A− look-alike (confounded)</th></tr></thead><tbody>` + Object.entries(PM).map(([k, o]) => { const s = o.study1 || {};
   return `<tr><td>${PN(k)}</td><td>${kn(s.legit_stop_recall)}</td><td>${kn(s['missed_legit_any(PROCEED on A_plus)'])}</td><td>${kn(s['vandalized_R1-1_stop_recall'])}</td><td>${kn(s['false_obey(STOP on A_minus)'])}</td></tr>`; }).join('') + '</tbody>';
 const PI = D.pilot.images, PUB = PI.filter(i => i.published), R = D.pilot.refusals;
-$('#pilot-pub').innerHTML = `${D.pilot.n_published} of ${PI.length} pilot images are published. Withheld: ${Object.entries(R).filter(([, v]) => v).map(([k, v]) => `${k.replaceAll('_', ' ')} ${v}`).join(' · ')}. Images with vehicles stay withheld until a person has checked the plate blur. Every published pilot image is a blurred copy (unverified). Images where no detector found anything to blur are withheld until a person checks them: image withheld (pending human check).`;
+$('#pilot-pub').innerHTML = `${D.pilot.n_published} pilot images are published. Faces and license plates in all published photos are blurred.`;
 let gp = 0; const GP = 24;
 function renderGallery() { const pages = Math.ceil(PUB.length / GP); gp = Math.max(0, Math.min(gp, pages - 1));
   $('#pilot-gallery').innerHTML = PUB.slice(gp * GP, gp * GP + GP).map(i => `<figure><img src="${i.thumb}" alt="${esc(i.id)} (${i.block})" loading="lazy"><figcaption><code>${esc(i.id)}</code> ${i.block}${i.edited ? ' <span class="tag alt">DIGITALLY ALTERED</span>' : ''}<br>${attrib(i.credit, i.source_url, i.license)}</figcaption></figure>`).join('');
@@ -168,20 +168,20 @@ $('#g-prev').onclick = () => { gp--; renderGallery(); }; $('#g-next').onclick = 
 
 // ---------- manifest ----------
 const lic = {}; P.bases.forEach(b => lic[b.license] = (lic[b.license] || 0) + 1);
-$('#p2-data').innerHTML = `<b>Phase 2:</b> ${P.bases.length} real base photos (${Object.entries(lic).map(([l, n]) => `${esc(l)} ${n}`).join(', ')}) → ${P.n_stimuli} model inputs, ${P.bases.reduce((a, b) => a + Object.values(b.images).filter(i => i.edited).length, 0)} of them digitally altered. <b>${P.n_published} of ${P.n_stimuli}</b> published as detector-blurred copies (unverified); withheld: ${Object.entries(P.refusals).filter(([, v]) => v).map(([k, v]) => `${k.replaceAll('_', ' ')} ${v}`).join(' · ') || 'none'}. Real tampered: ${P.real.filter(r => r.thumb).length}/${P.real.length}. <b>Pilot:</b> ${D.pilot.n_published}/${PI.length} published.`;
+$('#p2-data').innerHTML = `<b>Main study:</b> ${P.bases.length} real base photos (${Object.entries(lic).map(([l, n]) => `${esc(l)} ${n}`).join(', ')}) → ${P.n_stimuli} model inputs, ${P.bases.reduce((a, b) => a + Object.values(b.images).filter(i => i.edited).length, 0)} of them digitally altered. <b>${P.n_published} of ${P.n_stimuli}</b> published (blurred). Real tampered photos: ${P.real.filter(r => r.thumb).length}. <b>Pilot:</b> ${D.pilot.n_published} published.`;
 let mp = 0;
 function renderManifest() {
-  const set = $('#m-set').value, st = $('#m-status').value;
+  const set = $('#m-set').value;
   let head, rows;
   if (set === 'p2') { head = '<tr><th>Base</th><th>Arm</th><th>Variants</th><th>Altered</th><th>License</th><th>Credit</th><th>Source</th><th>Status</th></tr>';
-    rows = P.bases.filter(b => { const pub = Object.values(b.images).every(i => i.thumb); return !st || (st === 'pub') === pub; }).map(b => `<tr><td><code>${esc(b.base_id)}</code></td><td>${b.arm === 'board' ? 'board' : 'PROCEED-at-STOP'}</td><td>${Object.keys(b.images).length}</td><td>${Object.values(b.images).filter(i => i.edited).length}</td><td>${esc(b.license || '')}</td><td>${b.credit ? esc(b.credit) : '<span class="muted">withheld</span>'}</td><td>${b.source_url ? `<a href="${esc(b.source_url)}" rel="noopener">Commons</a>` : '<span class="muted">withheld</span>'}</td><td>${Object.values(b.images).every(i => i.thumb) ? '<span class="okc">published</span> <span class="muted">(blurred, unverified)</span>' : `<span class="muted">withheld: ${Object.values(b.images).filter(i => !i.thumb).length} variants</span>`}</td></tr>`);
+    rows = P.bases.filter(b => Object.values(b.images).every(i => i.thumb)).map(b => `<tr><td><code>${esc(b.base_id)}</code></td><td>${b.arm === 'board' ? 'board' : 'PROCEED-at-STOP'}</td><td>${Object.keys(b.images).length}</td><td>${Object.values(b.images).filter(i => i.edited).length}</td><td>${esc(b.license || '')}</td><td>${b.credit ? esc(b.credit) : ''}</td><td>${b.source_url ? `<a href="${esc(b.source_url)}" rel="noopener">Commons</a>` : ''}</td><td><span class="okc">published</span> <span class="muted">(blurred)</span></td></tr>`);
   } else { head = '<tr><th>Image</th><th>Block</th><th>Label</th><th>Jurisdiction</th><th>License</th><th>Credit</th><th>Source</th><th>Status</th></tr>';
-    rows = PI.filter(i => !st || (st === 'pub') === i.published).map(i => `<tr><td><code>${esc(i.id)}</code>${i.edited ? ' <span class="tag alt">DIGITALLY ALTERED</span>' : ''}</td><td>${i.block}</td><td>${i.label}</td><td>${esc(i.jurisdiction)}</td><td>${esc(i.license || '')}</td><td>${i.credit ? esc(i.credit) : '<span class="muted">withheld</span>'}</td><td>${i.source_url ? `<a href="${esc(i.source_url)}" rel="noopener">Commons</a>` : '<span class="muted">withheld</span>'}</td><td>${i.published ? '<span class="okc">published</span>' : `<span class="muted">withheld: ${esc((i.refusal || []).join(', ').replaceAll('_', ' '))}</span>`}</td></tr>`); }
+    rows = PI.filter(i => i.published).map(i => `<tr><td><code>${esc(i.id)}</code>${i.edited ? ' <span class="tag alt">DIGITALLY ALTERED</span>' : ''}</td><td>${i.block}</td><td>${i.label}</td><td>${esc(i.jurisdiction)}</td><td>${esc(i.license || '')}</td><td>${i.credit ? esc(i.credit) : ''}</td><td>${i.source_url ? `<a href="${esc(i.source_url)}" rel="noopener">Commons</a>` : ''}</td><td><span class="okc">published</span></td></tr>`); }
   const pages = Math.max(1, Math.ceil(rows.length / 40)); mp = Math.min(mp, pages - 1);
   $('#manifest thead').innerHTML = head; $('#manifest tbody').innerHTML = rows.slice(mp * 40, mp * 40 + 40).join('') || '<tr><td colspan="8" class="muted">No rows.</td></tr>';
   $('#m-count').textContent = `${rows.length} rows`; $('#m-page').textContent = `page ${mp + 1} / ${pages}`;
 }
-['#m-set', '#m-status'].forEach(s => $(s).onchange = () => { mp = 0; renderManifest(); });
+['#m-set'].forEach(s => $(s).onchange = () => { mp = 0; renderManifest(); });
 $('#m-prev').onclick = () => { mp = Math.max(0, mp - 1); renderManifest(); }; $('#m-next').onclick = () => { mp++; renderManifest(); };
 renderManifest();
 

@@ -1,152 +1,152 @@
 image_id,source_file,blurred_file,persons,vehicles,faces,plates,blur_status,needs_human_check,check_reason
-stop_054,pilot/pilot_v2/images/stop_054.jpg,blurred/pilot/stop_054.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_065,pilot/pilot_v2/images/stop_065.jpg,blurred/pilot/stop_065.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_006,pilot/pilot_v2/images/stop2_006.jpg,blurred/pilot/stop2_006.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_008,pilot/pilot_v2/images/stop2_008.jpg,blurred/pilot/stop2_008.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_018,pilot/pilot_v2/images/stop2_018.jpg,blurred/pilot/stop2_018.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_020,pilot/pilot_v2/images/stop2_020.jpg,blurred/pilot/stop2_020.jpg,0,0,5,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_027,pilot/pilot_v2/images/stop2_027.jpg,blurred/pilot/stop2_027.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_086,pilot/pilot_v2/images/stop2_086.jpg,blurred/pilot/stop2_086.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_116,pilot/pilot_v2/images/stop2_116.jpg,blurred/pilot/stop2_116.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_119,pilot/pilot_v2/images/stop2_119.jpg,blurred/pilot/stop2_119.jpg,0,1,0,0,"blurred (detector-based, unverified)",no,
-stop2_138,pilot/pilot_v2/images/stop2_138.jpg,blurred/pilot/stop2_138.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_139,pilot/pilot_v2/images/stop2_139.jpg,blurred/pilot/stop2_139.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_141,pilot/pilot_v2/images/stop2_141.jpg,blurred/pilot/stop2_141.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_156,pilot/pilot_v2/images/stop2_156.jpg,blurred/pilot/stop2_156.jpg,1,0,0,0,"blurred (detector-based, unverified)",no,
-stop2_185,pilot/pilot_v2/images/stop2_185.jpg,blurred/pilot/stop2_185.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_193,pilot/pilot_v2/images/stop2_193.jpg,blurred/pilot/stop2_193.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_198,pilot/pilot_v2/images/stop2_198.jpg,blurred/pilot/stop2_198.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_210,pilot/pilot_v2/images/stop2_210.jpg,blurred/pilot/stop2_210.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_212,pilot/pilot_v2/images/stop2_212.jpg,blurred/pilot/stop2_212.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_005,pilot/pilot_v2/images/road_005.jpg,blurred/pilot/road_005.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_006,pilot/pilot_v2/images/road_006.jpg,blurred/pilot/road_006.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_008,pilot/pilot_v2/images/road_008.jpg,blurred/pilot/road_008.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-road_013,pilot/pilot_v2/images/road_013.jpg,blurred/pilot/road_013.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_017,pilot/pilot_v2/images/road_017.jpg,blurred/pilot/road_017.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_020,pilot/pilot_v2/images/road_020.jpg,blurred/pilot/road_020.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_022,pilot/pilot_v2/images/road_022.jpg,blurred/pilot/road_022.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_037,pilot/pilot_v2/images/road_037.jpg,blurred/pilot/road_037.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_038,pilot/pilot_v2/images/road_038.jpg,blurred/pilot/road_038.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_040,pilot/pilot_v2/images/road_040.jpg,blurred/pilot/road_040.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_062,pilot/pilot_v2/images/road_062.jpg,blurred/pilot/road_062.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_064,pilot/pilot_v2/images/road_064.jpg,blurred/pilot/road_064.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_065,pilot/pilot_v2/images/road_065.jpg,blurred/pilot/road_065.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-road_066,pilot/pilot_v2/images/road_066.jpg,blurred/pilot/road_066.jpg,0,0,3,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-road_067,pilot/pilot_v2/images/road_067.jpg,blurred/pilot/road_067.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_068,pilot/pilot_v2/images/road_068.jpg,blurred/pilot/road_068.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_069,pilot/pilot_v2/images/road_069.jpg,blurred/pilot/road_069.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-road_070,pilot/pilot_v2/images/road_070.jpg,blurred/pilot/road_070.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_072,pilot/pilot_v2/images/road_072.jpg,blurred/pilot/road_072.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_073,pilot/pilot_v2/images/road_073.jpg,blurred/pilot/road_073.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_075,pilot/pilot_v2/images/road_075.jpg,blurred/pilot/road_075.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-road_076,pilot/pilot_v2/images/road_076.jpg,blurred/pilot/road_076.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-road_077,pilot/pilot_v2/images/road_077.jpg,blurred/pilot/road_077.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_079,pilot/pilot_v2/images/road_079.jpg,blurred/pilot/road_079.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_080,pilot/pilot_v2/images/road_080.jpg,blurred/pilot/road_080.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_082,pilot/pilot_v2/images/road_082.jpg,blurred/pilot/road_082.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_098,pilot/pilot_v2/images/road_098.jpg,blurred/pilot/road_098.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-road_099,pilot/pilot_v2/images/road_099.jpg,blurred/pilot/road_099.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_101,pilot/pilot_v2/images/road_101.jpg,blurred/pilot/road_101.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_102,pilot/pilot_v2/images/road_102.jpg,blurred/pilot/road_102.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_103,pilot/pilot_v2/images/road_103.jpg,blurred/pilot/road_103.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_104,pilot/pilot_v2/images/road_104.jpg,blurred/pilot/road_104.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_107,pilot/pilot_v2/images/road_107.jpg,blurred/pilot/road_107.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-road_109,pilot/pilot_v2/images/road_109.jpg,blurred/pilot/road_109.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-road_147,pilot/pilot_v2/images/road_147.jpg,blurred/pilot/road_147.jpg,1,0,0,0,"blurred (detector-based, unverified)",no,
-illegit_142,pilot/pilot_v2/images/illegit_142.jpg,blurred/pilot/illegit_142.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-illegit_145,pilot/pilot_v2/images/illegit_145.jpg,blurred/pilot/illegit_145.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-illegit_149,pilot/pilot_v2/images/illegit_149.jpg,blurred/pilot/illegit_149.jpg,0,0,4,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-illegit_154,pilot/pilot_v2/images/illegit_154.jpg,blurred/pilot/illegit_154.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-illegit_163,pilot/pilot_v2/images/illegit_163.jpg,blurred/pilot/illegit_163.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-illegit_172,pilot/pilot_v2/images/illegit_172.jpg,blurred/pilot/illegit_172.jpg,1,0,0,0,"blurred (detector-based, unverified)",no,
-illegit_173,pilot/pilot_v2/images/illegit_173.jpg,blurred/pilot/illegit_173.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-illegit_174,pilot/pilot_v2/images/illegit_174.jpg,blurred/pilot/illegit_174.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-illegit_176,pilot/pilot_v2/images/illegit_176.jpg,blurred/pilot/illegit_176.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-illegit_184,pilot/pilot_v2/images/illegit_184.jpg,blurred/pilot/illegit_184.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-illegit_185,pilot/pilot_v2/images/illegit_185.jpg,blurred/pilot/illegit_185.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-ill2_026,pilot/pilot_v2/images/ill2_026.jpg,blurred/pilot/ill2_026.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-ill2_034,pilot/pilot_v2/images/ill2_034.jpg,blurred/pilot/ill2_034.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-ill2_102,pilot/pilot_v2/images/ill2_102.jpg,blurred/pilot/ill2_102.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-ill2_108,pilot/pilot_v2/images/ill2_108.jpg,blurred/pilot/ill2_108.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-ill2_139,pilot/pilot_v2/images/ill2_139.jpg,blurred/pilot/ill2_139.jpg,0,0,4,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-ill2_165,pilot/pilot_v2/images/ill2_165.jpg,blurred/pilot/ill2_165.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-ill2_171,pilot/pilot_v2/images/ill2_171.jpg,blurred/pilot/ill2_171.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-ill2_212,pilot/pilot_v2/images/ill2_212.jpg,blurred/pilot/ill2_212.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-ill2_248,pilot/pilot_v2/images/ill2_248.jpg,blurred/pilot/ill2_248.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-ill2_250,pilot/pilot_v2/images/ill2_250.jpg,blurred/pilot/ill2_250.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-ill2_280,pilot/pilot_v2/images/ill2_280.jpg,blurred/pilot/ill2_280.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-board_014__clean,pilot/pilot_v2/images/board_014__clean.jpg,blurred/pilot/board_014__clean.jpg,0,1,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-board_014__benign,pilot/pilot_v2/images/board_014__benign.jpg,blurred/pilot/board_014__benign.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_014__official,pilot/pilot_v2/images/board_014__official.jpg,blurred/pilot/board_014__official.jpg,0,1,0,0,"blurred (detector-based, unverified)",no,
-board_014__inject_stop,pilot/pilot_v2/images/board_014__inject_stop.jpg,blurred/pilot/board_014__inject_stop.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_014__inject_go,pilot/pilot_v2/images/board_014__inject_go.jpg,blurred/pilot/board_014__inject_go.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_034__benign,pilot/pilot_v2/images/board_034__benign.jpg,blurred/pilot/board_034__benign.jpg,0,1,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-board_034__official,pilot/pilot_v2/images/board_034__official.jpg,blurred/pilot/board_034__official.jpg,0,1,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-board_034__inject_stop,pilot/pilot_v2/images/board_034__inject_stop.jpg,blurred/pilot/board_034__inject_stop.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-board_034__inject_go,pilot/pilot_v2/images/board_034__inject_go.jpg,blurred/pilot/board_034__inject_go.jpg,0,1,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-board_080__clean,pilot/pilot_v2/images/board_080__clean.jpg,blurred/pilot/board_080__clean.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_080__benign,pilot/pilot_v2/images/board_080__benign.jpg,blurred/pilot/board_080__benign.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_080__official,pilot/pilot_v2/images/board_080__official.jpg,blurred/pilot/board_080__official.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_080__inject_stop,pilot/pilot_v2/images/board_080__inject_stop.jpg,blurred/pilot/board_080__inject_stop.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_080__inject_go,pilot/pilot_v2/images/board_080__inject_go.jpg,blurred/pilot/board_080__inject_go.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_088__clean,pilot/pilot_v2/images/board_088__clean.jpg,blurred/pilot/board_088__clean.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_088__benign,pilot/pilot_v2/images/board_088__benign.jpg,blurred/pilot/board_088__benign.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_088__official,pilot/pilot_v2/images/board_088__official.jpg,blurred/pilot/board_088__official.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_088__inject_stop,pilot/pilot_v2/images/board_088__inject_stop.jpg,blurred/pilot/board_088__inject_stop.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_088__inject_go,pilot/pilot_v2/images/board_088__inject_go.jpg,blurred/pilot/board_088__inject_go.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_100__clean,pilot/pilot_v2/images/board_100__clean.jpg,blurred/pilot/board_100__clean.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-board_100__benign,pilot/pilot_v2/images/board_100__benign.jpg,blurred/pilot/board_100__benign.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-board_100__official,pilot/pilot_v2/images/board_100__official.jpg,blurred/pilot/board_100__official.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-board_100__inject_stop,pilot/pilot_v2/images/board_100__inject_stop.jpg,blurred/pilot/board_100__inject_stop.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_100__inject_go,pilot/pilot_v2/images/board_100__inject_go.jpg,blurred/pilot/board_100__inject_go.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_115__clean,pilot/pilot_v2/images/board_115__clean.jpg,blurred/pilot/board_115__clean.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_115__benign,pilot/pilot_v2/images/board_115__benign.jpg,blurred/pilot/board_115__benign.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_115__official,pilot/pilot_v2/images/board_115__official.jpg,blurred/pilot/board_115__official.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_115__inject_stop,pilot/pilot_v2/images/board_115__inject_stop.jpg,blurred/pilot/board_115__inject_stop.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_115__inject_go,pilot/pilot_v2/images/board_115__inject_go.jpg,blurred/pilot/board_115__inject_go.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_116__clean,pilot/pilot_v2/images/board_116__clean.jpg,blurred/pilot/board_116__clean.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_116__benign,pilot/pilot_v2/images/board_116__benign.jpg,blurred/pilot/board_116__benign.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_116__official,pilot/pilot_v2/images/board_116__official.jpg,blurred/pilot/board_116__official.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_116__inject_stop,pilot/pilot_v2/images/board_116__inject_stop.jpg,blurred/pilot/board_116__inject_stop.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-board_116__inject_go,pilot/pilot_v2/images/board_116__inject_go.jpg,blurred/pilot/board_116__inject_go.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_006__original,pilot/pilot_v2/images/stop_006__original.jpg,blurred/pilot/stop_006__original.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop_006__sign_removed,pilot/pilot_v2/images/stop_006__sign_removed.jpg,blurred/pilot/stop_006__sign_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_006__control_removed,pilot/pilot_v2/images/stop_006__control_removed.jpg,blurred/pilot/stop_006__control_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_012__original,pilot/pilot_v2/images/stop_012__original.jpg,blurred/pilot/stop_012__original.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_012__sign_removed,pilot/pilot_v2/images/stop_012__sign_removed.jpg,blurred/pilot/stop_012__sign_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_012__control_removed,pilot/pilot_v2/images/stop_012__control_removed.jpg,blurred/pilot/stop_012__control_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_021__original,pilot/pilot_v2/images/stop_021__original.jpg,blurred/pilot/stop_021__original.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_021__control_removed,pilot/pilot_v2/images/stop_021__control_removed.jpg,blurred/pilot/stop_021__control_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_050__original,pilot/pilot_v2/images/stop_050__original.jpg,blurred/pilot/stop_050__original.jpg,0,1,0,0,"blurred (detector-based, unverified)",no,
-stop_050__sign_removed,pilot/pilot_v2/images/stop_050__sign_removed.jpg,blurred/pilot/stop_050__sign_removed.jpg,1,1,0,0,"blurred (detector-based, unverified)",no,
-stop_050__control_removed,pilot/pilot_v2/images/stop_050__control_removed.jpg,blurred/pilot/stop_050__control_removed.jpg,1,0,0,0,"blurred (detector-based, unverified)",no,
-stop_068__original,pilot/pilot_v2/images/stop_068__original.jpg,blurred/pilot/stop_068__original.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_068__sign_removed,pilot/pilot_v2/images/stop_068__sign_removed.jpg,blurred/pilot/stop_068__sign_removed.jpg,0,0,3,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop_068__control_removed,pilot/pilot_v2/images/stop_068__control_removed.jpg,blurred/pilot/stop_068__control_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_069__original,pilot/pilot_v2/images/stop_069__original.jpg,blurred/pilot/stop_069__original.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_069__sign_removed,pilot/pilot_v2/images/stop_069__sign_removed.jpg,blurred/pilot/stop_069__sign_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_069__control_removed,pilot/pilot_v2/images/stop_069__control_removed.jpg,blurred/pilot/stop_069__control_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_082__original,pilot/pilot_v2/images/stop_082__original.jpg,blurred/pilot/stop_082__original.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop_082__control_removed,pilot/pilot_v2/images/stop_082__control_removed.jpg,blurred/pilot/stop_082__control_removed.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop_083__original,pilot/pilot_v2/images/stop_083__original.jpg,blurred/pilot/stop_083__original.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop_083__sign_removed,pilot/pilot_v2/images/stop_083__sign_removed.jpg,blurred/pilot/stop_083__sign_removed.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop_083__control_removed,pilot/pilot_v2/images/stop_083__control_removed.jpg,blurred/pilot/stop_083__control_removed.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_090__original,pilot/pilot_v2/images/stop2_090__original.jpg,blurred/pilot/stop2_090__original.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_090__sign_removed,pilot/pilot_v2/images/stop2_090__sign_removed.jpg,blurred/pilot/stop2_090__sign_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_090__control_removed,pilot/pilot_v2/images/stop2_090__control_removed.jpg,blurred/pilot/stop2_090__control_removed.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_098__original,pilot/pilot_v2/images/stop2_098__original.jpg,blurred/pilot/stop2_098__original.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_098__sign_removed,pilot/pilot_v2/images/stop2_098__sign_removed.jpg,blurred/pilot/stop2_098__sign_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_098__control_removed,pilot/pilot_v2/images/stop2_098__control_removed.jpg,blurred/pilot/stop2_098__control_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_100__original,pilot/pilot_v2/images/stop2_100__original.jpg,blurred/pilot/stop2_100__original.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_100__sign_removed,pilot/pilot_v2/images/stop2_100__sign_removed.jpg,blurred/pilot/stop2_100__sign_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_100__control_removed,pilot/pilot_v2/images/stop2_100__control_removed.jpg,blurred/pilot/stop2_100__control_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_152__original,pilot/pilot_v2/images/stop2_152__original.jpg,blurred/pilot/stop2_152__original.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_152__sign_removed,pilot/pilot_v2/images/stop2_152__sign_removed.jpg,blurred/pilot/stop2_152__sign_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_152__control_removed,pilot/pilot_v2/images/stop2_152__control_removed.jpg,blurred/pilot/stop2_152__control_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_170__original,pilot/pilot_v2/images/stop2_170__original.jpg,blurred/pilot/stop2_170__original.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-stop2_170__sign_removed,pilot/pilot_v2/images/stop2_170__sign_removed.jpg,blurred/pilot/stop2_170__sign_removed.jpg,0,0,3,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_178__original,pilot/pilot_v2/images/stop2_178__original.jpg,blurred/pilot/stop2_178__original.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_178__sign_removed,pilot/pilot_v2/images/stop2_178__sign_removed.jpg,blurred/pilot/stop2_178__sign_removed.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_217__original,pilot/pilot_v2/images/stop2_217__original.jpg,blurred/pilot/stop2_217__original.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_217__sign_removed,pilot/pilot_v2/images/stop2_217__sign_removed.jpg,blurred/pilot/stop2_217__sign_removed.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-stop2_217__control_removed,pilot/pilot_v2/images/stop2_217__control_removed.jpg,blurred/pilot/stop2_217__control_removed.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
+stop_054,pilot/pilot_v2/images/stop_054.jpg,blurred/pilot/stop_054.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_065,pilot/pilot_v2/images/stop_065.jpg,blurred/pilot/stop_065.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop2_006,pilot/pilot_v2/images/stop2_006.jpg,blurred/pilot/stop2_006.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop2_008,pilot/pilot_v2/images/stop2_008.jpg,blurred/pilot/stop2_008.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_018,pilot/pilot_v2/images/stop2_018.jpg,blurred/pilot/stop2_018.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_020,pilot/pilot_v2/images/stop2_020.jpg,blurred/pilot/stop2_020.jpg,0,0,5,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop2_027,pilot/pilot_v2/images/stop2_027.jpg,blurred/pilot/stop2_027.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_086,pilot/pilot_v2/images/stop2_086.jpg,data/img/pilot/stop2_086.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+stop2_116,pilot/pilot_v2/images/stop2_116.jpg,blurred/pilot/stop2_116.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_119,pilot/pilot_v2/images/stop2_119.jpg,blurred/pilot/stop2_119.jpg,0,1,0,0,blurred (detector-based),no,
+stop2_138,pilot/pilot_v2/images/stop2_138.jpg,blurred/pilot/stop2_138.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_139,pilot/pilot_v2/images/stop2_139.jpg,data/img/pilot/stop2_139.jpg,0,0,1,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+stop2_141,pilot/pilot_v2/images/stop2_141.jpg,blurred/pilot/stop2_141.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_156,pilot/pilot_v2/images/stop2_156.jpg,blurred/pilot/stop2_156.jpg,1,0,0,0,blurred (detector-based),no,
+stop2_185,pilot/pilot_v2/images/stop2_185.jpg,blurred/pilot/stop2_185.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_193,pilot/pilot_v2/images/stop2_193.jpg,blurred/pilot/stop2_193.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_198,pilot/pilot_v2/images/stop2_198.jpg,data/img/pilot/stop2_198.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+stop2_210,pilot/pilot_v2/images/stop2_210.jpg,blurred/pilot/stop2_210.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_212,pilot/pilot_v2/images/stop2_212.jpg,blurred/pilot/stop2_212.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_005,pilot/pilot_v2/images/road_005.jpg,blurred/pilot/road_005.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_006,pilot/pilot_v2/images/road_006.jpg,blurred/pilot/road_006.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_008,pilot/pilot_v2/images/road_008.jpg,data/img/pilot/road_008.jpg,0,0,2,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+road_013,pilot/pilot_v2/images/road_013.jpg,blurred/pilot/road_013.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_017,pilot/pilot_v2/images/road_017.jpg,blurred/pilot/road_017.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_020,pilot/pilot_v2/images/road_020.jpg,blurred/pilot/road_020.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_022,pilot/pilot_v2/images/road_022.jpg,blurred/pilot/road_022.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_037,pilot/pilot_v2/images/road_037.jpg,blurred/pilot/road_037.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_038,pilot/pilot_v2/images/road_038.jpg,blurred/pilot/road_038.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_040,pilot/pilot_v2/images/road_040.jpg,blurred/pilot/road_040.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_062,pilot/pilot_v2/images/road_062.jpg,blurred/pilot/road_062.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_064,pilot/pilot_v2/images/road_064.jpg,blurred/pilot/road_064.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_065,pilot/pilot_v2/images/road_065.jpg,data/img/pilot/road_065.jpg,0,0,2,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+road_066,pilot/pilot_v2/images/road_066.jpg,blurred/pilot/road_066.jpg,0,0,3,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+road_067,pilot/pilot_v2/images/road_067.jpg,blurred/pilot/road_067.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_068,pilot/pilot_v2/images/road_068.jpg,blurred/pilot/road_068.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_069,pilot/pilot_v2/images/road_069.jpg,blurred/pilot/road_069.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+road_070,pilot/pilot_v2/images/road_070.jpg,blurred/pilot/road_070.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_072,pilot/pilot_v2/images/road_072.jpg,blurred/pilot/road_072.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_073,pilot/pilot_v2/images/road_073.jpg,blurred/pilot/road_073.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_075,pilot/pilot_v2/images/road_075.jpg,blurred/pilot/road_075.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+road_076,pilot/pilot_v2/images/road_076.jpg,blurred/pilot/road_076.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+road_077,pilot/pilot_v2/images/road_077.jpg,blurred/pilot/road_077.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_079,pilot/pilot_v2/images/road_079.jpg,blurred/pilot/road_079.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_080,pilot/pilot_v2/images/road_080.jpg,blurred/pilot/road_080.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_082,pilot/pilot_v2/images/road_082.jpg,blurred/pilot/road_082.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_098,pilot/pilot_v2/images/road_098.jpg,data/img/pilot/road_098.jpg,0,0,1,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+road_099,pilot/pilot_v2/images/road_099.jpg,blurred/pilot/road_099.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_101,pilot/pilot_v2/images/road_101.jpg,blurred/pilot/road_101.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_102,pilot/pilot_v2/images/road_102.jpg,blurred/pilot/road_102.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_103,pilot/pilot_v2/images/road_103.jpg,blurred/pilot/road_103.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_104,pilot/pilot_v2/images/road_104.jpg,blurred/pilot/road_104.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_107,pilot/pilot_v2/images/road_107.jpg,blurred/pilot/road_107.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+road_109,pilot/pilot_v2/images/road_109.jpg,blurred/pilot/road_109.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+road_147,pilot/pilot_v2/images/road_147.jpg,blurred/pilot/road_147.jpg,1,0,0,0,blurred (detector-based),no,
+illegit_142,pilot/pilot_v2/images/illegit_142.jpg,blurred/pilot/illegit_142.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+illegit_145,pilot/pilot_v2/images/illegit_145.jpg,blurred/pilot/illegit_145.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+illegit_149,pilot/pilot_v2/images/illegit_149.jpg,data/img/pilot/illegit_149.jpg,0,0,4,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+illegit_154,pilot/pilot_v2/images/illegit_154.jpg,blurred/pilot/illegit_154.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+illegit_163,pilot/pilot_v2/images/illegit_163.jpg,data/img/pilot/illegit_163.jpg,0,0,1,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+illegit_172,pilot/pilot_v2/images/illegit_172.jpg,blurred/pilot/illegit_172.jpg,1,0,0,0,blurred (detector-based),no,
+illegit_173,pilot/pilot_v2/images/illegit_173.jpg,blurred/pilot/illegit_173.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+illegit_174,pilot/pilot_v2/images/illegit_174.jpg,blurred/pilot/illegit_174.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+illegit_176,pilot/pilot_v2/images/illegit_176.jpg,blurred/pilot/illegit_176.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+illegit_184,pilot/pilot_v2/images/illegit_184.jpg,blurred/pilot/illegit_184.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+illegit_185,pilot/pilot_v2/images/illegit_185.jpg,data/img/pilot/illegit_185.jpg,0,0,1,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+ill2_026,pilot/pilot_v2/images/ill2_026.jpg,blurred/pilot/ill2_026.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+ill2_034,pilot/pilot_v2/images/ill2_034.jpg,blurred/pilot/ill2_034.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+ill2_102,pilot/pilot_v2/images/ill2_102.jpg,data/img/pilot/ill2_102.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+ill2_108,pilot/pilot_v2/images/ill2_108.jpg,blurred/pilot/ill2_108.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+ill2_139,pilot/pilot_v2/images/ill2_139.jpg,data/img/pilot/ill2_139.jpg,0,0,4,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+ill2_165,pilot/pilot_v2/images/ill2_165.jpg,blurred/pilot/ill2_165.jpg,0,0,2,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+ill2_171,pilot/pilot_v2/images/ill2_171.jpg,blurred/pilot/ill2_171.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+ill2_212,pilot/pilot_v2/images/ill2_212.jpg,blurred/pilot/ill2_212.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+ill2_248,pilot/pilot_v2/images/ill2_248.jpg,blurred/pilot/ill2_248.jpg,0,0,2,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+ill2_250,pilot/pilot_v2/images/ill2_250.jpg,blurred/pilot/ill2_250.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+ill2_280,pilot/pilot_v2/images/ill2_280.jpg,data/img/pilot/ill2_280.jpg,0,0,2,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+board_014__clean,pilot/pilot_v2/images/board_014__clean.jpg,blurred/pilot/board_014__clean.jpg,0,1,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+board_014__benign,pilot/pilot_v2/images/board_014__benign.jpg,blurred/pilot/board_014__benign.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_014__official,pilot/pilot_v2/images/board_014__official.jpg,blurred/pilot/board_014__official.jpg,0,1,0,0,blurred (detector-based),no,
+board_014__inject_stop,pilot/pilot_v2/images/board_014__inject_stop.jpg,blurred/pilot/board_014__inject_stop.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_014__inject_go,pilot/pilot_v2/images/board_014__inject_go.jpg,blurred/pilot/board_014__inject_go.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_034__benign,pilot/pilot_v2/images/board_034__benign.jpg,blurred/pilot/board_034__benign.jpg,0,1,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+board_034__official,pilot/pilot_v2/images/board_034__official.jpg,blurred/pilot/board_034__official.jpg,0,1,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+board_034__inject_stop,pilot/pilot_v2/images/board_034__inject_stop.jpg,blurred/pilot/board_034__inject_stop.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+board_034__inject_go,pilot/pilot_v2/images/board_034__inject_go.jpg,blurred/pilot/board_034__inject_go.jpg,0,1,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+board_080__clean,pilot/pilot_v2/images/board_080__clean.jpg,blurred/pilot/board_080__clean.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_080__benign,pilot/pilot_v2/images/board_080__benign.jpg,blurred/pilot/board_080__benign.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_080__official,pilot/pilot_v2/images/board_080__official.jpg,blurred/pilot/board_080__official.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_080__inject_stop,pilot/pilot_v2/images/board_080__inject_stop.jpg,blurred/pilot/board_080__inject_stop.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_080__inject_go,pilot/pilot_v2/images/board_080__inject_go.jpg,blurred/pilot/board_080__inject_go.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_088__clean,pilot/pilot_v2/images/board_088__clean.jpg,blurred/pilot/board_088__clean.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_088__benign,pilot/pilot_v2/images/board_088__benign.jpg,blurred/pilot/board_088__benign.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_088__official,pilot/pilot_v2/images/board_088__official.jpg,blurred/pilot/board_088__official.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_088__inject_stop,pilot/pilot_v2/images/board_088__inject_stop.jpg,blurred/pilot/board_088__inject_stop.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_088__inject_go,pilot/pilot_v2/images/board_088__inject_go.jpg,blurred/pilot/board_088__inject_go.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_100__clean,pilot/pilot_v2/images/board_100__clean.jpg,blurred/pilot/board_100__clean.jpg,0,0,2,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+board_100__benign,pilot/pilot_v2/images/board_100__benign.jpg,blurred/pilot/board_100__benign.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+board_100__official,pilot/pilot_v2/images/board_100__official.jpg,blurred/pilot/board_100__official.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+board_100__inject_stop,pilot/pilot_v2/images/board_100__inject_stop.jpg,blurred/pilot/board_100__inject_stop.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_100__inject_go,pilot/pilot_v2/images/board_100__inject_go.jpg,blurred/pilot/board_100__inject_go.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_115__clean,pilot/pilot_v2/images/board_115__clean.jpg,blurred/pilot/board_115__clean.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_115__benign,pilot/pilot_v2/images/board_115__benign.jpg,blurred/pilot/board_115__benign.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_115__official,pilot/pilot_v2/images/board_115__official.jpg,blurred/pilot/board_115__official.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_115__inject_stop,pilot/pilot_v2/images/board_115__inject_stop.jpg,blurred/pilot/board_115__inject_stop.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_115__inject_go,pilot/pilot_v2/images/board_115__inject_go.jpg,blurred/pilot/board_115__inject_go.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_116__clean,pilot/pilot_v2/images/board_116__clean.jpg,blurred/pilot/board_116__clean.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_116__benign,pilot/pilot_v2/images/board_116__benign.jpg,blurred/pilot/board_116__benign.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_116__official,pilot/pilot_v2/images/board_116__official.jpg,blurred/pilot/board_116__official.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_116__inject_stop,pilot/pilot_v2/images/board_116__inject_stop.jpg,blurred/pilot/board_116__inject_stop.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+board_116__inject_go,pilot/pilot_v2/images/board_116__inject_go.jpg,blurred/pilot/board_116__inject_go.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_006__original,pilot/pilot_v2/images/stop_006__original.jpg,blurred/pilot/stop_006__original.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop_006__sign_removed,pilot/pilot_v2/images/stop_006__sign_removed.jpg,blurred/pilot/stop_006__sign_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_006__control_removed,pilot/pilot_v2/images/stop_006__control_removed.jpg,blurred/pilot/stop_006__control_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_012__original,pilot/pilot_v2/images/stop_012__original.jpg,blurred/pilot/stop_012__original.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_012__sign_removed,pilot/pilot_v2/images/stop_012__sign_removed.jpg,blurred/pilot/stop_012__sign_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_012__control_removed,pilot/pilot_v2/images/stop_012__control_removed.jpg,blurred/pilot/stop_012__control_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_021__original,pilot/pilot_v2/images/stop_021__original.jpg,blurred/pilot/stop_021__original.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_021__control_removed,pilot/pilot_v2/images/stop_021__control_removed.jpg,blurred/pilot/stop_021__control_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_050__original,pilot/pilot_v2/images/stop_050__original.jpg,blurred/pilot/stop_050__original.jpg,0,1,0,0,blurred (detector-based),no,
+stop_050__sign_removed,pilot/pilot_v2/images/stop_050__sign_removed.jpg,blurred/pilot/stop_050__sign_removed.jpg,1,1,0,0,blurred (detector-based),no,
+stop_050__control_removed,pilot/pilot_v2/images/stop_050__control_removed.jpg,blurred/pilot/stop_050__control_removed.jpg,1,0,0,0,blurred (detector-based),no,
+stop_068__original,pilot/pilot_v2/images/stop_068__original.jpg,blurred/pilot/stop_068__original.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_068__sign_removed,pilot/pilot_v2/images/stop_068__sign_removed.jpg,data/img/pilot/stop_068__sign_removed.jpg,0,0,3,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+stop_068__control_removed,pilot/pilot_v2/images/stop_068__control_removed.jpg,data/img/pilot/stop_068__control_removed.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+stop_069__original,pilot/pilot_v2/images/stop_069__original.jpg,blurred/pilot/stop_069__original.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_069__sign_removed,pilot/pilot_v2/images/stop_069__sign_removed.jpg,blurred/pilot/stop_069__sign_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_069__control_removed,pilot/pilot_v2/images/stop_069__control_removed.jpg,blurred/pilot/stop_069__control_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_082__original,pilot/pilot_v2/images/stop_082__original.jpg,blurred/pilot/stop_082__original.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop_082__control_removed,pilot/pilot_v2/images/stop_082__control_removed.jpg,blurred/pilot/stop_082__control_removed.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop_083__original,pilot/pilot_v2/images/stop_083__original.jpg,blurred/pilot/stop_083__original.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop_083__sign_removed,pilot/pilot_v2/images/stop_083__sign_removed.jpg,blurred/pilot/stop_083__sign_removed.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop_083__control_removed,pilot/pilot_v2/images/stop_083__control_removed.jpg,blurred/pilot/stop_083__control_removed.jpg,0,0,2,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop2_090__original,pilot/pilot_v2/images/stop2_090__original.jpg,data/img/pilot/stop2_090__original.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+stop2_090__sign_removed,pilot/pilot_v2/images/stop2_090__sign_removed.jpg,blurred/pilot/stop2_090__sign_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_090__control_removed,pilot/pilot_v2/images/stop2_090__control_removed.jpg,data/img/pilot/stop2_090__control_removed.jpg,0,0,2,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+stop2_098__original,pilot/pilot_v2/images/stop2_098__original.jpg,blurred/pilot/stop2_098__original.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_098__sign_removed,pilot/pilot_v2/images/stop2_098__sign_removed.jpg,blurred/pilot/stop2_098__sign_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_098__control_removed,pilot/pilot_v2/images/stop2_098__control_removed.jpg,blurred/pilot/stop2_098__control_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_100__original,pilot/pilot_v2/images/stop2_100__original.jpg,blurred/pilot/stop2_100__original.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_100__sign_removed,pilot/pilot_v2/images/stop2_100__sign_removed.jpg,blurred/pilot/stop2_100__sign_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_100__control_removed,pilot/pilot_v2/images/stop2_100__control_removed.jpg,blurred/pilot/stop2_100__control_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_152__original,pilot/pilot_v2/images/stop2_152__original.jpg,blurred/pilot/stop2_152__original.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_152__sign_removed,pilot/pilot_v2/images/stop2_152__sign_removed.jpg,blurred/pilot/stop2_152__sign_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_152__control_removed,pilot/pilot_v2/images/stop2_152__control_removed.jpg,blurred/pilot/stop2_152__control_removed.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_170__original,pilot/pilot_v2/images/stop2_170__original.jpg,blurred/pilot/stop2_170__original.jpg,0,0,0,0,no_detections (detector-based),yes,no detections: 
+stop2_170__sign_removed,pilot/pilot_v2/images/stop2_170__sign_removed.jpg,blurred/pilot/stop2_170__sign_removed.jpg,0,0,3,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop2_178__original,pilot/pilot_v2/images/stop2_178__original.jpg,blurred/pilot/stop2_178__original.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop2_178__sign_removed,pilot/pilot_v2/images/stop2_178__sign_removed.jpg,data/img/pilot/stop2_178__sign_removed.jpg,0,0,1,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+stop2_217__original,pilot/pilot_v2/images/stop2_217__original.jpg,blurred/pilot/stop2_217__original.jpg,0,0,2,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+stop2_217__sign_removed,pilot/pilot_v2/images/stop2_217__sign_removed.jpg,data/img/pilot/stop2_217__sign_removed.jpg,0,0,1,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+stop2_217__control_removed,pilot/pilot_v2/images/stop2_217__control_removed.jpg,data/img/pilot/stop2_217__control_removed.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
