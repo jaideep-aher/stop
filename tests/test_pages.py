@@ -21,7 +21,7 @@ ship_ok = _PAGES.ship_ok
 def test_real_artifact_is_allowlisted(tmp_path: Path):
     dest = tmp_path / "pages"
     summary = build(dest)
-    assert summary["kept"] == 897
+    assert summary["kept"] == 896
     errors = check(dest)
     assert errors == []
     assert (dest / ".nojekyll").is_file()

@@ -749,7 +749,6 @@ data/img/pilot/legit_108.jpg
 data/img/pilot/legit_109.jpg
 data/img/pilot/legit_111.jpg
 data/img/pilot/legit_115.jpg
-data/img/pilot/legit_132.jpg
 data/img/pilot/legit_133.jpg
 data/img/pilot/legit_147.jpg
 data/img/pilot/legit_159.jpg
