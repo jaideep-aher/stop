@@ -1,0 +1,9 @@
+[
+  {
+    "id": "phase3",
+    "title": "Phase 3: robustness",
+    "blurb": "Robustness re-runs of the Study 2 conditions across five prompt wordings (p1, n2, n3 and two renamed-letter versions), three runs (greedy plus two fixed-seed runs) and three resolutions (448, 640, 896 px), plus PROCEED-side controls, the new non-YOLO gate G2 and a second model (LFM2-VL-1.6B). Results are aggregated by condition only.",
+    "metrics": "results/phase3/phase3_metrics.json",
+    "addendum": "results/phase3/phase3_addendum_metrics.json"
+  }
+]
