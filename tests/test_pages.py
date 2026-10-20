@@ -21,7 +21,9 @@ ship_ok = _PAGES.ship_ok
 def test_real_artifact_is_allowlisted(tmp_path: Path):
     dest = tmp_path / "pages"
     summary = build(dest)
-    assert summary["kept"] == 896
+    assert summary["kept"] == 1189
+    assert (dest / "data/img/p2/fig1.png").is_file()
+    assert (dest / "data/img/p2/fig2_left.png").is_file()
     errors = check(dest)
     assert errors == []
     assert (dest / ".nojekyll").is_file()
@@ -154,7 +156,7 @@ def test_detector_clears_stay_off_pages_until_a_person_reviews_them(tmp_path: Pa
     assert len(upstream) == 252
     assert "ill2_037" not in pending
     checked = _human_checked()
-    assert len(checked) == 588
+    assert len(checked) == 879
     assert _PAGES.HARD_EXCLUDE_IDS.isdisjoint(checked)
     deny_lines = (ROOT / "data" / "PAGES_DENYLIST.txt").read_text(encoding="utf-8").splitlines()
     denied = {}

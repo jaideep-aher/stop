@@ -122,7 +122,7 @@ def test_phase3_gate_facts_stay_in_json():
     phase = data["phases"][0]
     assert phase["metrics"] is None
     assert phase["phase3"]["grid"]
-    assert phase["phase3"]["caveats"]
+    assert phase["phase3"]["caveats"] == []
     app = (ROOT / "site" / "assets" / "app.js").read_text(encoding="utf-8")
     assert "rate.toFixed(3)" in app
     assert "· ${px} px" in app

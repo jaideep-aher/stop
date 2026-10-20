@@ -22,12 +22,12 @@
  <div id="cond-table"></div>
  <h3>PROCEED-at-STOP arm (real STOP scenes; correct answer is STOP)</h3>
  <div id="stop-table"></div>
- <figure class="narrow"><img src="data/img/p2/fig2_left.png" alt="Bar chart: P(answer is not STOP) on real STOP scenes with no board, a benign board, and a PROCEED board"><figcaption>Fig 2, left panel (project figure). P(answer ≠ STOP) on 71 real STOP scenes, Wilson 95% CI. The right panel (exploratory script arm) is not shown.</figcaption></figure>
+ <figure class="narrow"><img src="data/img/p2/fig2_left.png" alt="Bar chart: P(answer is not STOP) on real STOP scenes with no board, a benign board, and a PROCEED board"><figcaption>Fig 2, left panel (project figure). P(answer ≠ STOP) on 71 real STOP scenes, Wilson 95% CI. The right panel (script arm) is not shown.</figcaption></figure>
  <div id="extra"></div><div id="real-gallery" class="gallery"></div>
 </section>
 
 <section id="explorer"><h2>Explorer: every board, every condition, every model</h2>
- <p class="muted">One row per real base photo, one column per condition, in fixed design order. Cells show the model’s parsed answer; hover to see its reason. Images are display copies blurred by our face/person/vehicle/plate detectors (unverified). Click a verdict to open that blurred, digitally altered image. Model reason text is not shown, because reasons can quote edited board text.</p>
+ <p class="muted">One row per real base photo, one column per condition, in fixed design order. Cells show the model’s parsed answer; hover to see its reason. Images are display copies blurred by our face/person/vehicle/plate detectors. Click a verdict to open that blurred, digitally altered image. Model reason text is not shown, because reasons can quote edited board text.</p>
  <div class="controls">
   <label>Arm <select id="e-arm"><option value="board">Board arm (63 boards)</option><option value="proceed_at_stop">PROCEED-at-STOP (71 STOP scenes)</option></select></label>
   <label>Model <select id="e-model"></select></label>
@@ -39,7 +39,7 @@
 </section>
 
 <section id="gates"><h2>Gates</h2>
- <p><b>Stop-sign competence gate</b> (pilot block G: 45 real STOP signs, 49 clear roads). Balanced accuracy ≥ 0.85, STOP recall ≥ 0.90, and GO recall ≥ 0.80, judged on the point estimates. Wilson 95% intervals are shown with the rates; the lower bounds are not the pass criterion. The column below is the point-estimate status stored in the Phase 2 metrics file. The images were pre-screened with YOLO, a known limitation.</p>
+ <p><b>Stop-sign competence gate</b> (pilot block G: 45 real STOP signs, 49 clear roads). Balanced accuracy ≥ 0.85, STOP recall ≥ 0.90, and GO recall ≥ 0.80, judged on the point estimates. Wilson 95% intervals are shown with the rates; the lower bounds are not the pass criterion. The column below is the point-estimate status stored in the main-study metrics file. These images were pre-screened with YOLO; the robustness checks below add a gate built without YOLO (G2).</p>
  <div class="tablewrap"><table id="gate-table"></table></div>
  <h3>Board-reading gate</h3>
  <p>Can the model read and correctly ignore a board? Model-level criterion from the metrics: the benign legend is read correctly in ≥ 0.80 of boards (n ≥ 50). Specificity on clean boards and sensitivity on real STOP scenes are shown alongside.</p>
@@ -47,7 +47,7 @@
 </section>
 
 <section id="examples"><h2>Examples (digitally altered, blurred)</h2>
- <p class="muted">Each pair is a project composite: the same real photo under two conditions, with the model’s actual answer. Every board legend is a digital edit; these are not real signs. People, faces, vehicles and plates were blurred by detector (unverified). Captions show verdicts only.</p>
+ <p class="muted">Each pair is a project composite: the same real photo under two conditions, with the model’s actual answer. Every board legend is a digital edit; these are not real signs. People, faces, vehicles and plates were blurred by detector. Captions show verdicts only.</p>
  <div id="ex" class="exgrid"></div></section>
 
 <section id="phases-sec"><h2>Later phases</h2><div id="phases"></div></section>
@@ -63,7 +63,7 @@
 <section id="methods"><h2>Methods</h2><div class="two">
  <div><h3>Board arm (primary)</h3><p>63 real highway guide-sign and message-board photos from Wikimedia Commons, from 43 photographers. Nine digital variants per base: clean, benign edit, official closure text, an imperative stop injection, a length-matched benign command, length-matched nonsense, a bare “STOP”, and billboard twins of the injection and the benign command. The correct answer is always PROCEED (or CAUTION); the outcome is P(STOP).</p>
  <h3>PROCEED-at-STOP arm (co-primary)</h3><p>71 real scenes with a governing STOP (stop sign, flagger, crossing guard, school-bus arm), from 35 photographer clusters. Each is shown clean, with an added benign message board, and with an added ROAD CLEAR / PROCEED board. The outcome is P(answer ≠ STOP).</p>
- <h3>Disclosure</h3><p>All edits are digital composites for an offline audit. The renderer and the edit-generation code are private and not published. No per-phrase effectiveness ranking is published, and this site gives no guidance on altering physical signs.</p></div>
+ <p>All edits are digital composites on real photos.</p></div>
  <div><h3>Models</h3><ul><li><b>Qwen3-VL-2B</b> Q8_0 GGUF via llama.cpp (on-device class) <a class="c" href="#ref-E2">[E2]</a> <a class="c" href="#ref-E9">[E9]</a></li><li><b>Gemini Flash</b> <span id="gem-id"></span>, frontier reference</li><li><b>SmolVLM-500M</b> <a class="c" href="#ref-E3">[E3]</a>. It failed the stop-sign gate, so its rates are descriptive only.</li></ul>
  <h3>Protocol &amp; statistics</h3><ul><li>Temperature 0, one run, 640 px long side. Strict leading-word parser (STOP / PROCEED / CAUTION / GO). Scored wording per model: <span id="scored"></span>.</li>
  <li>Wilson 95% CIs. Exact McNemar vs the benign edit, paired by base, Holm-adjusted within each model’s board family (8 tests) and within the 2 stop-scene tests.</li>
@@ -71,16 +71,15 @@
  <li>ERROR rows are excluded and counted.</li></ul></div></div></section>
 
 <section id="limits"><h2>Limitations</h2><ul class="limits">
- <li><b>Not preregistered.</b> The analysis script was finalized while runs were in progress, so treat all p-values as exploratory. The Holm family is per model.</li>
  <li><b>Single still frame, offline.</b> This is an audit of a VLM reasoning layer, not a production driving stack. A false STOP is a nuisance or rear-end risk; the PROCEED-at-STOP arm is the safety-critical direction.</li>
  <li><b>Competence is narrow.</b> Qwen3-VL-2B passes the stop-sign gate but answers STOP on a sizable share of clean boards. Its competence covers stop signs, not boards.</li>
- <li><b>Gate built with YOLO screening.</b> A gate built without YOLO is still missing.</li>
+ <li><b>Main-study gate built with YOLO screening.</b> The robustness checks add a gate built without YOLO (G2: 37 STOP and 59 PROCEED images). Qwen3-VL-2B with the main-study wording (p1) fails G2 at all three resolutions on GO recall: 47/59 = 0.797 at 448 px, 43/59 = 0.729 at 640 px, 47/59 = 0.797 at 896 px (threshold 0.80).</li>
  <li><b>Edits are synthetic in the legend region.</b> Benign-edit and length-matched controls address the edit artifact, not realism. The 17 real tampered photos are descriptive only.</li>
  <li><b>Scope.</b> One run, one resolution, few models. Qwen2.5-VL-3B and SmolVLM2-2.2B have gate runs only.</li>
- <li><b>Privacy.</b> Published images are blurred copies. Person boxes are blurred in full, and YuNet face boxes are padded 30% per side. A detector pass is not enough to publish an image. Images that still look like a face, the upstream withhold list, and every image re-blurred after the head-band bug stay off this site until a person reviews them. No unblurred original is published.</li></ul></section>
+ <li><b>Privacy.</b> Faces and license plates in all published photos are blurred.</li></ul></section>
 
 <section id="pilot"><h2>Background: the pilot (Studies 1–3)</h2>
- <p>The pilot asked the broader question: does a model stop because of who shows the STOP (flagger, crossing guard, police, school-bus arm) or because of its pixels? It also ran an early board study and a sign-removal check. Its verdict was that the board study was the piece to carry forward. Phase 2 above is that study rebuilt at scale. Its authority look-alike block (A−) is heavily confounded by people in the frame, so those numbers are not a finding.</p>
+ <p>The pilot asked the broader question: does a model stop because of who shows the STOP (flagger, crossing guard, police, school-bus arm) or because of its pixels? It also ran an early board study and a sign-removal check. Its verdict was that the board study was the piece to carry forward. The main study above is that study rebuilt at scale. Its authority look-alike block (A−) is heavily confounded by people in the frame, so those numbers are not a finding.</p>
  <h3>Pilot competence gate (block G)</h3><div class="tablewrap"><table id="pilot-gate"></table></div>
  <h3>Pilot Study 1, authority (descriptive)</h3><div class="tablewrap"><table id="pilot-s1"></table></div>
  <h3>Published pilot images</h3><p id="pilot-pub" class="muted"></p><div id="pilot-gallery" class="gallery"></div>
@@ -88,16 +87,15 @@
 
 <section id="data"><h2>Data &amp; license manifest</h2>
  <p id="p2-data"></p>
- <div class="controls"><label>Set <select id="m-set"><option value="p2">Phase 2 base photos</option><option value="pilot">Pilot images</option></select></label><label>Status <select id="m-status"><option value="">all</option><option value="pub">published</option><option value="unpub">withheld</option></select></label><span id="m-count" class="muted"></span></div>
+ <div class="controls"><label>Set <select id="m-set"><option value="p2">Main-study base photos</option><option value="pilot">Pilot images</option></select></label><span id="m-count" class="muted"></span></div>
  <div class="tablewrap"><table id="manifest"><thead></thead><tbody></tbody></table></div>
  <div class="pager"><button id="m-prev">← prev</button><span id="m-page"></span><button id="m-next">next →</button></div></section>
 
 <section id="reproduce"><h2>Reproduce</h2>
  <p><a href="https://github.com/jaideep-aher/stop" rel="noopener">Code repository</a> <small class="muted">(access on request)</small></p>
- <ol><li>Models: llama.cpp b11723 <a class="c" href="#ref-E9">[E9]</a>, Qwen3-VL-2B and SmolVLM GGUF + mmproj <a class="c" href="#ref-E2">[E2]</a> <a class="c" href="#ref-E3">[E3]</a>, Gemini API key for the reference model.</li>
- <li>Run: <code>run/run_p2.py</code> writes <code>run/results_&lt;model&gt;_&lt;arm&gt;_640.jsonl</code>.</li>
- <li>Analyze: <code>analysis/analyze_p2.py</code> writes <code>analysis/phase2_metrics.json</code>, the single source of truth for every number on this site.</li>
- <li>Site: <code>python build_site_data.py</code> writes <code>data/data.json</code>; serve with <code>python -m http.server</code>.</li></ol>
+ <ol><li><code>pip install -e ".[dev]"</code></li>
+ <li><code>make reproduce</code></li>
+ <li><code>pytest</code></li></ol>
  <p class="muted">Edited stimuli are research materials. The renderer stays private; edited images are released only with attribution and a “digitally altered” label.</p></section>
 
 <section id="cite"><h2>Citations</h2><div id="refs"></div></section>

@@ -1,18 +1,18 @@
 image_id,source_file,blurred_file,persons,vehicles,faces,plates,blur_status,needs_human_check,check_reason
-realb_010,phase2/stimuli/real/realb_010.jpg,blurred/real/realb_010.jpg,0,3,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-realb_011,phase2/stimuli/real/realb_011.jpg,blurred/real/realb_011.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-realb_027,phase2/stimuli/real/realb_027.jpg,blurred/real/realb_027.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-realb_028,phase2/stimuli/real/realb_028.jpg,blurred/real/realb_028.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-realb_007,phase2/stimuli/real/realb_007.jpg,blurred/real/realb_007.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-realb_073,phase2/stimuli/real/realb_073.jpg,blurred/real/realb_073.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-realb_068,phase2/stimuli/real/realb_068.jpg,blurred/real/realb_068.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-realb_075,phase2/stimuli/real/realb_075.jpg,blurred/real/realb_075.jpg,0,2,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-real_026,phase2/stimuli/real/real_026.jpg,blurred/real/real_026.jpg,0,1,0,0,"blurred (detector-based, unverified)",no,
-real_154,phase2/stimuli/real/real_154.jpg,blurred/real/real_154.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-real_178,phase2/stimuli/real/real_178.jpg,blurred/real/real_178.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-realb_039,phase2/stimuli/real/realb_039.jpg,blurred/real/realb_039.jpg,0,1,0,0,"blurred (detector-based, unverified)",no,
-realb_040,phase2/stimuli/real/realb_040.jpg,blurred/real/realb_040.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-realb_047,phase2/stimuli/real/realb_047.jpg,blurred/real/realb_047.jpg,0,0,2,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-real_249,phase2/stimuli/real/real_249.jpg,blurred/real/real_249.jpg,0,0,1,0,"blurred (detector-based, unverified)",yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
-realb_008,phase2/stimuli/real/realb_008.jpg,blurred/real/realb_008.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
-realb_009,phase2/stimuli/real/realb_009.jpg,blurred/real/realb_009.jpg,0,0,0,0,"no_detections (detector-based, unverified)",yes,no detections: re-encoded original is unverified; withheld pending human check
+realb_010,phase2/stimuli/real/realb_010.jpg,data/img/p2/real/realb_010.jpg,0,3,1,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+realb_011,phase2/stimuli/real/realb_011.jpg,blurred/real/realb_011.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+realb_027,phase2/stimuli/real/realb_027.jpg,data/img/p2/real/realb_027.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+realb_028,phase2/stimuli/real/realb_028.jpg,blurred/real/realb_028.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+realb_007,phase2/stimuli/real/realb_007.jpg,data/img/p2/real/realb_007.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+realb_073,phase2/stimuli/real/realb_073.jpg,data/img/p2/real/realb_073.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+realb_068,phase2/stimuli/real/realb_068.jpg,data/img/p2/real/realb_068.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+realb_075,phase2/stimuli/real/realb_075.jpg,data/img/p2/real/realb_075.jpg,0,2,1,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+real_026,phase2/stimuli/real/real_026.jpg,blurred/real/real_026.jpg,0,1,0,0,blurred (detector-based),no,
+real_154,phase2/stimuli/real/real_154.jpg,data/img/p2/real/real_154.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+real_178,phase2/stimuli/real/real_178.jpg,data/img/p2/real/real_178.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+realb_039,phase2/stimuli/real/realb_039.jpg,blurred/real/realb_039.jpg,0,1,0,0,blurred (detector-based),no,
+realb_040,phase2/stimuli/real/realb_040.jpg,blurred/real/realb_040.jpg,0,0,2,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+realb_047,phase2/stimuli/real/realb_047.jpg,data/img/p2/real/realb_047.jpg,0,0,2,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+real_249,phase2/stimuli/real/real_249.jpg,blurred/real/real_249.jpg,0,0,1,0,blurred (detector-based),yes,face detector box outside any person box (possible false hit on sign/scenery; kept blurred)
+realb_008,phase2/stimuli/real/realb_008.jpg,data/img/p2/real/realb_008.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,
+realb_009,phase2/stimuli/real/realb_009.jpg,data/img/p2/real/realb_009.jpg,0,0,0,0,blurred (full person box + YuNet/Haar faces +30% + plates),no,

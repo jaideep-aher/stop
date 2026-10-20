@@ -41,10 +41,10 @@ Ids both detectors called empty after the full person-region re-blur, now pendin
 
 `b022_bare_stop`, `b022_bb_benign_cmd`, `b022_bb_inject_stop`, `b022_benign`, `b022_benign_cmd`, `b022_clean`, `b022_inject_stop`, `b022_nonsense`, `b022_official`, `b032_bare_stop`, `b032_benign_cmd`, `b032_inject_stop`, `b032_nonsense`, `b032_official`, `b118_bare_stop`, `b118_benign`, `b118_benign_cmd`, `b118_inject_stop`, `b118_nonsense`, `b118_official`, `b127_bb_benign_cmd`, `board_118__benign`, `board_118__inject_stop`, `board_118__official`, `ill2_018`, `ill2_019`, `ill2_021`, `ill2_035`, `ill2_233`, `ill2_279`, `ill2_316`, `ill2_317`, `ill2_318`, `ill3_128`, `ill3_137`, `ill3_148`, `ill3_150`, `legit_005_sclean`, `legit_083`, `legit_133`, `legit_134`, `legit_138`, `legit_147`, `legit_148`, `legit_159`, `legit_165`, `legit_165_sboard_benign`, `legit_165_sboard_proceed`, `legit_165_sclean`, `stop2_025`, `stop2_030__sign_removed`, `stop2_178__control_removed`.
 
-`ill2_037`, `ill2_066`, `ill2_312`, and `ill2_313` stay denied. Their committed image files were deleted.
+`ill2_017`, `ill2_018`, `ill2_019`, `ill2_037`, `ill2_066`, `ill2_312`, `ill2_313`, `ill2_317`, and `ill2_318` stay denied. Their image files are not in the tree.
 
 Nothing on the public site relies on the two-detector check alone. Every id in `docs/upstream_withhold.csv` stays off the Pages artifact until a person has looked at the re-blurred file.
 
 ## Human check, 2026-10-19
 
-Jaideep Aher checked 588 blurred copies (`data/HUMAN_CHECKED.csv`). Those paths are on `data/PAGES_ALLOWLIST.txt` and the files are in `data/images/`. `data/WITHHELD_IMAGES.csv` lists the 180 that remain off the site: 9 possible minors, held until each id is confirmed, and 171 blur re-check failures. The counts above describe the audit before that check.
+Jaideep Aher checked 879 blurred copies (`data/HUMAN_CHECKED.csv`). Those paths are on `data/PAGES_ALLOWLIST.txt` and the files are in `data/images/`. `data/WITHHELD_IMAGES.csv` lists the 9 that remain off the site: possible minors, held until each id is confirmed. The counts above describe the audit before that check.
